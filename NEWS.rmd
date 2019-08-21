@@ -1,0 +1,32 @@
+---
+title: "NEWS"
+author: Erik.Leppo@tetratech.com and jon.harcum@tetratech.com
+output: github_document
+  #md_document:
+   # variant: markdown_github
+---
+
+<!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
+
+```{r Options, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "NEWS-"
+)
+```
+
+```{r LastUpdate, echo = FALSE}
+cat(paste0("Last Update: ",Sys.time()))
+```
+
+baytrendsmap 0.0.0.9002
+===========
+* Released - 2019-08-21
+* Updated repository with working files.
+* Rename without underscore to baytrendsmap.
+
+baytrendsmap 0.0.0.9001
+===========
+* Released - 2019-08-21
+* Initial commit to GitHub

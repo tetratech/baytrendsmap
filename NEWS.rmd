@@ -20,6 +20,11 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 0.0.0.9004
+===========
+* Released - 2019-08-21
+* Update Readme with usage directions.
+
 baytrendsmap 0.0.0.9003
 ===========
 * Released - 2019-08-21

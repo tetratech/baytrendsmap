@@ -16,6 +16,14 @@ Sys.setenv("TAR" = "internal") # needed for use with R v3.6.0
 install_github("leppott/baytrendsmap", force=TRUE, build_vignettes=TRUE)
 ```
 
+# Usage
+No functions other than running the Shiny app.
+
+```r
+library(baytrendsmap)
+runShiny()
+```
+
 # Purpose
 
 To aid staff in creating maps and exploring output of baytrends package.

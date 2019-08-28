@@ -1,9 +1,12 @@
+# Load a baytrends package output file.
+#~~~~~~~~~~~~~~~~~
+#
 function(){
   tabPanel("1. Import Data"
            #, fluidPage(
 
              , sidebarLayout(
-                 sidebarPanel(
+                 sidebarPanel(width=3, 
                    # App Steps
                    #h3("App Steps")
                     h3("1. Load baytrends Output")
@@ -19,11 +22,9 @@ function(){
                 , mainPanel(
                   tabsetPanel(type="tabs"
                               ,tabPanel("Data"
-                                        , p("After import (~ 1 second / MB) the data with appear below.")
+                                        , p("After upload (~ 3 second / MB) the data with appear below.")
                                         , DT::dataTableOutput('df_import_DT')
                               )##tabPanel~Data~END
-                              #,tabPanel("Map1")
-                              #,tabPanel("Map2")
                   )##tabsetPanel~END
                 )##mainPanel~END
                 

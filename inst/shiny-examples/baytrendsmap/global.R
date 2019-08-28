@@ -3,8 +3,17 @@
 # Packages
 library(shiny)
 library(baytrends)
-# library(DT)
-# library(ggplot2)
+library(shinyBS)
+library(DT)
+library(ggplot2)
+library(rgdal)
+library(ggsn)
+library(classInt)
+# library(leaflet)
+# library(dplyr)
+# library(dataRetrieval)
+# library(data.table)
+# library(stringr)
 # library(plotly)
 # library(shinyjs) # for testing, comment out in final version
 
@@ -21,3 +30,8 @@ library(baytrends)
 options(shiny.maxRequestSize = 10*1024^2)
 
 
+pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
+pick_gamDiff_Desc <- c("Baseline mean", "Current mean", "Absolute change", "Percent change (%)", "p-value")
+pick_classInt <- c("sd", "quantile", "equal", "pretty")
+pick_color <- c("PuOr", "BuPu", "OrRd PuBu", "PdPu")
+pick_ext <- c("jpg", "tiff", "png", "pdf")

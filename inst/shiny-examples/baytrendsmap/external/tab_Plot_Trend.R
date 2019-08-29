@@ -4,7 +4,7 @@
 #
 function(){
   tabPanel("3.b. Plot Trend"
-           , fluidPage(h2("Plot Trend")
+           , fluidPage(h2("Plot Data Trend")
           , br()
 
           

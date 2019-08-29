@@ -68,7 +68,7 @@ function(){
                 , mainPanel(
                   tabsetPanel(type="tabs"
                               ,tabPanel("Data"
-                                        , p(paste0("Number of records imported (n=", -999 ,") and after filters applied (n=", -999, ")."))
+                                        #, p(paste0("Number of records imported (n=", -999 ,") and after filters applied (n=", -999, ")."))
                                         # , renderText("txt_nrow_df_import")
                                         # , p("Once have target turn green or something.")
                                         # , p("At this point no 'save' or 'load' feature for the filters".)
@@ -82,10 +82,10 @@ function(){
                                          , DT::dataTableOutput("df_filt_dups_DT")
                                          )
                               ,tabPanel("Range Map"
-                                        #, tab_Plot_Range()
+                                        , tab_Plot_Range()
                                         )##tabPanel~Range~END
-                              ,tabPanel("Trends Map"
-                                        #, tab_Plot_Trends()
+                              ,tabPanel("Trend Map"
+                                        , tab_Plot_Trend()
                                         )##tabPanel~Trends~END
                   )##tabsetPanel~END
                 )##mainPanel~END

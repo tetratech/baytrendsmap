@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.1.9005
+===========
+* Released - 2019-08-29
+* Range map options.
+* Default Range map.
+
 baytrendsmap 0.0.1.9004
 ===========
 * Released - 2019-08-29

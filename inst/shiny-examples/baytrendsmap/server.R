@@ -232,7 +232,7 @@ shinyServer(function(input, output) {
   #   return(nrow_df)
   # })
   
-  # Filter UI's ####
+  # UI - Filter Data ####
   output$filt_state <- renderUI({
     str_col <- "state"
     str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
@@ -375,21 +375,91 @@ shinyServer(function(input, output) {
       
     )##fluidRow~END
   })##filt_seasonNameEND
+  
+  # UI - Map Options ####
+  output$opt_var <- renderUI({
+    str_col <- "variable"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_gamDiff,
+                     multiple = FALSE,
+                     selected = pick_gamDiff[1])
+
+    )##fluidRow~END
+  })##opt_var~END
   #
-  # output$opt_var <- renderUI({
-  #   df_xx <- df_filt()
-  #   str_col <- "seasonName"
-  #   str_SI <- paste0("SI_", str_col)
-  #   fluidRow(
-  #     selectizeInput(str_col, h4(paste0("  Select ", str_col, ":")),
-  #                    choices = unique(df_x[, str_col]),
-  #                    multiple = TRUE,
-  #                    selected = if(str_sel == 1){
-  #                      unique(df_x[, str_col])
-  #                    } else {NULL})
-  #   
-  #   )##fluidRow~END
-  # })opt_var~END
+  output$opt_classInt <- renderUI({
+    str_col <- "classInt"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_classInt,
+                     multiple = FALSE,
+                     selected = pick_classInt[3])
+      
+    )##fluidRow~END
+  })##classInt~END
+  #
+  output$opt_col <- renderUI({
+    str_col <- "variable"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_color,
+                     multiple = FALSE,
+                     selected = pick_color[1])
+      
+    )##fluidRow~END
+  })##opt_col~END
+  #
+  output$opt_ext <- renderUI({
+    str_col <- "ext"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_ext,
+                     multiple = FALSE,
+                     selected = pick_ext[3])
+      
+    )##fluidRow~END
+  })##opt_ext~END
+  #
+  output$opt_riverNames <- renderUI({
+    str_col <- "riverNames"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Add ", str_col, ":")),
+                     choices = c("Yes", "No"),
+                     multiple = FALSE,
+                     selected = "Yes")
+      
+    )##fluidRow~END
+  })##riverNames~END
+  
+  # Map Range ####
+  output$map_r <- renderPlot({
+    m_r <- ggplot() + geom_polygon(data = fort_shp
+                                   , aes(long, lat, group=group, fill=hole), colour = "grey59") +
+      scale_fill_manual(values = c("lightskyblue", "grey92")) +
+      theme_void() + # no grid or box for lat-long
+      theme(legend.position = "none") + # remove legend
+      # annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
+      # annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
+      # annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1]) +
+      # annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1]) +
+      # annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1]) +
+      # annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1]) +
+      # annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1]) +
+      scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
+      north(fort_shp, symbol = 3)
+                                   
+    print(m_r)                   
+    
+  })##map_r~END
+  
+  
+  # Map Trend ####
   
   
 })##shinyServer~END

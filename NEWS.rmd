@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.1.9004
+===========
+* Released - 2019-08-29
+* Add dplyr package to global and DESCRIPTION.
+    + Need for filter summary table.
+
 baytrendsmap 0.0.1.9003
 ===========
 * Released - 2019-08-29

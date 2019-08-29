@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-08-29 15:13:28
+    #> Last Update: 2019-08-29 15:26:10
+
+# baytrendsmap 0.0.1.9004
+
+  - Released - 2019-08-29
+  - Add dplyr package to global and DESCRIPTION.
+      - Need for filter summary table.
 
 # baytrendsmap 0.0.1.9003
 

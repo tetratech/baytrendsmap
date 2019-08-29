@@ -45,10 +45,6 @@ function(){
                                                    fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
                                                    uiOutput('filt_parmName')
                                                   )##bsCollapsePanel~parmName~END
-                                 , bsCollapsePanel("Filter by 'GAM Formula Number'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_gamOption', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_gamOption')
-                                                  )##bsCollapsePanel~gamOption~END
                                  , bsCollapsePanel("Filter by 'GAM Formula Name'", style='info',
                                                    fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
                                                    uiOutput('filt_gamName')
@@ -79,9 +75,18 @@ function(){
                                         # , p("need to modify for 'user-supplied' variables.")
                                         # , DT::dataTableOutput('df_import_DT')
                                         , DT::dataTableOutput('df_filt_DT')
+                                        #, DT::dataTableOutput('df_import_DT')
                               )##tabPanel~Data~END
-                              ,tabPanel("Map1_option")
-                              ,tabPanel("Map2_option")
+                              , tabPanel("Data Filter Summary"
+                                         , p("Number of unique entries by station and column. If greater than 1 need to change filters and re-apply.")
+                                         , DT::dataTableOutput("df_filt_dups_DT")
+                                         )
+                              ,tabPanel("Range Map"
+                                        #, tab_Plot_Range()
+                                        )##tabPanel~Range~END
+                              ,tabPanel("Trends Map"
+                                        #, tab_Plot_Trends()
+                                        )##tabPanel~Trends~END
                   )##tabsetPanel~END
                 )##mainPanel~END
                 

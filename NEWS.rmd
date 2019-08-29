@@ -19,6 +19,15 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.1.9003
+===========
+* Released - 2019-08-29
+* Filters working.
+* Structure for maps.
+* Filter summary so can find non-uniques and re-apply filters.
+* Packages to global.R.
+* Package updates to DESCRIPTION.
+
 baytrendsmap 0.0.1.9002
 ===========
 * Released - 2019-08-28

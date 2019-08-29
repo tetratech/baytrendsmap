@@ -7,7 +7,7 @@ function(){
            , fluidPage(h2("Plot Trend")
           , br()
 
-            
+          
              
            )##fluidPage~END
   )##tabPanel~END

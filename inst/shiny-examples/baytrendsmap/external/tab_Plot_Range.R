@@ -8,14 +8,13 @@ function(){
           , br()
           #, p(paste0("abc", nrow_df_import(), "xyz"))
           
-          
           , sidebarLayout(
             sidebarPanel(width=3, 
                          # App Steps
                          #h3("App Steps")
                          h3("3. Range Map Options")
-                         , fluidRow(column(3),
-                                    column(1, bsButton("but_map_range", "Apply Range Map Options")),
+                         , fluidRow(column(1),
+                                    column(1, bsButton("but_map_range", "Update Range Map")),
                                     bsPopover("but_map_range", "Click 'apply' after modifying filters", "A 'data range' map will be created with the selected options.",
                                               "top", trigger = "hover", options = list(container = "body"))
                          )##fluidRow~filter button~END
@@ -51,12 +50,17 @@ function(){
                          , sliderInput("numclass", "Number of classes"
                                        , min = 3, max = 8, value = 5)
                          
-                         
-                         
+                         , br()
+                         , fluidRow(column(1),
+                                    column(1, downloadButton("but_map_range_save", "Save Range Map")),
+                                    bsPopover("but_map_range_save", "Click 'save' after updating map", "A 'data range' map will be saved in the selected format.",
+                                              "top", trigger = "hover", options = list(container = "body"))
+                         )##fluidRow~save button~END
+                         , br() 
                          
                          
             )##sidebarPanel~END
-            , mainPanel(plotOutput("map_r", height = "600")
+            , mainPanel(plotOutput("map_r_render", height = 800,  width=800/1.5)
               
             )##mainPanel~END
             

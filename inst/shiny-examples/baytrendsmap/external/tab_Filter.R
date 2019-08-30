@@ -11,8 +11,8 @@ function(){
                    # App Steps
                    #h3("App Steps")
                     h3("2. Filter Data")
-                    , fluidRow(column(3),
-                               column(2, bsButton("but_filt_apply", "Apply Filters")),
+                    , fluidRow(column(1),
+                               column(1, bsButton("but_filt_apply", "Apply Filters")),
                                bsPopover("but_filt_apply", "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.",
                                          "top", trigger = "hover", options = list(container = "body"))
                                )##fluidRow~filter button~END

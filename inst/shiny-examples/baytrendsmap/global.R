@@ -51,3 +51,18 @@ lab_Rap <- c("Rappahannock", -76.891649, 37.993317)
 lab_Yor <- c("York", -76.731066, 37.550827)
 lab_Jam <- c("James", -77.366298, 37.426916)
 
+# Map, base
+map_base <- ggplot() + geom_polygon(data = fort_shp
+                                            , aes(long, lat, group=group, fill=hole), colour = "grey59") +
+  scale_fill_manual(values = c("lightskyblue", "grey92")) +
+  theme_void() + # no grid or box for lat-long
+  theme(legend.position = "none") + # remove legend
+  # annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
+  # annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
+  # annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1]) +
+  # annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1]) +
+  # annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1]) +
+  # annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1]) +
+  # annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1]) +
+  scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
+  north(fort_shp, symbol = 3)

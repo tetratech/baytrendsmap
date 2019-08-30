@@ -100,9 +100,10 @@ shinyServer(function(input, output) {
   df_filt <- eventReactive (input$but_filt_apply, {
     # if filters not null then apply to df_import
     # it is possible to select no data
-    #
+    
     # temp data frame
     df_y <- df_import()
+    
     #
     str_col_2 <- "state"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
@@ -158,9 +159,6 @@ shinyServer(function(input, output) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~seasonName~END
     #
-  
-    
-
     #
     return(df_y)
     #
@@ -186,9 +184,17 @@ shinyServer(function(input, output) {
   )##df_filt_DT~END
   
   # df_filt_dups ####
-  df_filt_dups <- eventReactive (input$but_filt_apply, {
+  df_filt_dups <- eventReactive ({
+    input$but_filt_apply
+    input$fn_input
+    }, {
     # data
-    df_tmp <- df_filt()
+    if(input$but_filt_apply == 0){
+      df_tmp <- df_import()
+    } else {
+      df_tmp <- df_filt()
+    }
+    
     #
     # Check and report back number and locations of duplicates
     tib_abc <- summarize(group_by(df_tmp, station)
@@ -402,7 +408,7 @@ shinyServer(function(input, output) {
   })##classInt~END
   #
   output$opt_col <- renderUI({
-    str_col <- "variable"
+    str_col <- "color"
     str_SI <- paste0("SI_", str_col)
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
@@ -437,26 +443,81 @@ shinyServer(function(input, output) {
     )##fluidRow~END
   })##riverNames~END
   
+  
   # Map Range ####
-  output$map_r <- renderPlot({
-    m_r <- ggplot() + geom_polygon(data = fort_shp
-                                   , aes(long, lat, group=group, fill=hole), colour = "grey59") +
-      scale_fill_manual(values = c("lightskyblue", "grey92")) +
-      theme_void() + # no grid or box for lat-long
-      theme(legend.position = "none") + # remove legend
-      # annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
-      # annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
-      # annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1]) +
-      # annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1]) +
-      # annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1]) +
-      # annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1]) +
-      # annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1]) +
-      scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
-      north(fort_shp, symbol = 3)
-                                   
-    print(m_r)                   
+  map_range <- eventReactive (input$but_map_range, {
+    # start with base map
+    m_r <- map_base
     
+    # data for plot
+    #df_mr <- df_filt()
+    # str_var <- input$SI_variable
+    # str_color <- input$SI_color
+    # str_classInt <- input$SI_clasInt
+    
+    
+    
+    # River Names
+    boo_riverNames <- input$SI_riverNames
+   if(boo_riverNames == "Yes"){
+      m_r <- m_r + 
+        annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1])
+    }##IF~riverNames~END
+    
+    # Title
+    if(!is.null(input$SI_layer)){
+      m_r <- m_r + 
+        labs(title=paste(input$SI_layer, collapse=";"))
+    }##IF~riverNames~END
+    
+    # save map
+    ext <- input$SI_ext #"pdf"
+    date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+    fn_out <- paste0("map_range.", ext)
+    # ggplot2::ggsave(fn_out, plot = m_r, device = ext, height = 9, width = 9/1.5, units = "in" )
+    ggplot2::ggsave(fn_out, plot = m_r, device = ext, height = 9, width = 9/1.5, units = "in" )
+      
+    #
+    return(m_r)
+    #
+  })##map_range~END
+  
+  
+  
+  output$map_r_render <- renderPlot({
+    # default map to show
+    if(input$but_map_range == 0){
+      m_r_2 <- map_base
+    } else {
+      m_r_2 <- map_range()  
+    }
+    print(m_r_2)                   
   })##map_r~END
+  
+  
+  # df_filt_dups ####
+  output$but_map_range_save <- downloadHandler(
+    filename = function() {
+      ext <- input$SI_ext
+      date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+      paste0("map_range_", date_time, ".", ext)
+      # #paste0(input$fn_input, input$SI_ext)
+    }, ##filename~END
+    content = function(fn) {
+       ext <- input$SI_ext
+       fn_out <- paste0("map_range.", ext)
+       #print(map_range())
+     # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
+      # #file.copy("map_range.pdf", fn, overwrite=TRUE)
+        file.copy(fn_out, fn, overwrite = TRUE)
+    }##content~END
+  )##map_r_save~END
   
   
   # Map Trend ####

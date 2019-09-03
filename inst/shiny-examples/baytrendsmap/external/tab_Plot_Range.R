@@ -23,24 +23,24 @@ function(){
                          
                          , br()
                          , bsCollapse(multiple = TRUE
-                                      , bsCollapsePanel("var", style='info',
+                                      , bsCollapsePanel("Variable to Plot", style='info',
                                                       uiOutput('opt_var')
                                                       )##bsCollapsePanel~variable~END
-                                      , bsCollapsePanel("classInt", style='info',
+                                      , bsCollapsePanel("Class Interval", style='info',
                                                         uiOutput('opt_classInt')
                                                         )##bsCollapsePanel~classInt~END
-                                      , bsCollapsePanel("col", style='info',
-                                                        uiOutput('opt_col')
-                                                        )##bsCollapsePanel~col~END
-                                      , bsCollapsePanel("ext", style='info',
+                                      , bsCollapsePanel("Color Brewer Palatte", style='info',
+                                                        uiOutput('opt_pal')
+                                                        )##bsCollapsePanel~pal~END
+                                      , bsCollapsePanel("File Save Extension", style='info',
                                                         uiOutput('opt_ext')
                                                         )##bsCollapsePanel~ext~END
-                                      , bsCollapsePanel("riverNames", style='info',
+                                      , bsCollapsePanel("River Names (Y/N)", style='info',
                                                         uiOutput('opt_riverNames')
                                       )##bsCollapsePanel~riverNames~END
                                       
                          )##bsCollapse~END
-                         , textAreaInput("title", "Title: "
+                         , textAreaInput("map_range_title", "Title: "
                                      , value = paste0("Layer: "
                                                       , "; Parameter: "
                                                       , "; Season: "
@@ -51,6 +51,7 @@ function(){
                                        , min = 3, max = 8, value = 5)
                          
                          , br()
+                         , p("Must 'update' map prior to save.")
                          , fluidRow(column(1),
                                     column(1, downloadButton("but_map_range_save", "Save Range Map")),
                                     bsPopover("but_map_range_save", "Click 'save' after updating map", "A 'data range' map will be saved in the selected format.",

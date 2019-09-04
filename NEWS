@@ -4,7 +4,12 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-09-04 12:49:55
+    #> Last Update: 2019-09-04 13:08:19
+
+# baytrendsmap 0.0.1.9009
+
+  - Released - 2019-09-04
+  - Returned to use of shp file.
 
 # baytrendsmap 0.0.1.9008
 

@@ -39,9 +39,11 @@ pick_pal <- c("PuOr", "BuPu", "OrRd", "PuBu", "RdPu") #RColorBrewer
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 
 # Map, Shapefile
-fn_shp <- file.path("data", "cbseg")
-ogr_shp <- rgdal::readOGR(dsn=fn_shp, layer="cbseg2003Combined2-latlong")
-fort_shp <- ggplot2::fortify(ogr_shp)
+# fn_shp <- file.path("data", "cbseg")
+# ogr_shp <- rgdal::readOGR(dsn=fn_shp, layer="cbseg2003Combined2-latlong")
+# fort_shp <- ggplot2::fortify(ogr_shp)
+#fort_shp <- load(file.path(getwd(), "data", "data_GIS_cbpseg.rda"))
+fort_shp <- data_GIS_cbpseg
 
 # Map, Labels
 lab_Sus <- c("Susquehanna", -76.172, 39.659)

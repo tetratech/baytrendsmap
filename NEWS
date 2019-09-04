@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-09-03 15:35:24
+    #> Last Update: 2019-09-04 12:49:55
+
+# baytrendsmap 0.0.1.9008
+
+  - Released - 2019-09-04
+  - GIS shapefile (cbpseg) to RDA.
+      - Speed and file size improvement.
 
 # baytrendsmap 0.0.1.9007
 

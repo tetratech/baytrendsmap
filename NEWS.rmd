@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.1.9010
+===========
+* Released - 2019-09-05
+* DESCRIPTION
+    + Reduced required R version from 3.6.0 to 3.2.0.
+    + Matches baytrends package.
+
 baytrendsmap 0.0.1.9009
 ===========
 * Released - 2019-09-04

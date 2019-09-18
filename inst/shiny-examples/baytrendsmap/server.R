@@ -198,16 +198,16 @@ shinyServer(function(input, output) {
     #
     # Check and report back number and locations of duplicates
     tib_abc <- summarize(group_by(df_tmp, station)
-                     , n_layer = n_distinct(layer, na.rm=TRUE)
-                     , n_gamName = n_distinct(gamName, na.rm=TRUE)
-                     , n_periodName = n_distinct(periodName, na.rm=TRUE)
-                     , n_seasonName = n_distinct(seasonName, na.rm=TRUE)
-                     )
+                         , n_Parameter = n_distinct(parmName, na.rm=TRUE)
+                         , n_GAM = n_distinct(gamName, na.rm=TRUE)
+                         , n_Layer = n_distinct(layer, na.rm=TRUE)
+                         , n_Period = n_distinct(periodName, na.rm=TRUE)
+                         , n_Season = n_distinct(seasonName, na.rm=TRUE)
+                         )
     #
     return(as.data.frame(tib_abc))
     #
   })##df_filt_dups~END
-  
   
   # df_filt_dups_DT ####
   output$df_filt_dups_DT <- DT::renderDT({
@@ -220,7 +220,45 @@ shinyServer(function(input, output) {
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
   )##df_filt_dups_DT~END
   
+  
+  # df_filt_dups_num ####
+  # Number of sites with more than 1 entry per field
+  output$filt_dups_num <- renderText({
+    #
+    input$but_filt_apply
+    input$fn_input
+    # data
+    if(input$but_filt_apply == 0){
+      df_tmp <- df_import()
+    } else {
+      df_tmp <- df_filt()
+    }##IF~END
+    #
+    # Check and report back number and locations of duplicates
+    tib_abc <- dplyr::summarize(dplyr::group_by(df_tmp, station)
+                         , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
+                         , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
+                         , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
+                         , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
+                         , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
+                          )
+    #
+    # # DEBUG
+    # tmp_stat <- c("CB1.1", "CB2.1", "CB3.3E", "CB3.3W", "CB4.1W")
+    # tib_abc <- tibble(station = tmp_stat
+    #                      , n_Parameter = 1
+    #                      , n_GAM = 2
+    #                      , n_Layer = 1
+    #                      , n_Period = 1
+    #                      , n_Season = 1)
 
+    n_dups <- sum(tib_abc[, 2:ncol(tib_abc)] != 1)
+    #
+    str_n_dups <- paste0(n_dups, " = Number of entries with more than 1 record.")
+    #
+    return(str_n_dups)
+    #
+  })##df_filt_dups_num~END
   
   # # helper ####
   output$txt_nrow_df_import <- renderText({

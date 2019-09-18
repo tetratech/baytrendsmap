@@ -37,18 +37,18 @@ function(){
                                                    fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
                                                    uiOutput('filt_station')
                                                   )##bsCollapsePanel~station~END
+                                 , bsCollapsePanel("Filter by 'Full Parameter Name'", style='info',
+                                                   fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                                   uiOutput('filt_parmName')
+                                                    )##bsCollapsePanel~parmName~END
+                                 , bsCollapsePanel("Filter by 'GAM Formula Name'", style='info',
+                                                   fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                                   uiOutput('filt_gamName')
+                                                   )##bsCollapsePanel~gamName~END
                                  , bsCollapsePanel("Filter by 'Sample Layer'", style='info',
                                                    fluidRow(column(1), column(10, radioButtons('sel_layer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
                                                    uiOutput('filt_layer')
                                                   )##bsCollapsePanel~layer~END
-                                 , bsCollapsePanel("Filter by 'Full Parameter Name'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_parmName')
-                                                  )##bsCollapsePanel~parmName~END
-                                 , bsCollapsePanel("Filter by 'GAM Formula Name'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_gamName')
-                                                  )##bsCollapsePanel~gamName~END
                                  , bsCollapsePanel("Filter by 'Period Name'", style='info',
                                                    fluidRow(column(1), column(10, radioButtons('sel_periodName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
                                                    uiOutput('filt_periodName')
@@ -78,7 +78,12 @@ function(){
                                         #, DT::dataTableOutput('df_import_DT')
                               )##tabPanel~Data~END
                               , tabPanel("Data Filter Summary"
-                                         , p("Number of unique entries by station and column. If greater than 1 need to change filters and re-apply.")
+                                         , br()
+                                         , p("The most common fields that require filtering are 'Parameter', 'GAM', 'Layer', 'Period', and 'Season'.")
+                                         , p("Number of unique entries by station are in the table below. If greater than 1 need to modify filters and re-'apply'.")
+                                         , br()
+                                         , textOutput("filt_dups_num")
+                                         , br()
                                          , DT::dataTableOutput("df_filt_dups_DT")
                                          )
                               ,tabPanel("Range Map"

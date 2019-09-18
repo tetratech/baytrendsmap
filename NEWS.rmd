@@ -19,6 +19,22 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.1.9012
+===========
+* Released - 2019-09-18
+* Trends map, legend to include range of values.
+* DESCRIPTION; add packages
+    + Add grid, lubridate, and sp
+* global.R
+    + Suppress messages
+        - library
+        - readOGR
+        - fortify
+* range map
+    + Add button to auto-generate map title based on filtered selections.
+    + Make auto-title wrap lines.
+    + Add cut (break) numbers to legend.
+
 baytrendsmap 0.0.1.9011
 ===========
 * Released - 2019-09-18

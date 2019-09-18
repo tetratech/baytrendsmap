@@ -12,7 +12,7 @@
 
 # Server ####
 # Define server logic
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   # Data ####
   ## df_import ####
@@ -523,19 +523,26 @@ shinyServer(function(input, output) {
     # fortify
     fort_df_mr <- ggplot2::fortify(df_mr)
     # Add to data frame
-    fort_df_mr$mapColor <- cut(fort_df_mr[, mr_var]
+    ## Break, Color
+    fort_df_mr$map_brk_col <- cut(fort_df_mr[, mr_var]
                                  , breaks = mr_cI_val$brks
                                  , labels = brewer.pal(mr_numclass, mr_pal))
+    ## Break, Text
+    fort_df_mr$map_brk_num <- cut(fort_df_mr[, mr_var]
+                               , breaks = mr_cI_val$brks
+                               )
+    
     # Add points to map
     m_r <- m_r + geom_point(data=fort_df_mr
-                                    , aes_string(x="longitude", y="latitude", color="mapColor")
+                                    , aes_string(x="longitude", y="latitude", color="map_brk_col")
                                     , size = 4
                                     , na.rm=TRUE)
     
     # Legend
     #Modify Legend
     m_r <- m_r + scale_color_discrete(name=mr_var_name
-                        , labels = paste(c(">", rep("< ", length(mr_cI_val$brks)-1)), round(mr_cI_val$brks, 2))) +
+                        #, labels = paste(c(">", rep("< ", length(mr_cI_val$brks)-1)), round(mr_cI_val$brks, 2))) +
+                        , labels = levels(fort_df_mr$map_brk_num)) +
       theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
     
     
@@ -553,7 +560,6 @@ shinyServer(function(input, output) {
   })##map_range~END
   
   
-  
   output$map_r_render <- renderPlot({
     # default map to show
     if(input$but_map_range == 0){
@@ -564,8 +570,23 @@ shinyServer(function(input, output) {
     print(m_r_2)                   
   })##map_r~END
   
+  # but_mr_title ####
+  observeEvent(input$but_mr_title, {
+    sep1 <- ": "
+    sep2 <- "\n" #"; "
+    str_title <- paste(input$SI_parmName
+                      , paste("GAM", input$SI_gamName, sep = sep1)
+                      , paste("Layer", input$SI_layer, sep = sep1)
+                      , paste("Period", input$SI_periodName, sep = sep1)
+                      , paste("Season", input$SI_seasonName, sep = sep1)
+                      , sep = sep2)
+    updateTextAreaInput(session, "map_range_title", value = str_title)
+    # max is 89 characters, if need to wrap dynamically
+    #https://stackoverflow.com/questions/2631780/r-ggplot2-can-i-set-the-plot-title-to-wrap-around-and-shrink-the-text-to-fit-t
+  })##observerEvent~input$but_mr_title~END
   
-  # df_filt_dups ####
+    
+  # but_map_range_save ####
   output$but_map_range_save <- downloadHandler(
     filename = function() {
       mr_ext <- input$SI_ext

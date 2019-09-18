@@ -4,7 +4,24 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-09-18 09:51:12
+    #> Last Update: 2019-09-18 15:45:10
+
+# baytrendsmap 0.0.1.9012
+
+  - Released - 2019-09-18
+  - Trends map, legend to include range of values.
+  - DESCRIPTION; add packages
+      - Add grid, lubridate, and sp
+  - global.R
+      - Suppress messages
+          - library
+          - readOGR
+          - fortify
+  - range map
+      - Add button to auto-generate map title based on filtered
+        selections.
+      - Make auto-title wrap lines.
+      - Add cut (break) numbers to legend.
 
 # baytrendsmap 0.0.1.9011
 

@@ -40,11 +40,18 @@ function(){
                                       )##bsCollapsePanel~riverNames~END
                                       
                          )##bsCollapse~END
+                         , fluidRow(column(1), 
+                                    # column(1, bsButton("but_mr_title", "Auto-generate Title")),
+                                    # bsPopover("but_mr_title", "Click to auto-generate title from 'filters'."))
+                                     column(1, tipify(bsButton("but_mr_title", "Auto-generate Title")
+                                            , "Click to auto-generate title from 'filters'.")))
                          , textAreaInput("map_range_title", "Title: "
-                                     , value = paste0("Layer: "
-                                                      , "; Parameter: "
-                                                      , "; Season: "
-                                                      , "; Period: ")
+                                     # , value = paste0("Parameter: "
+                                     #                  , "; GAM: "
+                                     #                  , "; Layer: "
+                                     #                  , "; Season: "
+                                     #                  , "; Period: ")
+                                     , value = NULL #output$str_mr_title
                                      , rows = 4
                                      )##textInput~END
                          , sliderInput("numclass", "Number of classes"

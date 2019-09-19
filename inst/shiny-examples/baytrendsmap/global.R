@@ -56,8 +56,9 @@ lab_Jam <- c("James", -77.380, 37.500)
 
 # Map, base
 map_base <- ggplot() + geom_polygon(data = fort_shp
-                                            , aes(long, lat, group=group, fill=hole), colour = "grey59") +
-  scale_fill_manual(values = c("lightskyblue", "grey92"), guide=FALSE) +
+                                            , aes(long, lat, group=group, fill=hole), colour = "grey59"
+                                    , fill = "lightskyblue") +
+  #scale_fill_manual(values = c("lightskyblue", "grey92"), guide=FALSE) +
   theme_void() + # no grid or box for lat-long
   #theme(legend.position = "none") + # remove legend
   scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
@@ -69,6 +70,7 @@ if(boo_test==TRUE){
   # data
   df_test <- read.csv(file.path(system.file(package="baytrendsmap"), "extdata", "MD17v104chnggam_DOselect.csv"))
   # 
+  # Test, Range ####
   tst_rand_15 <- floor(runif(1, min=1, max=5))
   tst_rand_14 <- floor(runif(1, min=1, max=4))
   tst_gamDiff <- pick_gamDiff[1] #[tst_rand_15]
@@ -155,6 +157,124 @@ if(boo_test==TRUE){
   #                                 )
   # 
   # 
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Test, Trend
+  
+  # data
+  df_test <- read.csv(file.path(system.file(package="baytrendsmap"), "extdata", "MD17v104chnggam_DOselect.csv"))
+  #
+  df_trend <- df_test %>% filter(parmName == "Dissolved Oxygen [mg/L]") %>% 
+    filter(gamName == "2-Non-linear trend with Seas+Int") %>%
+    filter(layer == "S") %>%
+    filter(periodName == "2008/09-Present") %>%
+    filter(seasonName == "All")
+  
+  
+  df_trend <- df_test[df_test$parmName=="Dissolved Oxygen [mg/L]", ]
+  df_trend <- df_trend[df_trend$gamName == "2-Non-linear trend with Seas+Int", ]
+  df_trend <- df_trend[df_trend$layer == "S", ]
+  df_trend <- df_trend[df_trend$periodName == "2008/09-Present", ]
+  df_trend <- df_trend[df_trend$seasonName == "All", ]
+  
+  
+  
+  #
+  # Fortify
+  fort_df_test <- ggplot2::fortify(df_trend)
+  
+  #"gamDiff.pct.chg" 
+  #"gamDiff.chg.pval"
+  myParam <- "gamDiff.pct.chg" 
+  trend_parmName <- "DO"
+  if(trend_parmName=="DO" | trend_parmName=="Sechi"){
+    boo_upisgood <- TRUE
+  } else {
+    boo_upisgood <- FALSE
+  }
+  
+  chg_pval_sig_2 <- 0.25 #map_trend_val_poss
+  chg_pval_sig_1 <- 0.05 #map_trend_val_sig
+  #
+  if (boo_upisgood == TRUE){
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] > chg_pval_sig_2, "ChangeClass"] <- "NS"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_2 & fort_df_test[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_2 & fort_df_test[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posDecr"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_1 & fort_df_test[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_1 & fort_df_test[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
+  } else {
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] > chg_pval_sig_2, "ChangeClass"] <- "NS"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_2 & fort_df_test[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posIncr"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_2 & fort_df_test[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posDecr"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_1 & fort_df_test[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigIncr"
+    fort_df_test[fort_df_test[, "gamDiff.chg.pval"] < chg_pval_sig_1 & fort_df_test[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigDecr"
+  }##boo_upisgood~END
+  
+  trend_ChangeClass <- c("sigDecr", "sigIncr", "posDecr", "posIncr", "NS")
+  trend_leg_label   <- c("Significant decrease", "Significant increase", "Possible decrease", "Possible increase", "Unlikely")
+  trend_leg_color   <- c("orange", "dark green", "orange", "dark green", "dark gray")
+  trend_leg_shape   <- c("25", "24", "21", "21", "23")
+  trend_leg_size    <- c("4", "4", "3", "3", "2")
+  
+  manval_color <- c("sigDecr" = "orange", "sigIncr" = "dark green", "posDecr" = "orange", "posIncr" = "dark green", "NS" = "dark gray")
+  manval_shape <- c("sigDecr" = 25, "sigIncr" = 24, "posDecr" = 21, "posIncr" = 21, "NS" = 23)
+  manval_size  <- c("sigDecr" = 4, "sigIncr" = 4, "posDecr" = 3, "posIncr" = 3, "NS" = 2)
+  
+  # add to data frame
+  fort_df_test[, "ChangeClass"] <- factor(fort_df_test[, "ChangeClass"], trend_ChangeClass)
+  fort_df_test$ChangeClass_color <- trend_leg_color[match(fort_df_test$ChangeClass, trend_ChangeClass)]
+  fort_df_test$ChangeClass_shape <- trend_leg_shape[match(fort_df_test$ChangeClass, trend_ChangeClass)]
+  fort_df_test$ChangeClass_size  <- trend_leg_size[match(fort_df_test$ChangeClass, trend_ChangeClass)]
+  
+  # Add points
+  map_t <- map_base + geom_point(data=fort_df_test
+                                  , aes_string(x="longitude", y="latitude"#, group ="ChangeClass"
+                                               , color="ChangeClass"
+                                               , shape="ChangeClass"
+                                               , size="ChangeClass"
+                                               , fill="ChangeClass"
+                                               )
+                                  # , color = fort_df_test$ChangeClass_color 
+                                  # , shape = as.numeric(fort_df_test$ChangeClass_shape)
+                                  # , size = as.numeric(fort_df_test$ChangeClass_size)
+                                  # , fill = fort_df_test$ChangeClass_color
+                                  #, na.rm=TRUE
+                                 ) +
+    scale_color_manual(name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+    scale_shape_manual(name = "Type of trend", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
+    scale_fill_manual( name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+    scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
+    theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
+  
+  # Custom Legend
+  map_t <- map_t + scale_color_manual(name = "Type of trend"
+                                      , labels = trend_leg_label
+                                      , values = trend_leg_color)
+  
+  
+  
+  #
+  map_t + scale_color_manual(values = manval_color, breaks = trend_ChangeClass) +
+    scale_color_manual(values = manval_shape, breaks = trend_ChangeClass) +
+    scale_size_manual(values = manval_size, breaks = trend_ChangeClass)
+  
+  # Modify Legend parts
+  map_t2 <- map_t + scale_shape_manual(values = trend_leg_shape) +
+                    scale_size_manual(values = trend_leg_size) + 
+                    scale_color_manual(values = trend_leg_color)
+  
+  
+  
+  
+  
+  map_t <- map_t + scale_color_manual(name="Type of trend"
+                                      , labels = trend_leg_label
+                                      , values = trend_leg_color)
+  
+ 
+  map_t + scale_shape_manual(breaks = trend_ChangeClass, values = trend_leg_shape, drop = FALSE)
+  
+  
+  map_t + theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
 
   # 
 }##IF~boo_test~END

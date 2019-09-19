@@ -67,7 +67,16 @@ function(){
                 )##sidebarPanel~END
                 , mainPanel(
                   tabsetPanel(type="tabs"
-                              ,tabPanel("Data"
+                              , tabPanel("Filter Data Summary"
+                                         , br()
+                                         , p("The most common fields that require filtering are 'Parameter', 'GAM', 'Layer', 'Period', and 'Season'.")
+                                         , p("Number of unique entries by station are in the table below. If greater than 1 need to modify filters and re-'apply'.")
+                                         , br()
+                                         , textOutput("filt_dups_num")
+                                         , br()
+                                         , DT::dataTableOutput("df_filt_dups_DT")
+                                         )##tabPanel~Data Filter Summary ~ END
+                              ,tabPanel("Filter Data"
                                         #, p(paste0("Number of records imported (n=", -999 ,") and after filters applied (n=", -999, ")."))
                                         # , renderText("txt_nrow_df_import")
                                         # , p("Once have target turn green or something.")
@@ -76,16 +85,7 @@ function(){
                                         # , DT::dataTableOutput('df_import_DT')
                                         , DT::dataTableOutput('df_filt_DT')
                                         #, DT::dataTableOutput('df_import_DT')
-                              )##tabPanel~Data~END
-                              , tabPanel("Data Filter Summary"
-                                         , br()
-                                         , p("The most common fields that require filtering are 'Parameter', 'GAM', 'Layer', 'Period', and 'Season'.")
-                                         , p("Number of unique entries by station are in the table below. If greater than 1 need to modify filters and re-'apply'.")
-                                         , br()
-                                         , textOutput("filt_dups_num")
-                                         , br()
-                                         , DT::dataTableOutput("df_filt_dups_DT")
-                                         )
+                                        )##tabPanel~Data~END
                               ,tabPanel("Range Map"
                                         , tab_Plot_Range()
                                         )##tabPanel~Range~END

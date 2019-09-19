@@ -4,7 +4,22 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-09-18 15:45:10
+    #> Last Update: 2019-09-19 15:48:41
+
+# baytrendsmap 0.0.1.9013
+
+  - Released - 2019-09-19
+  - Trends map
+      - Edits to global test.
+      - Create Trends tab; similar to Range tab.
+      - Create map.
+  - Remove dynamic version number from title.
+      - Causes Shiny.io to fail.
+  - global
+      - Base map declare fill color so don’t use scale\_fill\_manual.
+  - tab\_Filter
+      - Reorder tabs with filter summary before data.
+      - Rename data tabs.
 
 # baytrendsmap 0.0.1.9012
 

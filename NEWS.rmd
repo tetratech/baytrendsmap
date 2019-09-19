@@ -19,6 +19,21 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.1.9013
+===========
+* Released - 2019-09-19
+* Trends map
+    + Edits to global test.
+    + Create Trends tab; similar to Range tab.
+    + Create map. 
+* Remove dynamic version number from title.
+    + Causes Shiny.io to fail.
+* global
+    + Base map declare fill color so don't use scale_fill_manual.
+* tab_Filter
+    + Reorder tabs with filter summary before data.
+    + Rename data tabs.
+
 baytrendsmap 0.0.1.9012
 ===========
 * Released - 2019-09-18

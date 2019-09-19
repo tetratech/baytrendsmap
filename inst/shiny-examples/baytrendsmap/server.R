@@ -480,6 +480,45 @@ shinyServer(function(input, output, session) {
       
     )##fluidRow~END
   })##riverNames~END
+  #
+  # TREND Map
+  output$opt_ext_t <- renderUI({
+    str_col <- "ext"
+    str_SI <- paste0("SI_", str_col, "_t")
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_ext,
+                     multiple = FALSE,
+                     selected = pick_ext[3])
+      
+    )##fluidRow~END
+  })##opt_ext_t~END
+  #
+  output$opt_riverNames_t <- renderUI({
+    str_col <- "riverNames"
+    str_SI <- paste0("SI_", str_col, "_t")
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Add ", str_col, ":")),
+                     choices = c("Yes", "No"),
+                     multiple = FALSE,
+                     selected = "Yes")
+      
+    )##fluidRow~END
+  })##riverNames_t~END
+  #
+  output$opt_upisgood <- renderUI({
+    str_col <- "upisgood"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Up is good?")),
+                     choices = c("TRUE", "FALSE"),
+                     multiple = FALSE,
+                     selected = "TRUE")
+      
+    )##fluidRow~END
+  })##riverNames_t~END
+  #
+
   
   
   # Map Range ####
@@ -606,6 +645,160 @@ shinyServer(function(input, output, session) {
   
   
   # Map Trend ####
+  map_trend <- eventReactive (input$but_map_trend, {
+    # start with base map
+    m_t <- map_base
+    
+    # data for plot
+    df_mt <- df_filt()
+    # mr_cI_type  <- input$SI_classInt
+    # mr_pal <- input$SI_pal
+    # mr_var <- input$SI_variable
+    # mr_numclass <- input$numclass
+    # mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
+    # mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    # 
+    # mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
+    
+    boo_upisgood   <- TRUE # input$SI_upisgood # TRUE
+    chg_pval_poss <- 0.25 # input$map_trend_val_poss # 0.25
+    chg_pval_sig <- 0.05 # input$map_trend_val_sig # 0.05
+    #
+    if (boo_upisgood == TRUE){
+      df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posDecr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
+    } else {
+      df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posIncr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posDecr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigIncr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigDecr"
+    }##boo_upisgood~END
+    
+    # River Names
+    boo_riverNames <- input$SI_riverNames_t
+    if(boo_riverNames == "Yes"){
+      m_t <- m_t + 
+        annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1], hjust=1) +
+        annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1], hjust=0)
+    }##IF~riverNames~END
+    
+    # Title
+    mt_title <- input$map_trend_title
+    if(!is.null(mt_title)){
+      m_t <- m_t +
+        labs(title=paste(mt_title, collapse="; "))
+      # labs(title=paste(mr_pal_col, collapse="; "))
+    }##IF~riverNames~END
+    
+    # Points ##
+    
+    # fortify
+    fort_df_mt <- ggplot2::fortify(df_mt)
+    
+    #
+    trend_ChangeClass <- c("sigDecr", "sigIncr", "posDecr", "posIncr", "NS")
+    trend_leg_label   <- c("Significant Decrease", "Significant Increase", "Possible Decrease", "Possible Increase", "Unlikely")
+    trend_leg_color   <- c("orange", "green", "orange", "green", "gray")
+    trend_leg_shape   <- c("25", "24", "21", "21", "23")
+    trend_leg_size    <- c("4", "4", "3", "3", "2")
+    
+    manval_color <- c("sigDecr" = "orange", "sigIncr" = "green", "posDecr" = "orange", "posIncr" = "green", "NS" = "gray")
+    manval_shape <- c("sigDecr" = 25, "sigIncr" = 24, "posDecr" = 21, "posIncr" = 21, "NS" = 23)
+    manval_size  <- c("sigDecr" = 4, "sigIncr" = 4, "posDecr" = 3, "posIncr" = 3, "NS" = 2)
+    
+    # Add to data frame
+    fort_df_mt[, "ChangeClass"] <- factor(fort_df_mt[, "ChangeClass"], trend_ChangeClass)
+    # 
+    fort_df_mt$ChangeClass_color <- trend_leg_color[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
+    fort_df_mt$ChangeClass_shape <- trend_leg_shape[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
+    fort_df_mt$ChangeClass_size  <- trend_leg_size[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
+    
+    m_t <- map_base + geom_point(data=fort_df_mt
+                                   , aes_string(x="longitude", y="latitude"#, group ="ChangeClass"
+                                                , color="ChangeClass"
+                                                , shape="ChangeClass"
+                                                , size="ChangeClass"
+                                                , fill="ChangeClass"
+                                                )
+                                   # , color = fort_df_mt$ChangeClass_color 
+                                   # , shape = as.numeric(fort_df_mt$ChangeClass_shape)
+                                   # , size = as.numeric(fort_df_mt$ChangeClass_size)
+                                   # , fill = fort_df_mt$ChangeClass_color
+                                   #, na.rm=TRUE
+                                   ) +
+      scale_color_manual(name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      scale_shape_manual(name = "Type of trend", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
+      scale_fill_manual( name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
+      theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
+      #theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
+    # could use position as coordinates but uses 0:1 not coordinates of the plot.
+    
+    # drop = FALSE keeps all factor levels
+    
+    # # save map
+    mt_ext <- input$SI_ext_t #"pdf"
+    #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+    fn_out <- file.path("map", paste0("map_trend.", mt_ext))
+    ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext, height = 9, width = 9/1.5, units = "in" )
+    # Save so download button just copies
+    #
+    return(m_t)
+    #
+  })##map_trend~END
+  
+  
+  output$map_t_render <- renderPlot({
+    # default map to show
+    if(input$but_map_trend == 0){
+      m_t_2 <- map_base
+    } else {
+      m_t_2 <- map_trend()  
+    }
+    print(m_t_2)                   
+  })##map_r~END
+  
+  # but_mt_title ####
+  observeEvent(input$but_mt_title, {
+    sep1 <- ": "
+    sep2 <- "\n" #"; "
+    str_title <- paste(input$SI_parmName
+                       , paste("GAM", input$SI_gamName, sep = sep1)
+                       , paste("Layer", input$SI_layer, sep = sep1)
+                       , paste("Period", input$SI_periodName, sep = sep1)
+                       , paste("Season", input$SI_seasonName, sep = sep1)
+                       , sep = sep2)
+    updateTextAreaInput(session, "map_trend_title", value = str_title)
+    # max is 89 characters, if need to wrap dynamically
+    #https://stackoverflow.com/questions/2631780/r-ggplot2-can-i-set-the-plot-title-to-wrap-around-and-shrink-the-text-to-fit-t
+  })##observerEvent~input$but_mr_title~END
+  
+  # # but_map_trend_save ####
+  output$but_map_trend_save <- downloadHandler(
+    filename = function() {
+      mt_ext <- input$SI_ext_t
+      date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+      paste0("map_trend_", date_time, ".", mt_ext)
+      # #paste0(input$fn_input, input$SI_ext)
+    }, ##filename~END
+    content = function(fn) {
+      mt_ext <- input$SI_ext_t
+      fn_out <- file.path("map", paste0("map_trend.", mt_ext))
+      #print(map_range())
+      # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
+      # #file.copy("map_range.pdf", fn, overwrite=TRUE)
+      file.copy(fn_out, fn, overwrite = TRUE)
+    }##content~END
+  )##map_t_save~END
   
   
 })##shinyServer~END

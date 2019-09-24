@@ -827,18 +827,27 @@ shinyServer(function(input, output, session) {
     #
     df_x <- df_import()
     #
-    updateSelectizeInput(session, input$sel_seasonName, choices=unique(df_x[, "seasonName"]), selected=1)
-   
-     updateSelectizeInput(session, "filt_state", choices=unique(df_x[, "state"]), selected=1)
-     
-      updateSelectizeInput(session, "filt_cbSeg92", choices=NULL, selected=1)
-      updateSelectizeInput(session, "filt_stationGrpName", choices=NULL, selected=1)
-      updateSelectizeInput(session, "filt_station", choices=NULL, selected=1)
-      updateSelectizeInput(session, "filt_parmName", choices=NULL, selected=1)
-      updateSelectizeInput(session, "filt_gamName", choices=NULL, selected=1)
-      updateSelectizeInput(session, "filt_layer", choices=NULL, selected=1)
-      updateSelectizeInput(session, "filt_periodName", choices=NULL, selected=1)
-      #updateSelectizeInput(session, "filt_seasonName", choices=unique(df_import()[, "seasonName"]), selected=1)
+    #updateSelectizeInput(session, "SI_seasonName", choices=unique(df_x[, "seasonName"]), selected=character(1))
+    # reset values to entire domain of values for each box.
+      str_col <- "state"
+    updateSelectizeInput(session, "SI_state"         , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "cbSeg92"
+    updateSelectizeInput(session, "SI_cbSeg92"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "stationGrpName"
+    updateSelectizeInput(session, "SI_stationGrpName", choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "station"
+    updateSelectizeInput(session, "SI_station"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "parmName"
+    updateSelectizeInput(session, "SI_parmName"      , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "gamName"
+    updateSelectizeInput(session, "SI_gamName"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "layer"
+    updateSelectizeInput(session, "SI_layer"         , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "periodName"
+    updateSelectizeInput(session, "SI_periodName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      str_col <- "seasonName"
+    updateSelectizeInput(session, "SI_seasonName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+
     #}##FUNCTION~clearFilterSelection~END
   })
   

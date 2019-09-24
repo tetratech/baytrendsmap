@@ -481,6 +481,7 @@ shinyServer(function(input, output, session) {
     )##fluidRow~END
   })##riverNames~END
   #
+  
   # TREND Map
   output$opt_ext_t <- renderUI({
     str_col <- "ext"
@@ -533,9 +534,12 @@ shinyServer(function(input, output, session) {
     mr_var <- input$SI_variable
     mr_numclass <- input$numclass
     mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
-    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    
     
     mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
+    # Redo num classes as "pretty" picks its own number of breaks
+    mr_numclass <- ifelse(mr_cI_type=="pretty", length(mr_cI_val$brks) - 1, mr_numclass)
+    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
     
     # River Names
     boo_riverNames <- input$SI_riverNames
@@ -629,8 +633,14 @@ shinyServer(function(input, output, session) {
   output$but_map_range_save <- downloadHandler(
     filename = function() {
       mr_ext <- input$SI_ext
-      date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-      paste0("map_range_", date_time, ".", mr_ext)
+      fn_out <- file.path("map", paste0("map_range.", mr_ext))
+      if(file.exists(fn_out)==TRUE) {
+        mr_ext <- input$SI_ext
+        date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+        paste0("map_range_", date_time, ".", mr_ext)
+      } else {
+          "Error_UpdateMapBeforeSave.pdf"
+      }
       # #paste0(input$fn_input, input$SI_ext)
     }, ##filename~END
     content = function(fn) {
@@ -639,9 +649,17 @@ shinyServer(function(input, output, session) {
        #print(map_range())
      # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
       # #file.copy("map_range.pdf", fn, overwrite=TRUE)
-        file.copy(fn_out, fn, overwrite = TRUE)
+       if(file.exists(fn_out)==TRUE){
+         file.copy(fn_out, fn, overwrite = TRUE)
+       } else {
+         fn_out_error <- file.path("map", "Error_UpdateMapBeforeSave.pdf")
+         file.copy(fn_out_error, fn, overwrite = TRUE)
+       }
     }##content~END
   )##map_r_save~END
+  # Need error handling in case change EXT but didn't "update" the map.
+  # expected name doesn't match the saved file name.
+  # file.exists(fn_out)
   
   
   # Map Trend ####
@@ -660,9 +678,31 @@ shinyServer(function(input, output, session) {
     # 
     # mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
     
-    boo_upisgood   <- TRUE # input$SI_upisgood # TRUE
-    chg_pval_poss <- 0.25 # input$map_trend_val_poss # 0.25
-    chg_pval_sig <- 0.05 # input$map_trend_val_sig # 0.05
+    # River Names
+    boo_riverNames_t <- input$SI_riverNames_t
+    if(boo_riverNames_t == "Yes"){
+      m_t <- m_t + 
+        annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1], hjust=1) +
+        annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1], hjust=0)
+    }##IF~riverNames~END
+    
+    # Title
+    mt_title <- input$map_trend_title
+    if(!is.null(mt_title)==TRUE){
+      m_t <- m_t + labs(title=paste(mt_title, collapse="; "))
+      # labs(title=paste(mr_pal_col, collapse="; "))
+    }##IF~riverNames~END
+    
+    # Points ##
+    
+    boo_upisgood   <- input$SI_upisgood # TRUE
+    chg_pval_poss <- input$map_trend_val_poss # 0.25
+    chg_pval_sig <- input$map_trend_val_sig # 0.05
     #
     if (boo_upisgood == TRUE){
       df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
@@ -678,40 +718,17 @@ shinyServer(function(input, output, session) {
       df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigDecr"
     }##boo_upisgood~END
     
-    # River Names
-    boo_riverNames <- input$SI_riverNames_t
-    if(boo_riverNames == "Yes"){
-      m_t <- m_t + 
-        annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
-        annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
-        annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1], hjust=0) +
-        annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1], hjust=0) +
-        annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1], hjust=1) +
-        annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1], hjust=0) +
-        annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1], hjust=0)
-    }##IF~riverNames~END
-    
-    # Title
-    mt_title <- input$map_trend_title
-    if(!is.null(mt_title)){
-      m_t <- m_t +
-        labs(title=paste(mt_title, collapse="; "))
-      # labs(title=paste(mr_pal_col, collapse="; "))
-    }##IF~riverNames~END
-    
-    # Points ##
-    
     # fortify
     fort_df_mt <- ggplot2::fortify(df_mt)
-    
+    #
     #
     trend_ChangeClass <- c("sigDecr", "sigIncr", "posDecr", "posIncr", "NS")
     trend_leg_label   <- c("Significant Decrease", "Significant Increase", "Possible Decrease", "Possible Increase", "Unlikely")
-    trend_leg_color   <- c("orange", "green", "orange", "green", "gray")
+    trend_leg_color   <- c("orange", "green", "orange", "green", "dark gray")
     trend_leg_shape   <- c("25", "24", "21", "21", "23")
     trend_leg_size    <- c("4", "4", "3", "3", "2")
     
-    manval_color <- c("sigDecr" = "orange", "sigIncr" = "green", "posDecr" = "orange", "posIncr" = "green", "NS" = "gray")
+    manval_color <- c("sigDecr" = "orange", "sigIncr" = "green", "posDecr" = "orange", "posIncr" = "green", "NS" = "dark gray")
     manval_shape <- c("sigDecr" = 25, "sigIncr" = 24, "posDecr" = 21, "posIncr" = 21, "NS" = 23)
     manval_size  <- c("sigDecr" = 4, "sigIncr" = 4, "posDecr" = 3, "posIncr" = 3, "NS" = 2)
     
@@ -722,7 +739,7 @@ shinyServer(function(input, output, session) {
     fort_df_mt$ChangeClass_shape <- trend_leg_shape[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
     fort_df_mt$ChangeClass_size  <- trend_leg_size[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
     
-    m_t <- map_base + geom_point(data=fort_df_mt
+    m_t <- m_t + geom_point(data=fort_df_mt
                                    , aes_string(x="longitude", y="latitude"#, group ="ChangeClass"
                                                 , color="ChangeClass"
                                                 , shape="ChangeClass"
@@ -800,5 +817,29 @@ shinyServer(function(input, output, session) {
     }##content~END
   )##map_t_save~END
   
+  # Button, Clear Filters ####
+  observeEvent(input$but_ClearFilters, {
+    # Clear User Selections for Query
+    #clearFilterSelection(session)
+    # Clear Filter Selections
+    #clearFilterSelection <- function(mySession) {
+      # reset all fields
+    #
+    df_x <- df_import()
+    #
+    updateSelectizeInput(session, input$sel_seasonName, choices=unique(df_x[, "seasonName"]), selected=1)
+   
+     updateSelectizeInput(session, "filt_state", choices=unique(df_x[, "state"]), selected=1)
+     
+      updateSelectizeInput(session, "filt_cbSeg92", choices=NULL, selected=1)
+      updateSelectizeInput(session, "filt_stationGrpName", choices=NULL, selected=1)
+      updateSelectizeInput(session, "filt_station", choices=NULL, selected=1)
+      updateSelectizeInput(session, "filt_parmName", choices=NULL, selected=1)
+      updateSelectizeInput(session, "filt_gamName", choices=NULL, selected=1)
+      updateSelectizeInput(session, "filt_layer", choices=NULL, selected=1)
+      updateSelectizeInput(session, "filt_periodName", choices=NULL, selected=1)
+      #updateSelectizeInput(session, "filt_seasonName", choices=unique(df_import()[, "seasonName"]), selected=1)
+    #}##FUNCTION~clearFilterSelection~END
+  })
   
 })##shinyServer~END

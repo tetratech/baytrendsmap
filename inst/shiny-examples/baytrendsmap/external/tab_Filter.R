@@ -13,8 +13,10 @@ function(){
                     h3("2. Filter Data")
                     , fluidRow(column(1),
                                column(1, bsButton("but_filt_apply", "Apply Filters")),
-                               bsPopover("but_filt_apply", "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.",
-                                         "top", trigger = "hover", options = list(container = "body"))
+                               # bsPopover("but_filt_apply", "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.",
+                               #           placement = "top", trigger = "hover", options = list(container = "body"))
+                               bsPopover(id = "but_filt_apply", title = "Apply Filters"
+                                         , content = "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.")
                                )##fluidRow~filter button~END
                     
                     
@@ -58,6 +60,11 @@ function(){
                                                    uiOutput('filt_seasonName')
                                                   )##bsCollapsePanel~seasonName~END
                  )##bsCollapse~END
+                 , br()
+                 , fluidRow(column(1), 
+                          column(1,bsButton("but_ClearFilters", label="Reset Filterer Selections", style="primary"))
+                          )##fluidRow~END
+                 
                     
                     
                     

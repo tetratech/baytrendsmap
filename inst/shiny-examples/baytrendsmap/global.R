@@ -1,7 +1,7 @@
 # Shiny Global File
 
 # Packages
-library(shiny)
+suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(baytrends, quietly = TRUE, warn.conflicts = FALSE))
 library(shinyBS)
 suppressMessages(library(DT, quietly = TRUE, warn.conflicts = FALSE))
@@ -64,6 +64,7 @@ map_base <- ggplot() + geom_polygon(data = fort_shp
   scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
   north(fort_shp, symbol = 3) 
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Testing (Comment out in final version)
 boo_test <- FALSE
 if(boo_test==TRUE){
@@ -244,6 +245,22 @@ if(boo_test==TRUE){
     scale_fill_manual( name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
     scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
     theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
+  
+  # Zoom
+  zoom_buffer <- 0.5
+  if(!is.null(zoom_buffer)){
+    x_min <- min(fort_df_test[, "longitude"]) - -zoom_buffer
+    x_max <- max(fort_df_test[, "longitude"]) + -zoom_buffer
+    y_min <- min(fort_df_test[, "latitude"]) - zoom_buffer
+    y_max <- max(fort_df_test[, "latitude"]) + zoom_buffer
+    map_t + coord_cartesian(xlim = c(x_min, x_max), ylim = c(y_min, y_max))
+  }
+  # Need to solve legend, best if at bottom.
+  # really only works if zooming in on a river or watershed.
+  # can distort if too big an area
+  # Need way to revert back - 
+  
+  
   
   # Custom Legend
   map_t <- map_t + scale_color_manual(name = "Type of trend"

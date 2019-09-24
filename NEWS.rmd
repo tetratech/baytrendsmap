@@ -19,6 +19,30 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.2.9001
+===========
+* Released - 2019-09-24
+* global.R
+    + Test map zoom in global.
+    + Make Shiny load silently as well.
+* Added 2nd test data file.
+* tab_Data.R
+    + Fix typo.
+* Trend map
+    + NS points
+        - Change "gray" to "dark gray".
+    + Modified (removed debug mode):
+        - UpisGood
+        - p value significant threshold
+        - p value possible threshold
+    + Proper map is created for title and river names.
+* Range map
+    + "Pretty" option ignores number of breaks.
+        - Added error trapping to use number of breaks output from pretty option.
+* Filters
+    + Add "ClearFilters" button.
+        - Inactive at this point.
+
 baytrendsmap 0.0.2
 ===========
 * Released - 2019-09-19

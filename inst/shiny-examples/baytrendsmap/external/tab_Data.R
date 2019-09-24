@@ -22,7 +22,7 @@ function(){
                 , mainPanel(
                   tabsetPanel(type="tabs"
                               ,tabPanel("Data"
-                                        , p("After upload (~ 3 second / MB) the data with appear below.")
+                                        , p("After upload (~ 3 second / MB) the data will appear below.")
                                         , DT::dataTableOutput('df_import_DT')
                               )##tabPanel~Data~END
                   )##tabsetPanel~END

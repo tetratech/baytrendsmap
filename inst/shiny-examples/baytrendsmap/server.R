@@ -851,4 +851,15 @@ shinyServer(function(input, output, session) {
     #}##FUNCTION~clearFilterSelection~END
   })
   
+  # Help ####
+  output$help_html <- renderUI({
+    fn_help_html <- file.path(".", "www", "ShinyHelp.html")
+    fe_help_html <- file.exists(fn_help_html)
+    if(fe_help_html==TRUE){
+      return(includeHTML(fn_help_html))
+    } else {
+      return(NULL)
+    }##IF~fe_help_html~END
+  })##help_html~END
+  
 })##shinyServer~END

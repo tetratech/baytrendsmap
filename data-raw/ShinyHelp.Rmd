@@ -1,0 +1,40 @@
+---
+title: "Navigating the baytrendsmap Shiny App"
+#subtitle: "help"
+#author: "`r Sys.getenv('USERNAME')`"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+output:
+  html_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(results='asis', echo=FALSE, warning=FALSE)
+```
+
+1. In R studio, run these 3 lines to open up the shiny app:
+
+```{r runShiny, eval=FALSE, echo=TRUE}
+library(baytrendsmap)
+runShiny()
+```
+
+2. Once open, in tab "1. Import Data"" browse to the your desired `baytrends` package output.
+
+3. Be sure data loaded into the screen after you import.
+
+4. Click on "2. Filter Data", and notice that it says "308 = Number of entries with more than 1 record". It is necessary to filter this data set down until the message here tells you "0" entries have more than 1 record. Our csv files have results for different periods, seasons, models and depths for each station. To make the app work, you need to filter it down to 1 record per station. This may be a little tough if you aren’t familiar with the files because they don’t all contain the same choices.
+
+5. Make the following selections in the blue buttons on the left in order to filter down this specific file that I’ve attached.
+a) Filter by 'Gam Formula Name': Click Deselect All, then use the drop down to pick just one of these, e.g., "2- Non-linear".
+b) Filter by 'sample Layer': same thing, deselect, then select one, e.g., "B".
+c) Filter by 'Period Name': Select just one of these, e.g., "Full Record".
+d) Filter by 'Season Name': Select just one, e.g., "Summer1".
+
+6. Don’t click the bottom button, but scroll back to the top and click “Apply Filters”. Now you should see the text say 0=Number of entries with more than 1 record.
+
+7. Click on the 2nd blue tab called “Filter Data”. This is now the table of data that will be mapped.
+
+8. Click on “Range Map”. You have to make a selection in each of the blue boxes under 3.a. Range Map Options. An error can occur if one is skipped. Make a selection for each, they should all work as they are subsets from the current data file. Then click “Update Range Map” at the top.
+
+9. Click on the “Trend Map” tab. Pick something in each of the filter otherwise an error occurs.  Click “update trend map”.

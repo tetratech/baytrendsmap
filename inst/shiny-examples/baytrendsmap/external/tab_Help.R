@@ -1,12 +1,8 @@
 function(){
   tabPanel("HELP"
            , fluidPage(
-             fluidRow(h2("baytrends R package map tool Help", style  = "text-align:center"))##fluidRow~END
-             , HTML("<h4> This tool imports a data file from the baytrends package. 
-                    <br>
-                    <br>
-                    <p>Put help text here.</p>
-                    <br>")##HTML~END
+             fluidRow(h2("baytrends output map tool R package Help", style  = "text-align:center"))##fluidRow~END
+            , htmlOutput("help_html")
                  
            
        )##fluidPage~END   

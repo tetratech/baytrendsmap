@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-10-29 15:02:43
+    #> Last Update: 2019-10-30 10:43:39
+
+# baytrendsmap 0.0.3.9002
+
+  - Released - 2019-10-30
+  - Shiny
+      - Map, Range, Add point outlines, Issue \#2.
+      - Update Help text., Issue \#1
 
 # baytrendsmap 0.0.3.9001
 

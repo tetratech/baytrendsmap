@@ -577,16 +577,20 @@ shinyServer(function(input, output, session) {
     
     # Add points to map
     m_r <- m_r + geom_point(data=fort_df_mr
-                                    , aes_string(x="longitude", y="latitude", color="map_brk_col")
+                                    , aes_string(x =" longitude"
+                                                 , y = "latitude"
+                                                 , fill = "map_brk_col")
                                     , size = 4
-                                    , na.rm=TRUE)
+                                    , pch = 21
+                                    , color = "black"
+                                    , na.rm = TRUE)
     
     # Legend
-    #Modify Legend
-    m_r <- m_r + scale_color_discrete(name=mr_var_name
+    #Modify Legend 
+    m_r <- m_r + scale_fill_discrete(name = mr_var_name
                         #, labels = paste(c(">", rep("< ", length(mr_cI_val$brks)-1)), round(mr_cI_val$brks, 2))) +
                         , labels = levels(fort_df_mr$map_brk_num)) +
-      theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
+      theme(legend.position = "bottom", legend.box = "horizontal", legend.title = element_text(face = "bold"))
     
     
     

@@ -362,21 +362,26 @@ summary {
 
 
 <h1 class="title toc-ignore">Navigating the baytrendsmap Shiny App</h1>
-<h4 class="date">2019-10-29 14:56:58</h4>
+<h4 class="date">2019-10-30 10:27:36</h4>
 
 </div>
 
 
 <ol style="list-style-type: decimal">
-<li>In R studio, run these 3 lines to open up the shiny app:</li>
+<li>In R studio (or base R), run these 2 lines to open up the shiny app:</li>
 </ol>
 <pre class="r"><code>library(baytrendsmap)
 runShiny()</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Once open, in tab “1. Import Data”&quot; browse to the your desired <code>baytrends</code> package output.</p></li>
-<li><p>Be sure data loaded into the screen after you import.</p></li>
+<li><p>Once open, in tab “1. Import Data” use the “Browse” button to select your desired <code>baytrends</code> package output.</p></li>
+<li><p>Before continuing be sure the data file loaded into the app. That is, wait for the blue progress bar to read “Upload complete”. When the upload is complete a data table will appear in the main window to the right.</p></li>
 <li><p>Click on “2. Filter Data”, and notice that it says “308 = Number of entries with more than 1 record”. It is necessary to filter this data set down until the message here tells you “0” entries have more than 1 record. Our csv files have results for different periods, seasons, models and depths for each station. To make the app work, you need to filter it down to 1 record per station. This may be a little tough if you aren’t familiar with the files because they don’t all contain the same choices.</p></li>
-<li><p>Make the following selections in the blue buttons on the left in order to filter down this specific file that I’ve attached.</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>If the imported data are not in the proper format then “red” error messages will appear in the main window on the right instead of a data table.</li>
+</ol>
+<ol start="5" style="list-style-type: decimal">
+<li>Make the following selections in the blue buttons on the left in order to filter down this specific file that I’ve attached.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
 <li>Filter by ‘Gam Formula Name’: Click Deselect All, then use the drop down to pick just one of these, e.g., “2- Non-linear”.</li>

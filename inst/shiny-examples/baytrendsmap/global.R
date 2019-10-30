@@ -133,9 +133,13 @@ if(boo_test==TRUE){
                                )
   
   # Add points
-  map_tst <- map_tst + geom_point(data=fort_df_test
-                                  , aes_string(x="longitude", y="latitude", color="map_brk_col")
+  map_tst <- map_tst + geom_point(data = fort_df_test
+                                  , aes_string(x = "longitude"
+                                               , y = "latitude"
+                                               , fill = "map_brk_col")
                                   , size = 4
+                                  , pch = 21
+                                  , color = "black"
                                   , na.rm=TRUE)
   # Modify Legend parts
   map_tst <- map_tst + scale_color_discrete(name=tst_gamDiff_Desc

@@ -745,18 +745,19 @@ shinyServer(function(input, output, session) {
     
     m_t <- m_t + geom_point(data=fort_df_mt
                                    , aes_string(x="longitude", y="latitude"#, group ="ChangeClass"
-                                                , color="ChangeClass"
+                                                #, color="ChangeClass"
                                                 , shape="ChangeClass"
                                                 , size="ChangeClass"
                                                 , fill="ChangeClass"
                                                 )
+                                     , color = "black"
                                    # , color = fort_df_mt$ChangeClass_color 
                                    # , shape = as.numeric(fort_df_mt$ChangeClass_shape)
                                    # , size = as.numeric(fort_df_mt$ChangeClass_size)
                                    # , fill = fort_df_mt$ChangeClass_color
                                    #, na.rm=TRUE
                                    ) +
-      scale_color_manual(name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      #scale_color_manual(name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
       scale_shape_manual(name = "Type of trend", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
       scale_fill_manual( name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
       scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +

@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.3.9003
+===========
+* Released - 2019-10-30
+* Shiny
+    + Map, Trend, Add point outlines, Issue #2.
+* NEWS
+    + Keep NEWS.md file rather than delete.
+    
 baytrendsmap 0.0.3.9002
 ===========
 * Released - 2019-10-30

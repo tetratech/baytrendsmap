@@ -59,8 +59,19 @@ function(){
                                       )##textInput~END
                                       # , sliderInput("numclass", "Number of classes"
                                       #               , min = 3, max = 8, value = 5)
-                                      # 
-                                      , br()
+                                     , br()
+                                     , bsCollapse(multiple = TRUE
+                                                  , bsCollapsePanel("Zoom Region", style='info',
+                                                                    uiOutput('opt_zoomregion_t')
+                                                  )##bsCollapsePanel~zoomregion~END
+                                     )##bsCollapse~END
+                                     , numericInput("map_trend_val_zoom", h4(paste0("  Zoom buffer (decimal degrees):"))
+                                                    , value = 0.05
+                                                    , min = 0.01
+                                                    , max = 2.5
+                                                    , step = 0.01)
+                                       
+                                      , hr()
                                       , p("Must 'update' map prior to save.")
                                       , fluidRow(column(1),
                                                  column(1, downloadButton("but_map_trend_save", "Save Trend Map")),

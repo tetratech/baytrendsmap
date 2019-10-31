@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.3.9004
+===========
+* Released - 2019-10-31
+* Shiny, Maps
+    + Add zoom feature, Issue #4
+    + Fixed ratio of 1.3 (better sizing).
+* Miscellaneous formatting.
+    
 baytrendsmap 0.0.3.9003
 ===========
 * Released - 2019-10-30

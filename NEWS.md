@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2019-10-30 11:59:27
+    #> Last Update: 2019-10-31 14:53:46
+
+# baytrendsmap 0.0.3.9004
+
+  - Released - 2019-10-31
+  - Shiny, Maps
+      - Add zoom feature, Issue \#4
+      - Fixed ratio of 1.3 (better sizing).
+  - Miscellaneous formatting.
 
 # baytrendsmap 0.0.3.9003
 

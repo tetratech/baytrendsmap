@@ -78,9 +78,9 @@ function(){
                                          , br()
                                          , p("The most common fields that require filtering are 'Parameter', 'GAM', 'Layer', 'Period', and 'Season'.")
                                          , p("Number of unique entries by station are in the table below. If greater than 1 need to modify filters and re-'apply'.")
-                                         , br()
+                                         , hr()
                                          , textOutput("filt_dups_num")
-                                         , br()
+                                         , hr()
                                          , DT::dataTableOutput("df_filt_dups_DT")
                                          )##tabPanel~Data Filter Summary ~ END
                               ,tabPanel("Filter Data"

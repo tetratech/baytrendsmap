@@ -31,12 +31,16 @@ library(RColorBrewer)
 # setting this option. Here we'll raise limit to 10MB.
 options(shiny.maxRequestSize = 10*1024^2)
 
+#pkgver <- packageVersion("baytrendsmap")
+
 # Pick Lists
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
 pick_gamDiff_Desc <- c("Baseline mean", "Current mean", "Absolute change", "Percent change (%)", "p-value")
 pick_classInt <- c("quantile", "equal", "pretty") #c("sd", "quantile", "equal", "pretty")
 pick_pal <- c("PuOr", "BuPu", "OrRd", "PuBu", "RdPu") #RColorBrewer
 pick_ext <- c("jpg", "tiff", "png", "pdf")
+pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
+                     , "Rappahannock", "Susquehanna", "York")
 
 # Map, Shapefile
 fn_shp <- file.path("data", "cbseg")
@@ -45,7 +49,7 @@ fort_shp <- suppressMessages(ggplot2::fortify(ogr_shp))
 #fort_shp <- load(file.path(getwd(), "data", "data_GIS_cbpseg.rda"))
 #fort_shp <- load(file.path("data", "data_GIS_cbpseg.rda"))
 
-# Map, Labels
+# Map, Labels (name, x, y)
 lab_Sus <- c("Susquehanna", -76.172, 39.659)
 lab_Pat <- c("Patuxent", -76.700, 38.945)
 lab_Cho <- c("Choptank", -75.942, 38.750)
@@ -54,13 +58,30 @@ lab_Rap <- c("Rappahannock", -76.950, 37.993)
 lab_Yor <- c("York", -76.731, 37.551)
 lab_Jam <- c("James", -77.380, 37.500)
 
-# Map, base
+# Bounding Box
+#           EXT_MIN_X, EXT_MIN_Y, EXT_MAX_X, EXT_MAX_Y
+bbox_Sus <- c(-76.1467, 39.4016, -75.9790, 39.6090)
+bbox_Pat <- c(-76.8621, 38.2459, -76.4035, 38.8751)
+bbox_Cho <- c(-76.3636, 38.5184, -75.7926, 39.0376)
+bbox_Pot <- c(-77.7047, 37.6438, -76.2050, 39.0159)
+bbox_Rap <- c(-77.4901, 37.4703, -76.2413, 38.4143)
+bbox_Yor <- c(-76.9052, 37.1470, -76.3784, 37.5903)
+bbox_Jam <- c(-77.5250, 36.7142, -76.2311, 37.7369)
+bbox_MD <- NA
+bbox_VA <- NA
+bbox_points <- NA
+pick_zoomregion_bbox <- c("NA", "bbox_points", "bbox_Cho", "bbox_Jam", "bbox_Pat", "bbox_Pot"
+                          , "bbox_Rap", "bbox_Sus", "bbox_Yor")
+
+# Map, base ####
+map_coord_ratio <- 1.3
 map_base <- ggplot() + geom_polygon(data = fort_shp
                                             , aes(long, lat, group=group, fill=hole), colour = "grey59"
                                     , fill = "lightskyblue") +
   #scale_fill_manual(values = c("lightskyblue", "grey92"), guide=FALSE) +
   theme_void() + # no grid or box for lat-long
   #theme(legend.position = "none") + # remove legend
+  coord_fixed(map_coord_ratio) +
   scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
   north(fort_shp, symbol = 3) 
 
@@ -250,7 +271,8 @@ if(boo_test==TRUE){
     scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
     theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
   
-  # Zoom
+  # Zoom ####
+  ## uses data points
   zoom_buffer <- 0.5
   if(!is.null(zoom_buffer)){
     x_min <- min(fort_df_test[, "longitude"]) - -zoom_buffer
@@ -263,6 +285,20 @@ if(boo_test==TRUE){
   # really only works if zooming in on a river or watershed.
   # can distort if too big an area
   # Need way to revert back - 
+  
+  # Zoom base
+  zoom_buffer <- 0.05
+  zoom_region <- bbox_Yor
+  x_min <- zoom_region[1] - -zoom_buffer
+  x_max <- zoom_region[3] + -zoom_buffer
+  y_min <- zoom_region[2] - zoom_buffer / (map_coord_ratio * 5)
+  y_max <- zoom_region[4] + zoom_buffer / (map_coord_ratio * 5)
+  # map_base + coord_cartesian(xlim = c(x_min, x_max), ylim = c(y_min, y_max))
+  # coord_map needs a projection
+  # Coord_fixed of 1.3 gives better aspect ratio
+  map_base + coord_fixed(ratio=map_coord_ratio, xlim = c(x_min, x_max), ylim = c(y_min, y_max))
+  # gives warning
+  
   
   
   

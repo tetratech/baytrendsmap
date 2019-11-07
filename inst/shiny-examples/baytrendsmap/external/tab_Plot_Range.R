@@ -57,7 +57,8 @@ function(){
                          , sliderInput("numclass", "Number of classes"
                                        , min = 3, max = 8, value = 5)
                          , p("Custom classes/breaks can be input below.  
-                             Leave blank to use number of classes as specified above.")
+                             Leave blank to use number of classes as specified above.
+                             Need one more number than the number of intended classes.")
                          , textAreaInput("breaks", "Custom classes (comma delimited): "
                                          , value = NULL
                                          , rows = 2)##textAreaInput~END

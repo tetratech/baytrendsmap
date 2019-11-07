@@ -25,7 +25,7 @@ shinyUI(#fluidPage(
   # Application title
   #titlePanel("baytrends output mapping tool")
   
-  navbarPage(paste0("baytrendsmap R package v0.0.3.9006") #, packageVersion("baytrendsmap"))
+  navbarPage(paste0("baytrendsmap R package v0.0.3.9007") #, packageVersion("baytrendsmap"))
              , theme = "boostrap.css"
              , inverse= TRUE
              , tab_Help()

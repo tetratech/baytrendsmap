@@ -1,0 +1,120 @@
+---
+title: "baytrendsmap guide"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{baytrendsmap guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Package Purpose
+
+`baytrendsmap` is intended for quick and consistent mapping of `baytrends` output.
+
+# Installation
+
+Installation is from GitHub with the code below.
+
+Users of R versions >= 3.6.0 need the 2nd line of code.
+
+The code below will force the installation of any vignettes.  The default for installing from GitHub is to install without vignettes.
+```{r install, eval=FALSE}
+library(devtools)  #install if needed
+Sys.setenv("TAR" = "internal") # needed for use with R v3.6.0
+install_github("leppott/baytrendsmap", force=TRUE, build_vignettes=TRUE)
+
+```
+
+# Usage
+
+```{r setup, eval=FALSE}
+library(baytrendsmap)
+runShiny()
+```
+
+## Import Data
+
+It is assumed the user has an output file from the `baytrends` package.
+
+Click the "browse" button to locate and then upload a file to the Shiny app.
+
+The progress bar will say "complete" when the file is done uploading.
+
+## Filter Data
+
+There are nine filters available to down select data.  The last five are the critical ones.
+
+* Full Paramter Name
+
+* GAM Formula Name
+
+* Sample Layer
+
+* Period Name
+
+* Season Name
+
+The blue borders can be clicked to expand or collapse each filter.
+
+The select boxes are auto-filled with the values from the uploaded file.  There are pull downs and selects in gray can be highlighted and deleted if necessary.
+
+Click "Apply Filters" to apply the filters to your data.  You **must** expand each of the last 5 filters to make selections.
+
+If you make a mistake you can use the "Reset Filterer Selections" button at the bottom.
+
+Under the "Filter Data Summary" there is a line item with the number of unique records per sample.  If this is not **zero** then there are multiple entries in the data for a single location but only one will be mapped.  This leads to erroneous maps.
+
+## Maps
+
+Both "range" and "trends" maps are able to be produced.
+
+The blue selection boxes are similar to the blue filter selection boxes.
+
+When making changes to the maps with the "Update Map" button the process takes 2 to 5 seconds while the map is saved to a file.
+
+The "Save Map" button will pop up a download box in your browser.
+
+### River Labels
+
+Several major rivers are labeled with RiverNames = TRUE.
+
+The names can be moved to new locations only be editing the global.R file in the R package.  These values are presented in the table below.
+
+
+| River Name Label | Longitude | Latitude |
+|:-----------------|:---------:|:--------:|
+| Susquehanna      |-76.172    | 39.659   |
+| Patuxent         |-76.700    | 38.945   |
+| Choptank         |-75.942    | 38.750   |
+| Potomac          |-77.250    | 38.500   |
+| Rappahannock     |-76.950    | 37.993   |
+| York             |-76.731    | 37.551   |
+| James            |-77.380    | 37.500   |
+
+### Zoom Feature
+
+The "Zoom Region" selection allows for the map focus to change to limited number of rivers.
+
+The map view is focused on the selected river and the rest of the map is not viewable.  This includes the title and legend.
+
+Changing the "Zoom Region" to "none" resets the view to the full map.
+
+The Zoom levels are hard coded into the global.R file for the Shiny app and will need to edited there to change the sizing of the zoom regions.  These values are presented in the table below.
+
+| River Name Zoom | Min X    | Min Y    | Max X    | May Y    |
+|:----------------|:--------:|:--------:|:--------:|:--------:|
+| Susquehanna      |-76.1467 | 39.4016  | -75.9790 | 39.6090  |
+| Patuxent         |-76.8621 | 38.2459  | -76.4035 | 38.8751  |
+| Choptank         |-76.3636 | 38.5184  | -75.7926 | 39.0376  |
+| Potomac          |-77.7047 | 37.6438  | -76.2050 | 39.0159  |
+| Rappahannock     |-77.4901 | 37.4703  | -76.2413 | 38.4143  |
+| York             |-76.9052 | 37.1470  | -76.3784 | 37.5903  |
+| James            |-77.5250 | 36.7142  | -76.2311 | 37.7369  |
+

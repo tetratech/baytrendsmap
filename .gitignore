@@ -37,3 +37,4 @@ rsconnect/
 .Rproj.user
 baytrendsmap.Rproj
 inst/extdata/Notebook_baytrendsmap.Rmd
+inst/doc

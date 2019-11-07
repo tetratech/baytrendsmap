@@ -56,6 +56,11 @@ function(){
                                      )##textInput~END
                          , sliderInput("numclass", "Number of classes"
                                        , min = 3, max = 8, value = 5)
+                         , p("Custom classes/breaks can be input below.  
+                             Leave blank to use number of classes as specified above.")
+                         , textAreaInput("breaks", "Custom classes (comma delimited): "
+                                         , value = NULL
+                                         , rows = 2)##textAreaInput~END
                          , br()
                          , bsCollapse(multiple = TRUE
                                       , bsCollapsePanel("Zoom Region", style='info',
@@ -67,7 +72,7 @@ function(){
                                         , min = 0.01
                                         , max = 2.5
                                         , step = 0.01)
-                         
+
                          , hr()
                          , p("Must 'update' map prior to save.")
                          , fluidRow(column(1),
@@ -80,7 +85,7 @@ function(){
                          
             )##sidebarPanel~END
             , mainPanel(plotOutput("map_r_render", height = 800,  width=800/1.5)
-              
+            #, mainPanel(plotlyOutput("map_r_render", height = 800,  width=800/1.5)  
             )##mainPanel~END
             
             

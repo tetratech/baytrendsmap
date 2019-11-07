@@ -553,13 +553,27 @@ shinyServer(function(input, output, session) {
     mr_cI_type  <- input$SI_classInt
     mr_pal <- input$SI_pal
     mr_var <- input$SI_variable
-    mr_numclass <- input$numclass
     mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
+    brks_user <- eval(parse(text = paste0("c(", input$breaks, ")"))) #evals to NULL if left blank
     
+    # breaks vs numclasses
+    ## input is "" for blank
+    if(is.null(brks_user)==TRUE){
+      # no breaks, use slider for num classes
+      mr_numclass <- input$numclass
+      # derive breaks from user n and style
+      mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
+      # Redo num classes as "pretty" picks its own number of breaks
+      mr_numclass <- ifelse(mr_cI_type=="pretty", length(mr_cI_val$brks) - 1, mr_numclass)
+      # breaks
+      mr_brks <- mr_cI_val$brks
+    } else {
+      # user breaks, use instead of slider for numclasses
+      mr_numclass <- length(brks_user) - 1
+      # breaks
+      mr_brks <- brks_user
+    }##IF~brks_user~END
     
-    mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
-    # Redo num classes as "pretty" picks its own number of breaks
-    mr_numclass <- ifelse(mr_cI_type=="pretty", length(mr_cI_val$brks) - 1, mr_numclass)
     mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
     
     # River Names
@@ -587,14 +601,17 @@ shinyServer(function(input, output, session) {
     # fortify
     fort_df_mr <- ggplot2::fortify(df_mr)
     # Add to data frame
+    
     ## Break, Color
     fort_df_mr$map_brk_col <- cut(fort_df_mr[, mr_var]
-                                 , breaks = mr_cI_val$brks
-                                 , labels = brewer.pal(mr_numclass, mr_pal))
+                                  , breaks = mr_brks
+                                  , labels = brewer.pal(max(3, mr_numclass), mr_pal)[1:mr_numclass]
+                                  )
+    # Minimum of 3 different levels or get warning
     ## Break, Text
     fort_df_mr$map_brk_num <- cut(fort_df_mr[, mr_var]
-                               , breaks = mr_cI_val$brks
-                               )
+                                  , breaks = mr_brks
+                                  )
     
     # Add points to map
     m_r <- m_r + geom_point(data=fort_df_mr
@@ -614,35 +631,35 @@ shinyServer(function(input, output, session) {
       theme(legend.position = "bottom", legend.box = "horizontal", legend.title = element_text(face = "bold"))
     
     
-    # Zoom
-    zoom_buffer <- input$map_range_val_zoom
-    ## Zoom, points
-    x_min_pts <- min(fort_df_mr[, "longitude"])
-    x_max_pts <- max(fort_df_mr[, "longitude"])
-    y_min_pts <- min(fort_df_mr[, "latitude"])
-    y_max_pts <- max(fort_df_mr[, "latitude"])
-    # Bounding Box
-    #                EXT_MIN_X, EXT_MIN_Y, EXT_MAX_X, EXT_MAX_Y
-    bbox_points <- c(x_min_pts, y_min_pts, x_max_pts, y_max_pts)
-    
-    zoomregion <- input$SI_zoomregion_r
-    
-    if(is.null(zoomregion)==TRUE | zoomregion == "none"){
-    #   # do nothing
-    } else {
-      # convert to values
-      zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
-      #zoomregion_bbox <- bbox_Cho
-      # Zoom, Limits
-      x_min <- zoomregion_bbox[1] - -zoom_buffer
-      x_max <- zoomregion_bbox[3] + -zoom_buffer
-      y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
-      y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
-      # replot map with zoom region and buffer
-      m_r <- m_r + ggplot2::coord_fixed(ratio = map_coord_ratio
-                                        , xlim = c(x_min, x_max)
-                                        , ylim = c(y_min, y_max))
-   }##IF~opt_zoomregion_t~END
+   # # Zoom
+   # zoom_buffer <- input$map_range_val_zoom
+   # ## Zoom, points
+   # x_min_pts <- min(fort_df_mr[, "longitude"])
+   # x_max_pts <- max(fort_df_mr[, "longitude"])
+   # y_min_pts <- min(fort_df_mr[, "latitude"])
+   # y_max_pts <- max(fort_df_mr[, "latitude"])
+   # # Bounding Box
+   # #                EXT_MIN_X, EXT_MIN_Y, EXT_MAX_X, EXT_MAX_Y
+   # bbox_points <- c(x_min_pts, y_min_pts, x_max_pts, y_max_pts)
+   # 
+   #  zoomregion <- input$SI_zoomregion_r
+   # 
+   #  if(is.null(zoomregion)==TRUE | zoomregion == "none"){
+   #  #   # do nothing
+   #  } else {
+   #    # convert to values
+   #    zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
+   #    #zoomregion_bbox <- bbox_Cho
+   #    # Zoom, Limits
+   #    x_min <- zoomregion_bbox[1] - -zoom_buffer
+   #    x_max <- zoomregion_bbox[3] + -zoom_buffer
+   #    y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
+   #    y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
+   #    # replot map with zoom region and buffer
+   #    m_r <- m_r + ggplot2::coord_fixed(ratio = map_coord_ratio
+   #                                      , xlim = c(x_min, x_max)
+   #                                      , ylim = c(y_min, y_max))
+   # }##IF~opt_zoomregion_t~END
     
     
     # # save map
@@ -653,18 +670,21 @@ shinyServer(function(input, output, session) {
       
     #
     return(m_r)
+    #return(ggplotly(m_r))
     #
   })##map_range~END
   
   
   output$map_r_render <- renderPlot({
+  #output$map_r_render <- renderPlotly({
     # default map to show
     if(input$but_map_range == 0){
       m_r_2 <- map_base
     } else {
       m_r_2 <- map_range()  
     }
-    print(m_r_2)                   
+    print(m_r_2) 
+    #ggplotly(m_r_2)
   })##map_r~END
   
   # but_mr_title ####
@@ -817,35 +837,35 @@ shinyServer(function(input, output, session) {
     
     # drop = FALSE keeps all factor levels
     
-    # Zoom
-    zoom_buffer <- input$map_trend_val_zoom
-    ## Zoom, points
-    x_min_pts <- min(fort_df_mt[, "longitude"])
-    x_max_pts <- max(fort_df_mt[, "longitude"])
-    y_min_pts <- min(fort_df_mt[, "latitude"])
-    y_max_pts <- max(fort_df_mt[, "latitude"])
-    # Bounding Box
-    #                EXT_MIN_X, EXT_MIN_Y, EXT_MAX_X, EXT_MAX_Y
-    bbox_points <- c(x_min_pts, y_min_pts, x_max_pts, y_max_pts)
-    
-    zoomregion <- input$SI_zoomregion_t
-    
-    if(is.null(zoomregion)==TRUE | zoomregion == "none"){
-      #   # do nothing
-    } else {
-      # convert to values
-      zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
-      #zoomregion_bbox <- bbox_Cho
-      # Zoom, Limits
-      x_min <- zoomregion_bbox[1] - -zoom_buffer
-      x_max <- zoomregion_bbox[3] + -zoom_buffer
-      y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
-      y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
-      # replot map with zoom region and buffer
-      m_t <- m_t + ggplot2::coord_fixed(ratio = map_coord_ratio
-                                        , xlim = c(x_min, x_max)
-                                        , ylim = c(y_min, y_max))
-    }##IF~opt_zoomregion_t~END
+    # # Zoom
+    # zoom_buffer <- input$map_trend_val_zoom
+    # ## Zoom, points
+    # x_min_pts <- min(fort_df_mt[, "longitude"])
+    # x_max_pts <- max(fort_df_mt[, "longitude"])
+    # y_min_pts <- min(fort_df_mt[, "latitude"])
+    # y_max_pts <- max(fort_df_mt[, "latitude"])
+    # # Bounding Box
+    # #                EXT_MIN_X, EXT_MIN_Y, EXT_MAX_X, EXT_MAX_Y
+    # bbox_points <- c(x_min_pts, y_min_pts, x_max_pts, y_max_pts)
+    # 
+    # zoomregion <- input$SI_zoomregion_t
+    # 
+    # if(is.null(zoomregion)==TRUE | zoomregion == "none"){
+    #   #   # do nothing
+    # } else {
+    #   # convert to values
+    #   zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
+    #   #zoomregion_bbox <- bbox_Cho
+    #   # Zoom, Limits
+    #   x_min <- zoomregion_bbox[1] - -zoom_buffer
+    #   x_max <- zoomregion_bbox[3] + -zoom_buffer
+    #   y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
+    #   y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
+    #   # replot map with zoom region and buffer
+    #   m_t <- m_t + ggplot2::coord_fixed(ratio = map_coord_ratio
+    #                                     , xlim = c(x_min, x_max)
+    #                                     , ylim = c(y_min, y_max))
+    # }##IF~opt_zoomregion_t~END
     
     # # save map
     mt_ext <- input$SI_ext_t #"pdf"
@@ -854,19 +874,21 @@ shinyServer(function(input, output, session) {
     ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext, height = 9, width = 9/1.5, units = "in" )
     # Save so download button just copies
     #
+    #return(ggplotly(m_t))
     return(m_t)
     #
   })##map_trend~END
   
-  
   output$map_t_render <- renderPlot({
+  #output$map_t_render <- renderPlotly({
     # default map to show
     if(input$but_map_trend == 0){
       m_t_2 <- map_base
     } else {
       m_t_2 <- map_trend()  
     }
-    print(m_t_2)                   
+    print(m_t_2)
+    #ggplotly(m_t_2)
   })##map_r~END
   
   # but_mt_title ####

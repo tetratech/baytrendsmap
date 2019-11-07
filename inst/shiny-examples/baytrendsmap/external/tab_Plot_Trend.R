@@ -83,6 +83,7 @@ function(){
                                       
                          )##sidebarPanel~END
                          , mainPanel(plotOutput("map_t_render", height = 800,  width=800/1.5)
+                         #, mainPanel(plotlyOutput("map_t_render", height = 800,  width=800/1.5)
                                      
                          )##mainPanel~END
                          

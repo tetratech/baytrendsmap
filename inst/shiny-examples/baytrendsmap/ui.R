@@ -17,7 +17,6 @@ tab_Filter     <- source("external/tab_Filter.R", local=TRUE)$value
 tab_Plot_Range <- source("external/tab_Plot_Range.R", local=TRUE)$value
 tab_Plot_Trend <- source("external/tab_Plot_Trend.R", local=TRUE)$value
 tab_Help       <- source("external/tab_Help.R", local=TRUE)$value 
-#tab_Leaflet_Range <- source("external/tab_Leaflet_Range.R", local = TRUE)$value
 
 # UI ####
 # Define UI for application that draws a histogram
@@ -26,15 +25,12 @@ shinyUI(#fluidPage(
   # Application title
   #titlePanel("baytrends output mapping tool")
   
-  navbarPage(paste0("baytrendsmap R package ", pkgver) #, packageVersion("baytrendsmap"))
+  navbarPage(paste0("baytrendsmap R package v", pkgver) #, packageVersion("baytrendsmap"))
              , theme = "boostrap.css"
              , inverse= TRUE
              , tab_Help()
              , tab_Data()
              , tab_Filter()
-             #, tab_Leaflet_Range()
-             #, tab_Plot_Range()
-             #, tab_Plot_Trend()
   )##navbarPage~END
   
 

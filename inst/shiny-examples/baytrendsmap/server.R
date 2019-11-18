@@ -739,15 +739,6 @@ shinyServer(function(input, output, session) {
   # expected name doesn't match the saved file name.
   # file.exists(fn_out)
   
-  # Leaflet Range ####
-  output$map_lr_render <- renderLeaflet({
-    leaflet() %>%
-      addProviderTiles(providers$Stamen.TonerLite,
-                       options = providerTileOptions(noWrap = TRUE)
-      ) %>%
-      addMarkers(data = points())
-  })
-  
   
   # Map Trend ####
   map_trend <- eventReactive (input$but_map_trend, {

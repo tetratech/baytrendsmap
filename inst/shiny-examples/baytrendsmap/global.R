@@ -11,6 +11,7 @@ suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
 library(classInt)
 suppressMessages(library(dplyr, quietly = TRUE, warn.conflicts = FALSE))
 library(RColorBrewer)
+library(leaflet)
 # library(plotly)
 # library(leaflet)
 # library(dplyr)
@@ -33,6 +34,7 @@ library(RColorBrewer)
 options(shiny.maxRequestSize = 10*1024^2)
 
 #pkgver <- packageVersion("baytrendsmap")
+pkgver <- "0.0.3.9008"
 
 # Pick Lists
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))

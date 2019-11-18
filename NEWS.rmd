@@ -19,6 +19,17 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.3.9008
+===========
+Released - 2019-11-18
+
+* Fix Up Is Good, Issue #5
+
+    + Trend Map, change color only, not direction.
+
+* ui.R
+
+    + App title to use package version as defined in global.R.
 
 baytrendsmap 0.0.3.9007
 ===========

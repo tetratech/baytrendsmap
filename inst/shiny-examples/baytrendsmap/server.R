@@ -543,6 +543,8 @@ shinyServer(function(input, output, session) {
     )##fluidRow~END
   })##opt_ext_t~END
   
+ 
+  
   # Map Range ####
   map_range <- eventReactive (input$but_map_range, {
     # start with base map
@@ -737,6 +739,15 @@ shinyServer(function(input, output, session) {
   # expected name doesn't match the saved file name.
   # file.exists(fn_out)
   
+  # Leaflet Range ####
+  output$map_lr_render <- renderLeaflet({
+    leaflet() %>%
+      addProviderTiles(providers$Stamen.TonerLite,
+                       options = providerTileOptions(noWrap = TRUE)
+      ) %>%
+      addMarkers(data = points())
+  })
+  
   
   # Map Trend ####
   map_trend <- eventReactive (input$but_map_trend, {
@@ -780,19 +791,19 @@ shinyServer(function(input, output, session) {
     chg_pval_poss <- input$map_trend_val_poss # 0.25
     chg_pval_sig <- input$map_trend_val_sig # 0.05
     #
-    if (boo_upisgood == TRUE){
+    #if (boo_upisgood == TRUE){
       df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
       df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
       df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posDecr"
       df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
       df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
-    } else {
-      df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posIncr"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posDecr"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigIncr"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigDecr"
-    }##boo_upisgood~END
+    #} else {
+      # df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
+      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posIncr"
+      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posDecr"
+      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
+      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
+   # }##boo_upisgood~END
     
     # fortify
     fort_df_mt <- ggplot2::fortify(df_mt)
@@ -800,13 +811,25 @@ shinyServer(function(input, output, session) {
     #
     trend_ChangeClass <- c("sigDecr", "sigIncr", "posDecr", "posIncr", "NS")
     trend_leg_label   <- c("Significant Decrease", "Significant Increase", "Possible Decrease", "Possible Increase", "Unlikely")
-    trend_leg_color   <- c("orange", "green", "orange", "green", "dark gray")
-    trend_leg_shape   <- c("25", "24", "21", "21", "23")
+    # trend_leg_color   <- c("orange", "green", "orange", "green", "dark gray")
+    # trend_leg_shape   <- c("25", "24", "21", "21", "23")
     trend_leg_size    <- c("4", "4", "3", "3", "2")
     
+    # Default (up is good = TRUE)
+    trend_leg_color   <- c("orange", "green", "orange", "green", "dark gray")
+    trend_leg_shape   <- c("25", "24", "21", "21", "23")
     manval_color <- c("sigDecr" = "orange", "sigIncr" = "green", "posDecr" = "orange", "posIncr" = "green", "NS" = "dark gray")
     manval_shape <- c("sigDecr" = 25, "sigIncr" = 24, "posDecr" = 21, "posIncr" = 21, "NS" = 23)
     manval_size  <- c("sigDecr" = 4, "sigIncr" = 4, "posDecr" = 3, "posIncr" = 3, "NS" = 2)
+    
+    if(boo_upisgood == FALSE){
+      # Direction Arrows the same
+      # Just the colors change
+      trend_leg_color   <- c("green", "orange", "green", "orange", "dark gray")
+      manval_color <- c("sigDecr" = "green", "sigIncr" = "orange", "posDecr" = "green", "posIncr" = "orange", "NS" = "dark gray")
+      
+    }##IF~boo_upisgood~END
+    
     
     # Add to data frame
     fort_df_mt[, "ChangeClass"] <- factor(fort_df_mt[, "ChangeClass"], trend_ChangeClass)

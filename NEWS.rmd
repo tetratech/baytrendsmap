@@ -19,7 +19,22 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 0.0.3.9011
+===========
+Released - 2019-11-18
 
+* Fix zoom level buffer.  Issue #6.
+
+    + Both Trend and Range maps.
+    
+baytrendsmap 0.0.3.9010
+===========
+Released - 2019-11-18
+
+* server.R
+
+    + Remove leaflet references
+    
 baytrendsmap 0.0.3.9009
 ===========
 Released - 2019-11-18

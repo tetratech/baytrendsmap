@@ -3,7 +3,25 @@ NEWS
 <Erik.Leppo@tetratech.com> and <jon.harcum@tetratech.com>
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
-    #> Last Update: 2019-11-18 14:08:09
+    #> Last Update: 2019-11-18 15:14:30
+
+baytrendsmap 0.0.3.9011
+=======================
+
+Released - 2019-11-18
+
+-   Fix zoom level buffer. Issue \#6.
+
+    -   Both Trend and Range maps.
+
+baytrendsmap 0.0.3.9010
+=======================
+
+Released - 2019-11-18
+
+-   server.R
+
+    -   Remove leaflet references
 
 baytrendsmap 0.0.3.9009
 =======================

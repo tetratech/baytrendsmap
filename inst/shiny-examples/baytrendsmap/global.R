@@ -34,7 +34,7 @@ library(RColorBrewer)
 options(shiny.maxRequestSize = 10*1024^2)
 
 #pkgver <- packageVersion("baytrendsmap")
-pkgver <- "0.0.3.9010"
+pkgver <- "0.0.3.9011"
 
 # Pick Lists
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
@@ -278,11 +278,17 @@ if(boo_test==TRUE){
   ## uses data points
   zoom_buffer <- 0.5
   if(!is.null(zoom_buffer)){
-    x_min <- min(fort_df_test[, "longitude"]) - -zoom_buffer
-    x_max <- max(fort_df_test[, "longitude"]) + -zoom_buffer
+    x_min <- min(fort_df_test[, "longitude"]) - zoom_buffer
+    x_max <- max(fort_df_test[, "longitude"]) + zoom_buffer
     y_min <- min(fort_df_test[, "latitude"]) - zoom_buffer
     y_max <- max(fort_df_test[, "latitude"]) + zoom_buffer
-    map_t + coord_cartesian(xlim = c(x_min, x_max), ylim = c(y_min, y_max))
+    #map_t + coord_cartesian(xlim = c(x_min, x_max), ylim = c(y_min, y_max))
+    
+    map_t + ggplot2::coord_fixed(ratio = map_coord_ratio
+                               , xlim = c(x_min, x_max)
+                               , ylim = c(y_min, y_max))
+    
+    
   }
   # Need to solve legend, best if at bottom.
   # really only works if zooming in on a river or watershed.

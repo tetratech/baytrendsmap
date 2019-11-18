@@ -655,8 +655,8 @@ shinyServer(function(input, output, session) {
       zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
       #zoomregion_bbox <- bbox_Cho
       # Zoom, Limits
-      x_min <- zoomregion_bbox[1] - -zoom_buffer
-      x_max <- zoomregion_bbox[3] + -zoom_buffer
+      x_min <- zoomregion_bbox[1] - zoom_buffer
+      x_max <- zoomregion_bbox[3] + zoom_buffer
       y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
       y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
       # replot map with zoom region and buffer
@@ -875,8 +875,8 @@ shinyServer(function(input, output, session) {
       zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
       #zoomregion_bbox <- bbox_Cho
       # Zoom, Limits
-      x_min <- zoomregion_bbox[1] - -zoom_buffer
-      x_max <- zoomregion_bbox[3] + -zoom_buffer
+      x_min <- zoomregion_bbox[1] - zoom_buffer
+      x_max <- zoomregion_bbox[3] + zoom_buffer
       y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
       y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
       # replot map with zoom region and buffer

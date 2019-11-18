@@ -3,7 +3,16 @@ NEWS
 <Erik.Leppo@tetratech.com> and <jon.harcum@tetratech.com>
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
-    #> Last Update: 2019-11-18 15:14:30
+    #> Last Update: 2019-11-18 15:29:29
+
+baytrendsmap 1.0.0
+==================
+
+Released - 2019-11-18
+
+-   Release version with all updates and edits.
+
+-   Update pkgdown website.
 
 baytrendsmap 0.0.3.9011
 =======================

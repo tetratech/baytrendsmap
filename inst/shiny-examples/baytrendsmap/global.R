@@ -34,7 +34,7 @@ library(RColorBrewer)
 options(shiny.maxRequestSize = 10*1024^2)
 
 #pkgver <- packageVersion("baytrendsmap")
-pkgver <- "0.0.3.9011"
+pkgver <- "1.0.0"
 
 # Pick Lists
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))

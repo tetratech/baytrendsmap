@@ -3,7 +3,16 @@ NEWS
 <Erik.Leppo@tetratech.com> and <jon.harcum@tetratech.com>
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
-    #> Last Update: 2019-11-18 13:50:51
+    #> Last Update: 2019-11-18 14:08:09
+
+baytrendsmap 0.0.3.9009
+=======================
+
+Released - 2019-11-18
+
+-   global.R
+
+    -   Remove leaflet package.
 
 baytrendsmap 0.0.3.9008
 =======================

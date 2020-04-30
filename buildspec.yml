@@ -1,0 +1,32 @@
+version: 0.2
+# John Massey, ASCR Federal
+# 3/31/2020
+# REQUIREMENTS
+# CodeBuild ENV Vars
+#   AWS_DEFAULT_REGION (us-east-1)
+#   AWS_ACCOUNT_ID
+#   IMAGE_REPO_NAME (ECR Repo Name)
+#   IMAGE_TAG       (Docker Image Tag)
+#   BASE_IMAGE_NAME (Default Name of docker image post build step)
+#   ENVIRONMENT     (based on REP or SCEN + DEV, TEST, PROD)
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - echo $AWS_DEFAULT_REGION
+      - echo $BASE_IMAGE_NAME
+      - echo $IMAGE_TAG
+      - ls -al
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image using docker build...
+      - docker build -t $BASE_IMAGE_NAME .
+      - docker tag $BASE_IMAGE_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG

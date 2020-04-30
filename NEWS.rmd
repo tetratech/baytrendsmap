@@ -19,6 +19,48 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9002
+===========
+Released - 2020-04-03
+
+* Added files for use with Docker.
+    + buildspec.yml
+    + Dockerfile
+
+baytrendsmap 1.0.0.9001
+===========
+Released - 2020-01-29 (work in progress)
+
+* Updated from rhub::check_for_cran()
+
+    + Title to title case and no ending period.
+    
+    + Update maintainer and author names to match.
+    
+    + .github folder to .gitbuildignore.
+
+More stuff from check
+
+* checking installed package size ... NOTE
+  installed size is 31.7Mb
+  sub-directories of 1Mb or more:
+    data             3.9Mb
+    extdata         10.0Mb
+    shiny-examples  17.7Mb
+
+License components which are templates and need '+ file LICENSE':
+  MIT
+
+* checking top-level files ... NOTE
+File
+  LICENSE
+is not mentioned in the DESCRIPTION file.
+
+Non-standard files/directories found at top level:
+  ‘NEWS.rmd’ ‘README.html’ ‘data-raw’
+
+
+
 baytrendsmap 1.0.0
 ===========
 Released - 2019-11-18

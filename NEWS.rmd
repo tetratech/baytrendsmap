@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9003
+===========
+Released - 2020-05-15
+
+* Moved GitHub repo from leppott to tetratech.
+    + Redo pkgdown.
+    
 baytrendsmap 1.0.0.9002
 ===========
 Released - 2020-04-03

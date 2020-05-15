@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-04-30 13:59:24
+    #> Last Update: 2020-05-15 09:49:01
+
+# baytrendsmap 1.0.0.9003
+
+Released - 2020-05-15
+
+  - Moved GitHub repo from leppott to tetratech.
+      - Redo pkgdown.
 
 # baytrendsmap 1.0.0.9002
 

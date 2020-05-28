@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9006
+===========
+Released - 2020-05-28
+
+* Shiny, Issue #16
+    + Remove numbers (3a and 3b) from map options headers.
+
 baytrendsmap 1.0.0.9005
 ===========
 Released - 2020-05-28

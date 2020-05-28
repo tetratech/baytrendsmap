@@ -12,7 +12,7 @@ function(){
             sidebarPanel(width=3, 
                          # App Steps
                          #h3("App Steps")
-                         h3("3.a. Range Map Options")
+                         h3("Range Map Options")
                          , fluidRow(column(1),
                                     column(1, bsButton("but_map_range", "Update Range Map")),
                                     bsPopover("but_map_range", "Click 'apply' after modifying filters", "A 'data range' map will be created with the selected options.",

@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-05-28 08:11:56
+    #> Last Update: 2020-05-28 08:20:41
+
+# baytrendsmap 1.0.0.9006
+
+Released - 2020-05-28
+
+  - Shiny, Issue \#16
+      - Remove numbers (3a and 3b) from map options headers.
 
 # baytrendsmap 1.0.0.9005
 

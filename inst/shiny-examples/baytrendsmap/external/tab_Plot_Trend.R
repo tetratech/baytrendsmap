@@ -12,7 +12,7 @@ function(){
                          sidebarPanel(width=3, 
                                       # App Steps
                                       #h3("App Steps")
-                                      h3("3.b. Trend Map Options")
+                                      h3("Trend Map Options")
                                       , fluidRow(column(1),
                                                  column(1, bsButton("but_map_trend", "Update Trend Map")),
                                                  bsPopover("but_map_trend", "Click 'apply' after modifying filters", "A 'data trend' map will be created with the selected options.",

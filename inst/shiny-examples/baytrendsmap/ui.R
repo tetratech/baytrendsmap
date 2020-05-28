@@ -28,9 +28,9 @@ shinyUI(#fluidPage(
   navbarPage(paste0("baytrendsmap R package v", pkgver) #, packageVersion("baytrendsmap"))
              , theme = "boostrap.css"
              , inverse= TRUE
-             , tab_Help()
              , tab_Data()
              , tab_Filter()
+             , tab_Help()
   )##navbarPage~END
   
 

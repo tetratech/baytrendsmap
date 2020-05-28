@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9005
+===========
+Released - 2020-05-28
+
+* Shiny, Issue #20
+    + Rename '1. Import Data' tab to '1. Select Data'.
+    + Default to '1. Import Data' tab instead of 'HELP'.
+
 baytrendsmap 1.0.0.9004
 ===========
 Released - 2020-05-28

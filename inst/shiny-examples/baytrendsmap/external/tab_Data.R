@@ -2,7 +2,7 @@
 #~~~~~~~~~~~~~~~~~
 #
 function(){
-  tabPanel("1. Import Data"
+  tabPanel("1. Select Data"
            #, fluidPage(
 
              , sidebarLayout(

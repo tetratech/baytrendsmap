@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-05-28 08:04:50
+    #> Last Update: 2020-05-28 08:11:56
+
+# baytrendsmap 1.0.0.9005
+
+Released - 2020-05-28
+
+  - Shiny, Issue \#20
+      - Rename ‘1. Import Data’ tab to ‘1. Select Data’.
+      - Default to ‘1. Import Data’ tab instead of ‘HELP’.
 
 # baytrendsmap 1.0.0.9004
 

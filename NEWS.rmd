@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9007
+===========
+Released - 2020-05-28
+
+* Update Table captions, Issue #15
+
 baytrendsmap 1.0.0.9006
 ===========
 Released - 2020-05-28

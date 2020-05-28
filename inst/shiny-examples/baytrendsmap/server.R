@@ -178,7 +178,7 @@ shinyServer(function(input, output, session) {
     
   }##expression~END
   , filter="top"
-  , caption = "Table 2. Filtered map data."
+  , caption = "Table 3. Filtered data."
   , options=list(scrollX=TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
   )##df_filt_DT~END
@@ -215,7 +215,7 @@ shinyServer(function(input, output, session) {
     return(df_tmp)
   }##expression~END
   , filter="top"
-  , caption = "Table 3. Filtered map data duplicates by column."
+  , caption = "Table 2. Station summary."
   , options=list(scrollX=TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
   )##df_filt_dups_DT~END

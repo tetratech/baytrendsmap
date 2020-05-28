@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-05-15 09:49:01
+    #> Last Update: 2020-05-28 08:04:50
+
+# baytrendsmap 1.0.0.9004
+
+Released - 2020-05-28
+
+  - README
+      - Update install example repo from leppottto tetratech
+      - Update install example to use dependencies = TRUE, Issue \#22
+          - Default of NA does not include packages listed as Suggests
+            in DESCRIPTION
+      - Commented out Set.sysenv() since on R v4 and only needed for R
+        v3.6
 
 # baytrendsmap 1.0.0.9003
 

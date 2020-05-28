@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-05-28 09:18:55
+    #> Last Update: 2020-05-28 10:00:51
+
+# baytrendsmap 1.0.0.9009
+
+Released - 2020-05-28
+
+  - Fix reset filter button display text spelling; Issue \#14
 
 # baytrendsmap 1.0.0.9008
 

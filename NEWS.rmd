@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9009
+===========
+Released - 2020-05-28
+
+* Fix reset filter button display text spelling; Issue #14
+
 baytrendsmap 1.0.0.9008
 ===========
 Released - 2020-05-28

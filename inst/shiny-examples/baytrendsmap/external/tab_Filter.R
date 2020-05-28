@@ -62,7 +62,7 @@ function(){
                  )##bsCollapse~END
                  , br()
                  , fluidRow(column(1), 
-                          column(1,bsButton("but_ClearFilters", label="Reset Filterer Selections", style="primary"))
+                          column(1,bsButton("but_ClearFilters", label="Reset Filter Selections", style="primary"))
                           )##fluidRow~END
                  
                     

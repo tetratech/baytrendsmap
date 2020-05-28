@@ -695,11 +695,11 @@ shinyServer(function(input, output, session) {
   observeEvent(input$but_mr_title, {
     sep1 <- ": "
     sep2 <- "\n" #"; "
-    str_title <- paste(input$SI_parmName
-                      , paste("GAM", input$SI_gamName, sep = sep1)
-                      , paste("Layer", input$SI_layer, sep = sep1)
-                      , paste("Period", input$SI_periodName, sep = sep1)
-                      , paste("Season", input$SI_seasonName, sep = sep1)
+    str_title <- paste(paste(input$SI_parmName, collapse = ", ")
+                      , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
+                      , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
+                      , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
+                      , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
                       , sep = sep2)
     updateTextAreaInput(session, "map_range_title", value = str_title)
     # max is 89 characters, if need to wrap dynamically
@@ -913,11 +913,11 @@ shinyServer(function(input, output, session) {
   observeEvent(input$but_mt_title, {
     sep1 <- ": "
     sep2 <- "\n" #"; "
-    str_title <- paste(input$SI_parmName
-                       , paste("GAM", input$SI_gamName, sep = sep1)
-                       , paste("Layer", input$SI_layer, sep = sep1)
-                       , paste("Period", input$SI_periodName, sep = sep1)
-                       , paste("Season", input$SI_seasonName, sep = sep1)
+    str_title <- paste(paste(input$SI_parmName, collapse = ", ")
+                       , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
+                       , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
+                       , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
+                       , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
                        , sep = sep2)
     updateTextAreaInput(session, "map_trend_title", value = str_title)
     # max is 89 characters, if need to wrap dynamically

@@ -254,7 +254,7 @@ shinyServer(function(input, output, session) {
 
     n_dups <- sum(tib_abc[, 2:ncol(tib_abc)] != 1)
     #
-    str_n_dups <- paste0(n_dups, " = Number of entries with more than 1 record.")
+    str_n_dups <- paste0(n_dups, " = Number of stations with more than 1 record.")
     #
     return(str_n_dups)
     #

@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9010
+===========
+Released - 2020-05-28
+
+* Filter data tab change "entries" to "stations"; Issue #17
+
 baytrendsmap 1.0.0.9009
 ===========
 Released - 2020-05-28

@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-05-28 10:00:51
+    #> Last Update: 2020-05-28 10:50:04
+
+# baytrendsmap 1.0.0.9010
+
+Released - 2020-05-28
+
+  - Filter data tab change “entries” to “stations”; Issue \#17
 
 # baytrendsmap 1.0.0.9009
 

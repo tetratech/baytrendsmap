@@ -37,9 +37,9 @@ function(){
                                                         )##bsCollapsePanel~ext~END
                                       , bsCollapsePanel("River Names (Y/N)", style='info',
                                                         uiOutput('opt_riverNames')
-                                      )##bsCollapsePanel~riverNames~END
-                                      
-                         )##bsCollapse~END
+                                                        )##bsCollapsePanel~riverNames~END
+                                      # , open = "Variable to Plot" # to auto open panels
+                                      )##bsCollapse~END
                          , fluidRow(column(1), 
                                     # column(1, bsButton("but_mr_title", "Auto-generate Title")),
                                     # bsPopover("but_mr_title", "Click to auto-generate title from 'filters'."))

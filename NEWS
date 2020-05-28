@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-05-28 10:50:04
+    #> Last Update: 2020-05-28 11:49:17
+
+# baytrendsmap 1.0.0.9011
+
+Released - 2020-05-28
+
+  - Add placeholder code to “open” collapsed filters and map options;
+    Issue \#23
 
 # baytrendsmap 1.0.0.9010
 

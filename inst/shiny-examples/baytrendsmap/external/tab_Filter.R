@@ -59,17 +59,12 @@ function(){
                                                    fluidRow(column(1), column(10, radioButtons('sel_seasonName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
                                                    uiOutput('filt_seasonName')
                                                   )##bsCollapsePanel~seasonName~END
+                                 # , open = "Filter by 'Season Name'" # to auto open panels
                  )##bsCollapse~END
                  , br()
                  , fluidRow(column(1), 
                           column(1,bsButton("but_ClearFilters", label="Reset Filter Selections", style="primary"))
                           )##fluidRow~END
-                 
-                    
-                    
-                    
-                    
-                    
                    
                 )##sidebarPanel~END
                 , mainPanel(

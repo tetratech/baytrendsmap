@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9011
+===========
+Released - 2020-05-28
+
+* Add placeholder code to "open" collapsed filters and map options; Issue #23
+
 baytrendsmap 1.0.0.9010
 ===========
 Released - 2020-05-28

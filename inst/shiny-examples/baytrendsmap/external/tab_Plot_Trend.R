@@ -18,9 +18,6 @@ function(){
                                                  bsPopover("but_map_trend", "Click 'apply' after modifying filters", "A 'data trend' map will be created with the selected options.",
                                                            "top", trigger = "hover", options = list(container = "body"))
                                       )##fluidRow~filter button~END
-                                      
-                                      
-                                      
                                      , br()
                                      , bsCollapse(multiple = TRUE
                                                   , bsCollapsePanel("Direction of 'good' trend", style='info',
@@ -38,6 +35,7 @@ function(){
                                                   , bsCollapsePanel("River Names (Y/N)", style='info',
                                                                     uiOutput('opt_riverNames_t')
                                                   )##bsCollapsePanel~riverNames~END
+                                                  # , open = "River Names (Y/N)" # to auto open panels
 
                                       )##bsCollapse~END
                                      , numericInput("map_trend_val_poss", h4(paste0("  Threshold for 'possible' trend:"))

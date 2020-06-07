@@ -769,7 +769,7 @@ shinyServer(function(input, output, session) {
         annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1], hjust=0) +
         annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1], hjust=0)
     }##IF~riverNames~END
-    
+
     # Title
     mt_title <- input$map_trend_title
     if(!is.null(mt_title)==TRUE){
@@ -796,6 +796,12 @@ shinyServer(function(input, output, session) {
       # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
       # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
    # }##boo_upisgood~END
+      
+      
+    # Caption - p-value
+    m_t <- m_t + ggplot2::labs(caption = paste0("p-value thresholds (possible, significant) = "
+                                                , chg_pval_poss, ", ", chg_pval_sig))
+      
     
     # fortify
     fort_df_mt <- ggplot2::fortify(df_mt)

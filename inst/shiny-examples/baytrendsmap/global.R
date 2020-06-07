@@ -1,5 +1,8 @@
 # Shiny Global File
 
+#pkgver <- packageVersion("baytrendsmap")
+pkgver <- "1.0.0.9012"
+
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(baytrends, quietly = TRUE, warn.conflicts = FALSE))
@@ -32,9 +35,6 @@ library(RColorBrewer)
 # By default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 10MB.
 options(shiny.maxRequestSize = 10*1024^2)
-
-#pkgver <- packageVersion("baytrendsmap")
-pkgver <- "1.0.0.9011"
 
 # Pick Lists
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))

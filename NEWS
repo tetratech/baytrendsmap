@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-07 10:46:22
+    #> Last Update: 2020-06-07 11:01:46
+
+# baytrendsmap 1.0.0.9015
+
+Released - 2020-06-07
+
+  - Add trend map p-values to auto-generated title; Issue \#10
 
 # baytrendsmap 1.0.0.9014
 

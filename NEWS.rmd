@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9015
+===========
+Released - 2020-06-07
+
+* Add trend map p-values to auto-generated title; Issue #10
+    
 baytrendsmap 1.0.0.9014
 ===========
 Released - 2020-06-07

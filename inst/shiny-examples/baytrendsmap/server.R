@@ -923,11 +923,14 @@ shinyServer(function(input, output, session) {
   observeEvent(input$but_mt_title, {
     sep1 <- ": "
     sep2 <- "\n" #"; "
+    sep_clsp <- ", "
     str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                       , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
-                       , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
-                       , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
-                       , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
+                       , paste("GAM", paste(input$SI_gamName, collapse = sep_clsp), sep = sep1)
+                       , paste("Layer", paste(input$SI_layer, collapse = sep_clsp), sep = sep1)
+                       , paste("Period", paste(input$SI_periodName, collapse = sep_clsp), sep = sep1)
+                       , paste("Season", paste(input$SI_seasonName, collapse = sep_clsp), sep = sep1)
+                       , paste("p-value thresholds (possible, significant)"
+                               , paste(input$map_trend_val_poss, input$map_trend_val_sig, sep = sep_clsp), sep = sep1)
                        , sep = sep2)
     updateTextAreaInput(session, "map_trend_title", value = str_title)
     # max is 89 characters, if need to wrap dynamically

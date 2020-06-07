@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-07 09:54:12
+    #> Last Update: 2020-06-07 10:46:22
+
+# baytrendsmap 1.0.0.9014
+
+Released - 2020-06-07
+
+  - Update “save map” button; Issue \#9
+      - No changes other than formatting and comments.
 
 # baytrendsmap 1.0.0.9013
 

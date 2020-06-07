@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9014
+===========
+Released - 2020-06-07
+
+* Update "save map" button; Issue #9
+    + No changes other than formatting and comments.
+
 baytrendsmap 1.0.0.9013
 ===========
 Released - 2020-06-07

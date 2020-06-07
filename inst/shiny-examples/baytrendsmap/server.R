@@ -570,6 +570,7 @@ shinyServer(function(input, output, session) {
       mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
       # Redo num classes as "pretty" picks its own number of breaks
       mr_numclass <- ifelse(mr_cI_type=="pretty", length(mr_cI_val$brks) - 1, mr_numclass)
+      #mr_numclass <- ifelse(mr_cI_type=="pretty", length(mr_cI_val$brks), mr_numclass)
       # breaks
       mr_brks <- mr_cI_val$brks
     } else {

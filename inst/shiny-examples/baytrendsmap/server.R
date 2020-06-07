@@ -427,9 +427,9 @@ shinyServer(function(input, output, session) {
     str_SI <- paste0("SI_", str_col)
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = pick_gamDiff,
+                     choices = pick_gamDiff_Desc,
                      multiple = FALSE,
-                     selected = pick_gamDiff[1])
+                     selected = pick_gamDiff_Desc[1])
 
     )##fluidRow~END
   })##opt_var~END
@@ -555,8 +555,10 @@ shinyServer(function(input, output, session) {
     df_mr <- df_filt()
     mr_cI_type  <- input$SI_classInt
     mr_pal <- input$SI_pal
-    mr_var <- input$SI_variable
-    mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
+    mr_var_name <- input$SI_variable
+    mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
+    # mr_var <- input$SI_variable
+    # mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
     brks_user <- eval(parse(text = paste0("c(", input$breaks, ")"))) #evals to NULL if left blank
     
     # breaks vs numclasses

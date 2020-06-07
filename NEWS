@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-07 09:16:11
+    #> Last Update: 2020-06-07 09:54:12
+
+# baytrendsmap 1.0.0.9013
+
+Released - 2020-06-07
+
+  - Modify range map variable pull-down to descriptive names; Issue \#18
 
 # baytrendsmap 1.0.0.9012
 

@@ -746,6 +746,20 @@ shinyServer(function(input, output, session) {
   
   # Map Trend ####
   map_trend <- eventReactive (input$but_map_trend, {
+    
+    # validate p-value, poss > sig
+    validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
+                  , paste0("ERROR; the 'possible' p-value (", input$map_trend_pval_poss
+                           , ") should be greater than the 'significant' p-value ("
+                           , input$map_trend_pval_sig, ").")))
+    # validate p-value, poss + sig <= 1
+    validate(need(input$map_trend_pval_poss + input$map_trend_pval_sig <= 1
+                  , paste0("ERROR; the 'possible' p-value (", input$map_trend_pval_poss
+                           , ") and the 'significant' p-value ("
+                           , input$map_trend_pval_sig, ") cannot be greater than 1.")))
+
+    
+    
     # start with base map
     m_t <- map_base
     
@@ -783,8 +797,8 @@ shinyServer(function(input, output, session) {
     # Points ##
     
     boo_upisgood   <- input$SI_upisgood # TRUE
-    chg_pval_poss <- input$map_trend_val_poss # 0.25
-    chg_pval_sig <- input$map_trend_val_sig # 0.05
+    chg_pval_poss <- input$map_trend_pval_poss # 0.25
+    chg_pval_sig <- input$map_trend_pval_sig # 0.05
     #
     #if (boo_upisgood == TRUE){
       df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
@@ -930,7 +944,7 @@ shinyServer(function(input, output, session) {
                        , paste("Period", paste(input$SI_periodName, collapse = sep_clsp), sep = sep1)
                        , paste("Season", paste(input$SI_seasonName, collapse = sep_clsp), sep = sep1)
                        , paste("p-value thresholds (possible, significant)"
-                               , paste(input$map_trend_val_poss, input$map_trend_val_sig, sep = sep_clsp), sep = sep1)
+                               , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1)
                        , sep = sep2)
     updateTextAreaInput(session, "map_trend_title", value = str_title)
     # max is 89 characters, if need to wrap dynamically

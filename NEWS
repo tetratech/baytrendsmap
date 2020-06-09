@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-07 11:01:46
+    #> Last Update: 2020-06-09 16:32:37
+
+# baytrendsmap 1.0.0.9016
+
+Released - 2020-06-09
+
+  - Trend map, constrain p-value; Issue \#24
+      - 0.0 \<= p(significant) \< p(possible) \<= 1.0
 
 # baytrendsmap 1.0.0.9015
 

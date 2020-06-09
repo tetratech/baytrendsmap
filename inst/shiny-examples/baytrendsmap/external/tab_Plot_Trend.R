@@ -38,14 +38,14 @@ function(){
                                                   # , open = "River Names (Y/N)" # to auto open panels
 
                                       )##bsCollapse~END
-                                     , numericInput("map_trend_val_poss", h4(paste0("  Threshold (p-value) for 'possible' trend:"))
+                                     , numericInput("map_trend_pval_poss", h4(paste0("  Threshold (p-value) for 'possible' trend:"))
                                                     , value = 0.25
                                                     , min = 0.01
-                                                    , max = 0.99
+                                                    , max = 1.00
                                                     , step = 0.01)
-                                     , numericInput("map_trend_val_sig", h4(paste0("  Threshold (p-value) for 'significant' trend:"))
+                                     , numericInput("map_trend_pval_sig", h4(paste0("  Threshold (p-value) for 'significant' trend:"))
                                                     , value = 0.05
-                                                    , min = 0.01
+                                                    , min = 0.00
                                                     , max = 0.99
                                                     , step = 0.01)
                                       , fluidRow(column(1),

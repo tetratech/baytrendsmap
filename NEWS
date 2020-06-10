@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-10 09:17:43
+    #> Last Update: 2020-06-10 09:33:01
+
+# baytrendsmap 1.0.0.9018
+
+Released - 2020-06-10
+
+  - Remove trend map p-value restriction for sum \> 1; Issue \#24
+      - Added in v1.0.0.9016
 
 # baytrendsmap 1.0.0.9017
 

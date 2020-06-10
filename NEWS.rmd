@@ -19,11 +19,18 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9018
+===========
+Released - 2020-06-10
+
+* Remove trend map p-value restriction for sum > 1; Issue #24
+    + Added in v1.0.0.9016
+
 baytrendsmap 1.0.0.9017
 ===========
 Released - 2020-06-10
 
-+ Fix range map palatte selection; Issue #21
+* Fix range map palatte selection; Issue #21
 
 baytrendsmap 1.0.0.9016
 ===========

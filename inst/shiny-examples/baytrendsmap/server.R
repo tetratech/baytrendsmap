@@ -762,14 +762,7 @@ shinyServer(function(input, output, session) {
                   , paste0("ERROR; the 'possible' p-value (", input$map_trend_pval_poss
                            , ") should be greater than the 'significant' p-value ("
                            , input$map_trend_pval_sig, ").")))
-    # validate p-value, poss + sig <= 1
-    validate(need(input$map_trend_pval_poss + input$map_trend_pval_sig <= 1
-                  , paste0("ERROR; the 'possible' p-value (", input$map_trend_pval_poss
-                           , ") and the 'significant' p-value ("
-                           , input$map_trend_pval_sig, ") cannot be greater than 1.")))
 
-    
-    
     # start with base map
     m_t <- map_base
     

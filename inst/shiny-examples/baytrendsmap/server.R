@@ -548,6 +548,7 @@ shinyServer(function(input, output, session) {
   
   # Map Range ####
   map_range <- eventReactive (input$but_map_range, {
+
     # start with base map
     m_r <- map_base
     
@@ -607,11 +608,12 @@ shinyServer(function(input, output, session) {
     # fortify
     fort_df_mr <- ggplot2::fortify(df_mr)
     # Add to data frame
-    
+
     ## Break, Color
     fort_df_mr$map_brk_col <- cut(fort_df_mr[, mr_var]
                                   , breaks = mr_brks
-                                  , labels = brewer.pal(max(3, mr_numclass), mr_pal)[1:mr_numclass]
+                                  #, labels = brewer.pal(max(3, mr_numclass), mr_pal)[1:mr_numclass]
+                                  , labels = mr_pal_col
                                   )
     # Minimum of 3 different levels or get warning
     ## Break, Text
@@ -619,23 +621,31 @@ shinyServer(function(input, output, session) {
                                   , breaks = mr_brks
                                   )
     
-    # Add points to map
+    # Points, Add
     m_r <- m_r + geom_point(data=fort_df_mr
                                     , aes_string(x =" longitude"
                                                  , y = "latitude"
-                                                 , fill = "map_brk_col")
+                                                 , fill = "map_brk_num")
                                     , size = 4
                                     , pch = 21
                                     , color = "black"
                                     , na.rm = TRUE)
     
-    # Legend
-    #Modify Legend 
-    m_r <- m_r + scale_fill_discrete(name = mr_var_name
-                        #, labels = paste(c(">", rep("< ", length(mr_cI_val$brks)-1)), round(mr_cI_val$brks, 2))) +
-                        , labels = levels(fort_df_mr$map_brk_num)) +
-      theme(legend.position = "bottom", legend.box = "horizontal", legend.title = element_text(face = "bold"))
+    # Points, Fill
+    m_r <- m_r + scale_fill_brewer(palette = mr_pal
+                                   , name = mr_var_name
+                                   , labels = levels(fort_df_mr$map_brk_num)
+                                    )
+    # m_r <- m_r + scale_fill_discrete(name = mr_var_name
+    #                     #, labels = paste(c(">", rep("< ", length(mr_cI_val$brks)-1)), round(mr_cI_val$brks, 2))) +
+    #                     , labels = levels(fort_df_mr$map_brk_num)
+    #                     )
     
+    # Legend 
+    m_r <- m_r + theme(legend.position = "bottom"
+                       , legend.box = "horizontal"
+                       , legend.title = element_text(face = "bold"))
+
     
    # Zoom
    zoom_buffer <- input$map_range_val_zoom

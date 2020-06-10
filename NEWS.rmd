@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9017
+===========
+Released - 2020-06-10
+
++ Fix range map palatte selection; Issue #21
+
 baytrendsmap 1.0.0.9016
 ===========
 Released - 2020-06-09

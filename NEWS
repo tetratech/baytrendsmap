@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-09 16:32:37
+    #> Last Update: 2020-06-10 09:17:43
+
+# baytrendsmap 1.0.0.9017
+
+Released - 2020-06-10
+
+  - Fix range map palatte selection; Issue \#21
 
 # baytrendsmap 1.0.0.9016
 

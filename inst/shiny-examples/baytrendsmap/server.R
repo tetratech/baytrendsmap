@@ -28,6 +28,31 @@ shinyServer(function(input, output, session) {
     df_input <- read.csv(inFile$datapath, header = TRUE,
                          sep = ",", quote = "\"", stringsAsFactors = FALSE)
     #
+    # validate required columns
+    col_req <- c("station"
+                 , "layer"
+                 , "latitude"
+                 , "longitude"
+                 , "cbSeg92"
+                 , "state"
+                 , "stationGrpName"
+                 , "parmName"
+                 , "gamName"
+                 , "periodName"
+                 , "seasonName"
+                 , "gamDiff.bl.mn.obs"
+                 , "gamDiff.cr.mn.obs"
+                 , "gamDiff.abs.chg.obs"
+                 , "gamDiff.pct.chg"
+                 , "gamDiff.chg.pval")
+    # Check
+    col_req_match <- col_req %in% colnames(df_input)
+    col_missing <- col_req[!col_req_match]
+    #
+    validate(need(sum(col_req_match) == length(col_req)
+                  , paste0("ERROR\nRequired columns missing from the data:\n"
+                           , paste("* ", col_missing, collapse = "\n"))))
+    #
     return(df_input)
     #
     #
@@ -759,7 +784,7 @@ shinyServer(function(input, output, session) {
     
     # validate p-value, poss > sig
     validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
-                  , paste0("ERROR; the 'possible' p-value (", input$map_trend_pval_poss
+                  , paste0("ERROR\nThe 'possible' p-value (", input$map_trend_pval_poss
                            , ") should be greater than the 'significant' p-value ("
                            , input$map_trend_pval_sig, ").")))
 

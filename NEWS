@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-10 09:33:01
+    #> Last Update: 2020-06-11 13:13:41
+
+# baytrendsmap 1.0.0.9019
+
+Released - 2020-06-11
+
+  - Error checking for required columns in imported file; Issue \#7
+  - Revise Error message text for p-value for consistency; Issue \#24
 
 # baytrendsmap 1.0.0.9018
 

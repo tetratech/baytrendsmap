@@ -10,6 +10,7 @@
 # Packages ####
 ## referenced global.R
 
+
 # Source Pages ####
 # Load files for individual screens
 tab_Data       <- source("external/tab_Data.R", local=TRUE)$value
@@ -20,18 +21,19 @@ tab_Help       <- source("external/tab_Help.R", local=TRUE)$value
 
 # UI ####
 # Define UI for application that draws a histogram
-shinyUI(#fluidPage(
+shinyUI(
+  #fluidPage(
   
-  # Application title
-  #titlePanel("baytrends output mapping tool")
+    # Application title
+    #titlePanel("baytrends output mapping tool")
   
-  navbarPage(paste0("baytrendsmap R package v", pkgver) #, packageVersion("baytrendsmap"))
-             , theme = "boostrap.css"
-             , inverse= TRUE
-             , tab_Data()
-             , tab_Filter()
-             , tab_Help()
-  )##navbarPage~END
+    navbarPage(paste0("baytrendsmap R package v", pkgver) #, packageVersion("baytrendsmap"))
+               , theme = "boostrap.css"
+               , inverse= TRUE
+               , tab_Data()
+               , tab_Filter()
+               , tab_Help()
+    )##navbarPage~END
   
-
+  #)##fluidPage ~ END
 )##shinyUI~END

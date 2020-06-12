@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap")
-pkgver <- "1.0.0.9019"
+pkgver <- "1.0.0.9020"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -22,7 +22,7 @@ library(RColorBrewer)
 # library(data.table)
 # library(stringr)
 # library(plotly)
-# library(shinyjs) # for testing, comment out in final version
+library(shinyjs) # for testing, comment out in final version
 
 # Drop-down boxes
 #MMIs <- c("BIBI_genus", "BIBI_family", "FIBI")
@@ -44,6 +44,14 @@ pick_pal <- c("PuOr", "BuPu", "OrRd", "PuBu", "RdPu") #RColorBrewer
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
                      , "Rappahannock", "Susquehanna", "York")
+pick_files_radio <- c("Non-linear Trend (Full Period)"
+                      , "Non-linear Trend (2009-2010 to 2017-2018)"
+                      , "Non-linear Trend with Flow Adjustment (Full Period)"
+                      , "Non-linear Trend with Flow Adjustment (2009-2010 to 2017-2018)")
+pick_files_names <- c("Trend_NL_FA_F_Full.csv"
+                      , "Trend_NL_FA_F_Short.csv"
+                      , "Trend_NL_FA_T_Full.csv"
+                      , "Trend_NL_FA_T_Short.csv")
 
 # Map, Shapefile
 fn_shp <- file.path("data", "cbseg")

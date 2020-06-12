@@ -16,42 +16,76 @@ shinyServer(function(input, output, session) {
   
   # Data ####
   ## df_import ####
-  df_import <- eventReactive(input$fn_input, {
-    #
-    inFile <- input$fn_input
+  file_watch <- reactive({
+    paste(input$fn_input, input$but_radio_load)
+  })## file_watch ~ END
+  
+  # eventReactive(input$but_radio_load, {
+  #   input$fn_input <- NULL
+  # })
+  
+  # Button, Clear File Input ####
+  observeEvent(input$but_ClearFilters, {
+    # Reset both inputs to 0 (unused)
+    input$fn_input <- NULL
+    #input$radio_input <- NULL
+  })## observerEvent ~ input$but_ClearFilters ~ END
+  
+  df_import <- eventReactive(file_watch(), {
+    # use a multi-item reactive so keep on a single line
     
-    if (is.null(inFile)){
-      return(NULL)
+    #
+    inFile       <- input$fn_input
+    inFile_radio <- input$radio_input
+    
+    if (!is.null(inFile)){
+      # Define file
+      fn_inFile <- inFile$datapath
+      # Read user imported file
+      df_input <- read.csv(fn_inFile
+                           , header = TRUE
+                           , sep = ","
+                           , quote = "\""
+                           , stringsAsFactors = FALSE)
+      # validate required columns
+      col_req <- c("station"
+                   , "layer"
+                   , "latitude"
+                   , "longitude"
+                   , "cbSeg92"
+                   , "state"
+                   , "stationGrpName"
+                   , "parmName"
+                   , "gamName"
+                   , "periodName"
+                   , "seasonName"
+                   , "gamDiff.bl.mn.obs"
+                   , "gamDiff.cr.mn.obs"
+                   , "gamDiff.abs.chg.obs"
+                   , "gamDiff.pct.chg"
+                   , "gamDiff.chg.pval")
+      # Check
+      col_req_match <- col_req %in% colnames(df_input)
+      col_missing <- col_req[!col_req_match]
+      #
+      validate(need(sum(col_req_match) == length(col_req)
+                    , paste0("ERROR\nRequired columns missing from the data:\n"
+                             , paste("* ", col_missing, collapse = "\n"))))
+      reset("fn_input")
+    } else if (input$but_radio_load != 0) {
+      fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
+      df_input <- read.csv(file.path(".", "data", fn_inFile)
+                          , header = TRUE
+                          , sep = ","
+                          , quote = "\""
+                          , stringsAsFactors = FALSE)
+      #return(NULL)
+    #   # saved files are already validated
+    } else {
+      # Should not trigger
+      return(NULL) 
     }##IF~is.null~END
     #
-    # Read user imported file
-    df_input <- read.csv(inFile$datapath, header = TRUE,
-                         sep = ",", quote = "\"", stringsAsFactors = FALSE)
-    #
-    # validate required columns
-    col_req <- c("station"
-                 , "layer"
-                 , "latitude"
-                 , "longitude"
-                 , "cbSeg92"
-                 , "state"
-                 , "stationGrpName"
-                 , "parmName"
-                 , "gamName"
-                 , "periodName"
-                 , "seasonName"
-                 , "gamDiff.bl.mn.obs"
-                 , "gamDiff.cr.mn.obs"
-                 , "gamDiff.abs.chg.obs"
-                 , "gamDiff.pct.chg"
-                 , "gamDiff.chg.pval")
-    # Check
-    col_req_match <- col_req %in% colnames(df_input)
-    col_missing <- col_req[!col_req_match]
-    #
-    validate(need(sum(col_req_match) == length(col_req)
-                  , paste0("ERROR\nRequired columns missing from the data:\n"
-                           , paste("* ", col_missing, collapse = "\n"))))
     #
     return(df_input)
     #

@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-11 13:13:41
+    #> Last Update: 2020-06-12 09:12:25
+
+# baytrendsmap 1.0.0.9020
+
+Released - 2020-06-12
+
+  - Modify file import to be able to use base files saved in-app; Issue
+    \#19
+      - Remaining issue of if select upload cannot select “official”
+        file from radio buttons.
+          - Added “reset” button but it is not active.
 
 # baytrendsmap 1.0.0.9019
 

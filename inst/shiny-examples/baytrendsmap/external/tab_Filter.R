@@ -22,45 +22,13 @@ function(){
                     
                     
                     , br()
-                    , bsCollapse(multiple = TRUE,
-                                 bsCollapsePanel("Filter by 'State'", style='info',
-                                                 fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                 uiOutput('filt_state')
-                                                 )##bsCollapsePanel~state~END
-                                 , bsCollapsePanel("Filter by 'CB Segment'", style='info',
-                                                  fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                  uiOutput('filt_cbSeg92')
-                                                  )##bsCollapsePanel~cbSeg92~END
-                                 , bsCollapsePanel("Filter by 'Station Group'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_stationGrpName')
-                                                  )##bsCollapsePanel~stationGrpName~END
-                                 , bsCollapsePanel("Filter by 'Station Identifier'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_station')
-                                                  )##bsCollapsePanel~station~END
-                                 , bsCollapsePanel("Filter by 'Full Parameter Name'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_parmName')
-                                                    )##bsCollapsePanel~parmName~END
-                                 , bsCollapsePanel("Filter by 'GAM Formula Name'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_gamName')
-                                                   )##bsCollapsePanel~gamName~END
-                                 , bsCollapsePanel("Filter by 'Sample Layer'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_layer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_layer')
-                                                  )##bsCollapsePanel~layer~END
-                                 , bsCollapsePanel("Filter by 'Period Name'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_periodName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_periodName')
-                                                   )##bsCollapsePanel~periodName~END
-                                 , bsCollapsePanel("Filter by 'Season Name'", style='info',
-                                                   fluidRow(column(1), column(10, radioButtons('sel_seasonName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
-                                                   uiOutput('filt_seasonName')
-                                                  )##bsCollapsePanel~seasonName~END
-                                 # , open = "Filter by 'Season Name'" # to auto open panels
-                 )##bsCollapse~END
+                   , p("")
+                   , fluidRow(h4("Filters", uiOutput("filt_collapse")))
+                   
+                    
+                     
+                  
+                    
                  , br()
                  , fluidRow(column(1), 
                           column(1,bsButton("but_ClearFilters", label="Reset Filter Selections", style="primary"))

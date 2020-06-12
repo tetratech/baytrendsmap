@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap")
-pkgver <- "1.0.0.9020"
+pkgver <- "1.0.0.9021"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -22,7 +22,7 @@ library(RColorBrewer)
 # library(data.table)
 # library(stringr)
 # library(plotly)
-library(shinyjs) # for testing, comment out in final version
+# library(shinyjs) # for testing, comment out in final version
 
 # Drop-down boxes
 #MMIs <- c("BIBI_genus", "BIBI_family", "FIBI")
@@ -52,6 +52,14 @@ pick_files_names <- c("Trend_NL_FA_F_Full.csv"
                       , "Trend_NL_FA_F_Short.csv"
                       , "Trend_NL_FA_T_Full.csv"
                       , "Trend_NL_FA_T_Short.csv")
+# pick_mapLayer <- c("CHLA|Surface|Jan-Dec","CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
+#                    , "DO|Bottom|Jun-Sep", "DO|Surface|Jun-Sep",    "SECCHI|Surface|Apr-Oct"
+#                    , "SECCHI|Surface|Jan-Dec", "SECCHI|Surface|Jul-Sep", "SECCHI|Surface|Jun-Sep"
+#                    , "SECCHI|Surface|Mar-May", "TN|Bottom|Jan-Dec",    "TN|Surface|Jan-Dec"    
+#                    , "TP|Bottom|Jan-Dec", "TP|Surface|Jan-Dec",    "WTEMP|Bottom|Apr-Oct"  
+#                    , "WTEMP|Bottom|Jan-Dec", "WTEMP|Bottom|Jul-Sep",  "WTEMP|Bottom|Jun-Sep"  
+#                    , "WTEMP|Bottom|Mar-May", "WTEMP|Surface|Apr-Oct", "WTEMP|Surface|Jan-Dec" 
+#                    , "WTEMP|Surface|Jul-Sep", "WTEMP|Surface|Jun-Sep",  "WTEMP|Surface|Mar-May" )
 
 # Map, Shapefile
 fn_shp <- file.path("data", "cbseg")

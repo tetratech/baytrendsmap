@@ -71,7 +71,7 @@ shinyServer(function(input, output, session) {
       validate(need(sum(col_req_match) == length(col_req)
                     , paste0("ERROR\nRequired columns missing from the data:\n"
                              , paste("* ", col_missing, collapse = "\n"))))
-      reset("fn_input")
+      #shinyjs::reset("fn_input")
     } else if (input$but_radio_load != 0) {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
       df_input <- read.csv(file.path(".", "data", fn_inFile)
@@ -219,6 +219,12 @@ shinyServer(function(input, output, session) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~seasonName~END
     #
+    str_col_2 <- "mapLayer"
+    str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
+    if(!is.null(str_SI_value)){
+      df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
+    }##IF~mapLayer~END
+    #
     #
     return(df_y)
     #
@@ -271,13 +277,13 @@ shinyServer(function(input, output, session) {
   
   # df_filt_dups_DT ####
   output$df_filt_dups_DT <- DT::renderDT({
-    df_tmp <- df_filt_dups()
-    return(df_tmp)
-  }##expression~END
-  , filter="top"
-  , caption = "Table 2. Station summary."
-  , options=list(scrollX=TRUE
-                 , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
+      df_tmp <- df_filt_dups()
+      return(df_tmp)
+    }##expression~END
+    , filter="top"
+    , caption = "Table 2. Station summary."
+    , options=list(scrollX=TRUE
+                   , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
   )##df_filt_dups_DT~END
   
   
@@ -294,25 +300,33 @@ shinyServer(function(input, output, session) {
       df_tmp <- df_filt()
     }##IF~END
     #
-    # Check and report back number and locations of duplicates
-    tib_abc <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                         , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
-                         , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
-                         , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
-                         , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
-                         , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
-                          )
-    #
-    # # DEBUG
-    # tmp_stat <- c("CB1.1", "CB2.1", "CB3.3E", "CB3.3W", "CB4.1W")
-    # tib_abc <- tibble(station = tmp_stat
-    #                      , n_Parameter = 1
-    #                      , n_GAM = 2
-    #                      , n_Layer = 1
-    #                      , n_Period = 1
-    #                      , n_Season = 1)
-
-    n_dups <- sum(tib_abc[, 2:ncol(tib_abc)] != 1)
+    
+    # If no data selected
+    if(input$fn_input == 0 & input$input_radio == 0){
+      n_dups <- "NA"
+    } else {
+      # Check and report back number and locations of duplicates
+      tib_abc <- dplyr::summarize(dplyr::group_by(df_tmp, station)
+                                  , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
+                                  , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
+                                  , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
+                                  , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
+                                  , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
+      )
+      #
+      # # DEBUG
+      # tmp_stat <- c("CB1.1", "CB2.1", "CB3.3E", "CB3.3W", "CB4.1W")
+      # tib_abc <- tibble(station = tmp_stat
+      #                      , n_Parameter = 1
+      #                      , n_GAM = 2
+      #                      , n_Layer = 1
+      #                      , n_Period = 1
+      #                      , n_Season = 1)
+      
+      n_dups <- sum(tib_abc[, 2:ncol(tib_abc)] != 1)
+    }## IF ~ inputs == 0 ~ END
+    
+    
     #
     str_n_dups <- paste0(n_dups, " = Number of stations with more than 1 record.")
     #
@@ -337,6 +351,85 @@ shinyServer(function(input, output, session) {
   # })
   
   # UI - Filter Data ####
+  
+  # Filter, Collapse ####
+  output$filt_collapse <- renderUI({
+    # filters change based on file format; official vs. user.
+    # Default is "official" file.
+    if(!is.null(input$fn_input)) {
+      # "User" file filters
+      bsCollapse(multiple = TRUE,
+                 bsCollapsePanel("Filter by 'State'", style='info',
+                                 fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                 uiOutput('filt_state')
+                                 )##bsCollapsePanel~state~END
+                 , bsCollapsePanel("Filter by 'CB Segment'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_cbSeg92')
+                                  )##bsCollapsePanel~cbSeg92~END
+                 , bsCollapsePanel("Filter by 'Station Group'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_stationGrpName')
+                     )##bsCollapsePanel~stationGrpName~END
+                 , bsCollapsePanel("Filter by 'Station Identifier'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_station')
+                     )##bsCollapsePanel~station~END
+                 , bsCollapsePanel("Filter by 'Full Parameter Name'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_parmName')
+                     )##bsCollapsePanel~parmName~END
+                 , bsCollapsePanel("Filter by 'GAM Formula Name'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_gamName')
+                      )##bsCollapsePanel~gamName~END
+                 , bsCollapsePanel("Filter by 'Sample Layer'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_layer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_layer')
+                      )##bsCollapsePanel~layer~END
+                 , bsCollapsePanel("Filter by 'Period Name'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_periodName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_periodName')
+                     )##bsCollapsePanel~periodName~END
+                 , bsCollapsePanel("Filter by 'Season Name'", style='info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_seasonName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                   uiOutput('filt_seasonName')
+                     )##bsCollapsePanel~seasonName~END
+                 #, open = "Filter by 'Season Name'" # to auto open panels
+      )##bsCollapse~END
+    } else {
+      # "official" file filters
+      bsCollapse(multiple = TRUE,
+         bsCollapsePanel("Filter by 'State'", style='info',
+                         fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                         uiOutput('filt_state')
+             )##bsCollapsePanel~state~END
+         , bsCollapsePanel("Filter by 'CB Segment'", style='info',
+                           fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                           uiOutput('filt_cbSeg92')
+             )##bsCollapsePanel~cbSeg92~END
+         , bsCollapsePanel("Filter by 'Station Group'", style='info',
+                           fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                           uiOutput('filt_stationGrpName')
+             )##bsCollapsePanel~stationGrpName~END
+         , bsCollapsePanel("Filter by 'Station Identifier'", style='info',
+                           fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                           uiOutput('filt_station')
+             )##bsCollapsePanel~station~END
+         , bsCollapsePanel("Filter by 'Map Layer'", style='info',
+                           #fluidRow(column(1), column(10, radioButtons('sel_mapLayer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                                    uiOutput('filt_mapLayer')
+              )##bsCollapsePanel~station~END
+         , open = "Filter by 'Map Layer'" # to auto open panels
+      )##bsCollapse~END
+      #radioButtons("radio_mapLayer", "Select Map Layer", choices = pick_mapLayer)
+      
+    }## IF ~ file type ~ END
+
+    
+  })## filt_collapse
+  
+  
   output$filt_state <- renderUI({
     str_col <- "state"
     str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
@@ -480,12 +573,26 @@ shinyServer(function(input, output, session) {
     )##fluidRow~END
   })##filt_seasonNameEND
   
+  output$filt_mapLayer <- renderUI({
+    str_col <- "mapLayer"
+    str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
+    str_SI <- paste0("SI_", str_col)
+    df_x <- df_import()
+    fluidRow(
+      selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                  list("Parameter | Layer | Season" = unique(df_x[, str_col])),
+                     multiple = FALSE
+      )## selectInput ~ mapLayer
+      
+    )##fluidRow~END
+  })##filt_mapLayer~END
+  
   # UI - Map Options ####
   output$opt_var <- renderUI({
     str_col <- "variable"
     str_SI <- paste0("SI_", str_col)
     fluidRow(
-      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+      selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = pick_gamDiff_Desc,
                      multiple = FALSE,
                      selected = pick_gamDiff_Desc[1])
@@ -768,12 +875,26 @@ shinyServer(function(input, output, session) {
   observeEvent(input$but_mr_title, {
     sep1 <- ": "
     sep2 <- "\n" #"; "
-    str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                      , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
-                      , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
-                      , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
-                      , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
-                      , sep = sep2)
+    #
+    if(!is.null(input$fn_input)){
+      # "User" file
+      str_title <- paste(paste(input$SI_parmName, collapse = ", ")
+                         , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
+                         , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
+                         , sep = sep2)
+      
+    } else {
+      # "Official" file
+      str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
+      str_title <- paste(paste(str_mapLayer[1], collapse = ", ")
+                         , paste(input$radio_input, sep = sep1)
+                         , paste("Layer", str_mapLayer[2], sep = sep1)
+                         , paste("Season", str_mapLayer[3], sep = sep1)
+                         , sep = sep2)
+    }## IF ~ is.null(input$fn_input) ~ END
+    #
     updateTextAreaInput(session, "map_range_title", value = str_title)
     # max is 89 characters, if need to wrap dynamically
     #https://stackoverflow.com/questions/2631780/r-ggplot2-can-i-set-the-plot-title-to-wrap-around-and-shrink-the-text-to-fit-t
@@ -1000,14 +1121,29 @@ shinyServer(function(input, output, session) {
     sep1 <- ": "
     sep2 <- "\n" #"; "
     sep_clsp <- ", "
-    str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                       , paste("GAM", paste(input$SI_gamName, collapse = sep_clsp), sep = sep1)
-                       , paste("Layer", paste(input$SI_layer, collapse = sep_clsp), sep = sep1)
-                       , paste("Period", paste(input$SI_periodName, collapse = sep_clsp), sep = sep1)
-                       , paste("Season", paste(input$SI_seasonName, collapse = sep_clsp), sep = sep1)
-                       , paste("p-value thresholds (possible, significant)"
-                               , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1)
-                       , sep = sep2)
+    #
+    if(!is.null(input$fn_input)){
+      # "User" file
+      str_title <- paste(paste(input$SI_parmName, collapse = ", ")
+                         , paste("GAM", paste(input$SI_gamName, collapse = sep_clsp), sep = sep1)
+                         , paste("Layer", paste(input$SI_layer, collapse = sep_clsp), sep = sep1)
+                         , paste("Period", paste(input$SI_periodName, collapse = sep_clsp), sep = sep1)
+                         , paste("Season", paste(input$SI_seasonName, collapse = sep_clsp), sep = sep1)
+                         , paste("p-value thresholds (possible, significant)"
+                                 , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1)
+                         , sep = sep2)
+      
+    } else {
+      # "Official" file
+      str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
+      str_title <- paste(paste(str_mapLayer[1], collapse = ", ")
+                         , paste(input$radio_input, sep = sep1)
+                         , paste("Layer", str_mapLayer[2], sep = sep1)
+                         , paste("Season", str_mapLayer[3], sep = sep1)
+                         , paste("p-value thresholds (possible, significant)"
+                                 , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1), sep = sep2)
+    }## IF ~ is.null(input$fn_input) ~ END
+    #
     updateTextAreaInput(session, "map_trend_title", value = str_title)
     # max is 89 characters, if need to wrap dynamically
     #https://stackoverflow.com/questions/2631780/r-ggplot2-can-i-set-the-plot-title-to-wrap-around-and-shrink-the-text-to-fit-t
@@ -1064,6 +1200,8 @@ shinyServer(function(input, output, session) {
 
     #}##FUNCTION~clearFilterSelection~END
   })
+  
+  
   
   # Help ####
   output$help_html <- renderUI({

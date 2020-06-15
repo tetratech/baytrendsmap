@@ -15,30 +15,42 @@
 shinyServer(function(input, output, session) {
   
   # Data ####
+
   ## df_import ####
+  
+  # Save last loaded file type
+  click_filetype <- reactiveValues(data = NULL)
+  
+  output$txt_click_filetype <- renderText({
+    str_click <- paste0("Loaded file type = ", click_filetype$data)
+    return(str_click)
+  })## txt_click_filetype ~ END
+  
+  observeEvent(input$but_radio_load, {
+    click_filetype$data <- "official"
+  })## observerEvent ~ but_radio_load
+  
+  observeEvent(input$fn_input, {
+    click_filetype$data <- "user"
+  })## observerEvent ~ fn_input
+  
   file_watch <- reactive({
+    # trigger for df_import()
     paste(input$fn_input, input$but_radio_load)
-  })## file_watch ~ END
-  
-  # eventReactive(input$but_radio_load, {
-  #   input$fn_input <- NULL
-  # })
-  
-  # Button, Clear File Input ####
-  observeEvent(input$but_ClearFilters, {
-    # Reset both inputs to 0 (unused)
-    input$fn_input <- NULL
-    #input$radio_input <- NULL
-  })## observerEvent ~ input$but_ClearFilters ~ END
+  })## file_watch ~ EN
   
   df_import <- eventReactive(file_watch(), {
     # use a multi-item reactive so keep on a single line
-    
-    #
+
     inFile       <- input$fn_input
     inFile_radio <- input$radio_input
     
-    if (!is.null(inFile)){
+    # Need is.null as first rather than last.
+    # It will always trigger on loading of the app
+    
+    if(is.null(click_filetype$data)){
+      return(NULL)
+    } else if (click_filetype$data == "user"){
       # Define file
       fn_inFile <- inFile$datapath
       # Read user imported file
@@ -71,19 +83,14 @@ shinyServer(function(input, output, session) {
       validate(need(sum(col_req_match) == length(col_req)
                     , paste0("ERROR\nRequired columns missing from the data:\n"
                              , paste("* ", col_missing, collapse = "\n"))))
-      #shinyjs::reset("fn_input")
-    } else if (input$but_radio_load != 0) {
+    } else if (click_filetype$data == "official") {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
       df_input <- read.csv(file.path(".", "data", fn_inFile)
                           , header = TRUE
                           , sep = ","
                           , quote = "\""
                           , stringsAsFactors = FALSE)
-      #return(NULL)
-    #   # saved files are already validated
-    } else {
-      # Should not trigger
-      return(NULL) 
+      # saved files are already validated so no QC on column names
     }##IF~is.null~END
     #
     #
@@ -291,8 +298,8 @@ shinyServer(function(input, output, session) {
   # Number of sites with more than 1 entry per field
   output$filt_dups_num <- renderText({
     #
-    input$but_filt_apply
-    input$fn_input
+    #input$but_filt_apply
+    #input$fn_input
     # data
     if(input$but_filt_apply == 0){
       df_tmp <- df_import()
@@ -302,8 +309,8 @@ shinyServer(function(input, output, session) {
     #
     
     # If no data selected
-    if(input$fn_input == 0 & input$input_radio == 0){
-      n_dups <- "NA"
+    if(is.null(click_filetype$data)){
+       n_dups <- "NA"
     } else {
       # Check and report back number and locations of duplicates
       tib_abc <- dplyr::summarize(dplyr::group_by(df_tmp, station)
@@ -325,8 +332,6 @@ shinyServer(function(input, output, session) {
       
       n_dups <- sum(tib_abc[, 2:ncol(tib_abc)] != 1)
     }## IF ~ inputs == 0 ~ END
-    
-    
     #
     str_n_dups <- paste0(n_dups, " = Number of stations with more than 1 record.")
     #
@@ -334,7 +339,7 @@ shinyServer(function(input, output, session) {
     #
   })##df_filt_dups_num~END
   
-  # # helper ####
+  # helper ####
   output$txt_nrow_df_import <- renderText({
     ifelse(is.null(input$fn_input), NULL, paste0("Records, df_import, n = ", nrow(df_import()), "."))
   })

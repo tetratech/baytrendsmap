@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9022
+===========
+Released - 2020-06-15
+
+* Modified input data (official vs. user); Issue #19
+    + Removed "reset" button as handle internally wiht a reactiveValues.
+    + Filtered Data Summary tab (number of dups and table) still needs work; Issue #19
+
 baytrendsmap 1.0.0.9021
 ===========
 Released - 2020-06-12

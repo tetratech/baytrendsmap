@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-12 16:20:53
+    #> Last Update: 2020-06-15 15:00:51
+
+# baytrendsmap 1.0.0.9022
+
+Released - 2020-06-15
+
+  - Modified input data (official vs. user); Issue \#19
+      - Removed “reset” button as handle internally wiht a
+        reactiveValues.
+      - Filtered Data Summary tab (number of dups and table) still needs
+        work; Issue \#19
 
 # baytrendsmap 1.0.0.9021
 

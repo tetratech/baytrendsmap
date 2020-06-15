@@ -28,8 +28,7 @@ function(){
                                )
                    )##fileInput~END
                    , hr()
-                   , p("Use the button below to clear a 'user' file to select an 'official' file.")
-                   , bsButton("but_ClearInput", label="Reset File Selections", style="primary")
+                   , textOutput("txt_click_filetype")
                 )##sidebarPanel~END
                 , mainPanel(
                   tabsetPanel(type="tabs"

@@ -4,14 +4,22 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-15 15:00:51
+    #> Last Update: 2020-06-15 16:31:29
+
+# baytrendsmap 1.0.0.9023
+
+Released - 2020-06-15
+
+  - Modified Filtered Data Summary tab; Issue \#19
+      - Individually official and user ok.
+      - Only have issues when change between them in the same session.
 
 # baytrendsmap 1.0.0.9022
 
 Released - 2020-06-15
 
   - Modified input data (official vs. user); Issue \#19
-      - Removed “reset” button as handle internally wiht a
+      - Removed “reset” button as handle internally with a
         reactiveValues.
       - Filtered Data Summary tab (number of dups and table) still needs
         work; Issue \#19

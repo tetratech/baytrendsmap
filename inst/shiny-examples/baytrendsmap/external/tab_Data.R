@@ -12,7 +12,7 @@ function(){
                    # App Steps
                    #h3("App Steps")
                    h2("Choose baytrends Output")
-                   , h3("1a. Select official file")
+                   , h3("1a. Load official file")
                    , radioButtons("radio_input", "Choose file to load", choices = pick_files_radio)
                    , bsButton("but_radio_load", "Load 'Official' File")
                    # , bsPopover(id = "but_radio_load", title = "Load 'Official' File"

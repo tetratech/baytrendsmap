@@ -28,10 +28,12 @@ shinyServer(function(input, output, session) {
   
   observeEvent(input$but_radio_load, {
     click_filetype$data <- "official"
+    click_filt_data$data <- NULL
   })## observerEvent ~ but_radio_load
   
   observeEvent(input$fn_input, {
     click_filetype$data <- "user"
+    click_filt_data$data <- NULL
   })## observerEvent ~ fn_input
   
   file_watch <- reactive({
@@ -163,6 +165,14 @@ shinyServer(function(input, output, session) {
   )##output$df_import_DT~END
   
   
+  # Save whether "apply filters" button has been clicked
+  click_filt_data <- reactiveValues(data = NULL)
+  
+  observeEvent(input$but_filt_apply, {
+    click_filt_data$data <- TRUE
+  })## observerEvent ~ but_filt_apply
+  
+  
   # df_filt ####
   df_filt <- eventReactive (input$but_filt_apply, {
     # if filters not null then apply to df_import
@@ -257,12 +267,12 @@ shinyServer(function(input, output, session) {
   )##df_filt_DT~END
   
   # df_filt_dups ####
-  df_filt_dups <- eventReactive ({
-    input$but_filt_apply
-    input$fn_input
-    }, {
+  df_filt_dups <- eventReactive (filt_watch(), {
     # data
-    if(input$but_filt_apply == 0){
+    
+    if(is.null(click_filetype$data)){
+      return(NULL)
+    } else if(is.null(click_filt_data$data)){
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
@@ -301,7 +311,7 @@ shinyServer(function(input, output, session) {
     #input$but_filt_apply
     #input$fn_input
     # data
-    if(input$but_filt_apply == 0){
+    if(is.null(click_filt_data$data)){
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
@@ -1172,8 +1182,14 @@ shinyServer(function(input, output, session) {
     }##content~END
   )##map_t_save~END
   
-  # Button, Clear Filters ####
-  observeEvent(input$but_ClearFilters, {
+  # Button, Filters ####
+  filt_watch <- reactive({
+    # Watch for filt_clear and df_filt
+    paste(input$but_ClearFilters, input$fn_input, input$but_radio_load)
+  })## file_watch ~ EN
+  
+  
+  observeEvent(filt_watch(), {
     # Clear User Selections for Query
     #clearFilterSelection(session)
     # Clear Filter Selections

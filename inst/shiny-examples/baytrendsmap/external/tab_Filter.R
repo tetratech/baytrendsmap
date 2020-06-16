@@ -25,10 +25,6 @@ function(){
                    , p("")
                    , fluidRow(h4("Filters", uiOutput("filt_collapse")))
                    
-                    
-                     
-                  
-                    
                  , br()
                  , fluidRow(column(1), 
                           column(1,bsButton("but_ClearFilters", label="Reset Filter Selections", style="primary"))

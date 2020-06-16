@@ -27,13 +27,13 @@ shinyServer(function(input, output, session) {
   })## txt_click_filetype ~ END
   
   observeEvent(input$but_radio_load, {
-    click_filetype$data <- "official"
-    click_filt_data$data <- NULL
+      click_filetype$data <- "official"
+      click_filtdata$data <- NULL
   })## observerEvent ~ but_radio_load
   
   observeEvent(input$fn_input, {
     click_filetype$data <- "user"
-    click_filt_data$data <- NULL
+    click_filtdata$data <- NULL
   })## observerEvent ~ fn_input
   
   file_watch <- reactive({
@@ -166,10 +166,10 @@ shinyServer(function(input, output, session) {
   
   
   # Save whether "apply filters" button has been clicked
-  click_filt_data <- reactiveValues(data = NULL)
+  click_filtdata <- reactiveValues(data = NULL)
   
   observeEvent(input$but_filt_apply, {
-    click_filt_data$data <- TRUE
+    click_filtdata$data <- TRUE
   })## observerEvent ~ but_filt_apply
   
   
@@ -238,7 +238,7 @@ shinyServer(function(input, output, session) {
     #
     str_col_2 <- "mapLayer"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if(!is.null(str_SI_value) & click_filetype$data == "official"){
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
     #
@@ -272,7 +272,7 @@ shinyServer(function(input, output, session) {
     
     if(is.null(click_filetype$data)){
       return(NULL)
-    } else if(is.null(click_filt_data$data)){
+    } else if(is.null(click_filtdata$data)){
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
@@ -318,7 +318,7 @@ shinyServer(function(input, output, session) {
     #input$but_filt_apply
     #input$fn_input
     # data
-    if(is.null(click_filt_data$data)){
+    if(is.null(click_filtdata$data)){
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
@@ -374,13 +374,16 @@ shinyServer(function(input, output, session) {
   #   return(nrow_df)
   # })
   
-  # UI - Filter Data ####
+  # UI, Filter, Data ####
   
-  # Filter, Collapse ####
+  # UI, Filter, Collapse ####
   output$filt_collapse <- renderUI({
     # filters change based on file format; official vs. user.
     # Default is "official" file.
-    if(!is.null(input$fn_input)) {
+    if(is.null(click_filetype$data)) {
+      #return(NULL)
+      p("No file loaded.  Return to step '1. Select Data'.")
+    } else if(click_filetype$data == "user") {
       # "User" file filters
       bsCollapse(multiple = TRUE,
                  bsCollapsePanel("Filter by 'State'", style='info',
@@ -421,7 +424,7 @@ shinyServer(function(input, output, session) {
                      )##bsCollapsePanel~seasonName~END
                  #, open = "Filter by 'Season Name'" # to auto open panels
       )##bsCollapse~END
-    } else {
+    } else if (click_filetype$data == "official"){
       # "official" file filters
       bsCollapse(multiple = TRUE,
          bsCollapsePanel("Filter by 'State'", style='info',
@@ -598,17 +601,20 @@ shinyServer(function(input, output, session) {
   })##filt_seasonNameEND
   
   output$filt_mapLayer <- renderUI({
-    str_col <- "mapLayer"
-    str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
-    str_SI <- paste0("SI_", str_col)
-    df_x <- df_import()
-    fluidRow(
-      selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                  list("Parameter | Layer | Season" = unique(df_x[, str_col])),
-                     multiple = FALSE
-      )## selectInput ~ mapLayer
-      
-    )##fluidRow~END
+    if(click_filetype$data == "official"){
+      str_col <- "mapLayer"
+      str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
+      str_SI <- paste0("SI_", str_col)
+      df_x <- df_import()
+      fluidRow(
+        selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                    list("Parameter | Layer | Season" = unique(df_x[, str_col])),
+                       multiple = FALSE
+        )## selectInput ~ mapLayer
+      )##fluidRow~END
+    } else {
+      return(NULL)
+    }## IF ~ click_filetype$data == "official" ~ END
   })##filt_mapLayer~END
   
   # UI - Map Options ####

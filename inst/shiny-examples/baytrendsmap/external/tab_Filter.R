@@ -39,8 +39,9 @@ function(){
                   tabsetPanel(type="tabs"
                               , tabPanel("Filter Data Summary"
                                          , br()
-                                         , p("The most common fields that require filtering are 'Parameter', 'GAM', 'Layer', 'Period', and 'Season'.")
-                                         , p("Number of unique entries by station are in the table below. If greater than 1 need to modify filters and re-'apply'.")
+                                         , p("The number of unique entries by station are in the table below. If greater than 1 need to modify filters and re-'apply'.")
+                                         , p("The most common fields that require filtering, for 'user' files, are 'Parameter', 'GAM', 'Layer', 'Period', and 'Season'.")
+                                         , p("For 'official' files the only field that requires filtering is 'mapLayer'.")
                                          , hr()
                                          , textOutput("filt_dups_num")
                                          , hr()

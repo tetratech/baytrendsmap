@@ -4,7 +4,18 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-15 16:31:29
+    #> Last Update: 2020-06-16 11:23:42
+
+# baytrendsmap 1.0.0.9024
+
+Released - 2020-06-16
+
+  - Changes related to interface update; Issue \#19
+      - Filter duplicates summary.
+          - Different table for different data file types.
+      - Works for each file type (official and user).
+          - Fails (filters and dups) to varying degrees when switch
+            between file types.
 
 # baytrendsmap 1.0.0.9023
 

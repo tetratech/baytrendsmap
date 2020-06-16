@@ -19,6 +19,16 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9024
+===========
+Released - 2020-06-16
+
+* Changes related to interface update; Issue #19
+    + Filter duplicates summary.  
+        - Different table for different data file types.
+    + Works for each file type (official and user).
+        - Fails (filters and dups) to varying degrees when switch between file types.
+
 baytrendsmap 1.0.0.9023
 ===========
 Released - 2020-06-15

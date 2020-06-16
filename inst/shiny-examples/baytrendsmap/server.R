@@ -267,7 +267,7 @@ shinyServer(function(input, output, session) {
   )##df_filt_DT~END
   
   # df_filt_dups ####
-  df_filt_dups <- eventReactive (filt_watch(), {
+  df_filt_dups <- eventReactive (filt_watch4(), {
     # data
     
     if(is.null(click_filetype$data)){
@@ -276,19 +276,26 @@ shinyServer(function(input, output, session) {
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
-    }
+    }## IF ~ filetype and filter click ~ END
+    
+    # If no data selected
+    if(is.null(click_filetype$data)){
+      n_dups <- "NA"
+    } else if (click_filetype$data == "user") {
+      # Check and report back number and locations of duplicates
+      tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
+                                     , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
+                                     , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
+                                     , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
+                                     , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
+                                     , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
+    } else if (click_filetype$data == "official"){
+      tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
+                                     , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
+    }## IF ~ click_filetype$data ~ END
     
     #
-    # Check and report back number and locations of duplicates
-    tib_abc <- summarize(group_by(df_tmp, station)
-                         , n_Parameter = n_distinct(parmName, na.rm=TRUE)
-                         , n_GAM = n_distinct(gamName, na.rm=TRUE)
-                         , n_Layer = n_distinct(layer, na.rm=TRUE)
-                         , n_Period = n_distinct(periodName, na.rm=TRUE)
-                         , n_Season = n_distinct(seasonName, na.rm=TRUE)
-                         )
-    #
-    return(as.data.frame(tib_abc))
+    return(as.data.frame(tib_n_dups))
     #
   })##df_filt_dups~END
   
@@ -321,28 +328,30 @@ shinyServer(function(input, output, session) {
     # If no data selected
     if(is.null(click_filetype$data)){
        n_dups <- "NA"
-    } else {
+    } else if (click_filetype$data == "user") {
       # Check and report back number and locations of duplicates
-      tib_abc <- dplyr::summarize(dplyr::group_by(df_tmp, station)
+      tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
                                   , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
                                   , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
                                   , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
                                   , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
-                                  , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
-      )
-      #
-      # # DEBUG
-      # tmp_stat <- c("CB1.1", "CB2.1", "CB3.3E", "CB3.3W", "CB4.1W")
-      # tib_abc <- tibble(station = tmp_stat
-      #                      , n_Parameter = 1
-      #                      , n_GAM = 2
-      #                      , n_Layer = 1
-      #                      , n_Period = 1
-      #                      , n_Season = 1)
+                                  , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
+      n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
+    } else if (click_filetype$data == "official"){
+      tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
+                                  , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
+      n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
+    }## IF ~ click_filetype$data ~ END
       
-      n_dups <- sum(tib_abc[, 2:ncol(tib_abc)] != 1)
-    }## IF ~ inputs == 0 ~ END
-    #
+    # # DEBUG
+    # tmp_stat <- c("CB1.1", "CB2.1", "CB3.3E", "CB3.3W", "CB4.1W")
+    # tib_abc <- tibble(station = tmp_stat
+    #                      , n_Parameter = 1
+    #                      , n_GAM = 2
+    #                      , n_Layer = 1
+    #                      , n_Period = 1
+    #                      , n_Season = 1)
+      
     str_n_dups <- paste0(n_dups, " = Number of stations with more than 1 record.")
     #
     return(str_n_dups)
@@ -1188,6 +1197,11 @@ shinyServer(function(input, output, session) {
     paste(input$but_ClearFilters, input$fn_input, input$but_radio_load)
   })## file_watch ~ EN
   
+  filt_watch4 <- reactive({
+    # Watch for filt_clear and df_filt
+    paste(input$but_ClearFilters, input$fn_input, input$but_radio_load, input$but_filt_apply)
+  })## file_watch ~ EN
+  
   
   observeEvent(filt_watch(), {
     # Clear User Selections for Query
@@ -1218,9 +1232,16 @@ shinyServer(function(input, output, session) {
     updateSelectizeInput(session, "SI_periodName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
       str_col <- "seasonName"
     updateSelectizeInput(session, "SI_seasonName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
-
+    # Official file
+    if(is.null(click_filetype$data)){
+      # do nothing
+    } else if (click_filetype$data == "official"){
+        str_col <- "mapLayer"
+      updateSelectInput(session, "SI_mapLayer"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    }## IF ~ click_filetype$data ~ END
+    #
     #}##FUNCTION~clearFilterSelection~END
-  })
+  })## observeEvent ~ clear filters ~ END
   
   
   

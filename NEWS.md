@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-16 14:26:14
+    #> Last Update: 2020-06-18 12:32:26
+
+# baytrendsmap 1.0.0.9026
+
+Released - 2020-06-17
+
+Increase file size from 10 MB to 100 MB; Issue \#25
 
 # baytrendsmap 1.0.0.9025
 

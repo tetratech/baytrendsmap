@@ -15,6 +15,7 @@ function(){
                    , h3("1a. Load official file")
                    , radioButtons("radio_input", "Choose file to load", choices = pick_files_radio)
                    , bsButton("but_radio_load", "Load 'Official' File")
+                   , p("Maximum file size is 100 MB.")
                    # , bsPopover(id = "but_radio_load", title = "Load 'Official' File"
                    #           , content = "Click button to load 'official' file based on radio button selection above.")
                    #, button to load data

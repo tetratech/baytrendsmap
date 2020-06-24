@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-18 12:32:26
+    #> Last Update: 2020-06-24 10:36:56
+
+# baytrendsmap 1.0.0.9027
+
+Released - 2020-06-24
+
+  - Modify filter tab; Issue \#32
 
 # baytrendsmap 1.0.0.9026
 

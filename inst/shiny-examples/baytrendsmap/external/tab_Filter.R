@@ -3,7 +3,7 @@
 #~~~~~~~~~~~~~~~~~
 #
 function(){
-  tabPanel("2. Filter Data"
+  tabPanel("2. Filtered Data"
            #, fluidPage(
 
              , sidebarLayout(

@@ -12,22 +12,22 @@ function(){
                    # App Steps
                    #h3("App Steps")
                    h2("Choose baytrends Output")
-                   , h3("1a. Load official file")
+                   , h3("1a. Load final file")
                    , radioButtons("radio_input", "Choose file to load", choices = pick_files_radio)
-                   , bsButton("but_radio_load", "Load 'Official' File")
-                   , p("Maximum file size is 100 MB.")
+                   , bsButton("but_radio_load", "Load 'Final' File")
                    # , bsPopover(id = "but_radio_load", title = "Load 'Official' File"
                    #           , content = "Click button to load 'official' file based on radio button selection above.")
                    #, button to load data
                    , h3("1b. Load user file")
                    , h4("Select CSV input file")
-                   , fileInput('fn_input', 'Choose file to upload',
+                   , fileInput('fn_input', 'Choose file to upload \n(maximum file size 100 MB)',
                                accept = c(
                                  'text/csv'
                                  , 'text/comma-separated-values'
                                  , '.csv'
                                )
                    )##fileInput~END
+                   #, p("Maximum file size is 100 MB.")
                    , hr()
                    , textOutput("txt_click_filetype")
                 )##sidebarPanel~END

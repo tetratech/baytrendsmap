@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9032
+===========
+Released - 2020-06-29
+
+* Modify auto-generated map titles (range and change) for 'final' files; Issue #27
+
 baytrendsmap 1.0.0.9031
 ===========
 Released - 2020-06-29

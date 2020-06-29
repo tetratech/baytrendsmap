@@ -918,7 +918,9 @@ shinyServer(function(input, output, session) {
     } else {
       # "Official" file
       str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
-      str_title <- paste(paste(str_mapLayer[1], collapse = ", ")
+      df_filt_mr <- df_filt()
+      final_parmName <- sort(unique(df_filt_mr[, "parmName"]))
+      str_title <- paste(paste(final_parmName, collapse = ", ")
                          , paste(input$radio_input, sep = sep1)
                          , paste("Layer", str_mapLayer[2], sep = sep1)
                          , paste("Season", str_mapLayer[3], sep = sep1)
@@ -1166,7 +1168,9 @@ shinyServer(function(input, output, session) {
     } else {
       # "Official" file
       str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
-      str_title <- paste(paste(str_mapLayer[1], collapse = ", ")
+      df_filt_mt <- df_filt()
+      final_parmName <- sort(unique(df_filt_mt[, "parmName"]))
+      str_title <- paste(paste(final_parmName, collapse = ", ")
                          , paste(input$radio_input, sep = sep1)
                          , paste("Layer", str_mapLayer[2], sep = sep1)
                          , paste("Season", str_mapLayer[3], sep = sep1)

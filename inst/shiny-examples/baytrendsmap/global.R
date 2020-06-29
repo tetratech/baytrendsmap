@@ -1,14 +1,14 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap")
-pkgver <- "1.0.0.9031"
+pkgver <- "1.0.0.9032"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(baytrends, quietly = TRUE, warn.conflicts = FALSE))
 library(shinyBS)
 suppressMessages(library(DT, quietly = TRUE, warn.conflicts = FALSE))
-library(ggplot2)
+suppressMessages(library(ggplot2, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(rgdal, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
 library(classInt)

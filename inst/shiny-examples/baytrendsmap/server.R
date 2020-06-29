@@ -1080,10 +1080,10 @@ shinyServer(function(input, output, session) {
                                    # , fill = fort_df_mt$ChangeClass_color
                                    #, na.rm=TRUE
                                    ) +
-      #scale_color_manual(name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
-      scale_shape_manual(name = "Type of trend", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
-      scale_fill_manual( name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
-      scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
+      #scale_color_manual(name = "Type of change", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      scale_shape_manual(name = "Type of change", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
+      scale_fill_manual( name = "Type of change", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      scale_size_manual( name = "Type of change", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
       theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
       #theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
     # could use position as coordinates but uses 0:1 not coordinates of the plot.

@@ -61,8 +61,8 @@ function(){
                               ,tabPanel("Range Map"
                                         , tab_Plot_Range()
                                         )##tabPanel~Range~END
-                              ,tabPanel("Trend Map"
-                                        , tab_Plot_Trend()
+                              ,tabPanel("Change Map"
+                                        , tab_Plot_Change()
                                         )##tabPanel~Trends~END
                   )##tabsetPanel~END
                 )##mainPanel~END

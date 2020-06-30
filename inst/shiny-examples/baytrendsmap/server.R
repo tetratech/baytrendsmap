@@ -464,7 +464,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -480,7 +480,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI,  h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -496,7 +496,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(input$sel_stationGrpName == 1){
                        unique(df_x[, str_col])
@@ -512,7 +512,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -528,7 +528,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -544,7 +544,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -560,7 +560,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -575,7 +575,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(input$sel_periodName == 1){
                        unique(df_x[, str_col])
@@ -591,7 +591,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -608,7 +608,7 @@ shinyServer(function(input, output, session) {
       df_x <- df_import()
       fluidRow(
         selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                    list("Parameter | Layer | Season" = unique(df_x[, str_col])),
+                    list("Parameter | Layer | Season" = sort(unique(df_x[, str_col]))),
                        multiple = FALSE
         )## selectInput ~ mapLayer
       )##fluidRow~END
@@ -1233,29 +1233,29 @@ shinyServer(function(input, output, session) {
     #updateSelectizeInput(session, "SI_seasonName", choices=unique(df_x[, "seasonName"]), selected=character(1))
     # reset values to entire domain of values for each box.
       str_col <- "state"
-    updateSelectizeInput(session, "SI_state"         , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_state"         , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "cbSeg92"
-    updateSelectizeInput(session, "SI_cbSeg92"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_cbSeg92"       , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "stationGrpName"
-    updateSelectizeInput(session, "SI_stationGrpName", choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_stationGrpName", choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "station"
-    updateSelectizeInput(session, "SI_station"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_station"       , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "parmName"
-    updateSelectizeInput(session, "SI_parmName"      , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_parmName"      , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "gamName"
-    updateSelectizeInput(session, "SI_gamName"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_gamName"       , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "layer"
-    updateSelectizeInput(session, "SI_layer"         , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_layer"         , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "periodName"
-    updateSelectizeInput(session, "SI_periodName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_periodName"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "seasonName"
-    updateSelectizeInput(session, "SI_seasonName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_seasonName"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
     # Official file
     if(is.null(click_filetype$data)){
       # do nothing
     } else if (click_filetype$data == "official"){
         str_col <- "mapLayer"
-      updateSelectInput(session, "SI_mapLayer"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      updateSelectInput(session, "SI_mapLayer"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
     }## IF ~ click_filetype$data ~ END
     #
     #}##FUNCTION~clearFilterSelection~END

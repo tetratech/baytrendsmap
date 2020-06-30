@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-30 13:24:47
+    #> Last Update: 2020-06-30 14:08:58
+
+# baytrendsmap 1.0.0.9036
+
+Released - 2020-06-30
+
+  - Modify auto-generated map titles (range and change) for ‘user’
+    files; Issue \#27
 
 # baytrendsmap 1.0.0.9035
 

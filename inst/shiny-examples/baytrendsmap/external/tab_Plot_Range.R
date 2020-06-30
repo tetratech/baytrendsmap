@@ -29,7 +29,7 @@ function(){
                                       , bsCollapsePanel("Class Interval", style='info',
                                                         uiOutput('opt_classInt')
                                                         )##bsCollapsePanel~classInt~END
-                                      , bsCollapsePanel("Color Brewer Palatte", style='info',
+                                      , bsCollapsePanel("Color Brewer Palette", style='info',
                                                         uiOutput('opt_pal')
                                                         )##bsCollapsePanel~pal~END
                                       , bsCollapsePanel("File Save Extension", style='info',

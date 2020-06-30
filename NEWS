@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-30 13:13:10
+    #> Last Update: 2020-06-30 13:24:47
+
+# baytrendsmap 1.0.0.9035
+
+Released - 2020-06-30
+
+  - Range map; Issue \#34
+      - Fix spelling for palette.
 
 # baytrendsmap 1.0.0.9034
 

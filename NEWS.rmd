@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9034
+===========
+Released - 2020-06-30
+
+* Modify trend map tab; Issue #33
+
 baytrendsmap 1.0.0.9033
 ===========
 Released - 2020-06-29

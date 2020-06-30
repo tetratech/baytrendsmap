@@ -4,7 +4,7 @@
 #
 function(){
   tabPanel("3.b. Plot Change"
-           , fluidPage(h2("Plot Data Trend")
+           , fluidPage(h2("Plot Data Change")
                        , br()
                        #, p(paste0("abc", nrow_df_import(), "xyz"))
                        

@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-01 08:56:08
+    #> Last Update: 2020-07-01 12:45:44
+
+# baytrendsmap 1.0.0.9039
+
+Released - 2020-07-01
+
+  - Map tabs move save button to top of column alongside apply button.
 
 # baytrendsmap 1.0.0.9038
 

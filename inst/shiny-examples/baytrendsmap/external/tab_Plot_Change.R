@@ -19,6 +19,13 @@ function(){
                                                            "top", trigger = "hover", options = list(container = "body"))
                                       )##fluidRow~filter button~END
                                      , br()
+                                     , p("Must 'update' map prior to save.")
+                                     , fluidRow(column(1),
+                                                column(1, downloadButton("but_map_trend_save", "Save Change Map")),
+                                                bsPopover("but_map_trend_save", "Click 'save' after updating map", "A 'data change' map will be saved in the selected format.",
+                                                          "top", trigger = "hover", options = list(container = "body"))
+                                     )##fluidRow~save button~END
+                                     , br()
                                      , bsCollapse(multiple = TRUE
                                                   , bsCollapsePanel("Direction of 'good' change", style='info',
                                                                     uiOutput('opt_upisgood')
@@ -69,14 +76,14 @@ function(){
                                                     , max = 2.5
                                                     , step = 0.01)
                                        
-                                      , hr()
-                                      , p("Must 'update' map prior to save.")
-                                      , fluidRow(column(1),
-                                                 column(1, downloadButton("but_map_trend_save", "Save Change Map")),
-                                                 bsPopover("but_map_trend_save", "Click 'save' after updating map", "A 'data change' map will be saved in the selected format.",
-                                                           "top", trigger = "hover", options = list(container = "body"))
-                                      )##fluidRow~save button~END
-                                      , br()
+                                      # , hr()
+                                      # , p("Must 'update' map prior to save.")
+                                      # , fluidRow(column(1),
+                                      #            column(1, downloadButton("but_map_trend_save", "Save Change Map")),
+                                      #            bsPopover("but_map_trend_save", "Click 'save' after updating map", "A 'data change' map will be saved in the selected format.",
+                                      #                      "top", trigger = "hover", options = list(container = "body"))
+                                      # )##fluidRow~save button~END
+                                      # , br()
                                       
                                       
                          )##sidebarPanel~END

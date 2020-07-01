@@ -18,9 +18,13 @@ function(){
                                     bsPopover("but_map_range", "Click 'apply' after modifying filters", "A 'data range' map will be created with the selected options.",
                                               "top", trigger = "hover", options = list(container = "body"))
                          )##fluidRow~filter button~END
-                         
-                         
-                         
+                         , br()
+                         , p("Must 'update' map prior to save.")
+                         , fluidRow(column(1),
+                                    column(1, downloadButton("but_map_range_save", "Save Range Map")),
+                                    bsPopover("but_map_range_save", "Click 'save' after updating map", "A 'data range' map will be saved in the selected format.",
+                                              "top", trigger = "hover", options = list(container = "body"))
+                         )##fluidRow~save button~END
                          , br()
                          , bsCollapse(multiple = TRUE
                                       , bsCollapsePanel("Variable to Plot", style='info',
@@ -74,16 +78,14 @@ function(){
                                         , max = 2.5
                                         , step = 0.01)
 
-                         , hr()
-                         , p("Must 'update' map prior to save.")
-                         , fluidRow(column(1),
-                                    column(1, downloadButton("but_map_range_save", "Save Range Map")),
-                                    bsPopover("but_map_range_save", "Click 'save' after updating map", "A 'data range' map will be saved in the selected format.",
-                                              "top", trigger = "hover", options = list(container = "body"))
-                         )##fluidRow~save button~END
-                         , br() 
-                         
-                         
+                         # , hr()
+                         # , p("Must 'update' map prior to save.")
+                         # , fluidRow(column(1),
+                         #            column(1, downloadButton("but_map_range_save", "Save Range Map")),
+                         #            bsPopover("but_map_range_save", "Click 'save' after updating map", "A 'data range' map will be saved in the selected format.",
+                         #                      "top", trigger = "hover", options = list(container = "body"))
+                         # )##fluidRow~save button~END
+                         # , br() 
             )##sidebarPanel~END
             , mainPanel(plotOutput("map_r_render", height = 800,  width=800/1.5)
             #, mainPanel(plotlyOutput("map_r_render", height = 800,  width=800/1.5)  

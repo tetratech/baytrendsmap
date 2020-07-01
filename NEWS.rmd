@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9039
+===========
+Released - 2020-07-01
+
+* Map tabs move save button to top of column alongside apply button.
+
 baytrendsmap 1.0.0.9038
 ===========
 Released - 2020-07-01

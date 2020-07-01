@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.0.0.9038
+===========
+Released - 2020-07-01
+
+* Modify range map to included lowest value in legend; Issue #8 and #30
+
 baytrendsmap 1.0.0.9037
 ===========
 Released - 2020-06-30

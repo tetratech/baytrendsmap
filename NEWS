@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-30 15:11:25
+    #> Last Update: 2020-07-01 08:56:08
+
+# baytrendsmap 1.0.0.9038
+
+Released - 2020-07-01
+
+  - Modify range map to included lowest value in legend; Issue \#8 and
+    \#30
 
 # baytrendsmap 1.0.0.9037
 

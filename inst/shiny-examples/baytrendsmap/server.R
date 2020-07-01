@@ -810,11 +810,13 @@ shinyServer(function(input, output, session) {
                                   , breaks = mr_brks
                                   #, labels = brewer.pal(max(3, mr_numclass), mr_pal)[1:mr_numclass]
                                   , labels = mr_pal_col
+                                  , include.lowest = TRUE
                                   )
     # Minimum of 3 different levels or get warning
     ## Break, Text
     fort_df_mr$map_brk_num <- cut(fort_df_mr[, mr_var]
                                   , breaks = mr_brks
+                                  , include.lowest = TRUE
                                   )
     
     # Points, Add

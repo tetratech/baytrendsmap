@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-06 12:09:28
+    #> Last Update: 2020-07-06 13:53:31
+
+# baytrendsmap 1.0.0.9041
+
+Released - 2020-07-06
+
+  - global.R
+      - Use packageVersion() instead of manually setting the version.
+      - Tests failed before when on Shinyapps.io.
 
 # baytrendsmap 1.0.0.9040
 

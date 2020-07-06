@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-06 13:53:31
+    #> Last Update: 2020-07-06 14:12:38
+
+# baytrendsmap 1.0.0.9042
+
+Released - 2020-07-06
+
+  - DESCRIPTION
+      - Modify URL for Shiny since using development not main branch.
 
 # baytrendsmap 1.0.0.9041
 

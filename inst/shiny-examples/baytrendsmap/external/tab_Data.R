@@ -15,8 +15,8 @@ function(){
                    , h3("1a. Load final file")
                    , radioButtons("radio_input", "Choose file to load", choices = pick_files_radio)
                    , bsButton("but_radio_load", "Load 'Final' File")
-                   # , bsPopover(id = "but_radio_load", title = "Load 'Official' File"
-                   #           , content = "Click button to load 'official' file based on radio button selection above.")
+                   # , bsPopover(id = "but_radio_load", title = "Load 'final' File"
+                   #           , content = "Click button to load 'final' file based on radio button selection above.")
                    #, button to load data
                    , h3("1b. Load user file")
                    , h4("Select CSV input file")

@@ -27,7 +27,7 @@ shinyServer(function(input, output, session) {
   })## txt_click_filetype ~ END
   
   observeEvent(input$but_radio_load, {
-      click_filetype$data <- "official"
+      click_filetype$data <- "final"
       click_filtdata$data <- NULL
   })## observerEvent ~ but_radio_load
   
@@ -85,7 +85,7 @@ shinyServer(function(input, output, session) {
       validate(need(sum(col_req_match) == length(col_req)
                     , paste0("ERROR\nRequired columns missing from the data:\n"
                              , paste("* ", col_missing, collapse = "\n"))))
-    } else if (click_filetype$data == "official") {
+    } else if (click_filetype$data == "final") {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
       df_input <- read.csv(file.path(".", "data", fn_inFile)
                           , header = TRUE
@@ -238,7 +238,7 @@ shinyServer(function(input, output, session) {
     #
     str_col_2 <- "mapLayer"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value) & click_filetype$data == "official"){
+    if(!is.null(str_SI_value) & click_filetype$data == "final"){
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
     #
@@ -289,7 +289,7 @@ shinyServer(function(input, output, session) {
                                      , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
                                      , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
                                      , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
-    } else if (click_filetype$data == "official"){
+    } else if (click_filetype$data == "final"){
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
                                      , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
     }## IF ~ click_filetype$data ~ END
@@ -337,7 +337,7 @@ shinyServer(function(input, output, session) {
                                   , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
                                   , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
-    } else if (click_filetype$data == "official"){
+    } else if (click_filetype$data == "final"){
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
                                   , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
@@ -378,8 +378,8 @@ shinyServer(function(input, output, session) {
   
   # UI, Filter, Collapse ####
   output$filt_collapse <- renderUI({
-    # filters change based on file format; official vs. user.
-    # Default is "official" file.
+    # filters change based on file format; final vs. user.
+    # Default is "final" file.
     if(is.null(click_filetype$data)) {
       #return(NULL)
       p("No file loaded.  Return to step '1. Select Data'.")
@@ -424,8 +424,8 @@ shinyServer(function(input, output, session) {
                      )##bsCollapsePanel~seasonName~END
                  #, open = "Filter by 'Season Name'" # to auto open panels
       )##bsCollapse~END
-    } else if (click_filetype$data == "official"){
-      # "official" file filters
+    } else if (click_filetype$data == "final"){
+      # "final" file filters
       bsCollapse(multiple = TRUE,
          bsCollapsePanel("Filter by 'State'", style='info',
                          fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
@@ -601,7 +601,7 @@ shinyServer(function(input, output, session) {
   })##filt_seasonNameEND
   
   output$filt_mapLayer <- renderUI({
-    if(click_filetype$data == "official"){
+    if(click_filetype$data == "final"){
       str_col <- "mapLayer"
       str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
       str_SI <- paste0("SI_", str_col)
@@ -614,7 +614,7 @@ shinyServer(function(input, output, session) {
       )##fluidRow~END
     } else {
       return(NULL)
-    }## IF ~ click_filetype$data == "official" ~ END
+    }## IF ~ click_filetype$data == "final" ~ END
   })##filt_mapLayer~END
   
   # UI - Map Options ####
@@ -918,7 +918,7 @@ shinyServer(function(input, output, session) {
                          , sep = sep2)
       
     } else {
-      # "Official" file
+      # "final" file
       str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
       df_filt_mr <- df_filt()
       final_parmName <- sort(unique(df_filt_mr[, "parmName"]))
@@ -1172,7 +1172,7 @@ shinyServer(function(input, output, session) {
                          , sep = sep2)
       
     } else {
-      # "Official" file
+      # "final" file
       str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
       df_filt_mt <- df_filt()
       final_parmName <- sort(unique(df_filt_mt[, "parmName"]))
@@ -1252,10 +1252,10 @@ shinyServer(function(input, output, session) {
     updateSelectizeInput(session, "SI_periodName"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "seasonName"
     updateSelectizeInput(session, "SI_seasonName"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
-    # Official file
+    # final file
     if(is.null(click_filetype$data)){
       # do nothing
-    } else if (click_filetype$data == "official"){
+    } else if (click_filetype$data == "final"){
         str_col <- "mapLayer"
       updateSelectInput(session, "SI_mapLayer"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
     }## IF ~ click_filetype$data ~ END

@@ -42,14 +42,5 @@ docs
 doc
 Meta
 NEWS.html
-inst/shiny-examples/baytrendsmap/map/map_range.jpg
-inst/shiny-examples/baytrendsmap/map/map_range.pdf
-inst/shiny-examples/baytrendsmap/map/map_range.png
-inst/shiny-examples/baytrendsmap/map/map_range.tiff
-inst/shiny-examples/baytrendsmap/map/map_trend.jpg
-inst/shiny-examples/baytrendsmap/map/map_trend.pdf
-inst/shiny-examples/baytrendsmap/map/map_trend.png
-inst/shiny-examples/baytrendsmap/map/map_trend.tiff
-inst/shiny-examples/baytrendsmap/map/map_range.png
-inst/shiny-examples/baytrendsmap/map/map_range.png
-inst/shiny-examples/baytrendsmap/map/map_range.png
+inst/shiny-examples/baytrendsmap/map/map_range.*
+inst/shiny-examples/baytrendsmap/map/map_change.*

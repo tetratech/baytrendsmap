@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-06 15:47:32
+    #> Last Update: 2020-07-06 16:04:09
+
+# baytrendsmap 1.0.0.9045
+
+Released - 2020-07-06
+
+  - Change name of change map file; Issue \#33
+      - Replace “trend” with “change”.
+      - Internal and download file.
 
 # baytrendsmap 1.0.0.9044
 

@@ -1135,7 +1135,7 @@ shinyServer(function(input, output, session) {
     # # save map
     mt_ext <- input$SI_ext_t #"pdf"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-    fn_out <- file.path("map", paste0("map_trend.", mt_ext))
+    fn_out <- file.path("map", paste0("map_change.", mt_ext))
     ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext
                     , height = plot_h, width = plot_w, units = plot_units
                     , scale = plot_scale)
@@ -1202,12 +1202,12 @@ shinyServer(function(input, output, session) {
     filename = function() {
       mt_ext <- input$SI_ext_t
       date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-      paste0("map_trend_", date_time, ".", mt_ext)
+      paste0("map_change_", date_time, ".", mt_ext)
       # #paste0(input$fn_input, input$SI_ext)
     }, ##filename~END
     content = function(fn) {
       mt_ext <- input$SI_ext_t
-      fn_out <- file.path("map", paste0("map_trend.", mt_ext))
+      fn_out <- file.path("map", paste0("map_change.", mt_ext))
       #print(map_range())
       # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
       # #file.copy("map_range.pdf", fn, overwrite=TRUE)

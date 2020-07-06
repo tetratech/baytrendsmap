@@ -882,8 +882,10 @@ shinyServer(function(input, output, session) {
     mr_ext <- input$SI_ext #"pdf"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_range.", mr_ext))
-    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext, height = 9, width = 9/1.5, units = "in" )
-      
+    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
+                    , height = plot_h, width = plot_w, units = plot_units
+                    , scale = plot_scale)
+    
     #
     return(m_r)
     #return(ggplotly(m_r))
@@ -1134,7 +1136,9 @@ shinyServer(function(input, output, session) {
     mt_ext <- input$SI_ext_t #"pdf"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_trend.", mt_ext))
-    ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext, height = 9, width = 9/1.5, units = "in" )
+    ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext
+                    , height = plot_h, width = plot_w, units = plot_units
+                    , scale = plot_scale)
     # Save so download button just copies
     #
     #return(ggplotly(m_t))

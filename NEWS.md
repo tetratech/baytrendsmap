@@ -4,7 +4,22 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-06 14:32:59
+    #> Last Update: 2020-07-06 15:47:32
+
+# baytrendsmap 1.0.0.9044
+
+Released - 2020-07-06
+
+  - Change map output size; Issue \#26
+      - server.R
+          - Modified range and change maps to use values set in global.R
+      - global.R
+          - plot\_h \<- 9
+          - plot\_w \<- plot\_h/map\_coord\_ratio
+          - plot\_units \<- “in”
+          - plot\_scale \<- 1.25
+          - Use map\_coord\_ratio so has the same value as coord\_fixed
+            when create plots.
 
 # baytrendsmap 1.0.0.9043
 

@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-06 16:04:09
+    #> Last Update: 2020-07-07 14:04:35
+
+# baytrendsmap 1.0.0.9046
+
+Released - 2020-07-07
+
+  - Update map legend code; Issue \#27
+      - User/final files and range/change maps.
 
 # baytrendsmap 1.0.0.9045
 

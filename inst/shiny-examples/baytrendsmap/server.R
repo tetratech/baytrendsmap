@@ -910,28 +910,32 @@ shinyServer(function(input, output, session) {
     sep1 <- ": "
     sep2 <- "\n" #"; "
     #
+    df_filt_mr <- df_filt()
+    #
+    mr_title_parmName   <- sort(unique(df_filt_mr[, "parmName"]))
+    mr_title_gamName    <- sort(unique(df_filt_mr[, "gamName"]))
+    mr_title_periodName <- sort(unique(df_filt_mr[, "periodName"]))
+    #
     if(!is.null(input$fn_input)){
       # "User" file
-      str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                         , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
-                         , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
-                         , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
-                         , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
+      mr_title_layer      <- sort(unique(df_filt_mr[, "layer"]))
+      mr_title_seasonName <- sort(unique(df_filt_mr[, "seasonName"]))
+      str_title <- paste(paste(mr_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mr_title_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", paste(mr_title_layer, collapse = ", "), sep = sep1)
+                         , paste("Period", paste(mr_title_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", paste(mr_title_seasonName, collapse = ", "), sep = sep1)
                          , sep = sep2)
       
     } else {
       # "final" file
-      str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
-      df_filt_mr <- df_filt()
-      final_parmName <- sort(unique(df_filt_mr[, "parmName"]))
-      final_gamName <- sort(unique(df_filt_mr[, "gamName"]))
-      final_periodName <- sort(unique(df_filt_mr[, "periodName"]))
-      str_title <- paste(paste(final_parmName, collapse = ", ")
-                         #, paste(input$radio_input, sep = sep1)
-                         , paste("GAM", paste(final_gamName, collapse = ", "), sep = sep1)
-                         , paste("Layer", str_mapLayer[2], sep = sep1)
-                         , paste("Period", paste(final_periodName, collapse = ", "), sep = sep1)
-                         , paste("Season", str_mapLayer[3], sep = sep1)
+      #str_mapLayer     <- unlist(strsplit(input$SI_mapLayer, "[|]"))
+      mr_title_mapLayer <- unlist(strsplit(df_filt_mr[, "mapLayer"], "[|]"))
+      str_title <- paste(paste(mr_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mr_title_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", mr_title_mapLayer[2], sep = sep1)
+                         , paste("Period", paste(mr_title_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", mr_title_mapLayer[3], sep = sep1)
                          , sep = sep2)
     }## IF ~ is.null(input$fn_input) ~ END
     #
@@ -1164,30 +1168,33 @@ shinyServer(function(input, output, session) {
     sep2 <- "\n" #"; "
     sep_clsp <- ", "
     #
+    df_filt_mt <- df_filt()
+    #
+    mt_title_parmName   <- sort(unique(df_filt_mt[, "parmName"]))
+    mt_title_gamName    <- sort(unique(df_filt_mt[, "gamName"]))
+    mt_title_periodName <- sort(unique(df_filt_mt[, "periodName"]))
+    #
     if(!is.null(input$fn_input)){
       # "User" file
-      str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                         , paste("GAM", paste(input$SI_gamName, collapse = sep_clsp), sep = sep1)
-                         , paste("Layer", paste(input$SI_layer, collapse = sep_clsp), sep = sep1)
-                         , paste("Period", paste(input$SI_periodName, collapse = sep_clsp), sep = sep1)
-                         , paste("Season", paste(input$SI_seasonName, collapse = sep_clsp), sep = sep1)
+      mt_title_layer      <- sort(unique(df_filt_mt[, "layer"]))
+      mt_title_seasonName <- sort(unique(df_filt_mt[, "seasonName"]))
+      str_title <- paste(paste(mt_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mt_title_gamName, collapse = sep_clsp), sep = sep1)
+                         , paste("Layer", paste(mt_title_layer, collapse = sep_clsp), sep = sep1)
+                         , paste("Period", paste(mt_title_periodName, collapse = sep_clsp), sep = sep1)
+                         , paste("Season", paste(mt_title_seasonName, collapse = sep_clsp), sep = sep1)
                          , paste("p-value thresholds (possible, significant)"
                                  , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1)
                          , sep = sep2)
       
     } else {
       # "final" file
-      str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
-      df_filt_mt <- df_filt()
-      final_parmName <- sort(unique(df_filt_mt[, "parmName"]))
-      final_gamName <- sort(unique(df_filt_mt[, "gamName"]))
-      final_periodName <- sort(unique(df_filt_mt[, "periodName"]))
-      str_title <- paste(paste(final_parmName, collapse = ", ")
-                         #, paste(input$radio_input, sep = sep1)
-                         , paste("GAM", paste(final_gamName, collapse = ", "), sep = sep1)
-                         , paste("Layer", str_mapLayer[2], sep = sep1)
-                         , paste("Period", paste(final_periodName, collapse = ", "), sep = sep1)
-                         , paste("Season", str_mapLayer[3], sep = sep1)
+      mt_title_mapLayer <- unlist(strsplit(df_filt_mt[, "mapLayer"], "[|]"))
+      str_title <- paste(paste(mt_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mt_title_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", mt_title_mapLayer[2], sep = sep1)
+                         , paste("Period", paste(mt_title_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", mt_title_mapLayer[3], sep = sep1)
                          , paste("p-value thresholds (possible, significant)"
                                  , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1), sep = sep2)
     }## IF ~ is.null(input$fn_input) ~ END

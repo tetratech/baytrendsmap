@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.1.0
+===========
+Released - 2020-07-09
+
+* Update version number after merging in development branch; Issue #37
+* Create a "release" on github.
+* Upload latest version to Shiny.io.
+
 baytrendsmap 1.0.0.9046
 ===========
 Released - 2020-07-07

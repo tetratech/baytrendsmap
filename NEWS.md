@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-07 14:04:35
+    #> Last Update: 2020-07-09 08:20:57
+
+# baytrendsmap 1.1.0
+
+Released - 2020-07-09
+
+  - Update version number after merging in development branch; Issue
+    \#37
+  - Create a “release” on github.
+  - Upload latest version to Shiny.io.
 
 # baytrendsmap 1.0.0.9046
 

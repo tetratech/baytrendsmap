@@ -27,7 +27,7 @@ shinyServer(function(input, output, session) {
   })## txt_click_filetype ~ END
   
   observeEvent(input$but_radio_load, {
-      click_filetype$data <- "official"
+      click_filetype$data <- "final"
       click_filtdata$data <- NULL
   })## observerEvent ~ but_radio_load
   
@@ -85,7 +85,7 @@ shinyServer(function(input, output, session) {
       validate(need(sum(col_req_match) == length(col_req)
                     , paste0("ERROR\nRequired columns missing from the data:\n"
                              , paste("* ", col_missing, collapse = "\n"))))
-    } else if (click_filetype$data == "official") {
+    } else if (click_filetype$data == "final") {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
       df_input <- read.csv(file.path(".", "data", fn_inFile)
                           , header = TRUE
@@ -238,7 +238,7 @@ shinyServer(function(input, output, session) {
     #
     str_col_2 <- "mapLayer"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value) & click_filetype$data == "official"){
+    if(!is.null(str_SI_value) & click_filetype$data == "final"){
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
     #
@@ -289,7 +289,7 @@ shinyServer(function(input, output, session) {
                                      , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
                                      , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
                                      , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
-    } else if (click_filetype$data == "official"){
+    } else if (click_filetype$data == "final"){
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
                                      , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
     }## IF ~ click_filetype$data ~ END
@@ -337,7 +337,7 @@ shinyServer(function(input, output, session) {
                                   , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
                                   , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
-    } else if (click_filetype$data == "official"){
+    } else if (click_filetype$data == "final"){
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
                                   , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
@@ -378,8 +378,8 @@ shinyServer(function(input, output, session) {
   
   # UI, Filter, Collapse ####
   output$filt_collapse <- renderUI({
-    # filters change based on file format; official vs. user.
-    # Default is "official" file.
+    # filters change based on file format; final vs. user.
+    # Default is "final" file.
     if(is.null(click_filetype$data)) {
       #return(NULL)
       p("No file loaded.  Return to step '1. Select Data'.")
@@ -424,8 +424,8 @@ shinyServer(function(input, output, session) {
                      )##bsCollapsePanel~seasonName~END
                  #, open = "Filter by 'Season Name'" # to auto open panels
       )##bsCollapse~END
-    } else if (click_filetype$data == "official"){
-      # "official" file filters
+    } else if (click_filetype$data == "final"){
+      # "final" file filters
       bsCollapse(multiple = TRUE,
          bsCollapsePanel("Filter by 'State'", style='info',
                          fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
@@ -464,7 +464,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -480,7 +480,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI,  h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -496,7 +496,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(input$sel_stationGrpName == 1){
                        unique(df_x[, str_col])
@@ -512,7 +512,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -528,7 +528,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -544,7 +544,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -560,7 +560,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -575,7 +575,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(input$sel_periodName == 1){
                        unique(df_x[, str_col])
@@ -591,7 +591,7 @@ shinyServer(function(input, output, session) {
     df_x <- df_import()
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = unique(df_x[, str_col]),
+                     choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
                      selected = if(str_sel == 1){
                        unique(df_x[, str_col])
@@ -601,20 +601,20 @@ shinyServer(function(input, output, session) {
   })##filt_seasonNameEND
   
   output$filt_mapLayer <- renderUI({
-    if(click_filetype$data == "official"){
+    if(click_filetype$data == "final"){
       str_col <- "mapLayer"
       str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
       str_SI <- paste0("SI_", str_col)
       df_x <- df_import()
       fluidRow(
         selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                    list("Parameter | Layer | Season" = unique(df_x[, str_col])),
+                    list("Parameter | Layer | Season" = sort(unique(df_x[, str_col]))),
                        multiple = FALSE
         )## selectInput ~ mapLayer
       )##fluidRow~END
     } else {
       return(NULL)
-    }## IF ~ click_filetype$data == "official" ~ END
+    }## IF ~ click_filetype$data == "final" ~ END
   })##filt_mapLayer~END
   
   # UI - Map Options ####
@@ -810,11 +810,13 @@ shinyServer(function(input, output, session) {
                                   , breaks = mr_brks
                                   #, labels = brewer.pal(max(3, mr_numclass), mr_pal)[1:mr_numclass]
                                   , labels = mr_pal_col
+                                  , include.lowest = TRUE
                                   )
     # Minimum of 3 different levels or get warning
     ## Break, Text
     fort_df_mr$map_brk_num <- cut(fort_df_mr[, mr_var]
                                   , breaks = mr_brks
+                                  , include.lowest = TRUE
                                   )
     
     # Points, Add
@@ -880,8 +882,10 @@ shinyServer(function(input, output, session) {
     mr_ext <- input$SI_ext #"pdf"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_range.", mr_ext))
-    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext, height = 9, width = 9/1.5, units = "in" )
-      
+    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
+                    , height = plot_h, width = plot_w, units = plot_units
+                    , scale = plot_scale)
+    
     #
     return(m_r)
     #return(ggplotly(m_r))
@@ -906,22 +910,32 @@ shinyServer(function(input, output, session) {
     sep1 <- ": "
     sep2 <- "\n" #"; "
     #
+    df_filt_mr <- df_filt()
+    #
+    mr_title_parmName   <- sort(unique(df_filt_mr[, "parmName"]))
+    mr_title_gamName    <- sort(unique(df_filt_mr[, "gamName"]))
+    mr_title_periodName <- sort(unique(df_filt_mr[, "periodName"]))
+    #
     if(!is.null(input$fn_input)){
       # "User" file
-      str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                         , paste("GAM", paste(input$SI_gamName, collapse = ", "), sep = sep1)
-                         , paste("Layer", paste(input$SI_layer, collapse = ", "), sep = sep1)
-                         , paste("Period", paste(input$SI_periodName, collapse = ", "), sep = sep1)
-                         , paste("Season", paste(input$SI_seasonName, collapse = ", "), sep = sep1)
+      mr_title_layer      <- sort(unique(df_filt_mr[, "layer"]))
+      mr_title_seasonName <- sort(unique(df_filt_mr[, "seasonName"]))
+      str_title <- paste(paste(mr_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mr_title_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", paste(mr_title_layer, collapse = ", "), sep = sep1)
+                         , paste("Period", paste(mr_title_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", paste(mr_title_seasonName, collapse = ", "), sep = sep1)
                          , sep = sep2)
       
     } else {
-      # "Official" file
-      str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
-      str_title <- paste(paste(str_mapLayer[1], collapse = ", ")
-                         , paste(input$radio_input, sep = sep1)
-                         , paste("Layer", str_mapLayer[2], sep = sep1)
-                         , paste("Season", str_mapLayer[3], sep = sep1)
+      # "final" file
+      #str_mapLayer     <- unlist(strsplit(input$SI_mapLayer, "[|]"))
+      mr_title_mapLayer <- unlist(strsplit(df_filt_mr[, "mapLayer"], "[|]"))
+      str_title <- paste(paste(mr_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mr_title_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", mr_title_mapLayer[2], sep = sep1)
+                         , paste("Period", paste(mr_title_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", mr_title_mapLayer[3], sep = sep1)
                          , sep = sep2)
     }## IF ~ is.null(input$fn_input) ~ END
     #
@@ -1080,10 +1094,10 @@ shinyServer(function(input, output, session) {
                                    # , fill = fort_df_mt$ChangeClass_color
                                    #, na.rm=TRUE
                                    ) +
-      #scale_color_manual(name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
-      scale_shape_manual(name = "Type of trend", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
-      scale_fill_manual( name = "Type of trend", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
-      scale_size_manual( name = "Type of trend", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
+      #scale_color_manual(name = "Type of change", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      scale_shape_manual(name = "Type of change", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
+      scale_fill_manual( name = "Type of change", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
+      scale_size_manual( name = "Type of change", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
       theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
       #theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
     # could use position as coordinates but uses 0:1 not coordinates of the plot.
@@ -1125,8 +1139,10 @@ shinyServer(function(input, output, session) {
     # # save map
     mt_ext <- input$SI_ext_t #"pdf"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-    fn_out <- file.path("map", paste0("map_trend.", mt_ext))
-    ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext, height = 9, width = 9/1.5, units = "in" )
+    fn_out <- file.path("map", paste0("map_change.", mt_ext))
+    ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext
+                    , height = plot_h, width = plot_w, units = plot_units
+                    , scale = plot_scale)
     # Save so download button just copies
     #
     #return(ggplotly(m_t))
@@ -1152,24 +1168,33 @@ shinyServer(function(input, output, session) {
     sep2 <- "\n" #"; "
     sep_clsp <- ", "
     #
+    df_filt_mt <- df_filt()
+    #
+    mt_title_parmName   <- sort(unique(df_filt_mt[, "parmName"]))
+    mt_title_gamName    <- sort(unique(df_filt_mt[, "gamName"]))
+    mt_title_periodName <- sort(unique(df_filt_mt[, "periodName"]))
+    #
     if(!is.null(input$fn_input)){
       # "User" file
-      str_title <- paste(paste(input$SI_parmName, collapse = ", ")
-                         , paste("GAM", paste(input$SI_gamName, collapse = sep_clsp), sep = sep1)
-                         , paste("Layer", paste(input$SI_layer, collapse = sep_clsp), sep = sep1)
-                         , paste("Period", paste(input$SI_periodName, collapse = sep_clsp), sep = sep1)
-                         , paste("Season", paste(input$SI_seasonName, collapse = sep_clsp), sep = sep1)
+      mt_title_layer      <- sort(unique(df_filt_mt[, "layer"]))
+      mt_title_seasonName <- sort(unique(df_filt_mt[, "seasonName"]))
+      str_title <- paste(paste(mt_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mt_title_gamName, collapse = sep_clsp), sep = sep1)
+                         , paste("Layer", paste(mt_title_layer, collapse = sep_clsp), sep = sep1)
+                         , paste("Period", paste(mt_title_periodName, collapse = sep_clsp), sep = sep1)
+                         , paste("Season", paste(mt_title_seasonName, collapse = sep_clsp), sep = sep1)
                          , paste("p-value thresholds (possible, significant)"
                                  , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1)
                          , sep = sep2)
       
     } else {
-      # "Official" file
-      str_mapLayer <- unlist(strsplit(input$SI_mapLayer, "[|]"))
-      str_title <- paste(paste(str_mapLayer[1], collapse = ", ")
-                         , paste(input$radio_input, sep = sep1)
-                         , paste("Layer", str_mapLayer[2], sep = sep1)
-                         , paste("Season", str_mapLayer[3], sep = sep1)
+      # "final" file
+      mt_title_mapLayer <- unlist(strsplit(df_filt_mt[, "mapLayer"], "[|]"))
+      str_title <- paste(paste(mt_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mt_title_gamName, collapse = ", "), sep = sep1)
+                         , paste("Layer", mt_title_mapLayer[2], sep = sep1)
+                         , paste("Period", paste(mt_title_periodName, collapse = ", "), sep = sep1)
+                         , paste("Season", mt_title_mapLayer[3], sep = sep1)
                          , paste("p-value thresholds (possible, significant)"
                                  , paste(input$map_trend_pval_poss, input$map_trend_pval_sig, sep = sep_clsp), sep = sep1), sep = sep2)
     }## IF ~ is.null(input$fn_input) ~ END
@@ -1184,12 +1209,12 @@ shinyServer(function(input, output, session) {
     filename = function() {
       mt_ext <- input$SI_ext_t
       date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-      paste0("map_trend_", date_time, ".", mt_ext)
+      paste0("map_change_", date_time, ".", mt_ext)
       # #paste0(input$fn_input, input$SI_ext)
     }, ##filename~END
     content = function(fn) {
       mt_ext <- input$SI_ext_t
-      fn_out <- file.path("map", paste0("map_trend.", mt_ext))
+      fn_out <- file.path("map", paste0("map_change.", mt_ext))
       #print(map_range())
       # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
       # #file.copy("map_range.pdf", fn, overwrite=TRUE)
@@ -1221,29 +1246,29 @@ shinyServer(function(input, output, session) {
     #updateSelectizeInput(session, "SI_seasonName", choices=unique(df_x[, "seasonName"]), selected=character(1))
     # reset values to entire domain of values for each box.
       str_col <- "state"
-    updateSelectizeInput(session, "SI_state"         , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_state"         , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "cbSeg92"
-    updateSelectizeInput(session, "SI_cbSeg92"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_cbSeg92"       , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "stationGrpName"
-    updateSelectizeInput(session, "SI_stationGrpName", choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_stationGrpName", choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "station"
-    updateSelectizeInput(session, "SI_station"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_station"       , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "parmName"
-    updateSelectizeInput(session, "SI_parmName"      , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_parmName"      , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "gamName"
-    updateSelectizeInput(session, "SI_gamName"       , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_gamName"       , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "layer"
-    updateSelectizeInput(session, "SI_layer"         , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_layer"         , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "periodName"
-    updateSelectizeInput(session, "SI_periodName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+    updateSelectizeInput(session, "SI_periodName"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
       str_col <- "seasonName"
-    updateSelectizeInput(session, "SI_seasonName"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
-    # Official file
+    updateSelectizeInput(session, "SI_seasonName"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
+    # final file
     if(is.null(click_filetype$data)){
       # do nothing
-    } else if (click_filetype$data == "official"){
+    } else if (click_filetype$data == "final"){
         str_col <- "mapLayer"
-      updateSelectInput(session, "SI_mapLayer"    , choices=unique(df_x[, str_col]), selected=unique(df_x[, str_col]))
+      updateSelectInput(session, "SI_mapLayer"    , choices=sort(unique(df_x[, str_col])), selected=sort(unique(df_x[, str_col])))
     }## IF ~ click_filetype$data ~ END
     #
     #}##FUNCTION~clearFilterSelection~END

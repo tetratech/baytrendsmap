@@ -1,14 +1,14 @@
 # Shiny Global File
 
-#pkgver <- packageVersion("baytrendsmap")
-pkgver <- "1.0.0.9026"
+#pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
+pkgver <- "1.0.0.9046"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(baytrends, quietly = TRUE, warn.conflicts = FALSE))
 library(shinyBS)
 suppressMessages(library(DT, quietly = TRUE, warn.conflicts = FALSE))
-library(ggplot2)
+suppressMessages(library(ggplot2, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(rgdal, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
 library(classInt)
@@ -103,6 +103,12 @@ map_base <- ggplot() + geom_polygon(data = fort_shp
   coord_fixed(map_coord_ratio) +
   scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
   north(fort_shp, symbol = 3) 
+
+# map size
+plot_h <- 9
+plot_w <- plot_h/map_coord_ratio
+plot_units <- "in"
+plot_scale <- 1.25
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Testing (Comment out in final version)

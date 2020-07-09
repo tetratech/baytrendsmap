@@ -42,3 +42,5 @@ docs
 doc
 Meta
 NEWS.html
+inst/shiny-examples/baytrendsmap/map/map_range.*
+inst/shiny-examples/baytrendsmap/map/map_change.*

@@ -4,7 +4,152 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-06-18 12:32:26
+    #> Last Update: 2020-07-07 14:04:35
+
+# baytrendsmap 1.0.0.9046
+
+Released - 2020-07-07
+
+  - Update map legend code; Issue \#27
+      - User/final files and range/change maps.
+
+# baytrendsmap 1.0.0.9045
+
+Released - 2020-07-06
+
+  - Change name of change map file; Issue \#33
+      - Replace “trend” with “change”.
+      - Internal and download file.
+
+# baytrendsmap 1.0.0.9044
+
+Released - 2020-07-06
+
+  - Change map output size; Issue \#26
+      - server.R
+          - Modified range and change maps to use values set in global.R
+      - global.R
+          - plot\_h \<- 9
+          - plot\_w \<- plot\_h/map\_coord\_ratio
+          - plot\_units \<- “in”
+          - plot\_scale \<- 1.25
+          - Use map\_coord\_ratio so has the same value as coord\_fixed
+            when create plots.
+
+# baytrendsmap 1.0.0.9043
+
+Released - 2020-07-06
+
+  - Unwind change to DESCRIPTION URL and packageVersion() in global.R.
+      - Unable to get Shinyapps.io to use the development branch when
+        installing.
+
+# baytrendsmap 1.0.0.9042
+
+Released - 2020-07-06
+
+  - DESCRIPTION
+      - Modify URL for Shiny since using development not main branch.
+
+# baytrendsmap 1.0.0.9041
+
+Released - 2020-07-06
+
+  - global.R
+      - Use packageVersion() instead of manually setting the version.
+      - Tests failed before when on Shinyapps.io.
+
+# baytrendsmap 1.0.0.9040
+
+Released - 2020-07-06
+
+  - Loaded file type text, official to final; Issue \#35.
+      - server.R
+
+# baytrendsmap 1.0.0.9039
+
+Released - 2020-07-01
+
+  - Map tabs move save button to top of column alongside apply button.
+
+# baytrendsmap 1.0.0.9038
+
+Released - 2020-07-01
+
+  - Modify range map to included lowest value in legend; Issue \#8 and
+    \#30
+
+# baytrendsmap 1.0.0.9037
+
+Released - 2020-06-30
+
+  - Update filters to sort unique values; Issue \#28
+
+# baytrendsmap 1.0.0.9036
+
+Released - 2020-06-30
+
+  - Modify auto-generated map titles (range and change) for ‘user’
+    files; Issue \#27
+
+# baytrendsmap 1.0.0.9035
+
+Released - 2020-06-30
+
+  - Range map; Issue \#34
+      - Fix spelling for palette.
+
+# baytrendsmap 1.0.0.9034
+
+Released - 2020-06-30
+
+  - Modify trend map tab; Issue \#33
+
+# baytrendsmap 1.0.0.9033
+
+Released - 2020-06-29
+
+  - Revised “final” data files; Issue \#26
+
+# baytrendsmap 1.0.0.9032
+
+Released - 2020-06-29
+
+  - Modify auto-generated map titles (range and change) for ‘final’
+    files; Issue \#27
+
+# baytrendsmap 1.0.0.9031
+
+Released - 2020-06-29
+
+  - Modify help file; Issue \#29
+
+# baytrendsmap 1.0.0.9030
+
+Released - 2020-06-29
+
+  - Modify filter tab; Issue \#32
+  - Modify trend map tab; Issue \#33
+      - Left variables beyond filename as ‘trend’.
+
+# baytrendsmap 1.0.0.9029
+
+Released - 2020-06-24
+
+  - Modify help file; Issue \#29
+
+# baytrendsmap 1.0.0.9028
+
+Released - 2020-06-24
+
+  - Modify data tab; Issue \#31
+  - Modify filter tab title; Issue \#32
+
+# baytrendsmap 1.0.0.9027
+
+Released - 2020-06-24
+
+  - Modify filter tab; Issue \#32
 
 # baytrendsmap 1.0.0.9026
 

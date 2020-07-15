@@ -750,9 +750,9 @@ shinyServer(function(input, output, session) {
     
     # data for plot
     df_mr <- df_filt()
-    mr_cI_type  <- input$SI_classInt
-    mr_pal <- input$SI_pal
-    mr_var_name <- input$SI_variable
+    mr_cI_type  <- ifelse(is.null(input$SI_classInt), "pretty", input$SI_classInt)
+    mr_pal <- ifelse(is.null(input$SI_pal), "PuOr", input$SI_pal)
+    mr_var_name <- ifelse(is.null(input$SI_variable), "Baseline mean", input$SI_variable)
     mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
     # mr_var <- input$SI_variable
     # mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
@@ -780,7 +780,7 @@ shinyServer(function(input, output, session) {
     mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
     
     # River Names
-    boo_riverNames <- input$SI_riverNames
+    boo_riverNames <- ifelse(is.null(input$SI_riverNames), "Yes", input$SI_riverNames)
    if(boo_riverNames == "Yes"){
       m_r <- m_r + 
         annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
@@ -879,7 +879,7 @@ shinyServer(function(input, output, session) {
     
     
     # # save map
-    mr_ext <- input$SI_ext #"pdf"
+    mr_ext <- ifelse(is.null(input$SI_ext), "png", input$SI_ext) #"png"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_range.", mr_ext))
     ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
@@ -1002,7 +1002,7 @@ shinyServer(function(input, output, session) {
     # mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
     
     # River Names
-    boo_riverNames_t <- input$SI_riverNames_t
+    boo_riverNames_t <- ifelse(is.null(input$SI_riverNames_t), "Yes", input$SI_riverNames_t)
     if(boo_riverNames_t == "Yes"){
       m_t <- m_t + 
         annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
@@ -1023,7 +1023,7 @@ shinyServer(function(input, output, session) {
     
     # Points ##
     
-    boo_upisgood   <- input$SI_upisgood # TRUE
+    boo_upisgood   <- ifelse(is.null(input$SI_upisgood), TRUE,  input$SI_upisgood) # TRUE
     chg_pval_poss <- input$map_trend_pval_poss # 0.25
     chg_pval_sig <- input$map_trend_pval_sig # 0.05
     #
@@ -1137,7 +1137,7 @@ shinyServer(function(input, output, session) {
     }##IF~opt_zoomregion_t~END
     
     # # save map
-    mt_ext <- input$SI_ext_t #"pdf"
+    mt_ext <- ifelse(is.null(input$SI_ext_t), "png", input$SI_ext_t) #"png"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_change.", mt_ext))
     ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext

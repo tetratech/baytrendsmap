@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.1.0.9001
+===========
+Released - 2020-07-15
+
+* Update maps to use defaults if no map options selected; Issue #23
+    + Avoids map creation error.
+    + Range and Change maps.
+
 baytrendsmap 1.1.0
 ===========
 Released - 2020-07-09

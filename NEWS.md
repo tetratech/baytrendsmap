@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-09 08:20:57
+    #> Last Update: 2020-07-15 15:09:17
+
+# baytrendsmap 1.1.0.9001
+
+Released - 2020-07-15
+
+  - Update maps to use defaults if no map options selected; Issue \#23
+      - Avoids map creation error.
+      - Range and Change maps.
 
 # baytrendsmap 1.1.0
 

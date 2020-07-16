@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-15 15:09:17
+    #> Last Update: 2020-07-16 13:55:41
+
+# baytrendsmap 1.1.0.9002
+
+Released - 2020-07-16
+
+  - Update column widths in data tables (import and filter); Issue \#39
 
 # baytrendsmap 1.1.0.9001
 

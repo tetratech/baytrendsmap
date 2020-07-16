@@ -101,7 +101,52 @@ shinyServer(function(input, output, session) {
     #
   })##df_import~END
   
+  # df_import_cols_widen ####
+  df_import_cols_widen <- eventReactive(file_watch(), {
+    # uses a multi-item reactive so keep on a single line
+
+    col_widen <-  c("station"
+                    , "layer"
+                    , "latitude"
+                    , "longitude"
+                    , "cbSeg92"
+                    #, "state"
+                    #, "stationGrpName"
+                    , "parmName"
+                    , "gamName"
+                    , "periodName"
+                    , "seasonName"
+                    #, "gamDiff.bl.mn.obs"
+                    #, "gamDiff.cr.mn.obs"
+                    #, "gamDiff.abs.chg.obs"
+                    #, "gamDiff.pct.chg"
+                    #, "gamDiff.chg.pval"
+                    , "mapLayer")
+    
+    
+    df_i <- df_import()
+    
+    # Need is.null as first rather than last.
+    # It will always trigger on loading of the app
+    
+    if(is.null(click_filetype$data)){
+      return(NULL)
+    } else {
+      # Same for both file types
+      #
+      # get col nums of matching names
+      col_num_widen <- match(col_widen, names(df_i))
+      # remove NA
+      col_nums <- col_num_widen[!is.na(col_num_widen)]
+    }##IF~is.null~END
+    #
+    return(col_nums)
+    #
+  })##df_import_cols_widen ~ END
+  
   ## df_import_DT ####
+  cols_widen <- c(1,3)
+  
   output$df_import_DT <- DT::renderDT({
     # # input$df_import will be NULL initially. After the user selects
     # # and uploads a file, it will be a data frame with 'name',
@@ -161,7 +206,10 @@ shinyServer(function(input, output, session) {
   , filter="top"
   , caption = "Table 1. Imported data."
   , options=list(scrollX=TRUE
-                 , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
+                 , lengthMenu = c(5, 10, 25, 50, 100, 1000)
+                 , autoWidth = TRUE
+                 , columnDefs = list(list(width = col_width_manual
+                                          , targets = df_import_cols_widen())))
   )##output$df_import_DT~END
   
   
@@ -263,7 +311,10 @@ shinyServer(function(input, output, session) {
   , filter="top"
   , caption = "Table 3. Filtered data."
   , options=list(scrollX=TRUE
-                 , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
+                 , lengthMenu = c(5, 10, 25, 50, 100, 1000)
+                 , autoWidth = TRUE
+                 , columnDefs = list(list(width = col_width_manual
+                                          , targets = df_filt_cols_widen())))
   )##df_filt_DT~END
   
   # df_filt_dups ####
@@ -298,6 +349,49 @@ shinyServer(function(input, output, session) {
     return(as.data.frame(tib_n_dups))
     #
   })##df_filt_dups~END
+  
+  # df_filt_cols_widen ####
+  df_filt_cols_widen <- eventReactive(file_watch(), {
+    # uses a multi-item reactive so keep on a single line
+    
+    col_widen <-  c("station"
+                    , "layer"
+                    , "latitude"
+                    , "longitude"
+                    , "cbSeg92"
+                    #, "state"
+                    #, "stationGrpName"
+                    , "parmName"
+                    , "gamName"
+                    , "periodName"
+                    , "seasonName"
+                    #, "gamDiff.bl.mn.obs"
+                    #, "gamDiff.cr.mn.obs"
+                    #, "gamDiff.abs.chg.obs"
+                    #, "gamDiff.pct.chg"
+                    #, "gamDiff.chg.pval"
+                    , "mapLayer")
+    
+    
+    df_f <- df_filt()
+    
+    # Need is.null as first rather than last.
+    # It will always trigger on loading of the app
+    
+    if(is.null(click_filetype$data)){
+      return(NULL)
+    } else {
+      # Same for both file types
+      #
+      # get col nums of matching names
+      col_num_widen <- match(col_widen, names(df_f))
+      # remove NA
+      col_nums <- col_num_widen[!is.na(col_num_widen)]
+    }##IF~is.null~END
+    #
+    return(col_nums)
+    #
+  })##df_filt_cols_widen ~ END
   
   # df_filt_dups_DT ####
   output$df_filt_dups_DT <- DT::renderDT({

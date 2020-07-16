@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.1.0.9002"
+pkgver <- "1.1.0.9003"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))

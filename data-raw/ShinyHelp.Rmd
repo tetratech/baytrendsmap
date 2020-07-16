@@ -33,7 +33,15 @@ This option allows the user to upload a file created from  [baytrends](https://C
 
 + Select the file to upload and click **Open** from the file selection dialogue window.  
 
-Before continuing, make sure the data file has loaded into the app. That is, wait for the blue progress bar to read Upload complete. A data table will also appear in the main window when the upload is complete. If the imported data are not in the proper format, then a “red” error message will appear in the main window instead of a data table.
+Before continuing, make sure the data file has loaded into the app. That is, wait 
+for the blue progress bar to read "Upload complete". A data table will also appear 
+in the main window when the upload is complete. If the imported data are not in 
+the proper format, then a “red” error message will appear in the main window 
+instead of a data table.
+
+If instead of a blue progress bar with "Upload complete" you get a red bar with 
+an error message then the file did not load properly.  Edit your file by sorting 
+it by a column (Station ID seems to always work) then resave and retry the upload.
 
 # 2. Filtered Data
 

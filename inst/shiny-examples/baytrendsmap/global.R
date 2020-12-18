@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.1.0.9003"
+pkgver <- "1.1.0.9004"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -49,14 +49,20 @@ pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
                      , "Rappahannock", "Susquehanna", "York")
 pick_files_radio <- c("Non-linear Trend (Full Period)"
-                      , "Non-linear Trend (2009-2010 to 2017-2018)"
+                      , "Non-linear Trend (1999-2000 to 2018-2019)"
+                      , "Non-linear Trend (2010-2011 to 2018-2019)"
                       , "Non-linear Trend with Flow Adjustment (Full Period)"
-                      , "Non-linear Trend with Flow Adjustment (2009-2010 to 2017-2018)")
-pick_files_names <- c("Trend_NL_FA_F_Full.csv"
-                      , "Trend_NL_FA_F_Short.csv"
-                      , "Trend_NL_FA_T_Full.csv"
-                      , "Trend_NL_FA_T_Short.csv")
-# pick_mapLayer <- c("CHLA|Surface|Jan-Dec","CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
+                      , "Non-linear Trend with Flow Adjustment (1999-2000 to 2018-2019)"
+                      , "Non-linear Trend with Flow Adjustment (2010-2011 to 2018-2019)"
+                      )
+pick_files_names <- c("NLT_FA_F_FullPeriod.csv"
+                      , "NLT_FA_F_19992000_20182019.csv"
+                      , "NLT_FA_F_20102011_20182019.csv"
+                      , "NLT_FA_T_FullPeriod.csv"
+                      , "NLT_FA_T_19992000_20182019.csv"
+                      , "NLT_FA_T_20102011_20182019.csv"
+                      )
+# pick_mapLayer <- c("CHLA|Surface|Jan-Dec", "CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
 #                    , "DO|Bottom|Jun-Sep", "DO|Surface|Jun-Sep",    "SECCHI|Surface|Apr-Oct"
 #                    , "SECCHI|Surface|Jan-Dec", "SECCHI|Surface|Jul-Sep", "SECCHI|Surface|Jun-Sep"
 #                    , "SECCHI|Surface|Mar-May", "TN|Bottom|Jan-Dec",    "TN|Surface|Jan-Dec"    

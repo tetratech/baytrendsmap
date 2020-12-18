@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-07-16 14:32:07
+    #> Last Update: 2020-12-18 11:42:12
+
+# baytrendsmap 1.1.0.9004
+
+Released - 2020-12-18
+
+  - Replace “final” data with revised 2019 data; Issue \#44
+  - Update text on Shiny app sidebar (6 instead of 4 radio buttons);
+    Issue \#44
+  - Widened sidebar for select data so no wrapping of radio button
+    choices.
 
 # baytrendsmap 1.1.0.9003
 

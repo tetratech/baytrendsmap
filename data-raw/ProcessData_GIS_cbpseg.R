@@ -23,4 +23,3 @@ fort_shp <- ggplot2::fortify(ogr_shp)
 data_GIS_cbpseg <- fort_shp
 usethis::use_data(data_GIS_cbpseg, overwrite = TRUE)
 # 3.61 MB
-

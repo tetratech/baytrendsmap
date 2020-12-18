@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.1.0.9004
+===========
+Released - 2020-12-18
+
+* Replace "final" data with revised 2019 data; Issue #44
+* Update text on Shiny app sidebar (6 instead of 4 radio buttons); Issue #44
+* Widened sidebar for select data so no wrapping of radio button choices.
+
 baytrendsmap 1.1.0.9003
 ===========
 Released - 2020-07-16

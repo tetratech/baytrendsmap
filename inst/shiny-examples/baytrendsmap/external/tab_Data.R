@@ -8,7 +8,7 @@ function(){
                  tags$style(HTML("hr {border-top: 1px solid #A9A9A9;}"))
                )## tags ~ END
              , sidebarLayout(
-                 sidebarPanel(width=3, 
+                 sidebarPanel(width=4, 
                    # App Steps
                    #h3("App Steps")
                    h2("Choose baytrends Output")

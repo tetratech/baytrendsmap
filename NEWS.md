@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-04 11:58:53
+    #> Last Update: 2021-01-04 12:12:02
+
+# baytrendsmap 1.1.0.9006
+
+Released - 2021-01-04
+
+  - chore: Remove docs (pkgdown) folder from root
 
 # baytrendsmap 1.1.0.9005
 

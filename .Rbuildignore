@@ -10,3 +10,5 @@
 ^NEWS\.rmd$
 ^README\.html$
 rsconnect$
+^Dockerfile$
+^buildspec\.yml$

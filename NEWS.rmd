@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.1.0.9007
+===========
+Released - 2021-01-04
+
+* chore: Move docker and buildspec.yml back to root folder
+* chore: Add docker and buildspec.yml to .Rbuildignore
+
 baytrendsmap 1.1.0.9006
 ===========
 Released - 2021-01-04

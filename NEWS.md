@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-04 12:12:02
+    #> Last Update: 2021-01-04 12:26:22
+
+# baytrendsmap 1.1.0.9007
+
+Released - 2021-01-04
+
+  - chore: Move docker and buildspec.yml back to root folder
+  - chore: Add docker and buildspec.yml to .Rbuildignore
 
 # baytrendsmap 1.1.0.9006
 

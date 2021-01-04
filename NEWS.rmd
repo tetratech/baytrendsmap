@@ -19,6 +19,27 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.1.0.9005
+===========
+Released - 2021-01-04
+
+* refactor: lintr clean up
+* docs: DESCRIPTION add + file LICENSE
+* refactor: Add non-standard files/folders to .Rbuildignore
+    + folder data-raw
+    + NEWS.rmd
+    + README.html
+    + shiny rsconnect folder
+* chore: Move files from root to inst folder
+    + buildspec.yml
+    + Dockerfile
+* docs: Document data_GIS_cbpseg in Data.R
+* chore: Add GitHub Action, CMD check
+* chore: Add GitHub Action, pkgdown
+* chore: Remove _pkgdown.yaml from root directory
+* docs: Add badges to README
+* style: Trim lines to 80 characters, run_shiny.R
+
 baytrendsmap 1.1.0.9004
 ===========
 Released - 2020-12-18

@@ -2,12 +2,12 @@
 # uiOutput coded in server.R
 #~~~~~~~~~~~~~~~~~
 #
-function(){
+function() {
   tabPanel("2. Filtered Data"
            #, fluidPage(
 
              , sidebarLayout(
-                 sidebarPanel(width=3, 
+                 sidebarPanel(width = 3,
                    # App Steps
                    #h3("App Steps")
                     h3("2. Filter Data")
@@ -17,7 +17,6 @@ function(){
                                #           placement = "top", trigger = "hover", options = list(container = "body"))
                                , bsPopover(id = "but_filt_apply", title = "Apply Filters"
                                           , content = "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.")
-                               
                                 #)##fluidRow~filter button~END
                    
                    )##fluidRow~END

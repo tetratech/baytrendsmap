@@ -6,3 +6,7 @@
 ^\.github$
 ^doc$
 ^Meta$
+^data-raw$
+^NEWS\.rmd$
+^README\.html$
+rsconnect$

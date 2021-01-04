@@ -1,14 +1,14 @@
 # Load a baytrends package output file.
 #~~~~~~~~~~~~~~~~~
 #
-function(){
+function() {
   tabPanel("1. Select Data"
            #, fluidPage(
               , tags$head(
                  tags$style(HTML("hr {border-top: 1px solid #A9A9A9;}"))
                )## tags ~ END
              , sidebarLayout(
-                 sidebarPanel(width=4, 
+                 sidebarPanel(width = 4,
                    # App Steps
                    #h3("App Steps")
                    h2("Choose baytrends Output")
@@ -39,11 +39,7 @@ function(){
                               )##tabPanel~Data~END
                   )##tabsetPanel~END
                 )##mainPanel~END
-                
-                
              )##sidebarLayout~END
-             
           # )##fluidPage~END
   )##tabPanel~END
-  
 }##FUNCTION~END

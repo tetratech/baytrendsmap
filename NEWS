@@ -4,7 +4,28 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2020-12-18 11:42:12
+    #> Last Update: 2021-01-04 11:58:53
+
+# baytrendsmap 1.1.0.9005
+
+Released - 2021-01-04
+
+  - refactor: lintr clean up
+  - docs: DESCRIPTION add + file LICENSE
+  - refactor: Add non-standard files/folders to .Rbuildignore
+      - folder data-raw
+      - NEWS.rmd
+      - README.html
+      - shiny rsconnect folder
+  - chore: Move files from root to inst folder
+      - buildspec.yml
+      - Dockerfile
+  - docs: Document data\_GIS\_cbpseg in Data.R
+  - chore: Add GitHub Action, CMD check
+  - chore: Add GitHub Action, pkgdown
+  - chore: Remove \_pkgdown.yaml from root directory
+  - docs: Add badges to README
+  - style: Trim lines to 80 characters, run\_shiny.R
 
 # baytrendsmap 1.1.0.9004
 

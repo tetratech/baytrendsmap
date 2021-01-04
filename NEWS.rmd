@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.0
+===========
+Released - 2021-01-04
+
+* chore: Update version number and create release on GitHub
+
 baytrendsmap 1.1.0.9007
 ===========
 Released - 2021-01-04

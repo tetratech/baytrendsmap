@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.0.9002"
+pkgver <- "1.2.0.9003"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -49,8 +49,8 @@ pick_pal_change <- c("Orange_Green", "Red_Blue", "Purple_Green") # custom
 pal_change_OrGn <- c("orange", "green")
 # Color blind friendly
 # https://colorbrewer2.org/#type=diverging&scheme=BrBG&n=5
-pal_change_RdBu <- c("#d7191c", "#2b83ba")  # red_blue
-pal_change_PRGn <- c("#7b3294", "#008837") # purple_green
+pal_change_RdBu <- c("#ef8a62", "#67a9cf")  # red_blue
+pal_change_PRGn <- c("#af8dc3", "#7fbf7b") # purple_green
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
                      , "Rappahannock", "Susquehanna", "York")

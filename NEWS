@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-06 12:53:54
+    #> Last Update: 2021-01-06 13:11:45
+
+# baytrendsmap 1.2.0.9003
+
+Released - 2021-01-06
+
+  - chore: Update trend (change) map color blind palette; Issue \#46
 
 # baytrendsmap 1.2.0.9002
 

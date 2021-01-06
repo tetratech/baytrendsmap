@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-04 12:35:08
+    #> Last Update: 2021-01-06 12:40:52
+
+# baytrendsmap 1.2.0.9001
+
+Released - 2021-01-06
+
+  - chore: Add ability to select colors for change (trend) map; Issue
+    \#46
+  - chore: Add .groups = “drop\_last” to summarize to avoid warning
+    message
 
 # baytrendsmap 1.2.0
 

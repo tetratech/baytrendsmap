@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.1.0.9004"
+pkgver <- "1.2.0.9001"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -45,6 +45,12 @@ pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "p
 pick_gamDiff_Desc <- c("Baseline mean", "Current mean", "Absolute change", "Percent change (%)", "p-value")
 pick_classInt <- c("quantile", "equal", "pretty") #c("sd", "quantile", "equal", "pretty")
 pick_pal <- c("PuOr", "BuPu", "OrRd", "PuBu", "RdPu") #RColorBrewer
+pick_pal_change <- c("Orange_Green", "Red_Blue", "Purple_Green") # custom
+pal_change_OrGn <- c("orange", "green")
+# Color blind friendly
+# https://colorbrewer2.org/#type=diverging&scheme=BrBG&n=5
+pal_change_RdBu <- c("#d7191c", "#2b83ba")  # red_blue
+pal_change_PRGn <- c("#7b3294", "#008837") # purple_green
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
                      , "Rappahannock", "Susquehanna", "York")

@@ -339,10 +339,12 @@ shinyServer(function(input, output, session) {
                                      , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
                                      , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
                                      , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
-                                     , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
+                                     , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
+                                     , .groups = "drop_last")
     } else if (click_filetype$data == "final"){
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                                     , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
+                                     , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE)
+                                     , .groups = "drop_last")
     }## IF ~ click_filetype$data ~ END
     
     #
@@ -429,11 +431,13 @@ shinyServer(function(input, output, session) {
                                   , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
                                   , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
                                   , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
-                                  , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE))
+                                  , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
+                                  , .groups = "drop_last")
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
     } else if (click_filetype$data == "final"){
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                                  , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE))
+                                  , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE)
+                                  , .groups = "drop_last")
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
     }## IF ~ click_filetype$data ~ END
       
@@ -711,7 +715,7 @@ shinyServer(function(input, output, session) {
     }## IF ~ click_filetype$data == "final" ~ END
   })##filt_mapLayer~END
   
-  # UI - Map Options ####
+  # UI, Map Options ####
   output$opt_var <- renderUI({
     str_col <- "variable"
     str_SI <- paste0("SI_", str_col)
@@ -747,6 +751,18 @@ shinyServer(function(input, output, session) {
       
     )##fluidRow~END
   })##opt_pal~END
+  
+  output$opt_pal_change <- renderUI({
+    str_col <- "pal_change"
+    str_SI <- paste0("SI_", str_col)
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_pal_change,
+                     multiple = FALSE,
+                     selected = pick_pal_change[1])
+      
+    )##fluidRow~END
+  })##opt_pal_change~END
   #
   output$opt_ext <- renderUI({
     str_col <- "ext"
@@ -1077,13 +1093,26 @@ shinyServer(function(input, output, session) {
     
     # validate p-value, poss > sig
     validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
-                  , paste0("ERROR\nThe 'possible' p-value (", input$map_trend_pval_poss
+                  , paste0("ERROR\nThe 'possible' p-value ("
+                           , input$map_trend_pval_poss
                            , ") should be greater than the 'significant' p-value ("
-                           , input$map_trend_pval_sig, ").")))
+                           , input$map_trend_pval_sig
+                           , ").")))
 
     # start with base map
     m_t <- map_base
+    mt_pal <- ifelse(is.null(input$SI_pal_change)
+                     , "Orange_Green"
+                     , input$SI_pal_change)
     
+    if(mt_pal == "Orange_Green"){
+      pal_mt <- pal_change_OrGn
+    } else if (mt_pal == "Red_Blue") {
+      pal_mt <- pal_change_RdBu
+    } else if (mt_pal == "Purple_Green") {
+      pal_mt <- pal_change_PRGn
+    } ## IF ~ mt_pal ~ END
+      
     # data for plot
     df_mt <- df_filt()
     # mr_cI_type  <- input$SI_classInt
@@ -1096,16 +1125,32 @@ shinyServer(function(input, output, session) {
     # mr_cI_val <- classInt::classIntervals(df_mr[, mr_var], mr_numclass, mr_cI_type)
     
     # River Names
-    boo_riverNames_t <- ifelse(is.null(input$SI_riverNames_t), "Yes", input$SI_riverNames_t)
+    boo_riverNames_t <- ifelse(is.null(input$SI_riverNames_t)
+                               , "Yes"
+                               , input$SI_riverNames_t)
     if(boo_riverNames_t == "Yes"){
       m_t <- m_t + 
-        annotate(geom = "text", x = as.numeric(lab_Sus[2]), y=as.numeric(lab_Sus[3]), label=lab_Sus[1]) +
-        annotate(geom = "text", x = as.numeric(lab_Pat[2]), y=as.numeric(lab_Pat[3]), label=lab_Pat[1]) +
-        annotate(geom = "text", x = as.numeric(lab_Cho[2]), y=as.numeric(lab_Cho[3]), label=lab_Cho[1], hjust=0) +
-        annotate(geom = "text", x = as.numeric(lab_Pot[2]), y=as.numeric(lab_Pot[3]), label=lab_Pot[1], hjust=0) +
-        annotate(geom = "text", x = as.numeric(lab_Rap[2]), y=as.numeric(lab_Rap[3]), label=lab_Rap[1], hjust=1) +
-        annotate(geom = "text", x = as.numeric(lab_Yor[2]), y=as.numeric(lab_Yor[3]), label=lab_Yor[1], hjust=0) +
-        annotate(geom = "text", x = as.numeric(lab_Jam[2]), y=as.numeric(lab_Jam[3]), label=lab_Jam[1], hjust=0)
+        annotate(geom = "text", x = as.numeric(lab_Sus[2])
+                 , y=as.numeric(lab_Sus[3])
+                 , label=lab_Sus[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Pat[2])
+                 , y=as.numeric(lab_Pat[3])
+                 , label=lab_Pat[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Cho[2])
+                 , y=as.numeric(lab_Cho[3])
+                 , label=lab_Cho[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Pot[2])
+                 , y=as.numeric(lab_Pot[3])
+                 , label=lab_Pot[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Rap[2])
+                 , y=as.numeric(lab_Rap[3])
+                 , label=lab_Rap[1], hjust=1) +
+        annotate(geom = "text", x = as.numeric(lab_Yor[2])
+                 , y=as.numeric(lab_Yor[3])
+                 , label=lab_Yor[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Jam[2])
+                 , y=as.numeric(lab_Jam[3])
+                 , label=lab_Jam[1], hjust=0)
     }##IF~riverNames~END
 
     # Title
@@ -1117,69 +1162,119 @@ shinyServer(function(input, output, session) {
     
     # Points ##
     
-    boo_upisgood   <- ifelse(is.null(input$SI_upisgood), TRUE,  input$SI_upisgood) # TRUE
+    boo_upisgood   <- ifelse(is.null(input$SI_upisgood)
+                             , TRUE
+                             , input$SI_upisgood) # TRUE
     chg_pval_poss <- input$map_trend_pval_poss # 0.25
     chg_pval_sig <- input$map_trend_pval_sig # 0.05
     #
     #if (boo_upisgood == TRUE){
       df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posDecr"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
-      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
-    #} else {
-      # df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
-      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posIncr"
-      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posDecr"
-      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
-      # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & 
+              df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & 
+              df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posDecr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & 
+              df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
+      df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & 
+              df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
+   # } else {
+   # df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
+   # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & 
+   #         df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "posIncr"
+   # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & 
+   #         df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posDecr"
+   # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & 
+   #         df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "sigIncr"
+   # df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_sig  & 
+   #         df_mt[, "gamDiff.pct.chg"] < 0, "ChangeClass"] <- "sigDecr"
    # }##boo_upisgood~END
       
-      
     # Caption - p-value
-    m_t <- m_t + ggplot2::labs(caption = paste0("p-value thresholds (possible, significant) = "
-                                                , chg_pval_poss, ", ", chg_pval_sig))
+    m_t <- m_t + ggplot2::labs(caption = paste0("p-value thresholds (possible
+                                                        , significant) = "
+                                                , chg_pval_poss
+                                                , ", "
+                                                , chg_pval_sig))
       
     
     # fortify
     fort_df_mt <- ggplot2::fortify(df_mt)
     #
     #
-    trend_ChangeClass <- c("sigDecr", "sigIncr", "posDecr", "posIncr", "NS")
-    trend_leg_label   <- c("Significant Decrease", "Significant Increase", "Possible Decrease", "Possible Increase", "Unlikely")
+    trend_ChangeClass <- c("sigDecr"
+                           , "sigIncr"
+                           , "posDecr"
+                           , "posIncr"
+                           , "NS")
+    trend_leg_label   <- c("Significant Decrease"
+                           , "Significant Increase"
+                           , "Possible Decrease"
+                           , "Possible Increase"
+                           , "Unlikely")
     # trend_leg_color   <- c("orange", "green", "orange", "green", "dark gray")
     # trend_leg_shape   <- c("25", "24", "21", "21", "23")
     trend_leg_size    <- c("4", "4", "3", "3", "2")
     
     # Default (up is good = TRUE)
-    trend_leg_color   <- c("orange", "green", "orange", "green", "dark gray")
+    trend_leg_color   <- c(pal_mt[1]  # "orange"
+                           , pal_mt[2]# "green"
+                           , pal_mt[1]# "orange"
+                           , pal_mt[2]# "green"
+                           , "dark gray")
     trend_leg_shape   <- c("25", "24", "21", "21", "23")
-    manval_color <- c("sigDecr" = "orange", "sigIncr" = "green", "posDecr" = "orange", "posIncr" = "green", "NS" = "dark gray")
-    manval_shape <- c("sigDecr" = 25, "sigIncr" = 24, "posDecr" = 21, "posIncr" = 21, "NS" = 23)
-    manval_size  <- c("sigDecr" = 4, "sigIncr" = 4, "posDecr" = 3, "posIncr" = 3, "NS" = 2)
+    manval_color <- c("sigDecr" = pal_mt[1]   # "orange"
+                      , "sigIncr" = pal_mt[2] # "green"
+                      , "posDecr" = pal_mt[1] # "orange"
+                      , "posIncr" = pal_mt[2] # "green"
+                      , "NS" = "dark gray")
+    manval_shape <- c("sigDecr" = 25
+                      , "sigIncr" = 24
+                      , "posDecr" = 21
+                      , "posIncr" = 21
+                      , "NS" = 23)
+    manval_size  <- c("sigDecr" = 4
+                      , "sigIncr" = 4
+                      , "posDecr" = 3
+                      , "posIncr" = 3
+                      , "NS" = 2)
     
     if(boo_upisgood == FALSE){
       # Direction Arrows the same
       # Just the colors change
-      trend_leg_color   <- c("green", "orange", "green", "orange", "dark gray")
-      manval_color <- c("sigDecr" = "green", "sigIncr" = "orange", "posDecr" = "green", "posIncr" = "orange", "NS" = "dark gray")
+      trend_leg_color   <- c(pal_mt[2] # "green"
+                             , pal_mt[1] # "orange"
+                             , pal_mt[2] # "green"
+                             , pal_mt[1] # "orange"
+                             , "dark gray")
+      manval_color <- c("sigDecr" = pal_mt[2] # "green"
+                        , "sigIncr" = pal_mt[1] # "orange"
+                        , "posDecr" = pal_mt[2] # "green"
+                        , "posIncr" = pal_mt[1] # "orange"
+                        , "NS" = "dark gray")
       
     }##IF~boo_upisgood~END
     
     
     # Add to data frame
-    fort_df_mt[, "ChangeClass"] <- factor(fort_df_mt[, "ChangeClass"], trend_ChangeClass)
+    fort_df_mt[, "ChangeClass"] <- factor(fort_df_mt[, "ChangeClass"]
+                                          , trend_ChangeClass)
     # 
-    fort_df_mt$ChangeClass_color <- trend_leg_color[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
-    fort_df_mt$ChangeClass_shape <- trend_leg_shape[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
-    fort_df_mt$ChangeClass_size  <- trend_leg_size[match(fort_df_mt$ChangeClass, trend_ChangeClass)]
+    fort_df_mt$ChangeClass_color <- trend_leg_color[match(fort_df_mt$ChangeClass
+                                                          , trend_ChangeClass)]
+    fort_df_mt$ChangeClass_shape <- trend_leg_shape[match(fort_df_mt$ChangeClass
+                                                          , trend_ChangeClass)]
+    fort_df_mt$ChangeClass_size  <- trend_leg_size[match(fort_df_mt$ChangeClass
+                                                         , trend_ChangeClass)]
     
     m_t <- m_t + geom_point(data=fort_df_mt
-                                   , aes_string(x="longitude", y="latitude"#, group ="ChangeClass"
+                                   , aes_string(x = "longitude"
+                                                , y = "latitude"
+                                                #, group ="ChangeClass"
                                                 #, color="ChangeClass"
-                                                , shape="ChangeClass"
-                                                , size="ChangeClass"
-                                                , fill="ChangeClass"
+                                                , shape = "ChangeClass"
+                                                , size = "ChangeClass"
+                                                , fill = "ChangeClass"
                                                 )
                                      , color = "black"
                                    # , color = fort_df_mt$ChangeClass_color 
@@ -1188,12 +1283,26 @@ shinyServer(function(input, output, session) {
                                    # , fill = fort_df_mt$ChangeClass_color
                                    #, na.rm=TRUE
                                    ) +
-      #scale_color_manual(name = "Type of change", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
-      scale_shape_manual(name = "Type of change", labels = trend_leg_label, values = manval_shape, drop = FALSE ) + 
-      scale_fill_manual( name = "Type of change", labels = trend_leg_label, values = manval_color, drop = FALSE ) + 
-      scale_size_manual( name = "Type of change", labels = trend_leg_label, values = manval_size,  drop = FALSE ) +
-      theme(legend.position = c(1, 0.12), legend.justification = c(1, 0), legend.title = element_text(face = "bold"))
-      #theme(legend.position = "bottom", legend.box = "horizontal", legend.title=element_text(face="bold"))
+      # scale_color_manual(name = "Type of change", labels = trend_leg_label
+      #                    , values = manval_color, drop = FALSE ) +
+      scale_shape_manual(name = "Type of change"
+                         , labels = trend_leg_label
+                         , values = manval_shape
+                         , drop = FALSE ) + 
+      scale_fill_manual( name = "Type of change"
+                         , labels = trend_leg_label
+                         , values = manval_color
+                         , drop = FALSE ) + 
+      scale_size_manual( name = "Type of change"
+                         , labels = trend_leg_label
+                         , values = manval_size
+                         ,  drop = FALSE ) +
+      theme(legend.position = c(1, 0.12)
+            , legend.justification = c(1, 0)
+            , legend.title = element_text(face = "bold"))
+      # theme(legend.position = "bottom"
+      #       , legend.box = "horizontal"
+      #       , legend.title=element_text(face="bold"))
     # could use position as coordinates but uses 0:1 not coordinates of the plot.
     
     # drop = FALSE keeps all factor levels
@@ -1217,7 +1326,8 @@ shinyServer(function(input, output, session) {
       # more nothing
     } else {
       # convert to values
-      zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
+      zoomregion_bbox <- eval(parse(text=
+                      pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
       #zoomregion_bbox <- bbox_Cho
       # Zoom, Limits
       x_min <- zoomregion_bbox[1] - zoom_buffer
@@ -1231,11 +1341,17 @@ shinyServer(function(input, output, session) {
     }##IF~opt_zoomregion_t~END
     
     # # save map
-    mt_ext <- ifelse(is.null(input$SI_ext_t), "png", input$SI_ext_t) #"png"
+    mt_ext <- ifelse(is.null(input$SI_ext_t)
+                     , "png"
+                     , input$SI_ext_t) #"png"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_change.", mt_ext))
-    ggplot2::ggsave(fn_out, plot = m_t, device = mt_ext
-                    , height = plot_h, width = plot_w, units = plot_units
+    ggplot2::ggsave(fn_out
+                    , plot = m_t
+                    , device = mt_ext
+                    , height = plot_h
+                    , width = plot_w
+                    , units = plot_units
                     , scale = plot_scale)
     # Save so download button just copies
     #

@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.0.9001
+===========
+Released - 2021-01-06
+
+* chore: Add ability to select colors for change (trend) map; Issue #46
+* chore: Add .groups = "drop_last" to summarize to avoid warning message
+
 baytrendsmap 1.2.0
 ===========
 Released - 2021-01-04

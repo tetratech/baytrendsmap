@@ -33,8 +33,9 @@ function(){
                                                   # , bsCollapsePanel("Class Interval", style='info',
                                                   #                   uiOutput('opt_classInt')
                                                   # )##bsCollapsePanel~classInt~END
-                                                  # , bsCollapsePanel("Color Brewer Palatte", style='info',
-                                                  #                   uiOutput('opt_pal')
+                                                  , bsCollapsePanel("Color Palatte", style='info',
+                                                                    uiOutput('opt_pal_change')
+                                                  )##bsCollapsePanel~pal~END
                                                   # )##bsCollapsePanel~pal~END
                                                   , bsCollapsePanel("File Save Extension", style='info',
                                                                     uiOutput('opt_ext_t')

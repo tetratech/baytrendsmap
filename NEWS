@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-06 12:40:52
+    #> Last Update: 2021-01-06 12:53:54
+
+# baytrendsmap 1.2.0.9002
+
+Released - 2021-01-06
+
+  - chore: Edit spelling of “palette” in shiny app map pages
 
 # baytrendsmap 1.2.0.9001
 

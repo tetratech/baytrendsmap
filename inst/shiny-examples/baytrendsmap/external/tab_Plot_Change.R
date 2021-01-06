@@ -33,7 +33,7 @@ function(){
                                                   # , bsCollapsePanel("Class Interval", style='info',
                                                   #                   uiOutput('opt_classInt')
                                                   # )##bsCollapsePanel~classInt~END
-                                                  , bsCollapsePanel("Color Palatte", style='info',
+                                                  , bsCollapsePanel("Color Palette", style='info',
                                                                     uiOutput('opt_pal_change')
                                                   )##bsCollapsePanel~pal~END
                                                   # )##bsCollapsePanel~pal~END

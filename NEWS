@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-01-06 13:11:45
+    #> Last Update: 2021-01-26 09:23:46
+
+# baytrendsmap 1.2.1
+
+Released - 2021-01-26
+
+  - chore: Update to version 1.2.1 for release; Issue \#45
 
 # baytrendsmap 1.2.0.9003
 

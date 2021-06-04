@@ -19,12 +19,19 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9001
+===========
+Released - 2021-06-04
+
+* feat: Add leaflet map as demonstration for trend map.
+* chrore: Fix filtering
+* style: Trim lines to 80 characters
+
 baytrendsmap 1.2.1
 ===========
 Released - 2021-01-26
 
 * chore: Update to version 1.2.1 for release; Issue #45
-
 
 baytrendsmap 1.2.0.9003
 ===========

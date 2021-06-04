@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.1"
+pkgver <- "1.2.1 test leaflet"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -14,22 +14,12 @@ suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
 library(classInt)
 suppressMessages(library(dplyr, quietly = TRUE, warn.conflicts = FALSE))
 library(RColorBrewer)
-# library(leaflet)
 # library(plotly)
-# library(leaflet)
-# library(dplyr)
+library(leaflet)
 # library(dataRetrieval)
 # library(data.table)
 # library(stringr)
-# library(plotly)
 # library(shinyjs) # for testing, comment out in final version
-
-# Drop-down boxes
-#MMIs <- c("BIBI_genus", "BIBI_family", "FIBI")
-#MMIs <- c("BIBI_MBSS", "BIBI_MSW", "FIBI")
-#MMIs <- c("MBSS.2005.Fish", "MBSS.2005.Bugs", "MSW.1999.Bugs")
-#Community <- c("fish", "bugs", "bugs")
-#col_Strata <- c("FIBISTRATA", "STRATA_R", "STRATA_R")
 
 # File Size
 # By default, the file size limit is 5MB. It can be changed by
@@ -111,7 +101,11 @@ pick_zoomregion_bbox <- c("NA", "bbox_points", "bbox_Cho", "bbox_Jam", "bbox_Pat
 # Map, base ####
 map_coord_ratio <- 1.3
 map_base <- ggplot() + geom_polygon(data = fort_shp
-                                            , aes(long, lat, group=group, fill=hole), colour = "grey59"
+                                            , aes(long
+                                                  , lat
+                                                  , group=group
+                                                  , fill=hole)
+                                    , colour = "grey59"
                                     , fill = "lightskyblue") +
   #scale_fill_manual(values = c("lightskyblue", "grey92"), guide=FALSE) +
   theme_void() + # no grid or box for lat-long

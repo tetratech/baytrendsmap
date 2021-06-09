@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-04 16:39:06
+    #> Last Update: 2021-06-09 09:12:47
+
+# baytrendsmap 1.2.1.9002
+
+Released - 2021-06-09
+
+-   refactor: Shiny lealfet map, change order of base layers
+    -   Make Positron the default
 
 # baytrendsmap 1.2.1.9001
 

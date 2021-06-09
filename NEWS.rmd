@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9002
+===========
+Released - 2021-06-09
+
+* refactor: Shiny lealfet map, change order of base layers
+    + Make Positron the default
+
 baytrendsmap 1.2.1.9001
 ===========
 Released - 2021-06-04

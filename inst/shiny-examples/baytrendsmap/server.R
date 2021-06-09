@@ -1632,9 +1632,10 @@ shinyServer(function(input, output, session) {
     # Map
     leaflet(data = df_mrl) %>%
       # Groups, Base
-      addTiles(group="OSM (default)") %>%  #default tile too cluttered
+      #addTiles(group="OSM (default)") %>%  #default tile too cluttered
       addProviderTiles("CartoDB.Positron", group="Positron") %>%
       addProviderTiles(providers$Stamen.TonerLite, group="Toner Lite") %>%
+      addProviderTiles(providers$OpenStreetMap, group = "Open Street Map") %>%
       # Groups, Overlay
       addPolygons(data = ogr_shp
                   , color = col_Segs 
@@ -1661,9 +1662,12 @@ shinyServer(function(input, output, session) {
                 , labels = c("Stations", "CB Outline")
                 , values = NA) %>%
       # Layers
-      addLayersControl(baseGroups = c("OSM (default)"
-                                      , "Positron"
-                                      , "Toner Lite")
+      # addLayersControl(baseGroups = c("OSM (default)"
+      #                                 , "Positron"
+      #                                 , "Toner Lite")
+      addLayersControl(baseGroups = c("Positron"
+                                      , "Toner Lite"
+                                      , "Open Street Map")
                        , overlayGroups = c("Stations"
                                            , "CB Outline")) %>%
       # Mini map
@@ -1729,7 +1733,7 @@ shinyServer(function(input, output, session) {
       mr_brks <- brks_user
     }##IF~brks_user~END
     
-    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    mr_pal_col <- RColorBrewer::brewer.pal(n = mr_numclass, name = mr_pal)
     
     ## Break, Color
     df_mr$map_brk_col <- cut(df_mr[, mr_var]

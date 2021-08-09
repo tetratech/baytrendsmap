@@ -968,22 +968,35 @@ shinyServer(function(input, output, session) {
     m_r <- m_r + geom_point(data=fort_df_mr
                                     , aes_string(x =" longitude"
                                                  , y = "latitude"
-                                                 , fill = "map_brk_num")
+                                               #  , fill = "map_brk_num")
+                                                , fill = "map_brk_col")
                                     , size = 4
                                     , pch = 21
                                     , color = "black"
                                     , na.rm = TRUE)
-    
+ # browser()  
     # Points, Fill
-    m_r <- m_r + scale_fill_brewer(palette = mr_pal
-                                   , name = mr_var_name
-                                   , labels = levels(fort_df_mr$map_brk_num)
-                                    )
+#    m_r <- m_r + scale_fill_brewer(palette = mr_pal
+#                                   , name = mr_var_name
+#                                   , labels = levels(fort_df_mr$map_brk_num)
+#                                    )
     # m_r <- m_r + scale_fill_discrete(name = mr_var_name
     #                     #, labels = paste(c(">", rep("< "
     # , length(mr_cI_val$brks)-1)), round(mr_cI_val$brks, 2))) +
     #                     , labels = levels(fort_df_mr$map_brk_num)
     #                     )
+    
+    # 2021-08-06, Issue #51, 
+    # Custom breaks - legend has only values for where have data 
+    # Should have all breaks
+    
+    m_r <- m_r + scale_fill_brewer(palette = mr_pal
+                                   , name = mr_var_name
+                                   , labels = levels(fort_df_mr$map_brk_num)
+                                   , drop = FALSE
+    )
+    
+    
     
     # Legend 
     m_r <- m_r + theme(legend.position = "bottom"

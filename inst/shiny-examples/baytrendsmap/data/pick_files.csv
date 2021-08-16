@@ -1,0 +1,7 @@
+radio,names
+Non-linear Trend (Full Period),NLT_FA_F_FullPeriod.csv
+Non-linear Trend (1999-2000 to 2018-2019),NLT_FA_F_19992000_20182019.csv
+Non-linear Trend (2010-2011 to 2018-2019),NLT_FA_F_20102011_20182019.csv
+Non-linear Trend with Flow Adjustment (Full Period),NLT_FA_T_FullPeriod.csv
+Non-linear Trend with Flow Adjustment (1999-2000 to 2018-2019),NLT_FA_T_19992000_20182019.csv
+Non-linear Trend with Flow Adjustment (2010-2011 to 2018-2019),NLT_FA_T_20102011_20182019.csv

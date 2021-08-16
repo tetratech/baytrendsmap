@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9004
+===========
+Released - 2021-08-16
+
+* feat: Update Shiny app to auto update data import pick list from saved table,
+Issue #54
+
 baytrendsmap 1.2.1.9003
 ===========
 Released - 2021-08-09

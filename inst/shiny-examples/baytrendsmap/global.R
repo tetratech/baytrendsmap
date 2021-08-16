@@ -44,20 +44,25 @@ pal_change_PRGn <- c("#af8dc3", "#7fbf7b") # purple_green
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
                      , "Rappahannock", "Susquehanna", "York")
-pick_files_radio <- c("Non-linear Trend (Full Period)"
-                      , "Non-linear Trend (1999-2000 to 2018-2019)"
-                      , "Non-linear Trend (2010-2011 to 2018-2019)"
-                      , "Non-linear Trend with Flow Adjustment (Full Period)"
-                      , "Non-linear Trend with Flow Adjustment (1999-2000 to 2018-2019)"
-                      , "Non-linear Trend with Flow Adjustment (2010-2011 to 2018-2019)"
-                      )
-pick_files_names <- c("NLT_FA_F_FullPeriod.csv"
-                      , "NLT_FA_F_19992000_20182019.csv"
-                      , "NLT_FA_F_20102011_20182019.csv"
-                      , "NLT_FA_T_FullPeriod.csv"
-                      , "NLT_FA_T_19992000_20182019.csv"
-                      , "NLT_FA_T_20102011_20182019.csv"
-                      )
+# pick_files_radio <- c("Non-linear Trend (Full Period)"
+#                       , "Non-linear Trend (1999-2000 to 2018-2019)"
+#                       , "Non-linear Trend (2010-2011 to 2018-2019)"
+#                       , "Non-linear Trend with Flow Adjustment (Full Period)"
+#                       , "Non-linear Trend with Flow Adjustment (1999-2000 to 2018-2019)"
+#                       , "Non-linear Trend with Flow Adjustment (2010-2011 to 2018-2019)"
+#                       )
+# pick_files_names <- c("NLT_FA_F_FullPeriod.csv"
+#                       , "NLT_FA_F_19992000_20182019.csv"
+#                       , "NLT_FA_F_20102011_20182019.csv"
+#                       , "NLT_FA_T_FullPeriod.csv"
+#                       , "NLT_FA_T_19992000_20182019.csv"
+#                       , "NLT_FA_T_20102011_20182019.csv"
+#                       )
+## Files pick list (data driven)
+df_pick_files <- read.csv(file.path("data", "pick_files.csv"))
+pick_files_radio <- df_pick_files[, "radio"]
+pick_files_names <- df_pick_files[, "names"]
+
 # pick_mapLayer <- c("CHLA|Surface|Jan-Dec", "CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
 #                    , "DO|Bottom|Jun-Sep", "DO|Surface|Jun-Sep",    "SECCHI|Surface|Apr-Oct"
 #                    , "SECCHI|Surface|Jan-Dec", "SECCHI|Surface|Jul-Sep", "SECCHI|Surface|Jun-Sep"

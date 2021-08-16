@@ -59,9 +59,10 @@ pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac
 #                       , "NLT_FA_T_20102011_20182019.csv"
 #                       )
 ## Files pick list (data driven)
-df_pick_files <- read.csv(file.path("data", "pick_files.csv"))
+url_base_pick_files <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/data/"
+df_pick_files <- read.csv(paste0(url_base_pick_files, "pick_files.csv"))
 pick_files_radio <- df_pick_files[, "radio"]
-pick_files_names <- df_pick_files[, "names"]
+pick_files_names <- paste0(url_base_pick_files, df_pick_files[, "names"])
 
 # pick_mapLayer <- c("CHLA|Surface|Jan-Dec", "CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
 #                    , "DO|Bottom|Jun-Sep", "DO|Surface|Jun-Sep",    "SECCHI|Surface|Apr-Oct"

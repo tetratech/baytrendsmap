@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.1.9002 test leaflet"
+pkgver <- "1.2.1.9006 test leaflet"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -29,6 +29,9 @@ options(shiny.maxRequestSize = 100*1024^2)
 # Other
 ## DT Col Width
 col_width_manual <- "200px"
+
+# Data Repository
+url_remote_base <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/"
 
 # Pick Lists
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
@@ -59,10 +62,10 @@ pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac
 #                       , "NLT_FA_T_20102011_20182019.csv"
 #                       )
 ## Files pick list (data driven)
-url_base_pick_files <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/data/"
-df_pick_files <- read.csv(paste0(url_base_pick_files, "pick_files.csv"))
+url_data_pick_files <- paste0(url_remote_base, "data/")
+df_pick_files <- read.csv(paste0(url_data_pick_files, "pick_files.csv"))
 pick_files_radio <- df_pick_files[, "radio"]
-pick_files_names <- paste0(url_base_pick_files, df_pick_files[, "names"])
+pick_files_names <- paste0(url_data_pick_files, df_pick_files[, "names"])
 
 # pick_mapLayer <- c("CHLA|Surface|Jan-Dec", "CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
 #                    , "DO|Bottom|Jun-Sep", "DO|Surface|Jun-Sep",    "SECCHI|Surface|Apr-Oct"

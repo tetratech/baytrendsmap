@@ -87,7 +87,7 @@ shinyServer(function(input, output, session) {
                              , paste("* ", col_missing, collapse = "\n"))))
     } else if (click_filetype$data == "final") {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
-      df_input <- read.csv(file.path(".", "data", fn_inFile)
+      df_input <- read.csv(fn_inFile
                           , header = TRUE
                           , sep = ","
                           , quote = "\""
@@ -1611,7 +1611,8 @@ shinyServer(function(input, output, session) {
     # data for plot
     df_mrl <- df_filt()
     
-    url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/nlt_fp/"
+    #url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/nlt_fp/"
+    url_A <- paste0(url_remote_base, "nlt_fp/")
     #url_B <- "_chla_S.png"
     url_B <- paste0("_"
                     , tolower("CHLA")
@@ -1767,30 +1768,31 @@ shinyServer(function(input, output, session) {
     
     # data for plot
     df_mrl <- df_mr # df_filt()
-    
-    url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/nlt_fp/"
-    url_B <- "_chla_S.png"
+  
+    #url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/nlt_fp/"
+    url_A <- paste0(url_remote_base, "nlt_fp/")
+    # #url_B <- "_chla_S.png"
     # url_B <- paste0("_"
     #                 , tolower("CHLA")
     #                 , "_"
-    #                 , toupper(substr("Surface", 1,1))
+    #                 , toupper(substr("Surface", 1, 1))
     #                 , ".png")
     
-    # # Split mapLayer
-    # df_split <- as.data.frame(matrix(unlist(strsplit(df_mrl$mapLayer, "\\|"))
-    #                                  , ncol = 3
-    #                                  , byrow = TRUE))
-    # names(df_split) <- c("mL_parmName", "mL_layer", "mL_seasonName")
-    # df_mrl[, "mL_parmName"] <- df_split[, "mL_parmName"]
-    # 
-    # url_B <- paste0("_"
-    #                 , tolower(df_mrl$mL_parmName)
-    #                 , "_"
-    #                 , toupper(substr(df_mrl$layer, 1, 1))
-    #                 , ".png")
+    # Split mapLayer
+    df_split <- as.data.frame(matrix(unlist(strsplit(df_mrl$mapLayer, "\\|"))
+                                     , ncol = 3
+                                     , byrow = TRUE))
+    names(df_split) <- c("mL_parmName", "mL_layer", "mL_seasonName")
+    df_mrl[, "mL_parmName"] <- df_split[, "mL_parmName"]
+
+    url_B <- paste0("_"
+                    , tolower(df_mrl$mL_parmName[1])
+                    , "_"
+                    , toupper(substr(df_mrl$layer[1], 1, 1))
+                    , ".png")
     
     
-    df_mrl$url <- paste0(url_A, df_mrl$station, url_B)
+    df_mrl$url <- paste0(url_A, df_mrl$station[1], url_B)
     df_mrl$url_click <- paste0('<a href="'
                                , df_mrl[, "url"]
                                , '", target=\"blank\"> More info</a>')

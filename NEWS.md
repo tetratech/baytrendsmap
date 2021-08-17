@@ -4,7 +4,41 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-06-09 09:12:47
+    #> Last Update: 2021-08-17 12:14:48
+
+# baytrendsmap 1.2.1.9006
+
+Released - 2021-08-17
+
+-   refactor: Add remote data URL to global.R
+-   refactor: Update data and plot URL to reference global.R for base
+    URL
+-   refactor: Update Trends leaflet map to use all plots for import
+    -   Previously tested only chla\_S plots
+
+# baytrendsmap 1.2.1.9005
+
+Released - 2021-08-16
+
+-   refactor: Update Shiny app to import data files from remote repo,
+    Issue \#54
+
+# baytrendsmap 1.2.1.9004
+
+Released - 2021-08-16
+
+-   feat: Update Shiny app to auto update data import pick list from
+    saved table, Issue \#54
+
+# baytrendsmap 1.2.1.9003
+
+Released - 2021-08-09
+
+-   fix: Update DESCRIPTION to accurately include second author
+-   fix: Update range map in Shiny to use all categories when user
+    supplies custom classes, Issue \#51
+-   docs: Update README to use `remotes` instead of `devtools` in
+    install example
 
 # baytrendsmap 1.2.1.9002
 

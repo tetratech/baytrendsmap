@@ -1633,11 +1633,19 @@ shinyServer(function(input, output, session) {
     #                 , toupper(substr(df_mrl$layer, 1, 1))
     #                 , ".png")
     
-    
-    df_mrl$url <- paste0(url_A, df_mrl$station, url_B)
-    df_mrl$url_click <- paste0('<a href="'
-                               , df_mrl[, "url"]
-                               , '", target=\"blank\"> More info</a>')
+    # Different plot if not 'Full Period' dataset
+    inFile_radio <- input$radio_input
+    if(inFile_radio %in% pick_files_radio_fp) {
+      df_mrl$url <- paste0(url_A, df_mrl$station[1], url_B)
+      df_mrl$url_click <- paste0('<a href="'
+                                 , df_mrl[, "url"]
+                                 , '", target=\"blank\"> More info</a>')
+    } else {
+      df_mrl$url <- paste0(url_A, "_no_plot.png")
+      df_mrl$url_click <- paste0('<a href="'
+                                 , df_mrl[, "url"]
+                                 , '", target=\"blank\"> No plot</a>')
+    }## IF ~ inFile_radio ~ END
     
     col_Stations <- "blue"
     col_Segs     <- "black" # "grey59"
@@ -1791,14 +1799,20 @@ shinyServer(function(input, output, session) {
                     , toupper(substr(df_mrl$layer[1], 1, 1))
                     , ".png")
     
+    # Different plot if not 'Full Period' dataset
+    inFile_radio <- input$radio_input
+    if(inFile_radio %in% pick_files_radio_fp) {
+      df_mrl$url <- paste0(url_A, df_mrl$station[1], url_B)
+      df_mrl$url_click <- paste0('<a href="'
+                                 , df_mrl[, "url"]
+                                 , '", target=\"blank\"> More info</a>')
+    } else {
+      df_mrl$url <- paste0(url_A, "_no_plot.png")
+      df_mrl$url_click <- paste0('<a href="'
+                                 , df_mrl[, "url"]
+                                 , '", target=\"blank\"> No plot</a>')
+    }## IF ~ inFile_radio ~ END
     
-    df_mrl$url <- paste0(url_A, df_mrl$station[1], url_B)
-    df_mrl$url_click <- paste0('<a href="'
-                               , df_mrl[, "url"]
-                               , '", target=\"blank\"> More info</a>')
-    
-    
-
     col_Stations <- "purple"
     col_Segs     <- "black" # "grey59"
     

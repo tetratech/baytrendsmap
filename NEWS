@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-08-17 12:14:48
+    #> Last Update: 2021-09-08 13:59:26
+
+# baytrendsmap 1.2.1.9007
+
+Released - 2021-08-17
+
+-   feat: Added plot creation script for “no data” in Shiny leaflet map
+    pop up, Issue \#49
 
 # baytrendsmap 1.2.1.9006
 

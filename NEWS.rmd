@@ -19,6 +19,14 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+
+baytrendsmap 1.2.1.9007
+===========
+Released - 2021-08-17
+
+* feat: Added plot creation script for "no data" in Shiny leaflet map pop up, 
+Issue #49
+
 baytrendsmap 1.2.1.9006
 ===========
 Released - 2021-08-17

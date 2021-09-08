@@ -1,7 +1,7 @@
 # Shiny Global File
 
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.1.9006 test leaflet"
+pkgver <- "1.2.1.9007 test leaflet"
 
 # Packages
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -66,6 +66,8 @@ url_data_pick_files <- paste0(url_remote_base, "data/")
 df_pick_files <- read.csv(paste0(url_data_pick_files, "pick_files.csv"))
 pick_files_radio <- df_pick_files[, "radio"]
 pick_files_names <- paste0(url_data_pick_files, df_pick_files[, "names"])
+# Full Period should always be 1st and 4th elements
+pick_files_radio_fp <- pick_files_radio[c(1, 4)]
 
 # pick_mapLayer <- c("CHLA|Surface|Jan-Dec", "CHLA|Surface|Jul-Sep",   "CHLA|Surface|Mar-May"  
 #                    , "DO|Bottom|Jun-Sep", "DO|Surface|Jun-Sep",    "SECCHI|Surface|Apr-Oct"

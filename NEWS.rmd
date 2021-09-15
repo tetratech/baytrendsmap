@@ -20,6 +20,14 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9008
+===========
+Released - 2021-09-15
+
+* refactor: Update remote file directory structure, Issue #54 and Issue #50
+    + Update remove file pick_files.csv with plot directory name
+* refactor: Update shiny to use new files
+
 baytrendsmap 1.2.1.9007
 ===========
 Released - 2021-08-17

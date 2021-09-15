@@ -1611,8 +1611,8 @@ shinyServer(function(input, output, session) {
     # data for plot
     df_mrl <- df_filt()
     
-    #url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/nlt_fp/"
-    url_A <- paste0(url_remote_base, "nlt_fp/")
+    #url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/plots_NLT_FA_F_FP/"
+    url_A <- paste0(url_remote_base)
     #url_B <- "_chla_S.png"
     url_B <- paste0("_"
                     , tolower("CHLA")
@@ -1633,15 +1633,20 @@ shinyServer(function(input, output, session) {
     #                 , toupper(substr(df_mrl$layer, 1, 1))
     #                 , ".png")
     
-    # Different plot if not 'Full Period' dataset
+    # Different plot if not 'Full Period, Non Flow Adjusted' dataset
     inFile_radio <- input$radio_input
-    if(inFile_radio %in% pick_files_radio_fp) {
-      df_mrl$url <- paste0(url_A, df_mrl$station[1], url_B)
+    plots_dir <- paste0(df_pick_files[df_pick_files[, "radio"] == inFile_radio
+                                      , "dir_plot"], "/")
+    plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
+                               , "show_plots"]
+    
+    if(isTRUE(plots_boo)) {
+      df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
                                  , '", target=\"blank\"> More info</a>')
     } else {
-      df_mrl$url <- paste0(url_A, "_no_plot.png")
+      df_mrl$url <- paste0(url_A, plots_dir, "_no_plot.png")
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
                                  , '", target=\"blank\"> No plot</a>')
@@ -1777,8 +1782,8 @@ shinyServer(function(input, output, session) {
     # data for plot
     df_mrl <- df_mr # df_filt()
   
-    #url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/nlt_fp/"
-    url_A <- paste0(url_remote_base, "nlt_fp/")
+    #url_A <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/plots_NLT_FA_F_FP/"
+    url_A <- paste0(url_remote_base)
     # #url_B <- "_chla_S.png"
     # url_B <- paste0("_"
     #                 , tolower("CHLA")
@@ -1799,15 +1804,20 @@ shinyServer(function(input, output, session) {
                     , toupper(substr(df_mrl$layer[1], 1, 1))
                     , ".png")
     
-    # Different plot if not 'Full Period' dataset
+    # Different plot if not 'Full Period, Non Flow Adjusted' dataset
     inFile_radio <- input$radio_input
-    if(inFile_radio %in% pick_files_radio_fp) {
-      df_mrl$url <- paste0(url_A, df_mrl$station[1], url_B)
+    plots_dir <- paste0(df_pick_files[df_pick_files[, "radio"] == inFile_radio
+                               , "dir_plot"], "/")
+    plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
+                               , "show_plots"]
+
+    if(isTRUE(plots_boo)) {
+      df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
                                  , '", target=\"blank\"> More info</a>')
     } else {
-      df_mrl$url <- paste0(url_A, "_no_plot.png")
+      df_mrl$url <- paste0(url_A, plots_dir, "_no_plot.png")
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
                                  , '", target=\"blank\"> No plot</a>')

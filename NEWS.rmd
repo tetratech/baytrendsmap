@@ -19,12 +19,27 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.8001
+===========
+Released - 2021-12-07
+
+* refactor: Update app for 2020 data, Issue #55
+    + Use dev_data2020 branch
+    + Use 8000 series for versioning
+* refactor: Update data files for 2020 collection data
+    + data-raw\ProcessData_ShinyDataFinal_2020.R
+    + rename existing process file to ProcessData_ShinyDataFinal_2019.R
+* refactor: Update Shiny app for 2020 data names
+    + global.R
+        - Change names of "final" data files to use new 2020 data
+    + server.R modification for 2020
+        - Remove columnDefs from import and filtered data tables (was failing)
+
 baytrendsmap 1.2.1
 ===========
 Released - 2021-01-26
 
 * chore: Update to version 1.2.1 for release; Issue #45
-
 
 baytrendsmap 1.2.0.9003
 ===========

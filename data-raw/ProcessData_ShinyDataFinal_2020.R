@@ -59,6 +59,13 @@ df_data$mapLayer <- paste(toupper(df_data$dep)
                           , df_data$seasonName
                           , sep = "|")
 
+# new gam name field
+df_data$gamName2020 <- df_data$gamName
+
+
+df_data$gamName[df_data$gamOption == 2 | df_data$gamOption == 3] <- "Non-Linear Trend"
+df_data$gamName[df_data$gamOption == 4 | df_data$gamOption == 5] <- "Non-Linear Trend with Flow Adjustment"
+
 # trim the file to required columns
 col_req <- c("station"
              , "layer"
@@ -68,8 +75,8 @@ col_req <- c("station"
              , "state"
              , "stationGrpName"
              , "parmName"
-             , "gamOption"
              , "gamName"
+             , "gamOption"
              , "periodName"
              , "seasonName"
              , "gamDiff.bl.mn.obs"
@@ -77,6 +84,7 @@ col_req <- c("station"
              , "gamDiff.abs.chg.obs"
              , "gamDiff.pct.chg"
              , "gamDiff.chg.pval"
+             , "dep"
              , "mapLayer")
 df_data <- df_data[, col_req]
 
@@ -84,22 +92,22 @@ df_data <- df_data[, col_req]
 ## Filter
 
 NLT_FA_F_19992000_20192020 <- dplyr::filter(df_data
-                                            , (gamOption == 2 | gamOption == 3)
+                                            , gamName == "Non-Linear Trend"
                                             & periodName == "1999/00-2019/20")
 NLT_FA_F_20112012_20192020 <- dplyr::filter(df_data
-                                            , (gamOption == 2 | gamOption == 3)
+                                            , gamName == "Non-Linear Trend"
                                             & periodName == "2011/12-2019/20")
 NLT_FA_F_FullPeriod <- dplyr::filter(df_data
-                                     , (gamOption == 2 | gamOption == 3)
+                                     , gamName == "Non-Linear Trend"
                                      & periodName == "Full Period")
 NLT_FA_T_19992000_20192020 <- dplyr::filter(df_data
-                                            , (gamOption == 4 | gamOption == 5)
+                                            , gamName == "Non-Linear Trend with Flow Adjustment"
                                             & periodName == "1999/00-2019/20")
 NLT_FA_T_20112012_20192020 <- dplyr::filter(df_data
-                                            , (gamOption == 4 | gamOption == 5)
+                                            , gamName == "Non-Linear Trend with Flow Adjustment"
                                             & periodName == "2011/12-2019/20")
 NLT_FA_T_FullPeriod <- dplyr::filter(df_data
-                                     , (gamOption == 4 | gamOption == 5)
+                                     , gamName == "Non-Linear Trend with Flow Adjustment"
                                      & periodName == "Full Period")
 
 

@@ -19,6 +19,16 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.8002
+===========
+Released - 2021-12-10
+
+* docs: DESCRIPTION, require version of shiny prior to v1.6.0
+    + shiny v1.6.0 breaks code in baytrendsmap
+* refactor: Server, reinstate columnDefs
+* fix: Add script in data-raw for installing previous versions of packages
+    + shiny 1.5.0
+
 baytrendsmap 1.2.1.8001
 ===========
 Released - 2021-12-07

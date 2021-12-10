@@ -208,8 +208,8 @@ shinyServer(function(input, output, session) {
   , options=list(scrollX=TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000)
                  , autoWidth = TRUE
-                 #, columnDefs = list(list(width = col_width_manual
-                 #                         , targets = df_import_cols_widen()))
+                 , columnDefs = list(list(width = col_width_manual
+                                         , targets = df_import_cols_widen()))
                  )
   )##output$df_import_DT~END
   
@@ -286,7 +286,7 @@ shinyServer(function(input, output, session) {
     }##IF~seasonName~END
     #
     str_col_2 <- "mapLayer"
-    str_SI_value <- input$SI_mapLayer #eval(parse(text = paste0("input$SI_", str_col_2)))
+    str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2))) #input$SI_mapLayer
     if(!is.null(str_SI_value) & click_filetype$data == "final"){
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
@@ -314,8 +314,8 @@ shinyServer(function(input, output, session) {
   , options=list(scrollX=TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000)
                  , autoWidth = TRUE
-                 # , columnDefs = list(list(width = col_width_manual
-                 #                          , targets = df_filt_cols_widen()))
+                 , columnDefs = list(list(width = col_width_manual
+                                          , targets = df_filt_cols_widen()))
                  )
   )##df_filt_DT~END
   
@@ -557,6 +557,7 @@ shinyServer(function(input, output, session) {
   })## filt_collapse
   
   
+  output$filt_state <- renderUI({})
   output$filt_state <- renderUI({
     str_col <- "state"
     str_sel <- eval(parse(text = paste0("input$sel_", str_col)))

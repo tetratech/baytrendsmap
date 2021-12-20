@@ -1,5 +1,6 @@
 FROM rocker/geospatial:3.6.2
 
+RUN apt-get --allow-releaseinfo-change update   
 RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
 
 ENV PASSWORD=IcantB3li3v3itsN)TbutterCanYou

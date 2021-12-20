@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2021-12-10 08:44:51
+    #> Last Update: 2021-12-20 15:41:17
+
+# baytrendsmap 1.2.1.8003
+
+Released - 2021-12-20
+
+-   docs: Update docker file for upload to CBP server
+    -   Addresses issue with shiny v1.6.0
 
 # baytrendsmap 1.2.1.8002
 

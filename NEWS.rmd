@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.8003
+===========
+Released - 2021-12-20
+
+* docs: Update docker file for upload to CBP server
+    + Addresses issue with shiny v1.6.0
+
 baytrendsmap 1.2.1.8002
 ===========
 Released - 2021-12-10

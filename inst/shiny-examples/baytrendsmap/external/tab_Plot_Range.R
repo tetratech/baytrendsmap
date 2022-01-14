@@ -110,13 +110,14 @@ function(){
             #, mainPanel(plotlyOutput("map_r_render", height = 800,  width=800/1.5)
             , mainPanel(
               tabsetPanel(type = "tabs"
+                          , tabPanel("Interactive"
+                                     , leafletOutput("map_r_leaflet"
+                                                     , height = "85vh"))
                           , tabPanel("Static"
                                      , plotOutput("map_r_render"
                                                   , height = 800
                                                   ,  width=800/1.5))
-                          , tabPanel("Dynamic"
-                                     , leafletOutput("map_r_leaflet"
-                                                     , height = "85vh"))
+                          
                           )##tabsetPanel ~ END
                         )##mainPanel~END
             

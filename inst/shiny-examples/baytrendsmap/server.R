@@ -205,6 +205,7 @@ shinyServer(function(input, output, session) {
   }##expression~END
   , filter="top"
   , caption = "Table 1. Imported data."
+  #, rownames = FALSE
   , options=list(scrollX=TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000)
                  , autoWidth = TRUE
@@ -402,6 +403,7 @@ shinyServer(function(input, output, session) {
     }##expression~END
     , filter="top"
     , caption = "Table 2. Station summary."
+    , rownames = FALSE
     , options=list(scrollX=TRUE
                    , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
   )##df_filt_dups_DT~END
@@ -450,11 +452,16 @@ shinyServer(function(input, output, session) {
     #                      , n_Period = 1
     #                      , n_Season = 1)
       
-    str_n_dups <- paste0(n_dups, " = Number of stations with more than 1 record.")
+    str_n_dups <- paste0("Number of stations with more than 1 record = ", n_dups)
+   # str_n_dups <- n_dups
     #
     return(str_n_dups)
     #
   })##df_filt_dups_num~END
+  
+  # output$filt_dups_num_text <- renderText({
+  #   str_n_dups_text <- paste0("Numbers of stations with more than one record = ", filt_dups_num())
+  # })
   
   ## filter helper text ####
   output$txt_nrow_df_import <- renderText({
@@ -749,9 +756,9 @@ shinyServer(function(input, output, session) {
     str_SI <- paste0("SI_", str_col)
     fluidRow(
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                     choices = pick_pal,
+                     choices = pick_pal_names,
                      multiple = FALSE,
-                     selected = pick_pal[1])
+                     selected = pick_pal_names[1])
       
     )##fluidRow~END
   })##opt_pal~END
@@ -857,6 +864,7 @@ shinyServer(function(input, output, session) {
  
   
   # MAP, Range ####
+  ## MAP, Range, user ----
   map_range <- eventReactive (input$but_map_range, {
 
     # start with base map
@@ -869,7 +877,7 @@ shinyServer(function(input, output, session) {
                           , input$SI_classInt)
     mr_pal <- ifelse(is.null(input$SI_pal)
                      , "PuOr"
-                     , input$SI_pal)
+                     , pick_pal[match(input$SI_pal, pick_pal_names)])
     mr_var_name <- ifelse(is.null(input$SI_variable)
                           , "Baseline mean"
                           , input$SI_variable)
@@ -1052,12 +1060,185 @@ shinyServer(function(input, output, session) {
     #
   })##map_range~END
   
+  ## Map, Range, default ----
+  map_range_filt_default <- eventReactive (input$but_filt_apply, {
+    # Add all defaults
+    #
+    m_r <- map_base
+    #
+    # data for plot
+    df_mr <- df_filt()
+    mr_cI_type  <- "pretty"
+    mr_pal <- "PuOr"
+    mr_var_name <- "Baseline mean"
+    mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
+    # mr_var <- input$SI_variable
+    # mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
+    brks_user <- NULL
+    #evals to NULL if left blank
+    
+    # breaks vs numclasses
+      # no breaks, use slider for num classes
+      mr_numclass <- input$numclass
+      # derive breaks from user n and style
+      mr_cI_val <- classInt::classIntervals(df_mr[, mr_var]
+                                            , mr_numclass
+                                            , mr_cI_type)
+      # Redo num classes as "pretty" picks its own number of breaks
+      mr_numclass <- ifelse(mr_cI_type=="pretty"
+                            , length(mr_cI_val$brks) - 1
+                            , mr_numclass)
+      #mr_numclass <- ifelse(mr_cI_type=="pretty"
+      # , length(mr_cI_val$brks)
+      # , mr_numclass)
+      # breaks
+      mr_brks <- mr_cI_val$brks
+    
+    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    
+    # River Names
+    boo_riverNames <- "Yes"
+    
+    if(boo_riverNames == "Yes"){
+      m_r <- m_r + 
+        annotate(geom = "text"
+                 , x = as.numeric(lab_Sus[2])
+                 , y=as.numeric(lab_Sus[3])
+                 , label=lab_Sus[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Pat[2])
+                 , y=as.numeric(lab_Pat[3])
+                 , label=lab_Pat[1]) +
+        annotate(geom = "text", x = as.numeric(lab_Cho[2])
+                 , y=as.numeric(lab_Cho[3])
+                 , label=lab_Cho[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Pot[2])
+                 , y=as.numeric(lab_Pot[3])
+                 , label=lab_Pot[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Rap[2])
+                 , y=as.numeric(lab_Rap[3])
+                 , label=lab_Rap[1], hjust=1) +
+        annotate(geom = "text", x = as.numeric(lab_Yor[2])
+                 , y=as.numeric(lab_Yor[3])
+                 , label=lab_Yor[1], hjust=0) +
+        annotate(geom = "text", x = as.numeric(lab_Jam[2])
+                 , y=as.numeric(lab_Jam[3])
+                 , label=lab_Jam[1], hjust=0)
+    }##IF~riverNames~END
+    
+    # Title
+
+    sep1 <- ": "
+    sep2 <- "\n" #"; "
+    #
+    mr_title_parmName   <- sort(unique(df_mr[, "parmName"]))
+    mr_title_gamName    <- sort(unique(df_mr[, "gamName"]))
+    mr_title_periodName <- sort(unique(df_mr[, "periodName"]))
+    #
+   
+      # "User" file
+      mr_title_layer      <- sort(unique(df_mr[, "layer"]))
+      mr_title_seasonName <- sort(unique(df_mr[, "seasonName"]))
+      str_title <- paste(paste(mr_title_parmName, collapse = ", ")
+                         , paste("GAM", paste(mr_title_gamName
+                                              , collapse = ", ")
+                                 , sep = sep1)
+                         , paste("Layer", paste(mr_title_layer
+                                                , collapse = ", ")
+                                 , sep = sep1)
+                         , paste("Period", paste(mr_title_periodName
+                                                 , collapse = ", ")
+                                 , sep = sep1)
+                         , paste("Season", paste(mr_title_seasonName
+                                                 , collapse = ", ")
+                                 , sep = sep1)
+                         , sep = sep2)
+
+    
+    
+    mr_title <- str_title
+    
+    if(!is.null(mr_title)){
+      m_r <- m_r +
+        labs(title=paste(mr_title, collapse="; "))
+      # labs(title=paste(mr_pal_col, collapse="; "))
+    }##IF~riverNames~END
+    
+    
+    # Points
+    # fortify
+    fort_df_mr <- ggplot2::fortify(df_mr)
+    # Add to data frame
+    
+    ## Break, Color
+    fort_df_mr$map_brk_col <- cut(fort_df_mr[, mr_var]
+                                  , breaks = mr_brks
+                                  #, labels = brewer.pal(max(3, mr_numclass)
+                                  #, mr_pal)[1:mr_numclass]
+                                  , labels = mr_pal_col
+                                  , include.lowest = TRUE
+    )
+    # Minimum of 3 different levels or get warning
+    ## Break, Text
+    fort_df_mr$map_brk_num <- cut(fort_df_mr[, mr_var]
+                                  , breaks = mr_brks
+                                  , include.lowest = TRUE
+    )
+    
+    # Points, Add
+    m_r <- m_r + geom_point(data=fort_df_mr
+                            , aes_string(x =" longitude"
+                                         , y = "latitude"
+                                         #  , fill = "map_brk_num")
+                                         , fill = "map_brk_col")
+                            , size = 4
+                            , pch = 21
+                            , color = "black"
+                            , na.rm = TRUE)
+    
+    
+    
+    m_r <- m_r + scale_fill_brewer(palette = mr_pal
+                                   , name = mr_var_name
+                                   , labels = levels(fort_df_mr$map_brk_num)
+                                   , drop = FALSE
+    )
+    
+    
+    
+    # Legend 
+    m_r <- m_r + theme(legend.position = "bottom"
+                       , legend.box = "horizontal"
+                       , legend.title = element_text(face = "bold"))
+    
+    
+    
+    # # save map
+    mr_ext <- "png"
+    #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+    fn_out <- file.path("map", paste0("map_range.", mr_ext))
+    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
+                    , height = plot_h, width = plot_w, units = plot_units
+                    , scale = plot_scale)
+    
+    
+    
+    return(m_r)
+    #
+  })## map_range_filt_default
+  
+  output$map_r_render_example <- renderPlot({
+    print(m_r_d) 
+  })##map_r~END
   
   output$map_r_render <- renderPlot({
   #output$map_r_render <- renderPlotly({
     # default map to show
     if(input$but_map_range == 0){
-      m_r_2 <- map_base
+      #if(input$but_filt_apply == 0){
+        m_r_2 <- map_base
+      # } else {
+      #   m_r_2 <- map_range_filt_default # different map
+      # }## IF ~ input$but_filt_apply
     } else {
       m_r_2 <- map_range()  
     }
@@ -1725,7 +1906,7 @@ shinyServer(function(input, output, session) {
                           , input$SI_classInt)
     mr_pal <- ifelse(is.null(input$SI_pal)
                      , "PuOr"
-                     , input$SI_pal)
+                     , pick_pal[match(input$SI_pal, pick_pal_names)])
     mr_var_name <- ifelse(is.null(input$SI_variable)
                           , "Baseline mean"
                           , input$SI_variable)

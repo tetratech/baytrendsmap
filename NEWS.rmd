@@ -20,6 +20,17 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9009
+===========
+Released - 2022-01-14
+
+* refactor: Update 'filtered data summary' table without rownames
+* style: Update outline of global.R
+* feature: Add default map
+    + Uses first remote file and first mapLayer
+* refactor: Redesign Shiny interface
+    + Interim version for testing online
+
 baytrendsmap 1.2.1.9008
 ===========
 Released - 2021-09-15

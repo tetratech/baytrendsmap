@@ -4,11 +4,11 @@
 function() {
   tabPanel("View Tidal Trends"
            , navbarPage("Basic Functions"
-           , theme = "boostrap.css"
-           , inverse = FALSE
-           # , tab_Plot_Example()
-           # , tab_Data()
-           # , tab_Filter()
+               , theme = "boostrap.css"
+               , inverse = FALSE
+               , tab_Simple_Combined()
+               # , tab_Data()
+               # , tab_Filter()
            
            )##navbarPage~END
           #  #, fluidPage(

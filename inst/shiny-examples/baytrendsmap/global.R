@@ -2,7 +2,7 @@
 
 # Package Version ----
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.1.9009 test leaflet"
+pkgver <- "1.2.1.9010 test leaflet2"
 
 # Packages ----
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -80,6 +80,13 @@ pick_files_names <- paste0(url_data_pick_files, df_pick_files[, "names"])
 #                    , "WTEMP|Bottom|Jan-Dec", "WTEMP|Bottom|Jul-Sep",  "WTEMP|Bottom|Jun-Sep"  
 #                    , "WTEMP|Bottom|Mar-May", "WTEMP|Surface|Apr-Oct", "WTEMP|Surface|Jan-Dec" 
 #                    , "WTEMP|Surface|Jul-Sep", "WTEMP|Surface|Jun-Sep",  "WTEMP|Surface|Mar-May" )
+
+# Background ----
+## Copy background file to www folder
+# bg_fn <- "TidalWaterQualityChange.pdf"
+# bg_url <- paste0("https://github.com/tetratech/baytrends_files/raw/main/", bg_fn)
+# file.copy(bg_url, paste0("www/", bg_fn), overwrite = TRUE)
+# abandoned as can read direct from remote GitHub repo
 
 # Map ----
 ## Map, Shapefile----

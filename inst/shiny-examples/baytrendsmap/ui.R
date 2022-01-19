@@ -22,7 +22,8 @@ tab_Help         <- source("external/tab_Help.R", local = TRUE)$value
 
 tab_Simple       <- source("external/tab_Simple.R", local = TRUE)$value
 tab_Advanced     <- source("external/tab_Advanced.R", local = TRUE)$value 
-tab_Background   <- source("external/tab_Background.R", local = TRUE)$value 
+tab_Background   <- source("external/tab_Background.R", local = TRUE)$value
+tab_Simple_Combined <- source("external/tab_Simple_Combined.R", local = TRUE)$value 
 
 # UI ####
 # Define UI for application that draws a histogram

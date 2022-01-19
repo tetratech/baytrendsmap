@@ -3,8 +3,8 @@
 #
 function() {
   tabPanel("Background"
-           , p("describe why this tool exists.")
-           , p("text here, link to PDF, or a weblink")
+           , p("Background information in the link PDF.")
+           , a("Tidal Water Quality Change", href = "https://github.com/tetratech/baytrends_files/raw/main/TidalWaterQualityChange.pdf")
           #  #, fluidPage(
           #     , tags$head(
           #        tags$style(HTML("hr {border-top: 1px solid #A9A9A9;}"))

@@ -2,7 +2,7 @@
 
 # Package Version ----
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.1.9010 test leaflet2"
+pkgver <- "1.2.1.9011"
 
 # Packages ----
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
@@ -20,7 +20,7 @@ library(leaflet)
 # library(dataRetrieval)
 # library(data.table)
 # library(stringr)
-# library(shinyjs) # for testing, comment out in final version
+library(shinyjs) # turn on/off buttons
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by

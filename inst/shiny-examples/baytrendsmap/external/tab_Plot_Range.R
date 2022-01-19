@@ -13,10 +13,10 @@ function(){
                          # App Steps
                          #h3("App Steps")
                          h3("Range Map Options")
-                         , fluidRow(column(1),
-                                    column(1, bsButton("but_map_range"
-                                                       , "Update Range Map")),
-                                    bsPopover("but_map_range"
+                         , fluidRow(column(1)
+                                    , column(1, bsButton("but_map_range"
+                                                       , "Update Range Map"))
+                                    , bsPopover("but_map_range"
                                               , "Click 'apply' after modifying filters"
                                               , "A 'data range' map will be created with the selected options."
                                               , "top"
@@ -25,10 +25,17 @@ function(){
                          )##fluidRow~filter button~END
                          , br()
                          , p("Must 'update' map prior to save.")
+                         , useShinyjs()
                          , fluidRow(column(1),
-                                    column(1, downloadButton("but_map_range_save", "Save Range Map")),
-                                    bsPopover("but_map_range_save", "Click 'save' after updating map", "A 'data range' map will be saved in the selected format.",
-                                              "top", trigger = "hover", options = list(container = "body"))
+                                    column(1
+                                           , shinyjs::disabled(downloadButton("but_map_range_save"
+                                                            , "Save Range Map")))
+                                    , bsPopover("but_map_range_save"
+                                              , "Click 'save' after updating map"
+                                              , "A 'data range' map will be saved in the selected format."
+                                              , "top"
+                                              , trigger = "hover"
+                                              , options = list(container = "body"))
                          )##fluidRow~save button~END
                          , br()
                          , bsCollapse(multiple = TRUE
@@ -58,7 +65,8 @@ function(){
                                     # column(1, bsButton("but_mr_title", "Auto-generate Title")),
                                     # bsPopover("but_mr_title", "Click to auto-generate title from 'filters'."))
                                      column(1
-                                            , tipify(bsButton("but_mr_title", "Auto-generate Title")
+                                            , tipify(bsButton("but_mr_title"
+                                                              , "Auto-generate Title")
                                             , "Click to auto-generate title from 'filters'.")))
                          , textAreaInput("map_range_title"
                                          , "Title: "
@@ -84,8 +92,8 @@ function(){
                          , br()
                          , bsCollapse(multiple = TRUE
                                       , bsCollapsePanel("Zoom Region"
-                                                        , style='info',
-                                                        uiOutput('opt_zoomregion_r')
+                                                        , style='info'
+                                                        , uiOutput('opt_zoomregion_r')
                                       )##bsCollapsePanel~zoomregion~END
                          )##bsCollapse~END
                          , numericInput("map_range_val_zoom"
@@ -116,7 +124,7 @@ function(){
                           , tabPanel("Static"
                                      , plotOutput("map_r_render"
                                                   , height = 800
-                                                  ,  width=800/1.5))
+                                                  , width = 800/1.5))
                           
                           )##tabsetPanel ~ END
                         )##mainPanel~END

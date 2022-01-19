@@ -4,7 +4,18 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-01-18 19:26:50
+    #> Last Update: 2022-01-19 09:17:13
+
+# baytrendsmap 1.2.1.9011
+
+Released - 2022-01-19
+
+-   refactor: Complete updates to Shiny interface
+    -   Basic download button
+    -   Enable/disable save buttons in Shiny to guide order of
+        operations
+    -   DESCRIPTION, IMPORTS, add shinyjs package
+-   style: Add style to some shiny code files
 
 # baytrendsmap 1.2.1.9010
 

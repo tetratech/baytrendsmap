@@ -1062,6 +1062,8 @@ shinyServer(function(input, output, session) {
                     , height = plot_h, width = plot_w, units = plot_units
                     , scale = plot_scale)
     
+    # enable save button
+    shinyjs::enable("but_map_range_save")
     #
     return(m_r)
     #return(ggplotly(m_r))
@@ -1605,7 +1607,10 @@ shinyServer(function(input, output, session) {
                     , units = plot_units
                     , scale = plot_scale)
     # Save so download button just copies
-    #
+    
+    # enable save button
+    shinyjs::enable("but_map_trend_save")
+    
     #return(ggplotly(m_t))
     return(m_t)
     #
@@ -1804,6 +1809,20 @@ shinyServer(function(input, output, session) {
     #updateSelectizeInput(session, "SI_seasonName", choices=unique(df_x[, "seasonName"]), selected=character(1))
     # reset values to entire domain of values for each box.
    
+    # Remove saved map PNG
+    fn_png <- list.files("map", "\\.png$")
+    if(length(fn_png) >0 ) {
+      file.remove(paste0("map/", fn_png))
+    }##IF ~ length(fn_png)
+    # Remove zip file
+    fn_zip <- "map/baytrendsmap.zip"
+    if(file.exists(fn_zip)) {
+      file.remove(fn_zip)
+    }## IF ~ fn_zip
+    
+    # hide download button
+    ## new data so can't have updated the maps
+    shinyjs::disable("but_map_basic_save")
 
     # final file
    
@@ -2201,7 +2220,6 @@ shinyServer(function(input, output, session) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
     
-    #
     msg <- paste0("filter data, basic; ", str_col_2, " = ", str_SI_value)
     message(msg)
     #
@@ -2969,13 +2987,31 @@ shinyServer(function(input, output, session) {
     #ggplotly(m_t_2)
   })##map_r~END
   
-  ## Button, map, Basic, save ####
+  ## Button ----
+  
+  observeEvent(input$but_map_basic, {
+    #
+    # Enable save button
+    shinyjs::enable("but_map_basic_save")
+    #
+    # Remove saved map PNG
+    fn_png <- list.files("map", "\\.png$")
+    if(length(fn_png) >0 ) {
+      file.remove(paste0("map/", fn_png))
+    }##IF ~ length(fn_png)
+    # Remove zip file
+    fn_zip <- "map/baytrendsmap.zip"
+    if(file.exists(fn_zip)) {
+      file.remove(fn_zip)
+    }## IF ~ fn_zip
+  })## observerEvent ~ but_map_basic
+  
+  ### Button, map, Basic, save ####
   # create zip file
   # Can save leaflet as HTML if make a reactive and use saveWidget
   # https://stackoverflow.com/questions/52210682/download-leaflet-map-from-a-shiny-app-hosted-on-shiny-io
   output$but_map_basic_save <- downloadHandler(
-   #  filename = function() {
-   #    browser()
+    filename = function() {
    #    mr_ext <- "png" #input$SI_ext
    #    fn_out <- file.path("map", paste0("map_range.", mr_ext))
    #    
@@ -2985,33 +3021,33 @@ shinyServer(function(input, output, session) {
    #    
    #    
    #    if(file.exists(fn_out)==TRUE) {
-   #      mr_ext <- "png" #input$SI_ext
-   #      date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-   #      paste0("map_range_", date_time, ".", mr_ext)
+        mr_ext <- "zip" #input$SI_ext
+        date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+        paste0("baytrendsmap_", date_time, ".", mr_ext)
    #    } else {
    #      "Error_UpdateMapBeforeSave.pdf"
    #    }
    #    # #paste0(input$fn_input, input$SI_ext)
-   #  }, ##filename~END
-   #  content = function(fn) {
-   #    
-   #    fn_maps <- list.files(path = "map", pattern = "\\.png$")
-   #    zip(zipfile = "map/baytrendsmap.zip", files = file.path("map", fn_maps))
-   #    
-   #    
-   #    mr_ext <- input$SI_ext
-   #    fn_out <- file.path("map", paste0("map_range.", mr_ext))
+     } ##filename~END
+    , content = function(fn) {
+
+       # zip files
+       fn_maps <- list.files(path = "map", pattern = "\\.png$")
+       zip(zipfile = "map/baytrendsmap.zip", files = file.path("map", fn_maps))
+        # ensure exists
+       mr_ext <- "zip"
+       fn_out <- paste0("map/baytrendsmap.", mr_ext)
    #    #print(map_range())
    #    # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
    #    # #file.copy("map_range.pdf", fn, overwrite=TRUE)
-   #    if(file.exists(fn_out)==TRUE){
-   #      file.copy(fn_out, fn, overwrite = TRUE)
-   #    } else {
-   #      fn_out_error <- file.path("map", "Error_UpdateMapBeforeSave.pdf")
-   #      file.copy(fn_out_error, fn, overwrite = TRUE)
-   #    }
-   #  }##content~END
-  )##map_r_save~END
+      if(file.exists(fn_out) == TRUE){
+        file.copy(fn_out, fn, overwrite = TRUE)
+      } else {
+        fn_out_error <- file.path("map", "Error.zip")
+        file.copy(fn_out_error, fn, overwrite = TRUE)
+      }
+     }##content~END
+  )##downloadHander
   # Need error handling in case change EXT but didn't "update" the map.
   # expected name doesn't match the saved file name.
   # file.exists(fn_out)

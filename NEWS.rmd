@@ -19,6 +19,16 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9011
+===========
+Released - 2022-01-19
+
+* refactor: Complete updates to Shiny interface
+    + Basic download button
+    + Enable/disable save buttons in Shiny to guide order of operations
+    + DESCRIPTION, IMPORTS, add shinyjs package
+* style: Add style to some shiny code files
+
 baytrendsmap 1.2.1.9010
 ===========
 Released - 2022-01-18

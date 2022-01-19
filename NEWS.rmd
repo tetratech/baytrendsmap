@@ -19,12 +19,101 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9011
+===========
+Released - 2022-01-19
+
+* refactor: Complete updates to Shiny interface
+    + Basic download button
+    + Enable/disable save buttons in Shiny to guide order of operations
+    + DESCRIPTION, IMPORTS, add shinyjs package
+* style: Add style to some shiny code files
+
+baytrendsmap 1.2.1.9010
+===========
+Released - 2022-01-18
+
+* refactor: Continued updates to Shiny interface
+    + Split interface into basic and advanced
+    + Link to Background PDF
+
+baytrendsmap 1.2.1.9009
+===========
+Released - 2022-01-14
+
+* refactor: Update 'filtered data summary' table without rownames
+* style: Update outline of global.R
+* feature: Add default map
+    + Uses first remote file and first mapLayer
+* refactor: Redesign Shiny interface
+    + Interim version for testing online
+
+baytrendsmap 1.2.1.9008
+===========
+Released - 2021-09-15
+
+* refactor: Update remote file directory structure, Issue #54 and Issue #50
+    + Update remove file pick_files.csv with plot directory name
+* refactor: Update shiny to use new files
+
+baytrendsmap 1.2.1.9007
+===========
+Released - 2021-08-17
+
+* feat: Added plot creation script for "no data" in Shiny leaflet map pop up, 
+Issue #49
+
+baytrendsmap 1.2.1.9006
+===========
+Released - 2021-08-17
+
+* refactor: Add remote data URL to global.R
+* refactor: Update data and plot URL to reference global.R for base URL
+* refactor: Update Trends leaflet map to use all plots for import
+    + Previously tested only chla_S plots
+
+baytrendsmap 1.2.1.9005
+===========
+Released - 2021-08-16
+
+* refactor: Update Shiny app to import data files from remote repo, Issue #54
+
+baytrendsmap 1.2.1.9004
+===========
+Released - 2021-08-16
+
+* feat: Update Shiny app to auto update data import pick list from saved table,
+Issue #54
+
+baytrendsmap 1.2.1.9003
+===========
+Released - 2021-08-09
+
+* fix: Update DESCRIPTION to accurately include second author
+* fix: Update range map in Shiny to use all categories when user supplies custom
+classes, Issue #51
+* docs: Update README to use `remotes` instead of `devtools` in install example
+
+baytrendsmap 1.2.1.9002
+===========
+Released - 2021-06-09
+
+* refactor: Shiny lealfet map, change order of base layers
+    + Make Positron the default
+
+baytrendsmap 1.2.1.9001
+===========
+Released - 2021-06-04
+
+* feat: Add leaflet map as demonstration for trend map.
+* chrore: Fix filtering
+* style: Trim lines to 80 characters
+
 baytrendsmap 1.2.1
 ===========
 Released - 2021-01-26
 
 * chore: Update to version 1.2.1 for release; Issue #45
-
 
 baytrendsmap 1.2.0.9003
 ===========

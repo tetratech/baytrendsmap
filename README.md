@@ -21,11 +21,9 @@ The baytrends package was developed to enable users to evaluate long-term trends
 # Installation
 
 ``` r
-library(devtools)  #install if needed
-#Sys.setenv("TAR" = "internal") # needed for use with R v3.6.0
+if(!require(remotes)){install.packages("remotes")}  #install if needed
 install_github("tetratech/baytrendsmap", force=TRUE, build_vignettes=TRUE, dependencies = TRUE)
 ```
-
 
 # Usage
 No functions other than running the Shiny app.

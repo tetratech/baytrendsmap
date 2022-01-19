@@ -1,7 +1,7 @@
 Package: baytrendsmap
 Title: Shiny App to Create Maps on-the-Fly from Output of the Baytrends Package
 Description: Shiny app to create maps on-the-fly from output of the baytrends package.
-Version: 1.2.1
+Version: 1.2.1.9011
 Authors@R: c(
   person("Erik W.", "Leppo", email="Erik.Leppo@tetratech.com", role=c("aut","cre")),
   person("Jon","Harcum", role="aut"))
@@ -14,6 +14,7 @@ Imports:
   baytrends,
   shiny,
   shinyBS,
+  shinyjs,
   DT,
   ggplot2,
   rgdal,
@@ -29,4 +30,4 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

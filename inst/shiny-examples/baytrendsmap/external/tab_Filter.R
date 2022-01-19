@@ -12,17 +12,25 @@ function() {
                    #h3("App Steps")
                     h3("2. Filter Data")
                     , fluidRow(column(1)
-                               , column(1, bsButton("but_filt_apply", "Apply Filters"))
-                               # bsPopover("but_filt_apply", "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.",
-                               #           placement = "top", trigger = "hover", options = list(container = "body"))
-                               , bsPopover(id = "but_filt_apply", title = "Apply Filters"
+                               , column(1, bsButton("but_filt_apply"
+                                                    , "Apply Filters"))
+                               # bsPopover("but_filt_apply"
+                               #           , "Click 'apply' after modifying filters"
+                               #           , "Only filters with items selected will be applied. Note: At least one station must be selected."
+                               #           , placement = "top"
+                               #           , trigger = "hover"
+                               #           , options = list(container = "body"))
+                               , bsPopover(id = "but_filt_apply"
+                                           , title = "Apply Filters"
                                           , content = "Click 'apply' after modifying filters", "Only filters with items selected will be applied. Note: At least one station must be selected.")
                                 #)##fluidRow~filter button~END
                    
                    )##fluidRow~END
                    , br()
                    , fluidRow(column(1)
-                              , column(1, bsButton("but_ClearFilters", label="Reset Filter Selections", style="primary")))
+                              , column(1, bsButton("but_ClearFilters"
+                                                   , label="Reset Filter Selections"
+                                                   , style="primary")))
                     
                     
                    , br()
@@ -31,7 +39,9 @@ function() {
                    
                  # , br()
                  # , fluidRow(column(1), 
-                 #          column(1,bsButton("but_ClearFilters", label="Reset Filter Selections", style="primary"))
+                 #          column(1,bsButton("but_ClearFilters"
+                 #                   , label="Reset Filter Selections"
+                 #                   , style="primary"))
                  #          )##fluidRow~END
                    
                 )##sidebarPanel~END

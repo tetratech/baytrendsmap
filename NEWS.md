@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-01-19 09:17:13
+    #> Last Update: 2022-01-19 10:23:44
+
+# baytrendsmap 1.2.1.9012
+
+Released - 2022-01-19
+
+-   fix: Update URL for plots for interactive map, Issue #56
 
 # baytrendsmap 1.2.1.9011
 

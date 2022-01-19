@@ -2052,7 +2052,7 @@ shinyServer(function(input, output, session) {
                                , "show_plots"]
 
     if(isTRUE(plots_boo)) {
-      df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
+      df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
                                  , '", target=\"blank\"> More info</a>')
@@ -2895,9 +2895,9 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
-    
+ 
     if(isTRUE(plots_boo)) {
-      df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
+      df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
                                  , '", target=\"blank\"> More info</a>')

@@ -19,6 +19,12 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9012
+===========
+Released - 2022-01-19
+
+* fix: Update URL for plots for interactive map, Issue #56
+
 baytrendsmap 1.2.1.9011
 ===========
 Released - 2022-01-19

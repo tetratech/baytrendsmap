@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">baytrendsmap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1.9011</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/baytrendsmap.html">Get started</a>
 </li>
@@ -55,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tetratech/baytrendsmap/">
+  <a href="https://github.com/tetratech/baytrendsmap/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,45 +72,45 @@
       <h1 data-toc-skip>baytrendsmap guide</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tetratech/baytrendsmap/blob/master/vignettes/baytrendsmap.Rmd"><code>vignettes/baytrendsmap.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tetratech/baytrendsmap/blob/HEAD/vignettes/baytrendsmap.Rmd" class="external-link"><code>vignettes/baytrendsmap.Rmd</code></a></small>
       <div class="hidden name"><code>baytrendsmap.Rmd</code></div>
 
     </div>
 
     
     
-<div id="package-purpose" class="section level1">
-<h1 class="hasAnchor">
-<a href="#package-purpose" class="anchor"></a>Package Purpose</h1>
+<div class="section level2">
+<h2 id="package-purpose">Package Purpose<a class="anchor" aria-label="anchor" href="#package-purpose"></a>
+</h2>
 <p><code>baytrendsmap</code> is intended for quick and consistent mapping of <code>baytrends</code> output.</p>
 </div>
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Installation is from GitHub with the code below.</p>
 <p>Users of R versions &gt;= 3.6.0 need the 2nd line of code.</p>
 <p>The code below will force the installation of any vignettes. The default for installing from GitHub is to install without vignettes.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>  <span class="co">#install if needed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"TAR"</span> <span class="op">=</span> <span class="st">"internal"</span><span class="op">)</span> <span class="co"># needed for use with R v3.6.0</span>
-<span class="fu">install_github</span><span class="op">(</span><span class="st">"leppott/baytrendsmap"</span>, force<span class="op">=</span><span class="cn">TRUE</span>, build_vignettes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>  <span class="co">#install if needed</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"TAR"</span> <span class="op">=</span> <span class="st">"internal"</span><span class="op">)</span> <span class="co"># needed for use with R v3.6.0</span>
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"leppott/baytrendsmap"</span>, force<span class="op">=</span><span class="cn">TRUE</span>, build_vignettes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level1">
-<h1 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h1>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tetratech/baytrendsmap/">baytrendsmap</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tetratech/baytrendsmap/" class="external-link">baytrendsmap</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/runShiny.html">runShiny</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="import-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#import-data" class="anchor"></a>Import Data</h2>
+<div class="section level3">
+<h3 id="import-data">Import Data<a class="anchor" aria-label="anchor" href="#import-data"></a>
+</h3>
 <p>It is assumed the user has an output file from the <code>baytrends</code> package.</p>
 <p>Click the “browse” button to locate and then upload a file to the Shiny app.</p>
 <p>The progress bar will say “complete” when the file is done uploading.</p>
 </div>
-<div id="filter-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#filter-data" class="anchor"></a>Filter Data</h2>
+<div class="section level3">
+<h3 id="filter-data">Filter Data<a class="anchor" aria-label="anchor" href="#filter-data"></a>
+</h3>
 <p>There are nine filters available to down select data. The last five are the critical ones.</p>
 <ul>
 <li><p>Full Paramter Name</p></li>
@@ -129,16 +125,16 @@
 <p>If you make a mistake you can use the “Reset Filterer Selections” button at the bottom.</p>
 <p>Under the “Filter Data Summary” there is a line item with the number of unique records per sample. If this is not <strong>zero</strong> then there are multiple entries in the data for a single location but only one will be mapped. This leads to erroneous maps.</p>
 </div>
-<div id="maps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#maps" class="anchor"></a>Maps</h2>
+<div class="section level3">
+<h3 id="maps">Maps<a class="anchor" aria-label="anchor" href="#maps"></a>
+</h3>
 <p>Both “range” and “trends” maps are able to be produced.</p>
 <p>The blue selection boxes are similar to the blue filter selection boxes.</p>
 <p>When making changes to the maps with the “Update Map” button the process takes 2 to 5 seconds while the map is saved to a file.</p>
 <p>The “Save Map” button will pop up a download box in your browser.</p>
-<div id="river-labels" class="section level3">
-<h3 class="hasAnchor">
-<a href="#river-labels" class="anchor"></a>River Labels</h3>
+<div class="section level4">
+<h4 id="river-labels">River Labels<a class="anchor" aria-label="anchor" href="#river-labels"></a>
+</h4>
 <p>Several major rivers are labeled with RiverNames = TRUE.</p>
 <p>The names can be moved to new locations only be editing the global.R file in the R package. These values are presented in the table below.</p>
 <table class="table">
@@ -186,9 +182,9 @@
 </tbody>
 </table>
 </div>
-<div id="zoom-feature" class="section level3">
-<h3 class="hasAnchor">
-<a href="#zoom-feature" class="anchor"></a>Zoom Feature</h3>
+<div class="section level4">
+<h4 id="zoom-feature">Zoom Feature<a class="anchor" aria-label="anchor" href="#zoom-feature"></a>
+</h4>
 <p>The “Zoom Region” selection allows for the map focus to change to limited number of rivers.</p>
 <p>The map view is focused on the selected river and the rest of the map is not viewable. This includes the title and legend.</p>
 <p>Changing the “Zoom Region” to “none” resets the view to the full map.</p>
@@ -269,11 +265,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Erik W. Leppo, Jon Harcum.</p>
+  <p></p>
+<p>Developed by Erik W. Leppo, Jon Harcum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -281,6 +279,8 @@
 
   
 
+
+  
 
   </body>
 </html>

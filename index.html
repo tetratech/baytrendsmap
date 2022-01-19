@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">baytrendsmap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1.9011</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/baytrendsmap.html">Get started</a>
 </li>
@@ -55,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tetratech/baytrendsmap/">
+  <a href="https://github.com/tetratech/baytrendsmap/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -73,37 +69,43 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="baytrendsmap" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#baytrendsmap" class="anchor"></a>baytrendsmap</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="baytrendsmap">baytrendsmap<a class="anchor" aria-label="anchor" href="#baytrendsmap"></a>
+</h1></div>
 <p>Shiny app to create maps on-the-fly from output of the baytrends package.</p>
 </div>
-<div id="baytrends" class="section level1">
-<h1 class="hasAnchor">
-<a href="#baytrends" class="anchor"></a>baytrends</h1>
-<p><a href="https://CRAN.R-project.org/package=baytrends" class="uri">https://CRAN.R-project.org/package=baytrends</a></p>
+<div class="section level1">
+<h1 id="baytrends">baytrends<a class="anchor" aria-label="anchor" href="#baytrends"></a>
+</h1>
+<p><a href="https://CRAN.R-project.org/package=baytrends" class="external-link uri">https://CRAN.R-project.org/package=baytrends</a></p>
 <p>The baytrends package was developed to enable users to evaluate long-term trends in the Chesapeake Bay using a Generalized Additive Modeling (GAM) approach. The model development includes selecting a GAM structure to describe nonlinear seasonally-varying changes over time, incorporation of hydrologic variability via either a river flow or salinity, the use of an intervention to deal with method or laboratory changes suspected to impact data values, and representation of left- and interval-censored data. This approach, which is fully transferable to other systems, allows for Chesapeake Bay water quality data to be evaluated in a statistically rigorous, yet flexible way to provide insights to a range of management- and research-focused questions.</p>
 </div>
-
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>  <span class="co">#install if needed</span>
-<span class="co">#Sys.setenv("TAR" = "internal") # needed for use with R v3.6.0</span>
-<span class="fu">install_github</span><span class="op">(</span><span class="st">"tetratech/baytrendsmap"</span>, force<span class="op">=</span><span class="cn">TRUE</span>, build_vignettes<span class="op">=</span><span class="cn">TRUE</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="section level1">
+<h1 id="badges">Badges<a class="anchor" aria-label="anchor" href="#badges"></a>
+</h1>
+<p><a href="https://GitHub.com/tetratech/baytrendsmap/graphs/commit-activity" class="external-link"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance"></a> <a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="lifecycle"></a></p>
+<p><a href="https://cran.r-project.org/web/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></p>
+<p><a href="https://github.com/leppott/baytrends_map/actions" class="external-link"><img src="https://github.com/leppott/baytrends_map/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></p>
+<p><a href="https://GitHub.com/tetratech/baytrendsmap/issues/" class="external-link"><img src="https://img.shields.io/github/issues/tetratech/baytrendsmap.svg" alt="GitHub issues"></a></p>
 </div>
-<div id="usage" class="section level1">
-<h1 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h1>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">}</span>  <span class="co">#install if needed</span>
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tetratech/baytrendsmap"</span>, force<span class="op">=</span><span class="cn">TRUE</span>, build_vignettes<span class="op">=</span><span class="cn">TRUE</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level1">
+<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h1>
 <p>No functions other than running the Shiny app.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tetratech/baytrendsmap/">baytrendsmap</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tetratech/baytrendsmap/" class="external-link">baytrendsmap</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/runShiny.html">runShiny</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="purpose" class="section level1">
-<h1 class="hasAnchor">
-<a href="#purpose" class="anchor"></a>Purpose</h1>
+<div class="section level1">
+<h1 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
+</h1>
 <p>To aid staff in creating maps and exploring output of baytrends package.</p>
 </div>
 
@@ -111,48 +113,51 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/tetratech/baytrendsmap/">https://​github.com/​tetratech/​baytrendsmap/​</a>
-</li>
+<li><a href="https://github.com/tetratech/baytrendsmap/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing baytrendsmap</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Erik W. Leppo <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Jon Harcum <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://GitHub.com/tetratech/baytrendsmap/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="lifecycle"></a></li>
-<li><a href="https://cran.r-project.org/web/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></li>
-<li><a href="https://github.com/leppott/baytrends_map/actions"><img src="https://github.com/leppott/baytrends_map/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://GitHub.com/tetratech/baytrendsmap/issues/"><img src="https://img.shields.io/github/issues/tetratech/baytrendsmap.svg" alt="GitHub issues"></a></li>
-</ul>
-</div>
-</div>
+
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Erik W. Leppo, Jon Harcum.</p>
+  <p></p>
+<p>Developed by Erik W. Leppo, Jon Harcum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -160,6 +165,8 @@
 
   
 
+
+  
 
   </body>
 </html>

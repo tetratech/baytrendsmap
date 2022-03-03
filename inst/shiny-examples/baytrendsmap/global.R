@@ -1,9 +1,5 @@
 # Shiny Global File
 
-# Package Version ----
-#pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
-pkgver <- "1.2.1.9011"
-
 # Packages ----
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(baytrends, quietly = TRUE, warn.conflicts = FALSE))
@@ -21,6 +17,12 @@ library(leaflet)
 # library(data.table)
 # library(stringr)
 library(shinyjs) # turn on/off buttons
+
+# Package Version ----
+#pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
+#pkgver <- installed.packages()["baytrendsmap", "Version"]
+# believe ShinyApps.io blocks some system level commands
+pkgver <- "1.2.1.9013"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by
@@ -40,12 +42,12 @@ pick_gamDiff_Desc <- c("Baseline mean", "Current mean", "Absolute change", "Perc
 pick_classInt <- c("quantile", "equal", "pretty") #c("sd", "quantile", "equal", "pretty")
 pick_pal <- c("PuOr", "BuPu", "OrRd", "PuBu", "RdPu") #RColorBrewer
 pick_pal_names <- c("Purple_Orange", "Blue_Purple", "Orange_Red", "Purple_Blue", "Red_Purple")
-pick_pal_change <- c("Orange_Green", "Red_Blue", "Purple_Green") # custom
+pick_pal_change <- c("Red_Blue", "Purple_Green", "Orange_Green") # custom
 pal_change_OrGn <- c("orange", "green")
 # Color blind friendly
 # https://colorbrewer2.org/#type=diverging&scheme=BrBG&n=5
-pal_change_RdBu <- c("#ef8a62", "#67a9cf")  # red_blue
-pal_change_PRGn <- c("#af8dc3", "#7fbf7b") # purple_green
+pal_change_RdBu <- c("#ef8a62", "#67a9cf")  # red_blue (more orange than red)
+pal_change_PuGn <- c("#af8dc3", "#7fbf7b") # purple_green
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
                      , "Rappahannock", "Susquehanna", "York")

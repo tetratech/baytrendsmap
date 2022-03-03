@@ -102,12 +102,7 @@ shinyServer(function(input, output, session) {
     #
     #
   })##df_import~END
-  
-  file_watch_basic <- reactive({
-    # trigger for df_import()
-    #paste(input$fn_input, input$but_radio_load)
-    input$but_radio_load_basic
-  })## file_watch ~ EN
+
   
   ## df_import_cols_widen ####
   df_import_cols_widen <- eventReactive(file_watch(), {
@@ -837,7 +832,7 @@ shinyServer(function(input, output, session) {
     str_col <- "upisgood"
     str_SI <- paste0("SI_", str_col)
     fluidRow(
-      selectizeInput(str_SI, h4(paste0("  Up is good?")),
+      selectizeInput(str_SI, h4(paste0("  Increasing trend is 'good'?")),
                      choices = c("TRUE", "FALSE"),
                      multiple = FALSE,
                      selected = "TRUE")
@@ -1792,7 +1787,8 @@ shinyServer(function(input, output, session) {
     # paste(input$but_ClearFilters
     #       , input$fn_input
     #       , input$but_radio_load)
-    input$but_radio_load_basic
+    #input$but_radio_load_basic
+    input$radio_input_basic
   })## file_watch ~ EN
   
   
@@ -2117,14 +2113,32 @@ shinyServer(function(input, output, session) {
 # BASIC ----
 # Basic map interface
   
+  ## File Watch ----
+  file_watch_basic <- reactive({
+    # trigger for df_import()
+    #paste(input$fn_input, input$but_radio_load)
+    # input$but_radio_load_basic
+    input$radio_input_basic
+  })## file_watch ~ EN
+  
+  file_watch_basic_maps <- reactive({
+    # trigger for df_import()
+    #paste(input$fn_input, input$but_radio_load)
+    # input$but_radio_load_basic
+    input$radio_input_basic
+    input$SI_mapLayer_basic
+    input$SI_pal_basic
+    input$SI_upisgood_basic
+  })## file_watch ~ EN
+  
   ## UI, Filter, Collapse ----
   output$filt_collapse_basic <- renderUI({
     # filters change based on file format; final vs. user.
     # Default is "final" file.
-    if(input$but_radio_load_basic == 0) {
-      #return(NULL)
-      p("No data loaded, make a selection under '1. Choose Data'.")
-    } else {
+    # if(input$but_radio_load_basic == 0) {
+    #   #return(NULL)
+    #   p("No data loaded, make a selection under '1. Choose Data'.")
+    # } else {
       # "final" file filters
       bsCollapse(multiple = TRUE
                  , bsCollapsePanel("Filter by 'Map Layer'", style='info',
@@ -2133,7 +2147,7 @@ shinyServer(function(input, output, session) {
                  )##bsCollapsePanel~station~END
                  , open = "Filter by 'Map Layer'" # to auto open panels
       )##bsCollapse
-    }## IF ~ file type ~ END
+    # }## IF ~ file type ~ END
     
     
   })## filt_collapse_basic
@@ -2164,11 +2178,23 @@ shinyServer(function(input, output, session) {
     )##fluidRow~END
   })##opt_pal_basic
   
+  output$opt_pal_basic_trend <- renderUI({
+    str_col <- "pal"
+    str_SI <- paste0("SI_", str_col, "_basic_trend")
+    fluidRow(
+      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                     choices = pick_pal_change,
+                     multiple = FALSE,
+                     selected = pick_pal_change[1])
+      
+    )##fluidRow~END
+  })##opt_pal_basic
+  
   output$opt_upisgood_basic <- renderUI({
     str_col <- "upisgood"
     str_SI <- paste0("SI_", str_col, "_basic")
     fluidRow(
-      selectizeInput(str_SI, h4(paste0("  Up is good?")),
+      selectizeInput(str_SI, h4(paste0("  Increasing trend is 'good'?")),
                      choices = c("TRUE", "FALSE"),
                      multiple = FALSE,
                      selected = "TRUE")
@@ -2186,9 +2212,9 @@ shinyServer(function(input, output, session) {
     # Need is.null as first rather than last.
     # It will always trigger on loading of the app
     
-    if(input$but_radio_load_basic == 0){
-      return(NULL)
-    } else {
+    # if(input$but_radio_load_basic == 0){
+    #   return(NULL)
+    # } else {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
       df_input <- read.csv(fn_inFile
                            , header = TRUE
@@ -2196,7 +2222,7 @@ shinyServer(function(input, output, session) {
                            , quote = "\""
                            , stringsAsFactors = FALSE)
       # saved files are already validated so no QC on column names
-    }##IF~is.null~END
+    # }##IF~is.null~END
     #
     msg <- paste0("file loaded, basic; ", inFile_radio)
     message(msg)
@@ -2207,7 +2233,8 @@ shinyServer(function(input, output, session) {
   })##df_import_basic
   
   ### Data, df_filt_basic ----
-  df_filt_basic <- eventReactive (input$but_map_basic, {
+  #df_filt_basic <- eventReactive (input$but_map_basic, {
+  df_filt_basic <- eventReactive (input$SI_mapLayer_basic, {
     # if filters not null then apply to df_import
     # it is possible to select no data
 
@@ -2314,7 +2341,8 @@ shinyServer(function(input, output, session) {
       addLegend("bottomleft"
                 , colors = c(col_Stations, col_Segs)
                 , labels = c("Stations", "CB Outline")
-                , values = NA) %>%
+                , values = NA
+                , title = "Stations") %>%
       # Layers
       # addLayersControl(baseGroups = c("OSM (default)"
       #                                 , "Positron"
@@ -2333,8 +2361,8 @@ shinyServer(function(input, output, session) {
   })## map_r_leaflet_basic
   
   ### MAP, Basic, Range, Static ----
-  map_range_basic <- eventReactive (input$but_map_basic, {
-    
+  map_range_basic <- eventReactive (file_watch_basic_maps(), {
+
     # start with base map
     m_r <- map_base
     
@@ -2344,7 +2372,7 @@ shinyServer(function(input, output, session) {
     mr_pal <- ifelse(is.null(input$SI_pal_basic)
                      , "PuOr"
                      , pick_pal[match(input$SI_pal_basic, pick_pal_names)])
-    mr_var_name <- "Baseline mean"
+    mr_var_name <- "Current mean"
     mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
     # mr_var <- input$SI_variable
     # mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
@@ -2527,7 +2555,7 @@ shinyServer(function(input, output, session) {
   })##map_range_basic
   
   ### MAP, Basic, Trend ----
-  map_trend_basic <- eventReactive (input$but_map_basic, {
+  map_trend_basic <- eventReactive (file_watch_basic_maps(), {
    
     # # validate p-value, poss > sig
     # validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
@@ -2539,19 +2567,19 @@ shinyServer(function(input, output, session) {
   
     # start with base map
     m_t <- map_base
-    mt_pal <- ifelse(is.null(input$SI_pal_basic)
-                     , "PuOr"
-                     , pick_pal[match(input$SI_pal_basic, pick_pal_names)])
+    mt_pal <- ifelse(is.null(input$SI_pal_basic_trend)
+                     , "Red_Blue"
+                     , input$SI_pal_basic_trend)
     
-    # if(mt_pal == "Orange_Green"){
-    #   pal_mt <- pal_change_OrGn
-    # } else if (mt_pal == "Red_Blue") {
-    #   pal_mt <- pal_change_RdBu
-    # } else if (mt_pal == "Purple_Green") {
-    #   pal_mt <- pal_change_PRGn
-    # } ## IF ~ mt_pal ~ END
+    if(mt_pal == "Orange_Green"){
+      pal_mt <- pal_change_OrGn
+    } else if (mt_pal == "Red_Blue") {
+      pal_mt <- pal_change_RdBu
+    } else if (mt_pal == "Purple_Green") {
+      pal_mt <- pal_change_PuGn
+    } ## IF ~ mt_pal ~ END
     
-    pal_mt <- pal_change_OrGn
+    # pal_mt <- pal_change_RdBu
     
     # data for plot
     df_mt <- df_filt_basic()
@@ -2807,7 +2835,7 @@ shinyServer(function(input, output, session) {
   # tied to Update button
   # https://rstudio.github.io/leaflet/shiny.html
   # need a reactive to trigger, use map update button
-  observeEvent(input$but_map_basic, {
+  observeEvent(file_watch_basic_maps(), {
     
     #~~~~
     # Repeat code from Map_Range (static)
@@ -2820,7 +2848,7 @@ shinyServer(function(input, output, session) {
     mr_pal <- ifelse(is.null(input$SI_pal_basic)
                      , "PuOr"
                      , pick_pal[match(input$SI_pal_basic, pick_pal_names)])
-    mr_var_name <- "Baseline mean"
+    mr_var_name <- "Current mean"
     mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
     # mr_var <- input$SI_variable
     # mr_var_name <- pick_gamDiff_Desc[match(mr_var, pick_gamDiff)]
@@ -2942,7 +2970,8 @@ shinyServer(function(input, output, session) {
       addLegend("bottomleft"
                 , colors = mr_pal_col
                 , labels = map_brk_num_leg
-                , values = NA)
+                , values = NA
+                , title = mr_var_name)
     
     
     
@@ -2974,7 +3003,7 @@ shinyServer(function(input, output, session) {
     #ggplotly(m_r_2)
   })##map_r~END
   
-  ### MAP, Basic, render, Change ----  
+  ### MAP, Basic, render, Trend ----  
   output$map_t_render_basic <- renderPlot({
     #output$map_t_render <- renderPlotly({
     # default map to show

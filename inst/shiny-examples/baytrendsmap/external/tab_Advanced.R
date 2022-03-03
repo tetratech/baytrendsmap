@@ -2,7 +2,7 @@
 #~~~~~~~~~~~~~~~~~
 #
 function() {
-  tabPanel("Create Custom Trends"
+  tabPanel("Create Custom Maps"
            , navbarPage("Advanced Functions"
                       , theme = "boostrap.css"
                       , inverse = FALSE

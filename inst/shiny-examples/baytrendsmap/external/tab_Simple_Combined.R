@@ -15,7 +15,7 @@ function() {
                    , radioButtons("radio_input_basic"
                                   , "Choose file to load"
                                   , choices = pick_files_radio)
-                   , bsButton("but_radio_load_basic", "Load Data")
+                   #, bsButton("but_radio_load_basic", "Load Data")
                    # , bsPopover(id = "but_radio_load"
                    #           , title = "Load 'final' File"
                    #           , content = "Click button to load 'final' file based on radio button selection above.")
@@ -23,14 +23,23 @@ function() {
                    , h3("2. Choose Map Layer (parameter|layer|season)")
                    , fluidRow(h4("Filters", uiOutput("filt_collapse_basic")))
                    , h3("3. Map Options")
+                   , h4("3.a. Range Map Options")
                    , bsCollapse(multiple = TRUE
                           , bsCollapsePanel("Color Palette (Range Map Only)"
                                             , style='info'
                                             , uiOutput('opt_pal_basic')
                                 )##bsCollapsePanel~Color
                    )##bsCollapse 1
+                   , h4("3.b. Trend Map Options")
                    , bsCollapse(multiple = TRUE
-                                , bsCollapsePanel("Direction of 'Good' Change (Trends Map Only)"
+                                , bsCollapsePanel("Color Palette (Change Map Only"
+                                                  , style = 'info'
+                                                  , uiOutput('opt_pal_basic_trend')
+                                )##bsCollapsePanel
+                    )##bsCollapse ~ Pal Trend
+                   
+                   , bsCollapse(multiple = TRUE
+                                , bsCollapsePanel("Direction of 'Good' Change (Change Map Only)"
                                                   , style='info'
                                                   , uiOutput('opt_upisgood_basic')
                                 )##bsCollapsePanel~Direction
@@ -46,7 +55,7 @@ function() {
                                         , options = list(container = "body"))
                    )##fluidRow ~ update button
                   , p("Must 'update' and view map prior to save.")
-                  , p("Save will return a zip file with the Range and Trends maps but not the interactive map.")
+                  , p("Save will return a zip file with the Range and Change maps but not the interactive map.")
                   , useShinyjs()
                   , fluidRow(column(1),
                              column(1
@@ -72,7 +81,7 @@ function() {
                                               , height = 800
                                               ,  width=800/1.5)
                                  )
-                      , tabPanel("Trends Map"
+                      , tabPanel("Change Map"
                                  , plotOutput("map_t_render_basic"
                                               , height = 800
                                               ,  width=800/1.5)

@@ -1818,7 +1818,7 @@ shinyServer(function(input, output, session) {
     
     # hide download button
     ## new data so can't have updated the maps
-    shinyjs::disable("but_map_basic_save")
+    #shinyjs::disable("but_map_basic_save")
 
     # final file
    
@@ -2121,18 +2121,50 @@ shinyServer(function(input, output, session) {
     input$radio_input_basic
   })## file_watch ~ EN
   
-  file_watch_basic_maps <- reactive({
+  # file_watch_basic_maps <- reactive({
+  #   # trigger for df_import()
+  #   #paste(input$fn_input, input$but_radio_load)
+  #   # input$but_radio_load_basic
+  #   input$radio_input_basic
+  #   input$SI_mapLayer_basic
+  #   input$SI_pal_basic
+  #   input$SI_upisgood_basic
+  # })## file_watch ~ EN
+  
+  file_watch_basic_map_r <- reactive({
     # trigger for df_import()
     #paste(input$fn_input, input$but_radio_load)
     # input$but_radio_load_basic
     input$radio_input_basic
     input$SI_mapLayer_basic
-    input$SI_pal_basic
+    input$SI_pal_range_basic
+  })## file_watch ~ EN
+  
+  file_watch_basic_map_t <- reactive({
+    # trigger for df_import()
+    #paste(input$fn_input, input$but_radio_load)
+    # input$but_radio_load_basic
+    input$radio_input_basic
+    input$SI_mapLayer_basic
+    input$SI_pal_trend_basic
     input$SI_upisgood_basic
   })## file_watch ~ EN
   
   ## UI, Filter, Collapse ----
-  output$filt_collapse_basic <- renderUI({
+  output$filt_mapLayer_basic <- renderUI({
+    str_col <- "mapLayer"
+    str_sel <- eval(parse(text = paste0("input$sel_", str_col, "_basic")))
+    str_SI <- paste0("SI_", str_col, "_basic")
+    df_x <- df_import_basic()
+    fluidRow(
+      selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+                  list("Parameter | Layer | Season" = sort(unique(df_x[, str_col]))),
+                  multiple = FALSE
+      )## selectInput ~ mapLayer
+    )##fluidRow~END
+  })##filt_mapLayer_Basic
+  
+  output$filt_collapse_mapLayer_basic <- renderUI({
     # filters change based on file format; final vs. user.
     # Default is "final" file.
     # if(input$but_radio_load_basic == 0) {
@@ -2148,47 +2180,43 @@ shinyServer(function(input, output, session) {
                  , open = "Filter by 'Map Layer'" # to auto open panels
       )##bsCollapse
     # }## IF ~ file type ~ END
-    
-    
   })## filt_collapse_basic
   
   ## 
-  output$filt_mapLayer_basic <- renderUI({
-    str_col <- "mapLayer"
-    str_sel <- eval(parse(text = paste0("input$sel_", str_col, "_basic")))
-    str_SI <- paste0("SI_", str_col, "_basic")
-    df_x <- df_import_basic()
-    fluidRow(
-      selectInput(str_SI, h4(paste0("  Select ", str_col, ":")),
-                  list("Parameter | Layer | Season" = sort(unique(df_x[, str_col]))),
-                  multiple = FALSE
-      )## selectInput ~ mapLayer
-    )##fluidRow~END
-  })##filt_mapLayer_Basic
+
   
-  output$opt_pal_basic <- renderUI({
+  output$opt_pal_range_basic <- renderUI({
     str_col <- "pal"
-    str_SI <- paste0("SI_", str_col, "_basic")
+    str_SI <- paste0("SI_", str_col, "_range_basic")
     fluidRow(
-      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+      selectizeInput(str_SI, h4("  Select palette:"),
                      choices = pick_pal_names,
                      multiple = FALSE,
                      selected = pick_pal_names[1])
       
     )##fluidRow~END
-  })##opt_pal_basic
+  })##opt_pal_basic_range
   
-  output$opt_pal_basic_trend <- renderUI({
+  # output$filt_collapse_pal_range_basic <- renderUI({
+  #   bsCollapse(multiple = TRUE
+  #              , bsCollapsePanel("  Select palette:"
+  #                                , style = 'info'
+  #                                , uiOutput('filt_pal_range_basic')
+  #                                )
+  #              , open = "  Select palette:") # force panel open
+  # })## filt_collapse_pal_range_basic
+  
+  output$opt_pal_trend_basic <- renderUI({
     str_col <- "pal"
-    str_SI <- paste0("SI_", str_col, "_basic_trend")
+    str_SI <- paste0("SI_", str_col, "_trend_basic")
     fluidRow(
-      selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
+      selectizeInput(str_SI, h4("  Select palette:"),
                      choices = pick_pal_change,
                      multiple = FALSE,
                      selected = pick_pal_change[1])
       
     )##fluidRow~END
-  })##opt_pal_basic
+  })##opt_pal_basic_trend
   
   output$opt_upisgood_basic <- renderUI({
     str_col <- "upisgood"
@@ -2361,7 +2389,7 @@ shinyServer(function(input, output, session) {
   })## map_r_leaflet_basic
   
   ### MAP, Basic, Range, Static ----
-  map_range_basic <- eventReactive (file_watch_basic_maps(), {
+  map_range_basic <- eventReactive (file_watch_basic_map_r(), {
 
     # start with base map
     m_r <- map_base
@@ -2369,9 +2397,9 @@ shinyServer(function(input, output, session) {
     # data for plot
     df_mr <- df_filt_basic()
     mr_cI_type  <- "pretty"
-    mr_pal <- ifelse(is.null(input$SI_pal_basic)
+    mr_pal <- ifelse(is.null(input$SI_pal_range_basic)
                      , "PuOr"
-                     , pick_pal[match(input$SI_pal_basic, pick_pal_names)])
+                     , pick_pal[match(input$SI_pal_range_basic, pick_pal_names)])
     mr_var_name <- "Current mean"
     mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
     # mr_var <- input$SI_variable
@@ -2555,7 +2583,7 @@ shinyServer(function(input, output, session) {
   })##map_range_basic
   
   ### MAP, Basic, Trend ----
-  map_trend_basic <- eventReactive (file_watch_basic_maps(), {
+  map_trend_basic <- eventReactive (file_watch_basic_map_t(), {
    
     # # validate p-value, poss > sig
     # validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
@@ -2567,9 +2595,9 @@ shinyServer(function(input, output, session) {
   
     # start with base map
     m_t <- map_base
-    mt_pal <- ifelse(is.null(input$SI_pal_basic_trend)
+    mt_pal <- ifelse(is.null(input$SI_pal_trend_basic)
                      , "Red_Blue"
-                     , input$SI_pal_basic_trend)
+                     , input$SI_pal_trend_basic)
     
     if(mt_pal == "Orange_Green"){
       pal_mt <- pal_change_OrGn
@@ -2835,7 +2863,7 @@ shinyServer(function(input, output, session) {
   # tied to Update button
   # https://rstudio.github.io/leaflet/shiny.html
   # need a reactive to trigger, use map update button
-  observeEvent(file_watch_basic_maps(), {
+  observeEvent(file_watch_basic_map_r(), {
     
     #~~~~
     # Repeat code from Map_Range (static)
@@ -2845,9 +2873,9 @@ shinyServer(function(input, output, session) {
     
     #~~~~~~~~
     mr_cI_type  <- "pretty"
-    mr_pal <- ifelse(is.null(input$SI_pal_basic)
+    mr_pal <- ifelse(is.null(input$SI_pal_range_basic)
                      , "PuOr"
-                     , pick_pal[match(input$SI_pal_basic, pick_pal_names)])
+                     , pick_pal[match(input$SI_pal_range_basic, pick_pal_names)])
     mr_var_name <- "Current mean"
     mr_var <- pick_gamDiff[match(mr_var_name, pick_gamDiff_Desc)]
     # mr_var <- input$SI_variable
@@ -2990,15 +3018,16 @@ shinyServer(function(input, output, session) {
   output$map_r_render_basic <- renderPlot({
     #output$map_r_render <- renderPlotly({
     # default map to show
-    if(input$but_map_basic == 0){
-      #if(input$but_filt_apply == 0){
-      m_r_2 <- map_base
-      # } else {
-      #   m_r_2 <- map_range_filt_default # different map
-      # }## IF ~ input$but_filt_apply
-    } else {
-      m_r_2 <- map_range_basic()  
-    }
+    # if(input$but_map_basic == 0){
+    #   #if(input$but_filt_apply == 0){
+    #   m_r_2 <- map_base
+    #   # } else {
+    #   #   m_r_2 <- map_range_filt_default # different map
+    #   # }## IF ~ input$but_filt_apply
+    # } else {
+    #   m_r_2 <- map_range_basic()  
+    # }
+    m_r_2 <- map_range_basic()
     print(m_r_2) 
     #ggplotly(m_r_2)
   })##map_r~END
@@ -3007,79 +3036,137 @@ shinyServer(function(input, output, session) {
   output$map_t_render_basic <- renderPlot({
     #output$map_t_render <- renderPlotly({
     # default map to show
-    if(input$but_map_basic == 0){
-      m_t_2 <- map_base
-    } else {
-      m_t_2 <- map_trend_basic()  
-    }
+    # if(input$but_map_basic == 0){
+    #   m_t_2 <- map_base
+    # } else {
+    #   m_t_2 <- map_trend_basic()  
+    # }
+    
+    # ggplot() + 
+    #   annotate("text", x = 10, y = 10, size = 6, label = "LOADING...") + 
+    #   theme_void()
+    # mt_ext <-  "png"
+    # fn_out <- file.path("map", paste0("map_change.", mt_ext))
+    # validate(need(file.exists(fn_out), "Please wait for map to render and load."))
+    # validate stops and doesn't refresh
+    m_t_2 <- map_trend_basic() 
     print(m_t_2)
     #ggplotly(m_t_2)
   })##map_r~END
   
   ## Button ----
   
-  observeEvent(input$but_map_basic, {
-    #
-    # Enable save button
-    shinyjs::enable("but_map_basic_save")
-    #
-    # Remove saved map PNG
-    fn_png <- list.files("map", "\\.png$")
-    if(length(fn_png) >0 ) {
-      file.remove(paste0("map/", fn_png))
-    }##IF ~ length(fn_png)
-    # Remove zip file
-    fn_zip <- "map/baytrendsmap.zip"
-    if(file.exists(fn_zip)) {
-      file.remove(fn_zip)
-    }## IF ~ fn_zip
-  })## observerEvent ~ but_map_basic
-  
-  ### Button, map, Basic, save ####
-  # create zip file
-  # Can save leaflet as HTML if make a reactive and use saveWidget
-  # https://stackoverflow.com/questions/52210682/download-leaflet-map-from-a-shiny-app-hosted-on-shiny-io
-  output$but_map_basic_save <- downloadHandler(
-    filename = function() {
-   #    mr_ext <- "png" #input$SI_ext
-   #    fn_out <- file.path("map", paste0("map_range.", mr_ext))
-   #    
-   #    
-   # #   saveWidget(map_r_leaflet_basic, "map_leaflet.html")
-   #    
-   #    
-   #    
-   #    if(file.exists(fn_out)==TRUE) {
-        mr_ext <- "zip" #input$SI_ext
-        date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
-        paste0("baytrendsmap_", date_time, ".", mr_ext)
-   #    } else {
-   #      "Error_UpdateMapBeforeSave.pdf"
-   #    }
-   #    # #paste0(input$fn_input, input$SI_ext)
-     } ##filename~END
-    , content = function(fn) {
-
-       # zip files
-       fn_maps <- list.files(path = "map", pattern = "\\.png$")
-       zip(zipfile = "map/baytrendsmap.zip", files = file.path("map", fn_maps))
-        # ensure exists
-       mr_ext <- "zip"
-       fn_out <- paste0("map/baytrendsmap.", mr_ext)
-   #    #print(map_range())
-   #    # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
-   #    # #file.copy("map_range.pdf", fn, overwrite=TRUE)
-      if(file.exists(fn_out) == TRUE){
-        file.copy(fn_out, fn, overwrite = TRUE)
-      } else {
-        fn_out_error <- file.path("map", "Error.zip")
-        file.copy(fn_out_error, fn, overwrite = TRUE)
-      }
-     }##content~END
-  )##downloadHander
+  # observeEvent(input$but_map_basic, {
+  #   #
+  #   # Enable save button
+  #   shinyjs::enable("but_map_basic_save")
+  #   #
+  #   # Remove saved map PNG
+  #   fn_png <- list.files("map", "\\.png$")
+  #   if(length(fn_png) >0 ) {
+  #     file.remove(paste0("map/", fn_png))
+  #   }##IF ~ length(fn_png)
+  #   # Remove zip file
+  #   fn_zip <- "map/baytrendsmap.zip"
+  #   if(file.exists(fn_zip)) {
+  #     file.remove(fn_zip)
+  #   }## IF ~ fn_zip
+  # })## observerEvent ~ but_map_basic
+  # 
+  # ### Button, map, Basic, save ####
+  # # create zip file
+  # # Can save leaflet as HTML if make a reactive and use saveWidget
+  # # https://stackoverflow.com/questions/52210682/download-leaflet-map-from-a-shiny-app-hosted-on-shiny-io
+  # output$but_map_basic_save <- downloadHandler(
+  #   filename = function() {
+  #     # Remove old files
+  #     # Remove zip file
+  #     fn_zip <- "map/baytrendsmap.zip"
+  #     if(file.exists(fn_zip)) {
+  #       file.remove(fn_zip)
+  #     }## IF ~ fn_zip
+  #     
+  #  #    mr_ext <- "png" #input$SI_ext
+  #  #    fn_out <- file.path("map", paste0("map_range.", mr_ext))
+  #  #    
+  #  #    
+  #  # #   saveWidget(map_r_leaflet_basic, "map_leaflet.html")
+  #  #    
+  #  #    
+  #  #    
+  #  #    if(file.exists(fn_out)==TRUE) {
+  #       mr_ext <- "zip" #input$SI_ext
+  #       date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+  #       paste0("baytrendsmap_", date_time, ".", mr_ext)
+  #  #    } else {
+  #  #      "Error_UpdateMapBeforeSave.pdf"
+  #  #    }
+  #  #    # #paste0(input$fn_input, input$SI_ext)
+  #    } ##filename~END
+  #   , content = function(fn) {
+  # 
+  #      # zip files
+  #      fn_maps <- list.files(path = "map", pattern = "\\.png$")
+  #      zip(zipfile = "map/baytrendsmap.zip", files = file.path("map", fn_maps))
+  #       # ensure exists
+  #      mr_ext <- "zip"
+  #      fn_out <- paste0("map/baytrendsmap.", mr_ext)
+  #  #    #print(map_range())
+  #  #    # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
+  #  #    # #file.copy("map_range.pdf", fn, overwrite=TRUE)
+  #     if(file.exists(fn_out) == TRUE){
+  #       file.copy(fn_out, fn, overwrite = TRUE)
+  #     } else {
+  #       fn_out_error <- file.path("map", "Error.zip")
+  #       file.copy(fn_out_error, fn, overwrite = TRUE)
+  #     }
+  #    }##content~END
+  # )##downloadHander
   # Need error handling in case change EXT but didn't "update" the map.
   # expected name doesn't match the saved file name.
   # file.exists(fn_out)
+  
+  output$but_map_range_basic_save <- downloadHandler(
+    filename = function() {
+      map_ext <- "png"
+      date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+      paste0("baytrendsmap_range_", date_time, ".", map_ext)
+    } ##filename~END
+    , content = function(fn) {
+      map_ext <- "png"
+      fn_maps <- list.files(path = "map"
+                            , pattern = "^map_range\\.png$"
+                            , full.names = TRUE)
+      fn_out <- file.path("map", paste0("map_range", map_ext))
+      if(is.null(fn_maps) == FALSE){
+        file.copy(fn_maps, fn, overwrite = TRUE)
+      } else {
+        fn_out_error <- file.path("www", "Error_SomethingWrong.png")
+        file.copy(fn_out_error, fn, overwrite = TRUE)
+      }
+    }##content~END
+  )##downloadHander
+  
+  output$but_map_trend_basic_save <- downloadHandler(
+    filename = function() {
+      map_ext <- "png"
+      date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
+      paste0("baytrendsmap_change_", date_time, ".", map_ext)
+    } ##filename~END
+    , content = function(fn) {
+      map_ext <- "png"
+      fn_maps <- list.files(path = "map"
+                            , pattern = "^map_change\\.png$"
+                            , full.names = TRUE)
+      fn_out <- paste0("map/baytrendsmap.", map_ext)
+      if(is.null(fn_maps) == FALSE){
+        file.copy(fn_maps, fn, overwrite = TRUE)
+      } else {
+        fn_out_error <- file.path("www", "Error_SomethingWrong.png")
+        file.copy(fn_out_error, fn, overwrite = TRUE)
+      }
+    }##content~END
+  )##downloadHander
   
   
 })##shinyServer~END

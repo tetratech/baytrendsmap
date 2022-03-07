@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-03-03 15:15:38
+    #> Last Update: 2022-03-07 13:32:14
+
+# baytrendsmap 1.2.1.9014
+
+Released - 2022-03-07
+
+-   refactor: Update shiny app
+    -   Basic maps
+        -   Load with default map when app opens
+        -   Save buttons for range and trend moved to map tab
 
 # baytrendsmap 1.2.1.9013
 

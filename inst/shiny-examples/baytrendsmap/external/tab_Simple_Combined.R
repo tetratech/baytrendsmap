@@ -32,7 +32,7 @@ function() {
                           , open = "Color Palette (Range Map Only)"
                    )##bsCollapse 1
         #           , fluidRow(h4("range2", uiOutput("filt_collapse_pal_range_basic")))
-                   , h4("3.b. Trend Map Options")
+                   , h4("3.b. Change Map Options")
                    , bsCollapse(multiple = TRUE
                                 , bsCollapsePanel("Color Palette (Change Map Only)"
                                                   , style = 'info'

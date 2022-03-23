@@ -1914,7 +1914,7 @@ shinyServer(function(input, output, session) {
                                  , "Segment: ", cbSeg92, as.character("<br>")
                                  , "Season: ", seasonName, as.character("<br>")
                                  , "Period: ", periodName, as.character("<br>")
-                                 , "GAM:", gamName, as.character("<br>")
+                                 , "GAM: ", gamName, as.character("<br>")
                                  , "Parameter: ", parmName, as.character("<br>")
                                  , "Trend Chart: ", url_click
                                  )
@@ -2990,7 +2990,7 @@ shinyServer(function(input, output, session) {
                                        , "Segment: ", cbSeg92, as.character("<br>")
                                        , "Season: ", seasonName, as.character("<br>")
                                        , "Period: ", periodName, as.character("<br>")
-                                       , "GAM:", gamName, as.character("<br>")
+                                       , "GAM: ", gamName, as.character("<br>")
                                        , "Parameter: ", parmName, as.character("<br>")
                                        , "Variable: ", mr_var_name, as.character("<br>")
                                        , "Trend Chart: ", url_click)

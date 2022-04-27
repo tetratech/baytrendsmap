@@ -19,6 +19,16 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9016
+===========
+Released - 2022-04-27
+
+* update: Replace rgdal and sp packages with sf package, Issue #58
+    + DESCRIPTION
+    + ProcessData_GIS_cbseg.R
+    + global.R
+* style: Remove "test" code at bottom of global.R
+
 baytrendsmap 1.2.1.9015
 ===========
 Released - 2022-03-23

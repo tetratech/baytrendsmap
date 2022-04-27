@@ -9,13 +9,15 @@
 
 # 0. Prep####
 wd <- getwd() # assume is package directory
-#library(devtools)
-library(rgdal)
-library(ggplot2)
+# library(usethis)
+#library(rgdal)
+# library(sf) # replace rgdal
+# library(ggplot2)
 
 # 1. Get data and process #####
 fn_shp <- file.path("data-raw", "data", "cbseg")
-ogr_shp <- rgdal::readOGR(dsn=fn_shp, layer="cbseg2003Combined2-latlong")
+# ogr_shp <- rgdal::readOGR(dsn=fn_shp, layer="cbseg2003Combined2-latlong")
+ogr_shp <- sf::st_read(dsn = fn_shp, layer = "cbseg2003Combined2-latlong")
 fort_shp <- ggplot2::fortify(ogr_shp)
 # 4.23 MB
 

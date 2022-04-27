@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-03-23 15:46:22
+    #> Last Update: 2022-04-27 11:29:43
+
+# baytrendsmap 1.2.1.9016
+
+Released - 2022-04-27
+
+-   update: Replace rgdal and sp packages with sf package, Issue \#58
+    -   DESCRIPTION
+    -   ProcessData_GIS_cbseg.R
+    -   global.R
+-   style: Remove “test” code at bottom of global.R
 
 # baytrendsmap 1.2.1.9015
 

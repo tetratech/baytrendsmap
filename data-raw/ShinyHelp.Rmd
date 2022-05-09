@@ -12,8 +12,40 @@ output:
 knitr::opts_chunk$set(results='asis', echo=FALSE, warning=FALSE)
 ```
 
+There are two primary approaches for viewing concentration ranges and changes within this application. The **View Tidal Trends** tab provides a simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab.
 
-# 1. Select Data
+
+# View Tidal Trends
+
+The **View Tidal Trends** tab provides a simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. Maps are updated automatically as the user makes selections. 
+
+## 1. Choose Data 
+
+**Select** the type of change (non-linear trend or non-linear trend with flow adjustment) and the time period to investigate from the left-hand navigation pane.
+
+*Note, that changes in observed conditions (i.e., the conditions experienced by the estuary’s living resources) are used to evaluate incremental progress towards improved habitats and attainment of water quality standards. Changes in flow-adjusted conditions account for year-to-year variations in streamflow or salinity and can be used for understanding the influence of watershed management actions on the estuary.*
+
+## 2. Choose Map Layer & 3. Map Options 
+
+**Select** the water quality parameter (together with layer and season) to investigate from the left-hand navigation pane. Also **select** the desired map color palette and direction of 'Good' change.
+
+## Map Types
+
+There are three available maps available in the main portion of the window that are automatically updated as the above selections are made:
+
++ The **Range Map, Interactive** is an interactive map with zooming features enabled. You can click on an individual station to get further information. A time series plot of the underlying data is available if *Non-linear Trend (Full Period)* is selected in step 1 above.  
+
++ The **Range Map, Static** displays the same information as the interactive map but has a fixed scale. This allows you to save multiple maps with the same scale for use in presentations. These maps also include a title documenting the data set used in the analysis.
+
++ The **Change Map ** displays significant (p<0.05) and possible (p<0.25) increasing and decreasing change in water quality concentrations. Note, the direction of the triangles can be flipped by changing the Direction of ‘Good’ Change in the left-hand navigation pane.
+
+---
+
+# Create Custom Maps
+
+The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab. Because of the larger number of filtering and customization settings, the user must proactively click buttons for **Apply Filters** and **Update Map** to trigger map updates.   
+
+## 1. Select Data
 
 **Click** the **1. Select Data** page from the main menu located at the top of the webpage. The Select Data page provides two approaches to choose data for mapping. 
 
@@ -27,21 +59,15 @@ This option allows the user to select from a list of analyses prepared by Chesap
 
 ### 1b. Load user file
 
-This option allows the user to upload a file created from  [baytrends](https://CRAN.R-project.org/package=baytrends).  
+This option allows the user to upload a file created from [baytrends](https://CRAN.R-project.org/package=baytrends).  
 
 + Click **Browse** to select a user-created [baytrends](https://CRAN.R-project.org/package=baytrends) output file.  
 
 + Select the file to upload and click **Open** from the file selection dialogue window.  
 
-Before continuing, make sure the data file has loaded into the app. That is, wait 
-for the blue progress bar to read "Upload complete". A data table will also appear 
-in the main window when the upload is complete. If the imported data are not in 
-the proper format, then a “red” error message will appear in the main window 
-instead of a data table.
+Before continuing, make sure the data file has loaded into the app. That is, wait for the blue progress bar to read "Upload complete". A data table will also appear in the main window when the upload is complete. If the imported data are not in the proper format, then a “red” error message will appear in the main window instead of a data table.
 
-If instead of a blue progress bar with "Upload complete" you get a red bar with 
-an error message then the file did not load properly.  Edit your file by sorting 
-it by a column (Station ID seems to always work) then resave and retry the upload.
+If instead of a blue progress bar with "Upload complete" you get a red bar with an error message then the file did not load properly.  Edit your file by sorting it by a column (Station ID seems to always work) then resave and retry the upload.
 
 # 2. Filtered Data
 
@@ -54,7 +80,7 @@ This page displays four tabs below the main menu:
 + Range Map  
 + Change Map  
 
-### Filtered Data Summary
+#### Filtered Data Summary
 
 The data table displayed in the main window summarizes the number of results per station. 
 
@@ -68,13 +94,13 @@ Click **Apply Filters** to apply the filters and update the data table in the ma
 
 Click **Reset Filter Selections** and click the **Apply Filters** buttons to start over.
 
-**User-created files:** The baytrends output files may have results for different parameters, models, layers (depths), periods (time periods), and seasons for each station. To make the app work, you need to filter the data down to 1 record per station in order to plot range or change maps. Use the Station summary table to guide the process of filtering data using the left-hand navigation panel, but also monitor the number of stations with data for plotting to ensure that you do not remove too many stations from the analysis.
+**User-created files:** *The baytrends output files may have results for different parameters, models, layers (depths), periods (time periods), and seasons for each station. To make the app work, you need to filter the data down to 1 record per station in order to plot range or change maps. Use the Station summary table to guide the process of filtering data using the left-hand navigation panel, but also monitor the number of stations with data for plotting to ensure that you do not remove too many stations from the analysis.*
 
-### Filtered Data
+#### Filtered Data
 
 This page displays the data to be mapped. The data in this table can be sorted.
 
-### Range Map
+#### Range Map
 
 Click the **Range Map** tab. 
 
@@ -82,7 +108,7 @@ Click the **Range Map** tab.
 
 Click the **Auto-generate Title** to generate a default figure title.
 
-###  Change Map
+####  Change Map
 
 Click the **Change Map** tab. 
 

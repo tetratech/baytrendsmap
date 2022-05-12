@@ -25,7 +25,7 @@ library(shinyalert) # popup modal at start up
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.1.9019"
+pkgver <- "1.2.1.9020"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by

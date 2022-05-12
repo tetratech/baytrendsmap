@@ -12,18 +12,20 @@ suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
 library(classInt)
 suppressMessages(library(dplyr, quietly = TRUE, warn.conflicts = FALSE))
 library(RColorBrewer)
-# library(plotly)
 library(leaflet)
+library(shinyjs) # turn on/off buttons
+library(shinyalert) # popup modal at start up
+## Packages, No longer used
+# library(plotly)
 # library(dataRetrieval)
 # library(data.table)
 # library(stringr)
-library(shinyjs) # turn on/off buttons
 
 # Package Version ----
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.1.9016"
+pkgver <- "1.2.1.9019"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by

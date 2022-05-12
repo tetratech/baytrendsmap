@@ -32,7 +32,7 @@ shinyUI(
   
     # Application title
     #titlePanel("baytrends output mapping tool")
-  
+    
     navbarPage(paste0("baytrendsmap R package v", pkgver) #, packageVersion("baytrendsmap"))
                , theme = "boostrap.css"
                , inverse= TRUE

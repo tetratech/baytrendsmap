@@ -19,6 +19,25 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+baytrendsmap 1.2.1.9019
+===========
+Released - 2022-05-12
+
+* refactor: Add pop up modal at start up, Issue #59
+    + Add shinyalert package to DESCRIPTION and global.R
+    
+baytrendsmap 1.2.1.9018
+===========
+Released - 2022-05-09
+
+* refactor: Update shiny help
+    
+baytrendsmap 1.2.1.9017
+===========
+Released - 2022-05-09
+
+* refactor: Update shiny help
+
 baytrendsmap 1.2.1.9016
 ===========
 Released - 2022-04-27

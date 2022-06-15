@@ -3,7 +3,7 @@
 #
 function() {
   tabPanel("Background"
-           , p("Maryland Department of Natural Resources (MDDNR), Virginia Department of Environmental Quality (VADEQ), the District of Columbia, and others have coordinated to sample water quality on a bi-monthly or monthly basis at more than 130 stations located throughout the mainstem of the Chesapeake Bay and the tidal portions of numerous tributaries on the western and eastern shores since the mid-1980s. Scientists evaluate short- and long-term changes, or trends, in nutrients, dissolved oxygen (DO), Secchi depth (a measure of clarity), and chlorophyll-a using a Generalized Additive Modeling (GAM) approach.")
+           , p("Maryland Department of Natural Resources (MDDNR), Virginia Department of Environmental Quality (VADEQ), the District of Columbia, and others have coordinated to sample water quality on a bi-monthly or monthly basis at more than 130 stations located throughout the mainstem of the Chesapeake Bay and the tidal portions of numerous tributaries on the western and eastern shores since the mid-1980s. Scientists evaluate short- and long-term changes/trends in nutrients, dissolved oxygen (DO), Secchi depth (a measure of clarity), and chlorophyll-a using a Generalized Additive Modeling (GAM) approach.")
            , p("The approach includes selecting a GAM structure to describe nonlinear seasonally-varying changes over time, incorporation of hydrologic variability via either river flow or salinity, the use of an intervention to accommodate method or laboratory changes suspected to impact data values, and representation of left- and interval-censored data (Murphy et al, 2019, 2021).")
            , p("Selected results can be found here:"
                , a("Tidal Water Quality Change"

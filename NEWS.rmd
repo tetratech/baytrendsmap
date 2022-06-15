@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+
+baytrendsmap 1.2.1.9021
+===========
+Released - 2022-06-15
+
+* refactor: Update shiny help
+
 baytrendsmap 1.2.1.9020
 ===========
 Released - 2022-05-12

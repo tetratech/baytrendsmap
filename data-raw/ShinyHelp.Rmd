@@ -12,18 +12,20 @@ output:
 knitr::opts_chunk$set(results='asis', echo=FALSE, warning=FALSE)
 ```
 
-There are two primary approaches for viewing concentration ranges and changes within this application. The **View Tidal Trends** tab provides a simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab.
+There are two primary approaches for viewing concentration ranges and changes within this application. The **View Tidal Trends** tab provides simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab.
 
 
 # View Tidal Trends
 
-The **View Tidal Trends** tab provides a simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. Maps are updated automatically as the user makes selections. 
+The **View Tidal Trends** tab provides simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. Maps are updated automatically as the user makes selections.  
 
 ## 1. Choose Data 
 
-**Select** the type of change (non-linear trend or non-linear trend with flow adjustment) and the time period to investigate from the left-hand navigation pane.
+**Select** the time period (long term or short term) and type of change (with or without flow adjustment) to investigate from the left-hand navigation pane. 
 
-*Note, that changes in observed conditions (i.e., the conditions experienced by the estuary’s living resources) are used to evaluate incremental progress towards improved habitats and attainment of water quality standards. Changes in flow-adjusted conditions account for year-to-year variations in streamflow or salinity and can be used for understanding the influence of watershed management actions on the estuary.*
++ *Long-term trends* are based on data from 1985 to present with the exception of dissolved inorganic nitrogen (DIN), orthophosphorus (PO4), and total suspended solids (TSS) which are based on data from 1999 to present. *Short-term trends* are based on data from the last 10 years.  
+
++ Trends *without flow adjustment* are evaluations based on observed conditions (i.e., the conditions experienced by the estuary’s living resources) and can be used to evaluate incremental progress towards improved habitats and attainment of water quality standards. Changes in *flow-adjusted conditions* account for year-to-year variations in streamflow or salinity and can be used for understanding the influence of watershed management actions on the estuary.  
 
 ## 2. Choose Map Layer & 3. Map Options 
 

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
-baytrendsmap 1.2.1.9023 & 1.2.1.9024
+baytrendsmap 1.2.1.9023 - 1.2.1.9028
 ===========
 Released - 2022-07-11
 

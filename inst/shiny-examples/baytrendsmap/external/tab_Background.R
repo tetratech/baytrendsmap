@@ -11,10 +11,8 @@ function() {
     , p("Water quality in the tidal waters is frequently correlated to the amount of freshwater flowing in the bay. There are very high fluctuations in freshwater river flow measured at the fall-line river input monitoring stations, which can influence many factors that impact water quality including the amount of nutrients flowing into the bay, the degree of vertical density stratification, and the overall circulation. Therefore, a flow-adjustment procedure for the GAM implementation in Chesapeake Bay tidal waters is an option when producing trend results. The nine USGS river gages at the fall-lines of the major tributaries provide daily flow values to use in the GAM approach. Another option is to use salinity measured at the same place and time as the water quality observations. This approach has precedent (Beck and Hagy 2015; Beck and Murphy 2017) and may be advantageous to use in locations where it is unclear which USGS gage to match to a monitoring station.")
     , p("Laboratory and method changes")
     , p("In addition to changes in detection limits for water quality observations over time, there have also been changes in analytical laboratories and methods for some of the parameters. In many cases, when it was suspected that a change impacted the values of observations, a paired sampling study was conducted to compare the two methods side-by-side (CBP 2010) and often an adjustment factor was computed that could be used to account for the change.")
-    , p("Selected results can be found on CAST through the Tidal Water Quality Change Summary: Tidal Water Quality Change")
-
-    , p("Selected results can be found here:"
-      , a("Tidal Water Quality Change"
+    , p("Selected Tidal Water Quality Change results can be found on CAST " 
+      , a("here"
         , href = "https://cast.chesapeakebay.net/TrendsOverTime"))
         
     , p("Beck, M.W. and J.D. Hagy. 2015. Adaptation of a Weighted Regression Approach to Evaluate Water Quality Trends in an Estuary. Environ Model Assess 20:637. "

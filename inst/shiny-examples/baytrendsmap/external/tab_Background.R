@@ -34,7 +34,7 @@ function() {
         , href = "https://CRAN.R-project.org/package=baytrends"
         , target = "_blank"))
           
-{           #  #, fluidPage(
+           #  #, fluidPage(
           #     , tags$head(
           #        tags$style(HTML("hr {border-top: 1px solid #A9A9A9;}"))
           #      )## tags ~ END
@@ -72,6 +72,6 @@ function() {
           #       )##mainPanel~END
           #    )##sidebarLayout~END
           # # )##fluidPage~END
-  }
+  
   )##tabPanel~END
 }##FUNCTION~END

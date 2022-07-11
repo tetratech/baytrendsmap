@@ -12,54 +12,78 @@ output:
 knitr::opts_chunk$set(results='asis', echo=FALSE, warning=FALSE)
 ```
 
-There are two primary approaches for viewing concentration ranges and changes within this application. The **View Tidal Trends** tab provides simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab.
+There are two primary approaches for viewing concentration ranges and changes within this application
+
+1. The **View Tidal Trends** tab provides simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. 
+
+2. The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab.
 
 
 # View Tidal Trends
 
-The **View Tidal Trends** tab provides simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. Maps are updated automatically as the user makes selections.  
-
-## 1. Choose Data 
-
-**Select** the time period (long term or short term) and type of change (with or without flow adjustment) to investigate from the left-hand navigation pane. 
-
-+ *Long-term trends* are based on data from 1985 to present with the exception of dissolved inorganic nitrogen (DIN), orthophosphorus (PO4), and total suspended solids (TSS) which are based on data from 1999 to present. *Short-term trends* are based on data from the last 10 years.  
-
-+ Trends *without flow adjustment* are evaluations based on observed conditions (i.e., the conditions experienced by the estuary’s living resources) and can be used to evaluate incremental progress towards improved habitats and attainment of water quality standards. Changes in *flow-adjusted conditions* account for year-to-year variations in streamflow or salinity and can be used for understanding the influence of watershed management actions on the estuary.  
-
-## 2. Choose Map Layer & 3. Map Options 
-
-**Select** the water quality parameter (together with layer and season) to investigate from the left-hand navigation pane. Also **select** the desired map color palette and direction of 'Good' change.
+The **View Tidal Trends** tab provides simplified access for viewing current concentration ranges and changes using default settings. Most basic mapping needs can be met using this tab. The maps are updated automatically as the user makes selections.  
 
 ## Map Types
 
-There are three available maps available in the main portion of the window that are automatically updated as the above selections are made:
+There are three maps available in the main portion of the window that are automatically updated as the options outlined in the steps below are selected:
 
-+ The **Range Map, Interactive** is an interactive map with zooming features enabled. You can click on an individual station to get further information. A time series plot of the underlying data is available if *Non-linear Trend (Full Period)* is selected in step 1 above.  
++ The **Range Map, Interactive** is an interactive map with zooming features enabled. You can click on an individual station to get further information. A time series plot of the monitoring data is available if Non-linear Trend (Full Period) is selected in step 1 below.
 
-+ The **Range Map, Static** displays the same information as the interactive map but has a fixed scale. This allows you to save multiple maps with the same scale for use in presentations. These maps also include a title documenting the data set used in the analysis.
++ The **Range Map, Static** displays the same information as the interactive map but has a fixed scale (as opposed to the zooming feature). This allows you to save multiple maps with the same scale for use in presentations. These maps also include a title documenting the data set used in the analysis.
 
-+ The **Change Map ** displays significant (p<0.05) and possible (p<0.25) increasing and decreasing change in water quality concentrations. Note, the direction of the triangles can be flipped by changing the Direction of ‘Good’ Change in the left-hand navigation pane.
++ The **Change Map** displays significant (p<0.05) and possible (p<0.25) increasing and decreasing change in water quality concentrations. Note, the direction of the triangles can be flipped by changing the Direction of ‘Good’ Change in the left-hand navigation pane.
+
+## Step 1. Choose Data
+
+**Select** the time period (long term or short term) and type of change (with or without flow adjustment) to investigate from the left-hand navigation pane.
+
++ *Long-term trends* are based on data from 1985 to present with the exception of dissolved inorganic nitrogen (DIN), orthophosphorus (PO4), and total suspended solids (TSS) which are based on data from 1999 to present. *Short-term trends* are based on data from the last 10 years.
+
++ Trends *without flow adjustment* are evaluations based on observed conditions (i.e., the conditions experienced by the estuary’s living resources) and can be used to evaluate incremental progress towards improved habitats and attainment of water quality standards. Changes in *flow-adjusted conditions* account for year-to-year variations in streamflow or salinity and can be used for understanding the influence of watershed management actions on the estuary.
+
+## Step 2. Choose Map Layer 
+
+**Select** the water quality parameter (together with layer and season) to investigate from the left-hand navigation pane.
+
++ Chlorophyll-a (CHLA) (Surface|Annual, July-September, March-May)
+
++ Dissolved Oxygen (DO) (Bottom, Surface| June-September)
+
++ Secchi (Surface|Annual, April-October)
+
++ Total Nitrogen (TN) (Bottom, Surface|Annual)
+
++ Total Phosphorus (TP) (Bottom, Surface|Annual)
+
++ Water Temperature (WTEMP) (Bottom, Surface|Annual)
+
+## Step 3. Map Options
+
+**Select** the desired map color palette. Color palette options differ between the range map and the change map.  
+
+Determine the direction of an improving trend (the direction of a good change) from the left-hand navigation pane. For example, nutrient trends are generally ‘good’ if they are decreasing (downward triangle), but dissolved oxygen trends are ‘good’ when increasing (upward triangle). 
 
 ---
 
 # Create Custom Maps
 
-The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab. Because of the larger number of filtering and customization settings, the user must proactively click buttons for **Apply Filters** and **Update Map** to trigger map updates.   
+The **Create Custom Map** tab provides more options to filter and customize the same information. For example, the user can filter displayed stations and further customize the symbol palettes using the **Create Custom Map** tab.
 
-## 1. Select Data
+Because of the larger number of filtering and customization settings, the user must proactively click buttons for **Apply Filters** and **Update Map** to trigger map updates.   
 
-**Click** the **1. Select Data** page from the main menu located at the top of the webpage. The Select Data page provides two approaches to choose data for mapping. 
+## Step 1. Select Data
 
-### 1a. Load final file
+**Click** the **1. Select Data** page from the main menu located at the top of the webpage. The Select Data page provides two approaches to choose data for mapping.
 
-This option allows the user to select from a list of analyses prepared by Chesapeake Bay state stakeholders.  
+### Step 1a. Load final file
+
+This option allows the user to select from a list of analyses prepared by Chesapeake Bay state stakeholders.
   
-+ **Select** the radio button corresponding to one of the options.  
++ **Select** an option under **Choose file to load.** 
 
 + Click **Load 'Final' File**.  
 
-### 1b. Load user file
+### Step 1b. Load user file
 
 This option allows the user to upload a file created from [baytrends](https://CRAN.R-project.org/package=baytrends).  
 
@@ -67,11 +91,11 @@ This option allows the user to upload a file created from [baytrends](https://CR
 
 + Select the file to upload and click **Open** from the file selection dialogue window.  
 
-Before continuing, make sure the data file has loaded into the app. That is, wait for the blue progress bar to read "Upload complete". A data table will also appear in the main window when the upload is complete. If the imported data are not in the proper format, then a “red” error message will appear in the main window instead of a data table.
+Before continuing, make sure the data file has loaded into the app. That is, wait for the blue progress bar to read **<span style="color: dodgerblue;">"Upload Complete"</span>**. A data table will also appear in the main window when the upload is complete. If the imported data are not in the proper format, then a **<span style="color: red;">"red"</span>** error message will appear in the main window instead of a data table.
 
-If instead of a blue progress bar with "Upload complete" you get a red bar with an error message then the file did not load properly.  Edit your file by sorting it by a column (Station ID seems to always work) then resave and retry the upload.
+**<span style="text-decoration: underline">If instead</span>** of a blue progress bar with **<span style="color: dodgerblue;">"Upload Complete"</span>** you get a **<span style="color: red;">red</span>** bar with an error message, then the file did not load properly. **Edit** your file by sorting it by a column (Station ID seems to always work) then resave and retry the upload.
 
-# 2. Filtered Data
+## Step 2. Filtered Data
 
 Click the **2. Filtered Data** button from the main menu located at the top of the webpage. This page will display filter options along the left-hand navigation panel. Use these filters to narrow the data to be displayed. 
 
@@ -82,39 +106,39 @@ This page displays four tabs below the main menu:
 + Range Map  
 + Change Map  
 
-#### Filtered Data Summary
+### Filtered Data Summary
 
 The data table displayed in the main window summarizes the number of results per station. 
 
-Notice the message “**yyy** = Number of entries with more than 1 record”. It is required to use the left-hand navigation filters to narrow the data until this message indicates “0” entries have more than 1 record. Most users will use the *Map Layer* filter to select which results to plot if one of the final files from the **1. Select Data** page was previously selected.
+Notice the message “**yyy** = Number of entries with more than 1 record”. It is required to use the left-hand navigation filters to narrow the data until this message indicates “0” entries have more than 1 record.\* Most users will use the *Map Layer* filter to select which results to plot if one of the final files from the **1. Select Data** page was previously selected.
 
 Also, notice the number of entries “Showing 1 to 5 of **zzz** entries” shown below the Station summary table. The **zzz** indicates the number of stations with data that could potentially be plotted in later steps. 
 
-Click **Filter by State** (as well as CB Segment, Station Group, and Station Identifier) to set the filters for the geographic scope of the stations to be used in the analysis. The process of using the Select All and Deselect All radio buttons as well as making individual choices using the selection dialogue box is similar to other apps.
+Click **Filter by State** (as well as CB Segment, Station Group, and Station Identifier) to set the filters for the geographic scope of the stations to be used in the analysis. The process of using the Select All and Deselect All options, as well as making individual choices using the selection dialogue box is similar to other apps.
 
 Click **Apply Filters** to apply the filters and update the data table in the main window.  
 
 Click **Reset Filter Selections** and click the **Apply Filters** buttons to start over.
 
-**User-created files:** *The baytrends output files may have results for different parameters, models, layers (depths), periods (time periods), and seasons for each station. To make the app work, you need to filter the data down to 1 record per station in order to plot range or change maps. Use the Station summary table to guide the process of filtering data using the left-hand navigation panel, but also monitor the number of stations with data for plotting to ensure that you do not remove too many stations from the analysis.*
+**<span style="color: red;">\*User-created files:</span>** *The baytrends output files may have results for different parameters, models, layers (depths), periods (time periods), and seasons for each station. To make the app work, you need to filter the data down to 1 record per station in order to plot range or change maps. Use the Station summary table to guide the process of filtering data using the left-hand navigation panel, but also monitor the number of stations with data for plotting to ensure that you do not remove too many stations from the analysis.*
 
-#### Filtered Data
+### Filtered Data
 
-This page displays the data to be mapped. The data in this table can be sorted.
+This page displays the data to be mapped. The data in this table can be sorted by the various table columns.
 
-#### Range Map
+### Range Map
 
 Click the **Range Map** tab. 
 
-**<u>Open and make a selection in each of the blue boxes under Range Map Options.</u>** An error may occur if selections are skipped. Then click Update Range Map.
+**<u>Open and make a selection in each of the blue boxes under Range Map Options.</u>** An error may occur if selections are skipped. Then click **Update Range Map.**
 
 Click the **Auto-generate Title** to generate a default figure title.
 
-####  Change Map
+###  Change Map
 
 Click the **Change Map** tab. 
 
-**<u>Open and make a selection in each of the blue boxes under Change Map Options.</u>** An error may occur if selections are skipped. Then click Update Change Map.
+**<u>Open and make a selection in each of the blue boxes under Change Map Options.</u>** An error may occur if selections are skipped. Then click **Update Change Map.**
 
 Click the **Auto-generate Title** to generate a default figure title.
 

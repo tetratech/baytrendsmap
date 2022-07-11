@@ -17,14 +17,18 @@ shinyServer(function(input, output, session) {
   # Modal ----
   ## Not linked to anything so occurs at start up
   modal_startup_title <- "baytrendsmap"
-  modal_startup_txt <- paste0("This app provides access to maps depicting "
-  , "short- and long-term changes/trends in nutrients, dissolved oxygen "
-  , "(DO), Secchi depth (a measure of clarity), and chlorophyll-a. The "
-  , "maps include the results for more than 130 stations located throughout "
-  , "the mainstem of the Chesapeake Bay as well as the tidal portions of "
-  , "numerous tributaries on the western and eastern shores since the mid-1980s.   
+  modal_startup_txt <- paste0("This app provides access to maps depicting " 
+    , "short- and long-term changes/trends in nutrients, dissolved oxygen (DO), "
+    , "Secchi depth (a measure of clarity), and chlorophyll-a. The View Tidal Tends "
+    , "tab includes the results for more than 130 stations located throughout the "
+    , "mainstem of the Chesapeake Bay as well as the tidal portions of numerous "
+    , "tributaries on the western and eastern shores since the mid-1980s.   
 
-  Click HELP in main menu for information on how to use this app.")
+  The Create Custom Map tab provides options to create trend maps on the data "
+    , "provided or allow users to upload a personal baytrends (R package designed to "
+    , "fit GAMs for the tidal Chesapeake Bay water quality data) output file.   
+
+  Click HELP in the main menu for information on how to use this app.")
   # modal_startup <- modalDialog(title = modal_startup_title
   #                              , modal_startup_txt
   #                              , easyClose = TRUE)

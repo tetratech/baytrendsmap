@@ -362,27 +362,54 @@ pre code {
 
 
 <h1 class="title toc-ignore">Navigating the baytrendsmap Shiny App</h1>
-<h4 class="date">2022-06-15 12:13:50</h4>
+<h4 class="date">2022-07-11 15:30:08</h4>
 
 </div>
 
 
 <p>There are two primary approaches for viewing concentration ranges and
-changes within this application. The <strong>View Tidal Trends</strong>
-tab provides simplified access for viewing current concentration ranges
-and changes using default settings. Most basic mapping needs can be met
-using this tab. The <strong>Create Custom Map</strong> tab provides more
-options to filter and customize the same information. For example, the
-user can filter displayed stations and further customize the symbol
-palettes using the <strong>Create Custom Map</strong> tab.</p>
+changes within this application</p>
+<ol style="list-style-type: decimal">
+<li><p>The <strong>View Tidal Trends</strong> tab provides simplified
+access for viewing current concentration ranges and changes using
+default settings. Most basic mapping needs can be met using this
+tab.</p></li>
+<li><p>The <strong>Create Custom Map</strong> tab provides more options
+to filter and customize the same information. For example, the user can
+filter displayed stations and further customize the symbol palettes
+using the <strong>Create Custom Map</strong> tab.</p></li>
+</ol>
 <div id="view-tidal-trends" class="section level1">
 <h1>View Tidal Trends</h1>
 <p>The <strong>View Tidal Trends</strong> tab provides simplified access
 for viewing current concentration ranges and changes using default
-settings. Most basic mapping needs can be met using this tab. Maps are
-updated automatically as the user makes selections.</p>
-<div id="choose-data" class="section level2">
-<h2>1. Choose Data</h2>
+settings. Most basic mapping needs can be met using this tab. The maps
+are updated automatically as the user makes selections.</p>
+<div id="map-types" class="section level2">
+<h2>Map Types</h2>
+<p>There are three maps available in the main portion of the window that
+are automatically updated as the options outlined in the steps below are
+selected:</p>
+<ul>
+<li><p>The <strong>Range Map, Interactive</strong> is an interactive map
+with zooming features enabled. You can click on an individual station to
+get further information. A time series plot of the monitoring data is
+available if Non-linear Trend (Full Period) is selected in step 1
+below.</p></li>
+<li><p>The <strong>Range Map, Static</strong> displays the same
+information as the interactive map but has a fixed scale (as opposed to
+the zooming feature). This allows you to save multiple maps with the
+same scale for use in presentations. These maps also include a title
+documenting the data set used in the analysis.</p></li>
+<li><p>The <strong>Change Map</strong> displays significant (p&lt;0.05)
+and possible (p&lt;0.25) increasing and decreasing change in water
+quality concentrations. Note, the direction of the triangles can be
+flipped by changing the Direction of ‘Good’ Change in the left-hand
+navigation pane.</p></li>
+</ul>
+</div>
+<div id="step-1.-choose-data" class="section level2">
+<h2>Step 1. Choose Data</h2>
 <p><strong>Select</strong> the time period (long term or short term) and
 type of change (with or without flow adjustment) to investigate from the
 left-hand navigation pane.</p>
@@ -401,35 +428,29 @@ variations in streamflow or salinity and can be used for understanding
 the influence of watershed management actions on the estuary.</p></li>
 </ul>
 </div>
-<div id="choose-map-layer-3.-map-options" class="section level2">
-<h2>2. Choose Map Layer &amp; 3. Map Options</h2>
+<div id="step-2.-choose-map-layer" class="section level2">
+<h2>Step 2. Choose Map Layer</h2>
 <p><strong>Select</strong> the water quality parameter (together with
-layer and season) to investigate from the left-hand navigation pane.
-Also <strong>select</strong> the desired map color palette and direction
-of ‘Good’ change.</p>
-</div>
-<div id="map-types" class="section level2">
-<h2>Map Types</h2>
-<p>There are three available maps available in the main portion of the
-window that are automatically updated as the above selections are
-made:</p>
+layer and season) to investigate from the left-hand navigation pane.</p>
 <ul>
-<li><p>The <strong>Range Map, Interactive</strong> is an interactive map
-with zooming features enabled. You can click on an individual station to
-get further information. A time series plot of the underlying data is
-available if <em>Non-linear Trend (Full Period)</em> is selected in step
-1 above.</p></li>
-<li><p>The <strong>Range Map, Static</strong> displays the same
-information as the interactive map but has a fixed scale. This allows
-you to save multiple maps with the same scale for use in presentations.
-These maps also include a title documenting the data set used in the
-analysis.</p></li>
-<li><p>The <strong>Change Map </strong> displays significant (p&lt;0.05)
-and possible (p&lt;0.25) increasing and decreasing change in water
-quality concentrations. Note, the direction of the triangles can be
-flipped by changing the Direction of ‘Good’ Change in the left-hand
-navigation pane.</p></li>
+<li><p>Chlorophyll-a (CHLA) (Surface|Annual, July-September,
+March-May)</p></li>
+<li><p>Dissolved Oxygen (DO) (Bottom, Surface| June-September)</p></li>
+<li><p>Secchi (Surface|Annual, April-October)</p></li>
+<li><p>Total Nitrogen (TN) (Bottom, Surface|Annual)</p></li>
+<li><p>Total Phosphorus (TP) (Bottom, Surface|Annual)</p></li>
+<li><p>Water Temperature (WTEMP) (Bottom, Surface|Annual)</p></li>
 </ul>
+</div>
+<div id="step-3.-map-options" class="section level2">
+<h2>Step 3. Map Options</h2>
+<p><strong>Select</strong> the desired map color palette. Color palette
+options differ between the range map and the change map.</p>
+<p>Determine the direction of an improving trend (the direction of a
+good change) from the left-hand navigation pane. For example, nutrient
+trends are generally ‘good’ if they are decreasing (downward triangle),
+but dissolved oxygen trends are ‘good’ when increasing (upward
+triangle).</p>
 <hr />
 </div>
 </div>
@@ -438,27 +459,28 @@ navigation pane.</p></li>
 <p>The <strong>Create Custom Map</strong> tab provides more options to
 filter and customize the same information. For example, the user can
 filter displayed stations and further customize the symbol palettes
-using the <strong>Create Custom Map</strong> tab. Because of the larger
-number of filtering and customization settings, the user must
-proactively click buttons for <strong>Apply Filters</strong> and
-<strong>Update Map</strong> to trigger map updates.</p>
-<div id="select-data" class="section level2">
-<h2>1. Select Data</h2>
+using the <strong>Create Custom Map</strong> tab.</p>
+<p>Because of the larger number of filtering and customization settings,
+the user must proactively click buttons for <strong>Apply
+Filters</strong> and <strong>Update Map</strong> to trigger map
+updates.</p>
+<div id="step-1.-select-data" class="section level2">
+<h2>Step 1. Select Data</h2>
 <p><strong>Click</strong> the <strong>1. Select Data</strong> page from
 the main menu located at the top of the webpage. The Select Data page
 provides two approaches to choose data for mapping.</p>
-<div id="a.-load-final-file" class="section level3">
-<h3>1a. Load final file</h3>
+<div id="step-1a.-load-final-file" class="section level3">
+<h3>Step 1a. Load final file</h3>
 <p>This option allows the user to select from a list of analyses
 prepared by Chesapeake Bay state stakeholders.</p>
 <ul>
-<li><p><strong>Select</strong> the radio button corresponding to one of
-the options.</p></li>
+<li><p><strong>Select</strong> an option under <strong>Choose file to
+load.</strong></p></li>
 <li><p>Click <strong>Load ‘Final’ File</strong>.</p></li>
 </ul>
 </div>
-<div id="b.-load-user-file" class="section level3">
-<h3>1b. Load user file</h3>
+<div id="step-1b.-load-user-file" class="section level3">
+<h3>Step 1b. Load user file</h3>
 <p>This option allows the user to upload a file created from <a href="https://CRAN.R-project.org/package=baytrends">baytrends</a>.</p>
 <ul>
 <li><p>Click <strong>Browse</strong> to select a user-created <a href="https://CRAN.R-project.org/package=baytrends">baytrends</a> output
@@ -467,20 +489,20 @@ file.</p></li>
 the file selection dialogue window.</p></li>
 </ul>
 <p>Before continuing, make sure the data file has loaded into the app.
-That is, wait for the blue progress bar to read “Upload complete”. A
-data table will also appear in the main window when the upload is
-complete. If the imported data are not in the proper format, then a
-“red” error message will appear in the main window instead of a data
-table.</p>
-<p>If instead of a blue progress bar with “Upload complete” you get a
-red bar with an error message then the file did not load properly. Edit
-your file by sorting it by a column (Station ID seems to always work)
-then resave and retry the upload.</p>
+That is, wait for the blue progress bar to read <strong><span style="color: dodgerblue;">“Upload Complete”</span></strong>. A data
+table will also appear in the main window when the upload is complete.
+If the imported data are not in the proper format, then a <strong><span style="color: red;">“red”</span></strong> error message will appear in
+the main window instead of a data table.</p>
+<p><strong><span style="text-decoration: underline">If
+instead</span></strong> of a blue progress bar with <strong><span style="color: dodgerblue;">“Upload Complete”</span></strong> you get a
+<strong><span style="color: red;">red</span></strong> bar with an error
+message, then the file did not load properly. <strong>Edit</strong> your
+file by sorting it by a column (Station ID seems to always work) then
+resave and retry the upload.</p>
 </div>
 </div>
-</div>
-<div id="filtered-data" class="section level1">
-<h1>2. Filtered Data</h1>
+<div id="step-2.-filtered-data" class="section level2">
+<h2>Step 2. Filtered Data</h2>
 <p>Click the <strong>2. Filtered Data</strong> button from the main menu
 located at the top of the webpage. This page will display filter options
 along the left-hand navigation panel. Use these filters to narrow the
@@ -495,15 +517,15 @@ data to be displayed.</p>
 </li>
 <li>Change Map</li>
 </ul>
-<div id="filtered-data-summary" class="section level4">
-<h4>Filtered Data Summary</h4>
+<div id="filtered-data-summary" class="section level3">
+<h3>Filtered Data Summary</h3>
 <p>The data table displayed in the main window summarizes the number of
 results per station.</p>
 <p>Notice the message “<strong>yyy</strong> = Number of entries with
 more than 1 record”. It is required to use the left-hand navigation
 filters to narrow the data until this message indicates “0” entries have
-more than 1 record. Most users will use the <em>Map Layer</em> filter to
-select which results to plot if one of the final files from the
+more than 1 record.* Most users will use the <em>Map Layer</em> filter
+to select which results to plot if one of the final files from the
 <strong>1. Select Data</strong> page was previously selected.</p>
 <p>Also, notice the number of entries “Showing 1 to 5 of
 <strong>zzz</strong> entries” shown below the Station summary table. The
@@ -512,44 +534,46 @@ could potentially be plotted in later steps.</p>
 <p>Click <strong>Filter by State</strong> (as well as CB Segment,
 Station Group, and Station Identifier) to set the filters for the
 geographic scope of the stations to be used in the analysis. The process
-of using the Select All and Deselect All radio buttons as well as making
+of using the Select All and Deselect All options, as well as making
 individual choices using the selection dialogue box is similar to other
 apps.</p>
 <p>Click <strong>Apply Filters</strong> to apply the filters and update
 the data table in the main window.</p>
 <p>Click <strong>Reset Filter Selections</strong> and click the
 <strong>Apply Filters</strong> buttons to start over.</p>
-<p><strong>User-created files:</strong> <em>The baytrends output files
-may have results for different parameters, models, layers (depths),
-periods (time periods), and seasons for each station. To make the app
-work, you need to filter the data down to 1 record per station in order
-to plot range or change maps. Use the Station summary table to guide the
-process of filtering data using the left-hand navigation panel, but also
-monitor the number of stations with data for plotting to ensure that you
-do not remove too many stations from the analysis.</em></p>
+<p><strong><span style="color: red;">*User-created
+files:</span></strong> <em>The baytrends output files may have results
+for different parameters, models, layers (depths), periods (time
+periods), and seasons for each station. To make the app work, you need
+to filter the data down to 1 record per station in order to plot range
+or change maps. Use the Station summary table to guide the process of
+filtering data using the left-hand navigation panel, but also monitor
+the number of stations with data for plotting to ensure that you do not
+remove too many stations from the analysis.</em></p>
 </div>
-<div id="filtered-data-1" class="section level4">
-<h4>Filtered Data</h4>
+<div id="filtered-data" class="section level3">
+<h3>Filtered Data</h3>
 <p>This page displays the data to be mapped. The data in this table can
-be sorted.</p>
+be sorted by the various table columns.</p>
 </div>
-<div id="range-map" class="section level4">
-<h4>Range Map</h4>
+<div id="range-map" class="section level3">
+<h3>Range Map</h3>
 <p>Click the <strong>Range Map</strong> tab.</p>
 <p><strong><u>Open and make a selection in each of the blue boxes under
 Range Map Options.</u></strong> An error may occur if selections are
-skipped. Then click Update Range Map.</p>
+skipped. Then click <strong>Update Range Map.</strong></p>
 <p>Click the <strong>Auto-generate Title</strong> to generate a default
 figure title.</p>
 </div>
-<div id="change-map" class="section level4">
-<h4>Change Map</h4>
+<div id="change-map" class="section level3">
+<h3>Change Map</h3>
 <p>Click the <strong>Change Map</strong> tab.</p>
 <p><strong><u>Open and make a selection in each of the blue boxes under
 Change Map Options.</u></strong> An error may occur if selections are
-skipped. Then click Update Change Map.</p>
+skipped. Then click <strong>Update Change Map.</strong></p>
 <p>Click the <strong>Auto-generate Title</strong> to generate a default
 figure title.</p>
+</div>
 </div>
 <div id="advanced-users" class="section level2">
 <h2>Advanced Users</h2>

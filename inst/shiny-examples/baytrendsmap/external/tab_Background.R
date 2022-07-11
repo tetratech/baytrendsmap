@@ -27,7 +27,11 @@ function() {
         , href = "https://doi.org/10.1111/1752-1688.12489"
         , target = "_blank"))
     
-    , p("Murphy, R.R., E. Perry, J. Harcum, and J. Keisman. 2019. A generalized additive model approach to evaluating water quality: Chesapeake Bay case study. Environmental Modeling and Software 118(August 2019):1-13.")
+    , p("Murphy, R.R., E. Perry, J. Harcum, and J. Keisman. 2019. A generalized additive model approach to evaluating water quality: Chesapeake Bay case study. Environmental Modeling and Software 118(August 2019):1-13. "
+      , a("doi: 10.1016/j.envsoft.2019.03.027."
+        , href = "https://doi.org/10.1016/j.envsoft.2019.03.027"
+        , target = "_blank")
+            )
     
     , p("Murphy, R, E. Perry, J. Keisman, J. Harcum, and E. Leppo. 2021. baytrends: Long Term Water Quality Trend Analysis. R package version 2.0.5."
       , a("https://CRAN.R-project.org/package=baytrends"

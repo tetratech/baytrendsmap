@@ -19,7 +19,7 @@ shinyServer(function(input, output, session) {
   modal_startup_title <- "baytrendsmap"
   modal_startup_txt <- paste0("This app provides access to maps depicting " 
     , "short- and long-term changes/trends in nutrients, dissolved oxygen (DO), "
-    , "Secchi depth (a measure of clarity), and chlorophyll-a. The View Tidal Tends "
+    , "Secchi depth (a measure of clarity), and chlorophyll-a. The View Tidal Trends "
     , "tab includes the results for more than 130 stations located throughout the "
     , "mainstem of the Chesapeake Bay as well as the tidal portions of numerous "
     , "tributaries on the western and eastern shores since the mid-1980s.   

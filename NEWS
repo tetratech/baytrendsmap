@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-14 10:17:15
+    #> Last Update: 2022-07-14 10:51:01
+
+# baytrendsmap 1.2.1.9032
+
+Released - 2022-07-12
+
+-   refactor: Change location of plots linked to from map, Issue #64
 
 # baytrendsmap 1.2.1.9031
 

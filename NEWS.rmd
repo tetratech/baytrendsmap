@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9032
+===========
+Released - 2022-07-12
+
+* refactor: Change location of plots linked to from map, Issue #64
+
 baytrendsmap 1.2.1.9031
 ===========
 Released - 2022-07-12

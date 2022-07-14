@@ -29,15 +29,43 @@ shinyServer(function(input, output, session) {
     , "fit GAMs for the tidal Chesapeake Bay water quality data) output file.   
 
   Click HELP in the main menu for information on how to use this app.")
+  # Same text as HTML so can format
+  modal_startup_html <- p(hr()
+      , "This app provides access to maps depicting"
+      , "short- and long-term changes/trends in nutrients, dissolved oxygen (DO), "
+      , "Secchi depth (a measure of clarity), and chlorophyll-a."
+      , br()
+      , br()
+      , "The "
+      , tags$strong("View Tidal Trends ")
+      , "tab includes the results for more than 130 stations located throughout the "
+      , "mainstem of the Chesapeake Bay as well as the tidal portions of numerous "
+      , "tributaries on the western and eastern shores since the mid-1980s."
+      , br()
+      , br()
+      , "The "
+      , tags$strong("Create Custom Map ")
+      , "tab provides options to create trend maps on the data "
+      , "provided or allow users to upload a personal baytrends (R package designed to "
+      , "fit GAMs for the tidal Chesapeake Bay water quality data) output file."
+      , br()
+      , br()
+      , "Click "
+      , tags$strong("HELP ")
+      , "in the main menu for information on how to use this app."
+      )
+    
   # modal_startup <- modalDialog(title = modal_startup_title
   #                              , modal_startup_txt
   #                              , easyClose = TRUE)
   #showModal(modal_startup)
   shinyalert(title = modal_startup_title
-             , text = modal_startup_txt
-             , type = "info"
+             , text = modal_startup_html
+             , type = ""
              , closeOnEsc = TRUE
-             , closeOnClickOutside = TRUE)
+             , closeOnClickOutside = TRUE
+             , imageUrl = "circle-info.svg"
+             , html = TRUE)
   
   
   # Data ####

@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-14 09:22:49
+    #> Last Update: 2022-07-14 10:17:15
+
+# baytrendsmap 1.2.1.9031
+
+Released - 2022-07-12
+
+-   refactor: Format initial pop up text, Issue #62
+
+# baytrendsmap 1.2.1.9030
+
+Released - 2022-07-12
+
+-   refactor: Update initial pop up icon, Issue #61
 
 # baytrendsmap 1.2.1.9029
 

@@ -20,6 +20,13 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9034
+===========
+Released - 2022-07-15
+
+* refactor: Modify data files from 6 to 4 options, Issue #65
+* refactor: Change location of data and plots to GitHub for testing, Issue #64
+
 baytrendsmap 1.2.1.9033
 ===========
 Released - 2022-07-15

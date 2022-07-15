@@ -4,29 +4,37 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-14 10:51:01
+    #> Last Update: 2022-07-15 12:55:18
+
+# baytrendsmap 1.2.1.9033
+
+Released - 2022-07-15
+
+-   refactor: Change spelling for consistency on Background tab, Issue
+    #66
 
 # baytrendsmap 1.2.1.9032
 
-Released - 2022-07-12
+Released - 2022-07-14
 
--   refactor: Change location of plots linked to from map, Issue #64
+-   refactor: Change location of data and plots linked to from map,
+    Issue #64
 
 # baytrendsmap 1.2.1.9031
 
-Released - 2022-07-12
+Released - 2022-07-14
 
 -   refactor: Format initial pop up text, Issue #62
 
 # baytrendsmap 1.2.1.9030
 
-Released - 2022-07-12
+Released - 2022-07-14
 
 -   refactor: Update initial pop up icon, Issue #61
 
 # baytrendsmap 1.2.1.9029
 
-Released - 2022-07-12
+Released - 2022-07-14
 
 -   refactor: Update background tab, Issue #63
 

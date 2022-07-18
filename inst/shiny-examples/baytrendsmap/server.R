@@ -1939,6 +1939,10 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
+    # DIN and PO4, no long term plots
+    plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        , FALSE
+                        , TRUE)
     
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
@@ -2109,6 +2113,10 @@ shinyServer(function(input, output, session) {
                                , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
+    # DIN and PO4, no long term plots
+    plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        , FALSE
+                        , TRUE)
 
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)
@@ -2384,6 +2392,10 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
+    # DIN and PO4, no long term plots
+    plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        , FALSE
+                        , TRUE)
     
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
@@ -3020,6 +3032,10 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
+    # DIN and PO4, no long term plots
+    plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        , FALSE
+                        , TRUE)
  
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)

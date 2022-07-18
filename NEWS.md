@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-18 13:24:12
+    #> Last Update: 2022-07-18 15:35:31
+
+# baytrendsmap 1.2.1.9036
+
+Released - 2022-07-18
+
+-   fix: Change leaflet map plot links to show “no plot” for DIN and PO4
 
 # baytrendsmap 1.2.1.9035
 

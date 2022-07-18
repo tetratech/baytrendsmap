@@ -19,6 +19,13 @@ knitr::opts_chunk$set(
 ```{r LastUpdate, echo = FALSE}
 cat(paste0("Last Update: ",Sys.time()))
 ```
+
+baytrendsmap 1.2.1.9036
+===========
+Released - 2022-07-18
+
+* fix: Change leaflet map plot links to show "no plot" for DIN and PO4
+
 baytrendsmap 1.2.1.9035
 ===========
 Released - 2022-07-18

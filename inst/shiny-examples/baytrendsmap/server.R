@@ -1107,9 +1107,14 @@ shinyServer(function(input, output, session) {
     mr_ext <- ifelse(is.null(input$SI_ext), "png", input$SI_ext) #"png"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_range.", mr_ext))
-    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
-                    , height = plot_h, width = plot_w, units = plot_units
-                    , scale = plot_scale)
+    ggplot2::ggsave(fn_out
+                    , plot = m_r
+                    , device = mr_ext
+                    , height = plot_h
+                    , width = plot_w
+                    , units = plot_units
+                    , scale = plot_scale
+                    , bg = "white")
     
     # enable save button
     shinyjs::enable("but_map_range_save")
@@ -1275,12 +1280,15 @@ shinyServer(function(input, output, session) {
     mr_ext <- "png"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_range.", mr_ext))
-    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
-                    , height = plot_h, width = plot_w, units = plot_units
-                    , scale = plot_scale)
-    
-    
-    
+    ggplot2::ggsave(fn_out
+                    , plot = m_r
+                    , device = mr_ext
+                    , height = plot_h
+                    , width = plot_w
+                    , units = plot_units
+                    , scale = plot_scale
+                    , bg = "white")
+    #
     return(m_r)
     #
   })## map_range_filt_default
@@ -1654,7 +1662,8 @@ shinyServer(function(input, output, session) {
                     , height = plot_h
                     , width = plot_w
                     , units = plot_units
-                    , scale = plot_scale)
+                    , scale = plot_scale
+                    , bg = "white")
     # Save so download button just copies
     
     # enable save button
@@ -2626,9 +2635,14 @@ shinyServer(function(input, output, session) {
     mr_ext <- "png" #ifelse(is.null(input$SI_ext), "png", input$SI_ext) #"png"
     #date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
     fn_out <- file.path("map", paste0("map_range.", mr_ext))
-    ggplot2::ggsave(fn_out, plot = m_r, device = mr_ext
-                    , height = plot_h, width = plot_w, units = plot_units
-                    , scale = plot_scale)
+    ggplot2::ggsave(fn_out
+                    , plot = m_r
+                    , device = mr_ext
+                    , height = plot_h
+                    , width = plot_w
+                    , units = plot_units
+                    , scale = plot_scale
+                    , bg = "white")
     
     #
     return(m_r)
@@ -2900,7 +2914,8 @@ shinyServer(function(input, output, session) {
                     , height = plot_h
                     , width = plot_w
                     , units = plot_units
-                    , scale = plot_scale)
+                    , scale = plot_scale
+                    , bg = "white")
     # Save so download button just copies
     #
     #return(ggplotly(m_t))

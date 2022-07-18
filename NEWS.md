@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-15 13:46:58
+    #> Last Update: 2022-07-18 13:24:12
+
+# baytrendsmap 1.2.1.9035
+
+Released - 2022-07-18
+
+-   fix: Use consistent terminology in all locations for Long Term,
+    Issue #67
+    -   Included updates to “no plot” plot for dynamic map
+    -   Continuation of Issue #65
+-   fix: Update typos on background tab, Issue #68
+-   fix: Update saved maps to force white background, Issue #69
+-   fix: Update text on map types, change map, triangles, Issue #70
 
 # baytrendsmap 1.2.1.9034
 

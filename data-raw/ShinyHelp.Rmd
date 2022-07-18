@@ -27,11 +27,11 @@ The **View Tidal Trends** tab provides simplified access for viewing current con
 
 There are three maps available in the main portion of the window that are automatically updated as the options outlined in the steps below are selected:
 
-+ The **Range Map, Interactive** is an interactive map with zooming features enabled. You can click on an individual station to get further information. A time series plot of the monitoring data is available if Non-linear Trend (Full Period) is selected in step 1 below.
++ The **Range Map, Interactive** is an interactive map with zooming features enabled. You can click on an individual station to get further information. A time series plot of the monitoring data is available if Non-linear Trend (Long Term) is selected in step 1 below.
 
 + The **Range Map, Static** displays the same information as the interactive map but has a fixed scale (as opposed to the zooming feature). This allows you to save multiple maps with the same scale for use in presentations. These maps also include a title documenting the data set used in the analysis.
 
-+ The **Change Map** displays significant (p<0.05) and possible (p<0.25) increasing and decreasing change in water quality concentrations. Note, the direction of the triangles can be flipped by changing the Direction of ‘Good’ Change in the left-hand navigation pane.
++ The **Change Map** displays significant (p<0.05) and possible (p<0.25) increasing and decreasing change in water quality concentrations. Note, the color of the triangles can be flipped by changing the Direction of ‘Good’ Change in the left-hand navigation pane.
 
 ## Step 1. Choose Data
 

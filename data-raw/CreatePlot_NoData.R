@@ -10,7 +10,7 @@ library(ggplot2)
 p_blank <- ggplot() + 
   theme_void() +
   labs(title = "No trends plot available for selected dataset."
-       , subtitle = "Trends plots only available for 'Full Period' dataset.")
+       , subtitle = "Trends plots only available for 'Long Term' dataset.")
 
 # Save
 ggsave("_no_plot.png")

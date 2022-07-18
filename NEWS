@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-18 15:35:31
+    #> Last Update: 2022-07-18 16:53:09
+
+# baytrendsmap 1.2.1.9037
+
+Released - 2022-07-18
+
+-   fix: Auto open custom map file ext to avoid failure on save
 
 # baytrendsmap 1.2.1.9036
 

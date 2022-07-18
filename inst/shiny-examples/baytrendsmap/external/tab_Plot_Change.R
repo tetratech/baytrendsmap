@@ -61,6 +61,8 @@ function(){
                                                                     , uiOutput('opt_riverNames_t')
                                                   )##bsCollapsePanel~riverNames~END
                                                   # , open = "River Names (Y/N)" # to auto open panels
+                                                  
+                                                  , open = "File Save Extension" # to auto open panels
 
                                       )##bsCollapse~END
                                      , numericInput("map_trend_pval_poss"

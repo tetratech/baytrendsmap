@@ -1369,6 +1369,7 @@ shinyServer(function(input, output, session) {
   output$but_map_range_save <- downloadHandler(
     filename = function() {
       mr_ext <- input$SI_ext
+      if(is.null(mr_ext)) {pick_ext[3]}
       fn_out <- file.path("map", paste0("map_range.", mr_ext))
       if(file.exists(fn_out)==TRUE) {
         mr_ext <- input$SI_ext
@@ -1381,6 +1382,7 @@ shinyServer(function(input, output, session) {
     }, ##filename~END
     content = function(fn) {
        mr_ext <- input$SI_ext
+       if(is.null(mr_ext)) {pick_ext[3]}
        fn_out <- file.path("map", paste0("map_range.", mr_ext))
        #print(map_range())
      # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
@@ -1753,12 +1755,14 @@ shinyServer(function(input, output, session) {
   output$but_map_trend_save <- downloadHandler(
     filename = function() {
       mt_ext <- input$SI_ext_t
+      if(is.null(mt_ext)) {pick_ext[3]}
       date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
       paste0("map_change_", date_time, ".", mt_ext)
       # #paste0(input$fn_input, input$SI_ext)
     }, ##filename~END
     content = function(fn) {
       mt_ext <- input$SI_ext_t
+      if(is.null(mt_ext)) {pick_ext[3]}
       fn_out <- file.path("map", paste0("map_change.", mt_ext))
       #print(map_range())
       # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )

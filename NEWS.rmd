@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9037
+===========
+Released - 2022-07-18
+
+* fix: Auto open custom map file ext to avoid failure on save
+
 baytrendsmap 1.2.1.9036
 ===========
 Released - 2022-07-18

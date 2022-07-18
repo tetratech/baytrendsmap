@@ -60,6 +60,7 @@ function(){
                                                         , uiOutput('opt_riverNames')
                                                         )##bsCollapsePanel~riverNames~END
                                       # , open = "Variable to Plot" # to auto open panels
+                                      , open = "File Save Extension" # to auto open panels
                                       )##bsCollapse~END
                          , fluidRow(column(1), 
                                     # column(1, bsButton("but_mr_title", "Auto-generate Title")),

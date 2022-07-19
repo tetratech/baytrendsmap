@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-19 12:58:26
+    #> Last Update: 2022-07-19 13:38:46
+
+# baytrendsmap 1.2.1.9041
+
+Released - 2022-07-19
+
+-   fix: Update pop up modal so don’t get warning, Issue #74
 
 # baytrendsmap 1.2.1.9040
 

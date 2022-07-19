@@ -1946,7 +1946,7 @@ shinyServer(function(input, output, session) {
     # DIN and PO4, no long term plots
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
                         , FALSE
-                        , TRUE)
+                        , plots_boo)
     
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
@@ -2120,7 +2120,7 @@ shinyServer(function(input, output, session) {
     # DIN and PO4, no long term plots
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
                         , FALSE
-                        , TRUE)
+                        , plots_boo)
 
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)
@@ -2399,7 +2399,7 @@ shinyServer(function(input, output, session) {
     # DIN and PO4, no long term plots
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
                         , FALSE
-                        , TRUE)
+                        , plots_boo)
     
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
@@ -3039,7 +3039,7 @@ shinyServer(function(input, output, session) {
     # DIN and PO4, no long term plots
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
                         , FALSE
-                        , TRUE)
+                        , plots_boo)
  
     if(isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)

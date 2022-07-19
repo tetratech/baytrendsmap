@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9038
+===========
+Released - 2022-07-19
+
+* fix: Update linked plot from leaflet maps, Issue #71
+
 baytrendsmap 1.2.1.9037
 ===========
 Released - 2022-07-18

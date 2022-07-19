@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-18 16:53:09
+    #> Last Update: 2022-07-19 10:35:08
+
+# baytrendsmap 1.2.1.9038
+
+Released - 2022-07-19
+
+-   fix: Update linked plot from leaflet maps, Issue #71
 
 # baytrendsmap 1.2.1.9037
 

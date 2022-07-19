@@ -1069,7 +1069,7 @@ shinyServer(function(input, output, session) {
                        , legend.title = element_text(face = "bold"))
 
     
-   # Zoom
+   ### Zoom ----
    zoom_buffer <- input$map_range_val_zoom
    ## Zoom, points
    x_min_pts <- min(fort_df_mr[, "longitude"])
@@ -1097,9 +1097,10 @@ shinyServer(function(input, output, session) {
       y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
       y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
       # replot map with zoom region and buffer
-      m_r <- m_r + ggplot2::coord_fixed(ratio = map_coord_ratio
-                                        , xlim = c(x_min, x_max)
-                                        , ylim = c(y_min, y_max))
+      m_r <- m_r + ggplot2::coord_sf(expand = FALSE
+                                     , xlim = c(x_min, x_max)
+                                     , ylim = c(y_min, y_max))
+      
    }##IF~opt_zoomregion_t~END
     
     
@@ -1619,7 +1620,7 @@ shinyServer(function(input, output, session) {
     
     # drop = FALSE keeps all factor levels
     
-    # Zoom
+    ## Zoom ----
     zoom_buffer <- input$map_trend_val_zoom
     ## Zoom, points
     x_min_pts <- min(fort_df_mt[, "longitude"])
@@ -1647,9 +1648,9 @@ shinyServer(function(input, output, session) {
       y_min <- zoomregion_bbox[2] - zoom_buffer / (map_coord_ratio * 5)
       y_max <- zoomregion_bbox[4] + zoom_buffer / (map_coord_ratio * 5)
       # replot map with zoom region and buffer
-      m_t <- m_t + ggplot2::coord_fixed(ratio = map_coord_ratio
-                                        , xlim = c(x_min, x_max)
-                                        , ylim = c(y_min, y_max))
+      m_t <- m_t + ggplot2::coord_sf(expand = FALSE
+                                     , xlim = c(x_min, x_max)
+                                     , ylim = c(y_min, y_max))
     }##IF~opt_zoomregion_t~END
     
     # # save map
@@ -2644,7 +2645,7 @@ shinyServer(function(input, output, session) {
     
     
     # Zoom
-    ## removed
+    ## removed for basic
     
     
     # # save map

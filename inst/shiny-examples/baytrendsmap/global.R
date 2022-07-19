@@ -25,7 +25,7 @@ library(shinyalert) # popup modal at start up
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.1.9039"
+pkgver <- "1.2.1.9040"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by
@@ -115,7 +115,8 @@ pick_files_names <- paste0(url_data_pick_files, df_pick_files[, "names"])
 ## Map, Shapefile----
 fn_shp <- file.path("data", "cbseg")
 ogr_shp <- sf::st_read(dsn=fn_shp, layer="cbseg2003Combined2-latlong"
-                       , quiet = TRUE)
+                       , quiet = TRUE) %>% 
+  sf::st_transform('+proj=longlat +datum=WGS84')
 fort_shp <- suppressMessages(ggplot2::fortify(ogr_shp))
 #fort_shp <- load(file.path(getwd(), "data", "data_GIS_cbpseg.rda"))
 #fort_shp <- load(file.path("data", "data_GIS_cbpseg.rda"))

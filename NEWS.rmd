@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.1.9040
+===========
+Released - 2022-07-19
+
+* fix:  Update bay shapefile datum on import in global.R, Issue #73
+
 baytrendsmap 1.2.1.9039
 ===========
 Released - 2022-07-19

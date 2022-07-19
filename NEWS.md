@@ -4,7 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-19 10:35:08
+    #> Last Update: 2022-07-19 12:58:26
+
+# baytrendsmap 1.2.1.9040
+
+Released - 2022-07-19
+
+-   fix: Update bay shapefile datum on import in global.R, Issue #73
+
+# baytrendsmap 1.2.1.9039
+
+Released - 2022-07-19
+
+-   fix: Update zoom feature for custom maps, Issue #72
 
 # baytrendsmap 1.2.1.9038
 

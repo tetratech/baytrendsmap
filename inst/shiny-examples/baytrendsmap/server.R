@@ -1028,7 +1028,7 @@ shinyServer(function(input, output, session) {
                                   , breaks = mr_brks
                                   , include.lowest = TRUE
                                   )
-    
+
     # Points, Add
     m_r <- m_r + geom_point(data=fort_df_mr
                                     , aes_string(x =" longitude"
@@ -1912,7 +1912,7 @@ shinyServer(function(input, output, session) {
   
   # MAP, Range, Leaflet ----
   output$map_r_leaflet <- renderLeaflet({
-    
+
     # data for plot
     df_mrl <- df_filt()
     
@@ -2363,7 +2363,7 @@ shinyServer(function(input, output, session) {
   
   ### MAP, Basic, Range, Leaflet, render ----
   output$map_r_leaflet_basic <- renderLeaflet({
-   
+
     # data for plot
     df_mrl <- df_import_basic()
     # default data - load default data
@@ -2417,7 +2417,7 @@ shinyServer(function(input, output, session) {
     col_Stations <- "blue"
     col_Segs     <- "black" # "grey59"
     fill_Segs    <- "lightskyblue" 
-    
+  
     # Map
     leaflet(data = df_mrl) %>%
       # Groups, Base

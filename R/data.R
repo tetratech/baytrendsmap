@@ -4,15 +4,10 @@
 #' 
 #' @description Official CBP GIS shapefile outline of Chesapeake Bay
 #' 
-#' @format A data frame with 274836 observations on the following 7 variables.
+#' @format A simple feature collection with 6 features and 1 field.
 #' \describe{
-#'   \item{long}{a numeric vector}
-#'   \item{lat}{a numeric vector}
-#'   \item{order}{a numeric vectorr}
-#'   \item{hole}{a logical vector}
-#'   \item{piece}{a factor with levels \code{1}}
-#'   \item{id}{a character vector}
-#'   \item{group}{a factor with levels}
+#'    \item{\code{combo}}{a numeric vector}
+#'    \item{\code{geometry}}{a sfc_POLYGON}
 #' }
 "data_GIS_cbpseg"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

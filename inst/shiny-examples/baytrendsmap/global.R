@@ -25,7 +25,7 @@ library(shinyalert) # popup modal at start up
 #pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.1.9041"
+pkgver <- "1.2.1.9042"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by
@@ -39,7 +39,7 @@ col_width_manual <- "200px"
 # Data, Repository----
 url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/"
 url_remote_base_cbp <- "https://dx3ga8blp094q.cloudfront.net/"
-url_remote_base <- url_remote_base_github
+url_remote_base <- url_remote_base_cbp
 
 # Pick Lists----
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))

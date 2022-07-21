@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-07-21 08:33:08
+    #> Last Update: 2022-07-21 08:36:22
+
+# baytrendsmap 1.2.2
+
+Released - 2022-07-21
+
+-   docs: Update version number for a new release and posting of app to
+    CBP
 
 # baytrendsmap 1.2.1.9043
 

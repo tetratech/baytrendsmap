@@ -20,6 +20,15 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.3.9001
+===========
+Released - 2022-12-06
+
+* refactor: Move data-raw file processing for 2019 to baytrends-files
+    + Script and rda
+* feature: Add DC inset to static maps, Issue #75
+* docs: Add cowplot to Imports in DESCRIPTION
+
 baytrendsmap 1.2.3
 ===========
 Released - 2022-07-21

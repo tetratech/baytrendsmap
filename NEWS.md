@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-16 10:57:44
+    #> Last Update: 2022-12-16 11:02:06
+
+# baytrendsmap 1.2.4
+
+Released - 2022-12-16
+
+- refactor: Modify source files to use CBP server
+- docs: Create new release version on GitHub
 
 # baytrendsmap 1.2.3.9004
 

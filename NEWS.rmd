@@ -20,6 +20,13 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.4
+===========
+Released - 2022-12-16
+
+* refactor: Modify source files to use CBP server
+* docs: Create new release version on GitHub
+
 baytrendsmap 1.2.3.9004
 ===========
 Released - 2022-12-16

@@ -20,12 +20,13 @@ library(shinyalert) # popup modal at start up
 # library(dataRetrieval)
 # library(data.table)
 # library(stringr)
+library(cowplot)
 
 # Package Version ----
-#pkgver <- packageVersion("baytrendsmap") # does not work on Shinyapps.io
+#pkgver <- utils::packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.3"
+pkgver <- "1.2.3.9003"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by
@@ -37,9 +38,9 @@ options(shiny.maxRequestSize = 100*1024^2)
 col_width_manual <- "200px"
 
 # Data, Repository----
-url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/"
+url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/test/"
 url_remote_base_cbp <- "https://dx3ga8blp094q.cloudfront.net/"
-url_remote_base <- url_remote_base_cbp
+url_remote_base <- url_remote_base_github
 
 # Pick Lists----
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
@@ -55,7 +56,7 @@ pal_change_RdBu <- c("#ef8a62", "#67a9cf")  # red_blue (more orange than red)
 pal_change_PuGn <- c("#af8dc3", "#7fbf7b") # purple_green
 pick_ext <- c("jpg", "tiff", "png", "pdf")
 pick_zoomregion <- c("none", "points", "Choptank", "James", "Patuxent", "Potomac"
-                     , "Rappahannock", "Susquehanna", "York")
+                     , "Rappahannock", "Susquehanna", "York", "DC") #bbox too
 # pick_files_radio <- c("Non-linear Trend (Full Period)"
 #                       , "Non-linear Trend (1999-2000 to 2018-2019)"
 #                       , "Non-linear Trend (2010-2011 to 2018-2019)"
@@ -139,11 +140,16 @@ bbox_Pot <- c(-77.7047, 37.6438, -76.2050, 39.0159)
 bbox_Rap <- c(-77.4901, 37.4703, -76.2413, 38.4143)
 bbox_Yor <- c(-76.9052, 37.1470, -76.3784, 37.5903)
 bbox_Jam <- c(-77.5250, 36.7142, -76.2311, 37.7369)
+bbox_DC  <- c(-(77 + 8/60 + 30/3600), (38 + 46/60 + 30/3600)
+              , -(76 + 54/60 + 0/3600), (38 + 56/60 + 30/3600))
+# bbox_inset_DC <- c(-(76+56/60), (38+58/60+30/3600)
+#                    , -(76+8/60), (39+8/60))
 bbox_MD <- NA
 bbox_VA <- NA
 bbox_points <- NA
 pick_zoomregion_bbox <- c("NA", "bbox_points", "bbox_Cho", "bbox_Jam", "bbox_Pat", "bbox_Pot"
-                          , "bbox_Rap", "bbox_Sus", "bbox_Yor")
+                          , "bbox_Rap", "bbox_Sus", "bbox_Yor", "bbox_DC")
+# pick_zoomregion at start
 
 ## Map, base ####
 map_coord_ratio <- 1.3
@@ -167,6 +173,22 @@ map_base <- ggplot() +
   #coord_fixed(map_coord_ratio) +
   scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
   north(fort_shp, symbol = 3) 
+
+## Map, Inset (DC) ----
+map_inset <- map_base + 
+  ggplot2::coord_sf(expand = FALSE
+                    , xlim = c(bbox_DC[1], bbox_DC[3])
+                    , ylim = c(bbox_DC[2], bbox_DC[4])) + 
+  theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 2))
+
+## Map, Inset, Location ----
+inset_draw_x <- 0.15
+inset_draw_y <- 0.35 
+inset_draw_width <- 0.25
+
+inset_draw_x_adv <- inset_draw_x
+inset_draw_y_adv <- inset_draw_y # 0.35
+inset_draw_width_adv <- inset_draw_width
 
 ## Map, output size ----
 plot_h <- 9

@@ -926,8 +926,8 @@ shinyServer(function(input, output, session) {
   map_range <- eventReactive (input$but_map_range, {
 
     # start with base map
-    m_r <- map_base
-    
+      m_r <- map_base
+      
     # data for plot
     df_mr <- df_filt()
     mr_cI_type  <- ifelse(is.null(input$SI_classInt)
@@ -947,7 +947,7 @@ shinyServer(function(input, output, session) {
     
     # breaks vs numclasses
     ## input is "" for blank
-    if(is.null(brks_user)==TRUE){
+    if(is.null(brks_user) == TRUE) {
       # no breaks, use slider for num classes
       mr_numclass <- input$numclass
       # derive breaks from user n and style
@@ -1001,12 +1001,12 @@ shinyServer(function(input, output, session) {
                  , y=as.numeric(lab_Jam[3])
                  , label=lab_Jam[1], hjust=0)
     }##IF~riverNames~END
-    
+
     # Title
     mr_title <- input$map_range_title
     if(!is.null(mr_title)){
       m_r <- m_r +
-       labs(title=paste(mr_title, collapse="; "))
+       labs(title = paste(mr_title, collapse="; "))
        # labs(title=paste(mr_pal_col, collapse="; "))
     }##IF~riverNames~END
     
@@ -1071,6 +1071,7 @@ shinyServer(function(input, output, session) {
 
     
    ### Zoom ----
+    #### Inset, DC----
    zoom_buffer <- input$map_range_val_zoom
    ## Zoom, points
    x_min_pts <- min(fort_df_mr[, "longitude"])
@@ -1082,14 +1083,44 @@ shinyServer(function(input, output, session) {
    bbox_points <- c(x_min_pts, y_min_pts, x_max_pts, y_max_pts)
 
     zoomregion <- input$SI_zoomregion_r
+    zoomregion <- ifelse(is.null(zoomregion), "none", zoomregion)
 
-    if(is.null(zoomregion)==TRUE){
-     # do nothing
-    } else if (zoomregion == "none") {
-      # more nothing
+    if(zoomregion == "none") {
+     # Add DC inset
+      inset_blowout_y_offset <- lengths(regmatches(mr_title
+                                                 , gregexpr("\\n", mr_title)))
+     # base map and gray area over DC
+      m_r_inset_mod <- m_r + 
+        annotate("rect"
+                 , xmin = bbox_DC[1]
+                 , xmax = bbox_DC[3]
+                 , ymin = bbox_DC[2]
+                 , ymax = bbox_DC[4]
+                 , alpha = 1/3
+                 , fill = "gray"
+                 , color = "black")
+      # base map with just DC
+      m_r_inset_blowout <- m_r + 
+        ggplot2::coord_sf(expand = FALSE
+                          , xlim = c(bbox_DC[1], bbox_DC[3])
+                          , ylim = c(bbox_DC[2], bbox_DC[4])) + 
+        theme(panel.border = element_rect(color = "black"
+                                          , fill = NA
+                                          , linewidth = 2)) +
+        theme(legend.position = "none") +
+        labs(title = NULL, subtitle = NULL, caption = NULL)
+      # Combined plot
+      inset_blowout_y_offset <- 0.01 * lengths(regmatches(mr_title
+                                                   , gregexpr("\\n", mr_title)))
+      m_r <- cowplot::ggdraw() + 
+        cowplot::draw_plot(m_r_inset_mod) + 
+        cowplot::draw_plot(m_r_inset_blowout
+                           , x = inset_draw_x_adv
+                           , y = inset_draw_y_adv - inset_blowout_y_offset
+                           , width = inset_draw_width_adv)
     } else {
       # convert to values
-      zoomregion_bbox <- eval(parse(text=pick_zoomregion_bbox[match(zoomregion
+      zoomregion_bbox <- eval(parse(text = pick_zoomregion_bbox[match(zoomregion
                                                            , pick_zoomregion)]))
       #zoomregion_bbox <- bbox_Cho
       # Zoom, Limits
@@ -1101,7 +1132,6 @@ shinyServer(function(input, output, session) {
       m_r <- m_r + ggplot2::coord_sf(expand = FALSE
                                      , xlim = c(x_min, x_max)
                                      , ylim = c(y_min, y_max))
-      
    }##IF~opt_zoomregion_t~END
     
     
@@ -1622,6 +1652,7 @@ shinyServer(function(input, output, session) {
     # drop = FALSE keeps all factor levels
     
     ## Zoom ----
+    #### Inset, DC----
     zoom_buffer <- input$map_trend_val_zoom
     ## Zoom, points
     x_min_pts <- min(fort_df_mt[, "longitude"])
@@ -1633,11 +1664,39 @@ shinyServer(function(input, output, session) {
     bbox_points <- c(x_min_pts, y_min_pts, x_max_pts, y_max_pts)
 
     zoomregion <- input$SI_zoomregion_t
+    zoomregion <- ifelse(is.null(zoomregion), "none", zoomregion)
 
-    if(is.null(zoomregion)==TRUE){
-      # do nothing
-    } else if(zoomregion == "none"){
-      # more nothing
+    if(zoomregion == "none") {
+      # Add DC inset
+      # base map and gray area over DC
+      m_t_inset_mod <- m_t + 
+        annotate("rect"
+                 , xmin = bbox_DC[1]
+                 , xmax = bbox_DC[3]
+                 , ymin = bbox_DC[2]
+                 , ymax = bbox_DC[4]
+                 , alpha = 1/3
+                 , fill = "gray"
+                 , color = "black")
+      # base map with just DC
+      m_t_inset_blowout <- m_t + 
+        ggplot2::coord_sf(expand = FALSE
+                          , xlim = c(bbox_DC[1], bbox_DC[3])
+                          , ylim = c(bbox_DC[2], bbox_DC[4])) + 
+        theme(panel.border = element_rect(color = "black"
+                                          , fill = NA
+                                          , linewidth = 2)) +
+        theme(legend.position = "none") +
+        labs(title = NULL, subtitle = NULL, caption = NULL)
+      # Combined plot
+      inset_blowout_y_offset <- 0.01 * lengths(regmatches(mt_title
+                                                   , gregexpr("\\n", mt_title)))
+      m_t <- cowplot::ggdraw() + 
+        cowplot::draw_plot(m_t_inset_mod) + 
+        cowplot::draw_plot(m_t_inset_blowout
+                           , x = inset_draw_x_adv
+                           , y = inset_draw_y_adv - inset_blowout_y_offset
+                           , width = inset_draw_width_adv)
     } else {
       # convert to values
       zoomregion_bbox <- eval(parse(text=
@@ -2110,7 +2169,8 @@ shinyServer(function(input, output, session) {
     url_B <- paste0("_"
                     , tolower(df_mrl$mL_parmName[1])
                     , "_"
-                    , toupper(substr(df_mrl$layer[1], 1, 1))
+                    #, toupper(substr(df_mrl$layer[1], 1, 1))
+                    , tolower(substr(df_mrl$layer[1], 1, 4))
                     , ".png")
     
     # Different plot if not 'Full Period, Non Flow Adjusted' dataset
@@ -2647,6 +2707,36 @@ shinyServer(function(input, output, session) {
     
     # Zoom
     ## removed for basic
+    #### Inset, DC----
+    # base map and gray area over DC
+    m_r_inset_mod <- m_r + 
+      annotate("rect"
+               , xmin = bbox_DC[1]
+               , xmax = bbox_DC[3]
+               , ymin = bbox_DC[2]
+               , ymax = bbox_DC[4]
+               , alpha = 1/3
+               , fill = "gray"
+               , color = "black")
+    # base map with just DC
+    m_r_inset_blowout <- m_r + 
+      ggplot2::coord_sf(expand = FALSE
+                        , xlim = c(bbox_DC[1], bbox_DC[3])
+                        , ylim = c(bbox_DC[2], bbox_DC[4])) + 
+      theme(panel.border = element_rect(color = "black"
+                                        , fill = NA
+                                        , linewidth = 2)) +
+      theme(legend.position = "none") +
+      labs(title = NULL, subtitle = NULL, caption = NULL)
+    # Combined plot
+    inset_blowout_y_offset <- 0.01 * lengths(regmatches(mr_title
+                                                 , gregexpr("\\n", mr_title)))
+    m_r <- cowplot::ggdraw() + 
+      cowplot::draw_plot(m_r_inset_mod) + 
+      cowplot::draw_plot(m_r_inset_blowout
+                         , x = inset_draw_x
+                         , y = inset_draw_y - inset_blowout_y_offset
+                         , width = inset_draw_width)
     
     
     # # save map
@@ -2920,7 +3010,37 @@ shinyServer(function(input, output, session) {
     # drop = FALSE keeps all factor levels
     
     # Zoom
-   # Remove for basic
+    # Remove for basic
+    #### Inset, DC----
+    # base map and gray area over DC
+    m_t_inset_mod <- m_t + 
+      annotate("rect"
+               , xmin = bbox_DC[1]
+               , xmax = bbox_DC[3]
+               , ymin = bbox_DC[2]
+               , ymax = bbox_DC[4]
+               , alpha = 1/3
+               , fill = "gray"
+               , color = "black")
+    # base map with just DC
+    m_t_inset_blowout <- m_t + 
+      ggplot2::coord_sf(expand = FALSE
+                        , xlim = c(bbox_DC[1], bbox_DC[3])
+                        , ylim = c(bbox_DC[2], bbox_DC[4])) + 
+      theme(panel.border = element_rect(color = "black"
+                                        , fill = NA
+                                        , linewidth = 2)) +
+      theme(legend.position = "none") +
+      labs(title = NULL, subtitle = NULL, caption = NULL)
+    # Combined plot
+    inset_blowout_y_offset <- 0.01 * lengths(regmatches(mt_title
+                                                 , gregexpr("\\n", mt_title)))
+    m_t <- cowplot::ggdraw() + 
+      cowplot::draw_plot(m_t_inset_mod) + 
+      cowplot::draw_plot(m_t_inset_blowout
+                         , x = inset_draw_x
+                         , y = inset_draw_y - inset_blowout_y_offset
+                         , width = inset_draw_width)
     
     # # save map
     mt_ext <-  "png"

@@ -37,9 +37,21 @@ There are three maps available in the main portion of the window that are automa
 
 **Select** the time period (long term or short term) and type of change (with or without flow adjustment) to investigate from the left-hand navigation pane.
 
-+ *Long-term trends* are based on data from 1985 to present with the exception of dissolved inorganic nitrogen (DIN), orthophosphorus (PO4), and total suspended solids (TSS) which are based on data from 1999 to present. *Short-term trends* are based on data from the last 10 years.
++ *Long-term trends* are based on data from 1985 to present with the exception of dissolved inorganic nitrogen (DIN), orthophosphorus (PO4), and total suspended solids (TSS) which are based on data from 1999 to present. Short-term trends are based on data from the last 10 years.
 
 + Trends *without flow adjustment* are evaluations based on observed conditions (i.e., the conditions experienced by the estuary’s living resources) and can be used to evaluate incremental progress towards improved habitats and attainment of water quality standards. Changes in *flow-adjusted conditions* account for year-to-year variations in streamflow or salinity and can be used for understanding the influence of watershed management actions on the estuary.
+
+Note data is currently available for the D.C. water quality stations for the following parameters and time period:
+
++ Secchi: Long- and short-term data
+    
++ Surface DO: Long- and short-term data
+    
++ TSS: Long- and short-term data
+
++ Chla: Short-term data
+    
++ PO4: Long-term data
 
 ## Step 2. Choose Map Layer 
 

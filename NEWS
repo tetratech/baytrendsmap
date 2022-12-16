@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-16 10:42:26
+    #> Last Update: 2022-12-16 10:57:44
+
+# baytrendsmap 1.2.3.9004
+
+Released - 2022-12-16
+
+- refactor: Upload to Tt ShinyApps.io
 
 # baytrendsmap 1.2.3.9003
 

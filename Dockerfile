@@ -1,4 +1,4 @@
-FROM rocker/geospatial:4.2.1
+FROM rocker/geospatial:latest
 
 RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
 

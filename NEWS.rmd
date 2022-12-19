@@ -20,6 +20,13 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.5.9002
+===========
+Released - 2022-12-19
+
+* refactor: Update Dockerfile, rocker/geospatial
+    + 4.2.1 to latest
+
 baytrendsmap 1.2.5.9001
 ===========
 Released - 2022-12-19

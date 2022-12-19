@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-19 15:14:39
+    #> Last Update: 2022-12-19 16:32:29
+
+# baytrendsmap 1.2.5.9002
+
+Released - 2022-12-19
+
+- refactor: Update Dockerfile, rocker/geospatial
+  - 4.2.1 to latest
 
 # baytrendsmap 1.2.5.9001
 

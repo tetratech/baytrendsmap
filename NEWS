@@ -4,7 +4,14 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-16 11:02:06
+    #> Last Update: 2022-12-19 14:30:29
+
+# baytrendsmap 1.2.4.9001
+
+Released - 2022-12-19
+
+- docs: Update DESCRIPTION with missing packages (shinyalert and
+  leaftlet)
 
 # baytrendsmap 1.2.4
 

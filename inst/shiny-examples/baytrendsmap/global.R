@@ -26,19 +26,19 @@ library(cowplot)
 #pkgver <- utils::packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.4"
+pkgver <- "1.2.4.9001"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 10MB.
-options(shiny.maxRequestSize = 100*1024^2)
+options(shiny.maxRequestSize = 100 * 1024^2)
 
 # Other
 ## DT Col Width
 col_width_manual <- "200px"
 
 # Data, Repository----
-url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/test/"
+url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/2021/"
 url_remote_base_cbp <- "https://dx3ga8blp094q.cloudfront.net/"
 url_remote_base <- url_remote_base_cbp
 

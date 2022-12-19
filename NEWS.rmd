@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.4.9001
+===========
+Released - 2022-12-19
+
+* docs: Update DESCRIPTION with missing packages (shinyalert and leaftlet)
+
 baytrendsmap 1.2.4
 ===========
 Released - 2022-12-16

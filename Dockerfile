@@ -15,16 +15,18 @@ RUN install2.r --error \
     shinyalert \
     DT \
     ggplot2 \
-    rgdal \
-    sp \
+    sf \
     ggsn \
+    grid \
     classInt \
     dplyr \
     RColorBrewer \
     knitr \
     lubridate \
+    cowplot \
+    leaflet \
     rmarkdown && install2.r -r "https://cloud.R-project.org" --error aws.s3
-
+    
 COPY /inst/shiny-examples/baytrendsmap /srv/shiny-server/baytrendsmap
 
 run chmod 777 -R /srv/shiny-server/baytrendsmap/map

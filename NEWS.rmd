@@ -20,6 +20,14 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.5.9001
+===========
+Released - 2022-12-19
+
+* refactor: Update Dockerfile packages
+    + Add grid, leaflet, sf, and cowplot
+    + Remove rgdal and sp
+
 baytrendsmap 1.2.5
 ===========
 Released - 2022-12-19

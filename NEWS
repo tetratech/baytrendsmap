@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-19 14:34:41
+    #> Last Update: 2022-12-19 15:14:39
+
+# baytrendsmap 1.2.5.9001
+
+Released - 2022-12-19
+
+- refactor: Update Dockerfile packages
+  - Add grid, leaflet, sf, and cowplot
+  - Remove rgdal and sp
 
 # baytrendsmap 1.2.5
 

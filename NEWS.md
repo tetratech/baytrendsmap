@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-19 14:30:29
+    #> Last Update: 2022-12-19 14:34:41
+
+# baytrendsmap 1.2.5
+
+Released - 2022-12-19
+
+- docs: Create new release version on GitHub
 
 # baytrendsmap 1.2.4.9001
 

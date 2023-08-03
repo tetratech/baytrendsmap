@@ -38,9 +38,9 @@ options(shiny.maxRequestSize = 100 * 1024^2)
 col_width_manual <- "200px"
 
 # Data, Repository----
-url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/2021/"
+url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/data/current/"
 url_remote_base_cbp <- "https://dx3ga8blp094q.cloudfront.net/"
-url_remote_base <- url_remote_base_cbp
+url_remote_base <- url_remote_base_github
 
 # Pick Lists----
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
@@ -115,7 +115,8 @@ pick_files_names <- paste0(url_data_pick_files, df_pick_files[, "names"])
 # Map ----
 ## Map, Shapefile----
 fn_shp <- file.path("data", "cbseg")
-ogr_shp <- sf::st_read(dsn=fn_shp, layer="cbseg2003Combined2-latlong"
+ogr_shp <- sf::st_read(dsn = fn_shp
+                       , layer = "cbseg2003Combined2-latlong"
                        , quiet = TRUE) %>% 
   sf::st_transform('+proj=longlat +datum=WGS84')
 fort_shp <- suppressMessages(ggplot2::fortify(ogr_shp))

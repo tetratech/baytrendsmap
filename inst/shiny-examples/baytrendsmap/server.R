@@ -105,9 +105,9 @@ shinyServer(function(input, output, session) {
     # Need is.null as first rather than last.
     # It will always trigger on loading of the app
     
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
       return(NULL)
-    } else if (click_filetype$data == "user"){
+    } else if (click_filetype$data == "user") {
       # Define file
       fn_inFile <- inFile$datapath
       # Read user imported file
@@ -923,7 +923,7 @@ shinyServer(function(input, output, session) {
   
   # MAP, Range ####
   ## MAP, Range, user ----
-  map_range <- eventReactive (input$but_map_range, {
+  map_range <- eventReactive(input$but_map_range, {
 
     # start with base map
       m_r <- map_base
@@ -947,7 +947,7 @@ shinyServer(function(input, output, session) {
     
     # breaks vs numclasses
     ## input is "" for blank
-    if(is.null(brks_user) == TRUE) {
+    if (is.null(brks_user) == TRUE) {
       # no breaks, use slider for num classes
       mr_numclass <- input$numclass
       # derive breaks from user n and style
@@ -955,10 +955,10 @@ shinyServer(function(input, output, session) {
                                             , mr_numclass
                                             , mr_cI_type)
       # Redo num classes as "pretty" picks its own number of breaks
-      mr_numclass <- ifelse(mr_cI_type=="pretty"
+      mr_numclass <- ifelse(mr_cI_type == "pretty"
                             , length(mr_cI_val$brks) - 1
                             , mr_numclass)
-      #mr_numclass <- ifelse(mr_cI_type=="pretty"
+      #mr_numclass <- ifelse(mr_cI_type == "pretty"
       # , length(mr_cI_val$brks)
       # , mr_numclass)
       # breaks
@@ -2105,7 +2105,7 @@ shinyServer(function(input, output, session) {
     
     # breaks vs numclasses
     ## input is "" for blank
-    if(is.null(brks_user)==TRUE){
+    if (is.null(brks_user) == TRUE) {
       # no breaks, use slider for num classes
       mr_numclass <- input$numclass
       # derive breaks from user n and style
@@ -2113,7 +2113,7 @@ shinyServer(function(input, output, session) {
                                             , mr_numclass
                                             , mr_cI_type)
       # Redo num classes as "pretty" picks its own number of breaks
-      mr_numclass <- ifelse(mr_cI_type=="pretty"
+      mr_numclass <- ifelse(mr_cI_type == "pretty"
                             , length(mr_cI_val$brks) - 1
                             , mr_numclass)
       #mr_numclass <- ifelse(mr_cI_type=="pretty"

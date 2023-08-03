@@ -4,7 +4,16 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2022-12-19 16:32:29
+    #> Last Update: 2023-08-03 13:14:54.816759
+
+# baytrendsmap 1.2.5.9003
+
+Released - 2023-08-03
+
+- refactor: Update global baytrends_files reference for file
+  re-organization
+  - tetratech/baytrends_files#4
+  - CBP version of app does *not* need to be update
 
 # baytrendsmap 1.2.5.9002
 

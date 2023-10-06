@@ -26,7 +26,7 @@ library(cowplot)
 #pkgver <- utils::packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.5"
+pkgver <- "1.2.5.9004"
 
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by

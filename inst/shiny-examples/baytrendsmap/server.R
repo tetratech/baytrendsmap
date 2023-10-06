@@ -2258,6 +2258,15 @@ shinyServer(function(input, output, session) {
     input$radio_input_basic
   })## file_watch ~ EN
   
+  file_watch_basic_filt <- reactive({
+    # trigger for filtered data file
+    input$radio_input_basic
+    input$SI_mapLayer_basic
+    input$SI_pal_range_basic
+    input$SI_pal_trend_basic
+    input$SI_upisgood_basic
+  })
+  
   # file_watch_basic_maps <- reactive({
   #   # trigger for df_import()
   #   #paste(input$fn_input, input$but_radio_load)
@@ -2391,6 +2400,7 @@ shinyServer(function(input, output, session) {
     #
     msg <- paste0("file loaded, basic; ", inFile_radio)
     message(msg)
+    message(nrow(df_input))
     #
     return(df_input)
     #
@@ -2399,7 +2409,8 @@ shinyServer(function(input, output, session) {
   
   ### Data, df_filt_basic ----
   #df_filt_basic <- eventReactive (input$but_map_basic, {
-  df_filt_basic <- eventReactive (input$SI_mapLayer_basic, {
+  #df_filt_basic <- eventReactive (input$SI_mapLayer_basic, {
+  df_filt_basic <- eventReactive (file_watch_basic_filt(), {
     # if filters not null then apply to df_import
     # it is possible to select no data
 
@@ -2414,6 +2425,7 @@ shinyServer(function(input, output, session) {
     
     msg <- paste0("filter data, basic; ", str_col_2, " = ", str_SI_value)
     message(msg)
+    message(nrow(df_y))
     #
     return(df_y)
     #
@@ -3181,6 +3193,8 @@ shinyServer(function(input, output, session) {
     map_brk_num_leg <- levels(df_mrl$map_brk_num)
     mr_pal_col_leg <- mr_pal_col
     
+    df_mrl$map_val <- df_mrl[, mr_var]
+    
     # New map
     leafletProxy("map_r_leaflet_basic", data = df_mrl) %>%
       # Remove stations
@@ -3204,6 +3218,7 @@ shinyServer(function(input, output, session) {
                                        , "GAM: ", gamName, as.character("<br>")
                                        , "Parameter: ", parmName, as.character("<br>")
                                        , "Variable: ", mr_var_name, as.character("<br>")
+                                       , "Value: ", map_val, as.character("<br>")
                                        , "Trend Chart: ", url_click)
       ) %>%
       addLegend("bottomleft"

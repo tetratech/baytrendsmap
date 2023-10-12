@@ -187,7 +187,7 @@ shinyServer(function(input, output, session) {
     # Need is.null as first rather than last.
     # It will always trigger on loading of the app
     
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
       return(NULL)
     } else {
       # Same for both file types
@@ -214,7 +214,7 @@ shinyServer(function(input, output, session) {
     # 
     # inFile <- input$fn_input
     # 
-    # if (is.null(inFile)){
+    # if (is.null(inFile)) {
     #   return(NULL)
     # }##IF~is.null~END
     # 
@@ -222,7 +222,7 @@ shinyServer(function(input, output, session) {
     # 
     # # # Add "Results" folder if missing
     # # boo_Results <- dir.exists(file.path(".", "data"))
-    # # if(boo_Results==FALSE){
+    # # if (boo_Results==FALSE) {
     # #   dir.create(file.path(".", "data"))
     # # }
     # # 
@@ -247,7 +247,7 @@ shinyServer(function(input, output, session) {
     
     # inFile <- input$fn_input
     # 
-    # if (is.null(inFile)){
+    # if (is.null(inFile)) {
     #   return(NULL)
     # }##IF~is.null~END
     
@@ -261,10 +261,10 @@ shinyServer(function(input, output, session) {
     return(df_z[, str_names_keep])
     
   }##expression~END
-  , filter="top"
+  , filter = "top"
   , caption = "Table 1. Imported data."
   #, rownames = FALSE
-  , options=list(scrollX=TRUE
+  , options = list(scrollX = TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000)
                  , autoWidth = TRUE
                  , columnDefs = list(list(width = col_width_manual
@@ -281,7 +281,7 @@ shinyServer(function(input, output, session) {
   
   # FILTER ----
   ## df_filt ####
-  df_filt <- eventReactive (input$but_filt_apply, {
+  df_filt <- eventReactive(input$but_filt_apply, {
     # if filters not null then apply to df_import
     # it is possible to select no data
     
@@ -291,61 +291,61 @@ shinyServer(function(input, output, session) {
     #
     str_col_2 <- "state"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~state~END
     #
     str_col_2 <- "cbSeg92"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~cbSeg92~END
     #
     str_col_2 <- "stationGrpName"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~stationGrpName~END
     #
     str_col_2 <- "station"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~station~END
     #
     str_col_2 <- "layer"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~layer~END
     #
     str_col_2 <- "parmName"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~parmName~END
     #
     str_col_2 <- "gamName"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~gamName~END
     #
     str_col_2 <- "periodName"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~periodName~END
     #
     str_col_2 <- "seasonName"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~seasonName~END
     #
     str_col_2 <- "mapLayer"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2)))
-    if(!is.null(str_SI_value) & click_filetype$data == "final"){
+    if (!is.null(str_SI_value) & click_filetype$data == "final") {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
     #
@@ -367,9 +367,9 @@ shinyServer(function(input, output, session) {
     return(df_f[, str_names_keep])
     
   }##expression~END
-  , filter="top"
+  , filter = "top"
   , caption = "Table 3. Filtered data."
-  , options=list(scrollX=TRUE
+  , options = list(scrollX = TRUE
                  , lengthMenu = c(5, 10, 25, 50, 100, 1000)
                  , autoWidth = TRUE
                  , columnDefs = list(list(width = col_width_manual
@@ -380,29 +380,29 @@ shinyServer(function(input, output, session) {
   df_filt_dups <- eventReactive (filt_watch4(), {
     # data
     
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
       return(NULL)
-    } else if(is.null(click_filtdata$data)){
+    } else if (is.null(click_filtdata$data)) {
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
     }## IF ~ filetype and filter click ~ END
     
     # If no data selected
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
       n_dups <- "NA"
     } else if (click_filetype$data == "user") {
       # Check and report back number and locations of duplicates
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                                     , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
-                                     , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
-                                     , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
-                                     , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
-                                     , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
+                                     , n_Parameter = dplyr::n_distinct(parmName, na.rm = TRUE)
+                                     , n_GAM = dplyr::n_distinct(gamName, na.rm = TRUE)
+                                     , n_Layer = dplyr::n_distinct(layer, na.rm = TRUE)
+                                     , n_Period = dplyr::n_distinct(periodName, na.rm = TRUE)
+                                     , n_Season = dplyr::n_distinct(seasonName, na.rm = TRUE)
                                      , .groups = "drop_last")
-    } else if (click_filetype$data == "final"){
+    } else if (click_filetype$data == "final") {
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                                     , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE)
+                                     , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm = TRUE)
                                      , .groups = "drop_last")
     }## IF ~ click_filetype$data ~ END
     
@@ -439,7 +439,7 @@ shinyServer(function(input, output, session) {
     # Need is.null as first rather than last.
     # It will always trigger on loading of the app
     
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
       return(NULL)
     } else {
       # Same for both file types
@@ -459,10 +459,10 @@ shinyServer(function(input, output, session) {
       df_tmp <- df_filt_dups()
       return(df_tmp)
     }##expression~END
-    , filter="top"
+    , filter = "top"
     , caption = "Table 2. Station summary."
     , rownames = FALSE
-    , options=list(scrollX=TRUE
+    , options = list(scrollX = TRUE
                    , lengthMenu = c(5, 10, 25, 50, 100, 1000) )
   )##df_filt_dups_DT~END
   
@@ -474,7 +474,7 @@ shinyServer(function(input, output, session) {
     #input$but_filt_apply
     #input$fn_input
     # data
-    if(is.null(click_filtdata$data)){
+    if (is.null(click_filtdata$data)) {
       df_tmp <- df_import()
     } else {
       df_tmp <- df_filt()
@@ -482,21 +482,21 @@ shinyServer(function(input, output, session) {
     #
     
     # If no data selected
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
        n_dups <- "NA"
     } else if (click_filetype$data == "user") {
       # Check and report back number and locations of duplicates
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                                  , n_Parameter = dplyr::n_distinct(parmName, na.rm=TRUE)
-                                  , n_GAM = dplyr::n_distinct(gamName, na.rm=TRUE)
-                                  , n_Layer = dplyr::n_distinct(layer, na.rm=TRUE)
-                                  , n_Period = dplyr::n_distinct(periodName, na.rm=TRUE)
-                                  , n_Season = dplyr::n_distinct(seasonName, na.rm=TRUE)
+                                  , n_Parameter = dplyr::n_distinct(parmName, na.rm = TRUE)
+                                  , n_GAM = dplyr::n_distinct(gamName, na.rm = TRUE)
+                                  , n_Layer = dplyr::n_distinct(layer, na.rm = TRUE)
+                                  , n_Period = dplyr::n_distinct(periodName, na.rm = TRUE)
+                                  , n_Season = dplyr::n_distinct(seasonName, na.rm = TRUE)
                                   , .groups = "drop_last")
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
-    } else if (click_filetype$data == "final"){
+    } else if (click_filetype$data == "final") {
       tib_n_dups <- dplyr::summarize(dplyr::group_by(df_tmp, station)
-                                  , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm=TRUE)
+                                  , n_mapLayer = dplyr::n_distinct(mapLayer, na.rm = TRUE)
                                   , .groups = "drop_last")
       n_dups <- sum(tib_n_dups[, 2:ncol(tib_n_dups)] != 1)
     }## IF ~ click_filetype$data ~ END
@@ -531,7 +531,7 @@ shinyServer(function(input, output, session) {
   # nrow_df_import <- eventReactive(input$but_filt_apply{
   #   inFile <- input$fn_input
   #   
-  #   if (is.null(inFile)){
+  #   if (is.null(inFile)) {
   #     return(NULL)
   #   }##IF~is.null~END
   #   
@@ -547,71 +547,71 @@ shinyServer(function(input, output, session) {
   output$filt_collapse <- renderUI({
     # filters change based on file format; final vs. user.
     # Default is "final" file.
-    if(is.null(click_filetype$data)) {
+    if (is.null(click_filetype$data)) {
       #return(NULL)
       p("No file loaded.  Return to step '1. Select Data'.")
-    } else if(click_filetype$data == "user") {
+    } else if (click_filetype$data == "user") {
       # "User" file filters
       bsCollapse(multiple = TRUE,
-                 bsCollapsePanel("Filter by 'State'", style='info',
-                                 fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 bsCollapsePanel("Filter by 'State'", style = 'info',
+                                 fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                  uiOutput('filt_state')
                                  )##bsCollapsePanel~state~END
-                 , bsCollapsePanel("Filter by 'CB Segment'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'CB Segment'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_cbSeg92')
                                   )##bsCollapsePanel~cbSeg92~END
-                 , bsCollapsePanel("Filter by 'Station Group'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Station Group'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_stationGrpName')
                      )##bsCollapsePanel~stationGrpName~END
-                 , bsCollapsePanel("Filter by 'Station Identifier'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Station Identifier'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_station')
                      )##bsCollapsePanel~station~END
-                 , bsCollapsePanel("Filter by 'Full Parameter Name'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Full Parameter Name'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_parmName', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_parmName')
                      )##bsCollapsePanel~parmName~END
-                 , bsCollapsePanel("Filter by 'GAM Formula Name'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'GAM Formula Name'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_gamName', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_gamName')
                       )##bsCollapsePanel~gamName~END
-                 , bsCollapsePanel("Filter by 'Sample Layer'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_layer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Sample Layer'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_layer', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_layer')
                       )##bsCollapsePanel~layer~END
-                 , bsCollapsePanel("Filter by 'Period Name'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_periodName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Period Name'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_periodName', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_periodName')
                      )##bsCollapsePanel~periodName~END
-                 , bsCollapsePanel("Filter by 'Season Name'", style='info',
-                                   fluidRow(column(1), column(10, radioButtons('sel_seasonName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Season Name'", style = 'info',
+                                   fluidRow(column(1), column(10, radioButtons('sel_seasonName', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_seasonName')
                      )##bsCollapsePanel~seasonName~END
                  #, open = "Filter by 'Season Name'" # to auto open panels
       )##bsCollapse~END
-    } else if (click_filetype$data == "final"){
+    } else if (click_filetype$data == "final") {
       # "final" file filters
       bsCollapse(multiple = TRUE,
-         bsCollapsePanel("Filter by 'State'", style='info',
-                         fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+         bsCollapsePanel("Filter by 'State'", style = 'info',
+                         fluidRow(column(1), column(10, radioButtons('sel_state', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                          uiOutput('filt_state')
              )##bsCollapsePanel~state~END
-         , bsCollapsePanel("Filter by 'CB Segment'", style='info',
-                           fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+         , bsCollapsePanel("Filter by 'CB Segment'", style = 'info',
+                           fluidRow(column(1), column(10, radioButtons('sel_cbSeg92', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                            uiOutput('filt_cbSeg92')
              )##bsCollapsePanel~cbSeg92~END
-         , bsCollapsePanel("Filter by 'Station Group'", style='info',
-                           fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+         , bsCollapsePanel("Filter by 'Station Group'", style = 'info',
+                           fluidRow(column(1), column(10, radioButtons('sel_stationGrpName', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                            uiOutput('filt_stationGrpName')
              )##bsCollapsePanel~stationGrpName~END
-         , bsCollapsePanel("Filter by 'Station Identifier'", style='info',
-                           fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+         , bsCollapsePanel("Filter by 'Station Identifier'", style = 'info',
+                           fluidRow(column(1), column(10, radioButtons('sel_station', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                            uiOutput('filt_station')
              )##bsCollapsePanel~station~END
-         , bsCollapsePanel("Filter by 'Map Layer'", style='info',
-                           #fluidRow(column(1), column(10, radioButtons('sel_mapLayer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+         , bsCollapsePanel("Filter by 'Map Layer'", style = 'info',
+                           #fluidRow(column(1), column(10, radioButtons('sel_mapLayer', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                     uiOutput('filt_mapLayer')
               )##bsCollapsePanel~station~END
          , open = "Filter by 'Map Layer'" # to auto open panels
@@ -632,7 +632,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -648,7 +648,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI,  h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -664,7 +664,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(input$sel_stationGrpName == 1){
+                     selected = if (input$sel_stationGrpName == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
 
@@ -680,7 +680,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -696,7 +696,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -713,7 +713,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
 
@@ -729,7 +729,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -744,7 +744,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(input$sel_periodName == 1){
+                     selected = if (input$sel_periodName == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -760,7 +760,7 @@ shinyServer(function(input, output, session) {
       selectizeInput(str_SI, h4(paste0("  Select ", str_col, ":")),
                      choices = sort(unique(df_x[, str_col])),
                      multiple = TRUE,
-                     selected = if(str_sel == 1){
+                     selected = if (str_sel == 1) {
                        unique(df_x[, str_col])
                      } else {NULL})
       
@@ -768,7 +768,7 @@ shinyServer(function(input, output, session) {
   })##filt_seasonNameEND
   
   output$filt_mapLayer <- renderUI({
-    if(click_filetype$data == "final"){
+    if (click_filetype$data == "final") {
       str_col <- "mapLayer"
       str_sel <- eval(parse(text = paste0("input$sel_", str_col)))
       str_SI <- paste0("SI_", str_col)
@@ -970,41 +970,41 @@ shinyServer(function(input, output, session) {
       mr_brks <- brks_user
     }##IF~brks_user~END
     
-    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    mr_pal_col <- RColorBrewer::brewer.pal(n = mr_numclass, name = mr_pal)
     
     # River Names
     boo_riverNames <- ifelse(is.null(input$SI_riverNames)
                              , "Yes"
                              , input$SI_riverNames)
-   if(boo_riverNames == "Yes"){
+   if (boo_riverNames == "Yes") {
       m_r <- m_r + 
         annotate(geom = "text"
                  , x = as.numeric(lab_Sus[2])
-                 , y=as.numeric(lab_Sus[3])
-                 , label=lab_Sus[1]) +
+                 , y = as.numeric(lab_Sus[3])
+                 , label = lab_Sus[1]) +
         annotate(geom = "text", x = as.numeric(lab_Pat[2])
-                 , y=as.numeric(lab_Pat[3])
-                 , label=lab_Pat[1]) +
+                 , y = as.numeric(lab_Pat[3])
+                 , label = lab_Pat[1]) +
         annotate(geom = "text", x = as.numeric(lab_Cho[2])
-                 , y=as.numeric(lab_Cho[3])
-                 , label=lab_Cho[1], hjust=0) +
+                 , y = as.numeric(lab_Cho[3])
+                 , label = lab_Cho[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Pot[2])
-                 , y=as.numeric(lab_Pot[3])
-                 , label=lab_Pot[1], hjust=0) +
+                 , y = as.numeric(lab_Pot[3])
+                 , label = lab_Pot[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Rap[2])
-                 , y=as.numeric(lab_Rap[3])
-                 , label=lab_Rap[1], hjust=1) +
+                 , y = as.numeric(lab_Rap[3])
+                 , label = lab_Rap[1], hjust = 1) +
         annotate(geom = "text", x = as.numeric(lab_Yor[2])
-                 , y=as.numeric(lab_Yor[3])
-                 , label=lab_Yor[1], hjust=0) +
+                 , y = as.numeric(lab_Yor[3])
+                 , label = lab_Yor[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Jam[2])
-                 , y=as.numeric(lab_Jam[3])
-                 , label=lab_Jam[1], hjust=0)
+                 , y = as.numeric(lab_Jam[3])
+                 , label = lab_Jam[1], hjust = 0)
     }##IF~riverNames~END
 
     # Title
     mr_title <- input$map_range_title
-    if(!is.null(mr_title)){
+    if (!is.null(mr_title)) {
       m_r <- m_r +
        labs(title = paste(mr_title, collapse="; "))
        # labs(title=paste(mr_pal_col, collapse="; "))
@@ -1085,7 +1085,7 @@ shinyServer(function(input, output, session) {
     zoomregion <- input$SI_zoomregion_r
     zoomregion <- ifelse(is.null(zoomregion), "none", zoomregion)
 
-    if(zoomregion == "none") {
+    if (zoomregion == "none") {
      # Add DC inset
       inset_blowout_y_offset <- lengths(regmatches(mr_title
                                                  , gregexpr("\\n", mr_title)))
@@ -1157,7 +1157,7 @@ shinyServer(function(input, output, session) {
   })##map_range~END
   
   ## Map, Range, default ----
-  map_range_filt_default <- eventReactive (input$but_filt_apply, {
+  map_range_filt_default <- eventReactive(input$but_filt_apply, {
     # Add all defaults
     #
     m_r <- map_base
@@ -1181,44 +1181,44 @@ shinyServer(function(input, output, session) {
                                             , mr_numclass
                                             , mr_cI_type)
       # Redo num classes as "pretty" picks its own number of breaks
-      mr_numclass <- ifelse(mr_cI_type=="pretty"
+      mr_numclass <- ifelse(mr_cI_type == "pretty"
                             , length(mr_cI_val$brks) - 1
                             , mr_numclass)
-      #mr_numclass <- ifelse(mr_cI_type=="pretty"
+      #mr_numclass <- ifelse(mr_cI_type == "pretty"
       # , length(mr_cI_val$brks)
       # , mr_numclass)
       # breaks
       mr_brks <- mr_cI_val$brks
     
-    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    mr_pal_col <- RColorBrewer::brewer.pal(n = mr_numclass, name = mr_pal)
     
     # River Names
     boo_riverNames <- "Yes"
     
-    if(boo_riverNames == "Yes"){
+    if (boo_riverNames == "Yes") {
       m_r <- m_r + 
         annotate(geom = "text"
                  , x = as.numeric(lab_Sus[2])
-                 , y=as.numeric(lab_Sus[3])
-                 , label=lab_Sus[1]) +
+                 , y = as.numeric(lab_Sus[3])
+                 , label = lab_Sus[1]) +
         annotate(geom = "text", x = as.numeric(lab_Pat[2])
-                 , y=as.numeric(lab_Pat[3])
-                 , label=lab_Pat[1]) +
+                 , y = as.numeric(lab_Pat[3])
+                 , label = lab_Pat[1]) +
         annotate(geom = "text", x = as.numeric(lab_Cho[2])
-                 , y=as.numeric(lab_Cho[3])
-                 , label=lab_Cho[1], hjust=0) +
+                 , y = as.numeric(lab_Cho[3])
+                 , label = lab_Cho[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Pot[2])
-                 , y=as.numeric(lab_Pot[3])
-                 , label=lab_Pot[1], hjust=0) +
+                 , y = as.numeric(lab_Pot[3])
+                 , label = lab_Pot[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Rap[2])
-                 , y=as.numeric(lab_Rap[3])
-                 , label=lab_Rap[1], hjust=1) +
+                 , y = as.numeric(lab_Rap[3])
+                 , label = lab_Rap[1], hjust = 1) +
         annotate(geom = "text", x = as.numeric(lab_Yor[2])
-                 , y=as.numeric(lab_Yor[3])
-                 , label=lab_Yor[1], hjust=0) +
+                 , y = as.numeric(lab_Yor[3])
+                 , label = lab_Yor[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Jam[2])
-                 , y=as.numeric(lab_Jam[3])
-                 , label=lab_Jam[1], hjust=0)
+                 , y = as.numeric(lab_Jam[3])
+                 , label = lab_Jam[1], hjust = 0)
     }##IF~riverNames~END
     
     # Title
@@ -1253,7 +1253,7 @@ shinyServer(function(input, output, session) {
     
     mr_title <- str_title
     
-    if(!is.null(mr_title)){
+    if (!is.null(mr_title)) {
       m_r <- m_r +
         labs(title=paste(mr_title, collapse="; "))
       # labs(title=paste(mr_pal_col, collapse="; "))
@@ -1332,8 +1332,8 @@ shinyServer(function(input, output, session) {
   output$map_r_render <- renderPlot({
   #output$map_r_render <- renderPlotly({
     # default map to show
-    if(input$but_map_range == 0){
-      #if(input$but_filt_apply == 0){
+    if (input$but_map_range == 0) {
+      #if (input$but_filt_apply == 0) {
         m_r_2 <- map_base
       # } else {
       #   m_r_2 <- map_range_filt_default # different map
@@ -1356,7 +1356,7 @@ shinyServer(function(input, output, session) {
     mr_title_gamName    <- sort(unique(df_filt_mr[, "gamName"]))
     mr_title_periodName <- sort(unique(df_filt_mr[, "periodName"]))
     #
-    if(!is.null(input$fn_input)){
+    if (!is.null(input$fn_input)) {
       # "User" file
       mr_title_layer      <- sort(unique(df_filt_mr[, "layer"]))
       mr_title_seasonName <- sort(unique(df_filt_mr[, "seasonName"]))
@@ -1401,9 +1401,9 @@ shinyServer(function(input, output, session) {
   output$but_map_range_save <- downloadHandler(
     filename = function() {
       mr_ext <- input$SI_ext
-      if(is.null(mr_ext)) {pick_ext[3]}
+      if (is.null(mr_ext)) {pick_ext[3]}
       fn_out <- file.path("map", paste0("map_range.", mr_ext))
-      if(file.exists(fn_out)==TRUE) {
+      if (file.exists(fn_out) == TRUE) {
         mr_ext <- input$SI_ext
         date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
         paste0("map_range_", date_time, ".", mr_ext)
@@ -1414,12 +1414,12 @@ shinyServer(function(input, output, session) {
     }, ##filename~END
     content = function(fn) {
        mr_ext <- input$SI_ext
-       if(is.null(mr_ext)) {pick_ext[3]}
+       if (is.null(mr_ext)) {pick_ext[3]}
        fn_out <- file.path("map", paste0("map_range.", mr_ext))
        #print(map_range())
      # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
       # #file.copy("map_range.pdf", fn, overwrite=TRUE)
-       if(file.exists(fn_out)==TRUE){
+       if (file.exists(fn_out) == TRUE) {
          file.copy(fn_out, fn, overwrite = TRUE)
        } else {
          fn_out_error <- file.path("map", "Error_UpdateMapBeforeSave.pdf")
@@ -1433,7 +1433,7 @@ shinyServer(function(input, output, session) {
   
   
   # MAP, Trend ####
-  map_trend <- eventReactive (input$but_map_trend, {
+  map_trend <- eventReactive(input$but_map_trend, {
     
     # validate p-value, poss > sig
     validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
@@ -1449,7 +1449,7 @@ shinyServer(function(input, output, session) {
                      , "Orange_Green"
                      , input$SI_pal_change)
     
-    if(mt_pal == "Orange_Green"){
+    if (mt_pal == "Orange_Green") {
       pal_mt <- pal_change_OrGn
     } else if (mt_pal == "Red_Blue") {
       pal_mt <- pal_change_RdBu
@@ -1472,34 +1472,34 @@ shinyServer(function(input, output, session) {
     boo_riverNames_t <- ifelse(is.null(input$SI_riverNames_t)
                                , "Yes"
                                , input$SI_riverNames_t)
-    if(boo_riverNames_t == "Yes"){
+    if (boo_riverNames_t == "Yes") {
       m_t <- m_t + 
         annotate(geom = "text", x = as.numeric(lab_Sus[2])
-                 , y=as.numeric(lab_Sus[3])
-                 , label=lab_Sus[1]) +
+                 , y = as.numeric(lab_Sus[3])
+                 , label = lab_Sus[1]) +
         annotate(geom = "text", x = as.numeric(lab_Pat[2])
-                 , y=as.numeric(lab_Pat[3])
-                 , label=lab_Pat[1]) +
+                 , y = as.numeric(lab_Pat[3])
+                 , label = lab_Pat[1]) +
         annotate(geom = "text", x = as.numeric(lab_Cho[2])
-                 , y=as.numeric(lab_Cho[3])
-                 , label=lab_Cho[1], hjust=0) +
+                 , y = as.numeric(lab_Cho[3])
+                 , label = lab_Cho[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Pot[2])
-                 , y=as.numeric(lab_Pot[3])
-                 , label=lab_Pot[1], hjust=0) +
+                 , y = as.numeric(lab_Pot[3])
+                 , label = lab_Pot[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Rap[2])
-                 , y=as.numeric(lab_Rap[3])
-                 , label=lab_Rap[1], hjust=1) +
+                 , y = as.numeric(lab_Rap[3])
+                 , label = lab_Rap[1], hjust = 1) +
         annotate(geom = "text", x = as.numeric(lab_Yor[2])
-                 , y=as.numeric(lab_Yor[3])
-                 , label=lab_Yor[1], hjust=0) +
+                 , y = as.numeric(lab_Yor[3])
+                 , label = lab_Yor[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Jam[2])
-                 , y=as.numeric(lab_Jam[3])
-                 , label=lab_Jam[1], hjust=0)
+                 , y = as.numeric(lab_Jam[3])
+                 , label = lab_Jam[1], hjust = 0)
     }##IF~riverNames~END
 
     # Title
     mt_title <- input$map_trend_title
-    if(!is.null(mt_title)==TRUE){
+    if (!is.null(mt_title) == TRUE) {
       m_t <- m_t + labs(title=paste(mt_title, collapse="; "))
       # labs(title=paste(mr_pal_col, collapse="; "))
     }##IF~riverNames~END
@@ -1512,7 +1512,7 @@ shinyServer(function(input, output, session) {
     chg_pval_poss <- input$map_trend_pval_poss # 0.25
     chg_pval_sig <- input$map_trend_pval_sig # 0.05
     #
-    #if (boo_upisgood == TRUE){
+    #if (boo_upisgood == TRUE) {
       df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
       df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & 
               df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
@@ -1583,7 +1583,7 @@ shinyServer(function(input, output, session) {
                       , "posIncr" = 3
                       , "NS" = 2)
     
-    if(boo_upisgood == FALSE){
+    if (boo_upisgood == FALSE) {
       # Direction Arrows the same
       # Just the colors change
       trend_leg_color   <- c(pal_mt[2] # "green"
@@ -1625,7 +1625,7 @@ shinyServer(function(input, output, session) {
                                    # , shape = as.numeric(fort_df_mt$ChangeClass_shape)
                                    # , size = as.numeric(fort_df_mt$ChangeClass_size)
                                    # , fill = fort_df_mt$ChangeClass_color
-                                   #, na.rm=TRUE
+                                   #, na.rm = TRUE
                                    ) +
       # scale_color_manual(name = "Type of change", labels = trend_leg_label
       #                    , values = manval_color, drop = FALSE ) +
@@ -1666,7 +1666,7 @@ shinyServer(function(input, output, session) {
     zoomregion <- input$SI_zoomregion_t
     zoomregion <- ifelse(is.null(zoomregion), "none", zoomregion)
 
-    if(zoomregion == "none") {
+    if (zoomregion == "none") {
       # Add DC inset
       # base map and gray area over DC
       m_t_inset_mod <- m_t + 
@@ -1699,7 +1699,7 @@ shinyServer(function(input, output, session) {
                            , width = inset_draw_width_adv)
     } else {
       # convert to values
-      zoomregion_bbox <- eval(parse(text=
+      zoomregion_bbox <- eval(parse(text = 
                       pick_zoomregion_bbox[match(zoomregion, pick_zoomregion)]))
       #zoomregion_bbox <- bbox_Cho
       # Zoom, Limits
@@ -1740,7 +1740,7 @@ shinyServer(function(input, output, session) {
   output$map_t_render <- renderPlot({
   #output$map_t_render <- renderPlotly({
     # default map to show
-    if(input$but_map_trend == 0){
+    if (input$but_map_trend == 0) {
       m_t_2 <- map_base
     } else {
       m_t_2 <- map_trend()  
@@ -1761,7 +1761,7 @@ shinyServer(function(input, output, session) {
     mt_title_gamName    <- sort(unique(df_filt_mt[, "gamName"]))
     mt_title_periodName <- sort(unique(df_filt_mt[, "periodName"]))
     #
-    if(!is.null(input$fn_input)){
+    if (!is.null(input$fn_input)) {
       # "User" file
       mt_title_layer      <- sort(unique(df_filt_mt[, "layer"]))
       mt_title_seasonName <- sort(unique(df_filt_mt[, "seasonName"]))
@@ -1816,14 +1816,14 @@ shinyServer(function(input, output, session) {
   output$but_map_trend_save <- downloadHandler(
     filename = function() {
       mt_ext <- input$SI_ext_t
-      if(is.null(mt_ext)) {pick_ext[3]}
+      if (is.null(mt_ext)) {pick_ext[3]}
       date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
       paste0("map_change_", date_time, ".", mt_ext)
       # #paste0(input$fn_input, input$SI_ext)
     }, ##filename~END
     content = function(fn) {
       mt_ext <- input$SI_ext_t
-      if(is.null(mt_ext)) {pick_ext[3]}
+      if (is.null(mt_ext)) {pick_ext[3]}
       fn_out <- file.path("map", paste0("map_change.", mt_ext))
       #print(map_range())
       # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
@@ -1862,48 +1862,48 @@ shinyServer(function(input, output, session) {
     # reset values to entire domain of values for each box.
       str_col <- "state"
     updateSelectizeInput(session, "SI_state"         
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "cbSeg92"
     updateSelectizeInput(session, "SI_cbSeg92"       
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "stationGrpName"
     updateSelectizeInput(session, "SI_stationGrpName"
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "station"
     updateSelectizeInput(session, "SI_station"       
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "parmName"
     updateSelectizeInput(session, "SI_parmName"      
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "gamName"
     updateSelectizeInput(session, "SI_gamName"       
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "layer"
     updateSelectizeInput(session, "SI_layer"         
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "periodName"
     updateSelectizeInput(session, "SI_periodName"    
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
       str_col <- "seasonName"
     updateSelectizeInput(session, "SI_seasonName"    
-                         , choices=sort(unique(df_x[, str_col]))
-                         , selected=sort(unique(df_x[, str_col])))
+                         , choices = sort(unique(df_x[, str_col]))
+                         , selected = sort(unique(df_x[, str_col])))
     # final file
-    if(is.null(click_filetype$data)){
+    if (is.null(click_filetype$data)) {
       # do nothing
-    } else if (click_filetype$data == "final"){
+    } else if (click_filetype$data == "final") {
         str_col <- "mapLayer"
       updateSelectInput(session, "SI_mapLayer"    
-                        , choices=sort(unique(df_x[, str_col]))
-                        , selected=sort(unique(df_x[, str_col])))
+                        , choices = sort(unique(df_x[, str_col]))
+                        , selected = sort(unique(df_x[, str_col])))
     }## IF ~ click_filetype$data ~ END
     #
     #}##FUNCTION~clearFilterSelection~END
@@ -1935,12 +1935,12 @@ shinyServer(function(input, output, session) {
    
     # Remove saved map PNG
     fn_png <- list.files("map", "\\.png$")
-    if(length(fn_png) >0 ) {
+    if (length(fn_png) > 0 ) {
       file.remove(paste0("map/", fn_png))
     }##IF ~ length(fn_png)
     # Remove zip file
     fn_zip <- "map/baytrendsmap.zip"
-    if(file.exists(fn_zip)) {
+    if (file.exists(fn_zip)) {
       file.remove(fn_zip)
     }## IF ~ fn_zip
     
@@ -1952,8 +1952,8 @@ shinyServer(function(input, output, session) {
    
       str_col <- "mapLayer"
       updateSelectInput(session, "SI_mapLayer_Basic"    
-                        , choices=sort(unique(df_x[, str_col]))
-                        , selected=sort(unique(df_x[, str_col])))
+                        , choices = sort(unique(df_x[, str_col]))
+                        , selected = sort(unique(df_x[, str_col])))
 
     #
     #}##FUNCTION~clearFilterSelection~END
@@ -1963,7 +1963,7 @@ shinyServer(function(input, output, session) {
   output$help_html <- renderUI({
     fn_help_html <- file.path(".", "www", "ShinyHelp.html")
     fe_help_html <- file.exists(fn_help_html)
-    if(fe_help_html==TRUE){
+    if (fe_help_html == TRUE) {
       return(includeHTML(fn_help_html))
     } else {
       return(NULL)
@@ -2004,12 +2004,13 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
-    # DIN and PO4, no long term plots
-    plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+    # DIN and PO4, no long term plots, add Surf back for 2022 data
+    plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4") 
+                        & df_mrl$layer[1] == "Bottom"
                         , FALSE
                         , plots_boo)
     
-    if(isTRUE(plots_boo)) {
+    if (isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
@@ -2030,17 +2031,18 @@ shinyServer(function(input, output, session) {
       # Groups, Base
       #addTiles(group="OSM (default)") %>%  #default tile too cluttered
       addProviderTiles("CartoDB.Positron", group="Positron") %>%
-      addProviderTiles(providers$Stamen.TonerLite, group="Toner Lite") %>%
+      addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
       addProviderTiles(providers$OpenStreetMap, group = "Open Street Map") %>%
       # Groups, Overlay
       addPolygons(data = ogr_shp
                   , color = col_Segs 
                   , fill = fill_Segs
                   , group = "CB Outline") %>%
-      addCircles(lng=~longitude
-                 , lat=~latitude
-                 , color=col_Stations
-                 , popup=~paste0("Station: ", station, as.character("<br>")
+      addCircles(lng = ~longitude
+                 , lat = ~latitude
+                 , color = col_Stations
+                 , popup = ~paste0("Station: ", station, as.character("<br>")
+                                 , "Layer:  ", layer, as.character("<br>")
                                  , "Latitude: ", latitude, as.character("<br>")
                                  , "Longitude: ", longitude, as.character("<br>")
                                  , "Segment: ", cbSeg92, as.character("<br>")
@@ -2050,7 +2052,7 @@ shinyServer(function(input, output, session) {
                                  , "Parameter: ", parmName, as.character("<br>")
                                  , "Trend Chart: ", url_click
                                  )
-                 , radius=30
+                 , radius = 30
                  , group = "Stations") %>%
       # Legend
       addLegend("bottomleft"
@@ -2179,12 +2181,13 @@ shinyServer(function(input, output, session) {
                                , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
-    # DIN and PO4, no long term plots
+    # DIN and PO4, no long term plots (add Surf back for 2022 data)
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        & df_mrl$layer[1] == "Bottom"
                         , FALSE
                         , plots_boo)
 
-    if(isTRUE(plots_boo)) {
+    if (isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
@@ -2209,14 +2212,15 @@ shinyServer(function(input, output, session) {
       # Remove Legend
       clearControls() %>%
       # Circles, NEW
-      addCircleMarkers(lng=~longitude
-                       , lat=~latitude
-                       , color=~map_brk_col
-                       , fill=~map_brk_col
+      addCircleMarkers(lng = ~longitude
+                       , lat = ~latitude
+                       , color = ~map_brk_col
+                       , fill = ~map_brk_col
                        , group = "Stations"
                        , stroke = TRUE
                        , fillOpacity = 0.75
-                       , popup=~paste0("Station: ", station, as.character("<br>")
+                       , popup = ~paste0("Station: ", station, as.character("<br>")
+                                       , "Layer:  ", layer, as.character("<br>")
                                        , "Latitude: ", latitude, as.character("<br>")
                                        , "Longitude: ", longitude, as.character("<br>")
                                        , "Segment: ", cbSeg92, as.character("<br>")
@@ -2313,14 +2317,14 @@ shinyServer(function(input, output, session) {
   output$filt_collapse_mapLayer_basic <- renderUI({
     # filters change based on file format; final vs. user.
     # Default is "final" file.
-    # if(input$but_radio_load_basic == 0) {
+    # if (input$but_radio_load_basic == 0) {
     #   #return(NULL)
     #   p("No data loaded, make a selection under '1. Choose Data'.")
     # } else {
       # "final" file filters
       bsCollapse(multiple = TRUE
-                 , bsCollapsePanel("Filter by 'Map Layer'", style='info',
-                                   #fluidRow(column(1), column(10, radioButtons('sel_mapLayer', "", c("Select All"=1, "Deselect All" = 2), selected = 1))),
+                 , bsCollapsePanel("Filter by 'Map Layer'", style = 'info',
+                                   #fluidRow(column(1), column(10, radioButtons('sel_mapLayer', "", c("Select All" = 1, "Deselect All" = 2), selected = 1))),
                                    uiOutput('filt_mapLayer_basic')
                  )##bsCollapsePanel~station~END
                  , open = "Filter by 'Map Layer'" # to auto open panels
@@ -2386,7 +2390,7 @@ shinyServer(function(input, output, session) {
     # Need is.null as first rather than last.
     # It will always trigger on loading of the app
     
-    # if(input$but_radio_load_basic == 0){
+    # if (input$but_radio_load_basic == 0) {
     #   return(NULL)
     # } else {
       fn_inFile <- pick_files_names[match(inFile_radio, pick_files_radio)]
@@ -2410,7 +2414,7 @@ shinyServer(function(input, output, session) {
   ### Data, df_filt_basic ----
   #df_filt_basic <- eventReactive (input$but_map_basic, {
   #df_filt_basic <- eventReactive (input$SI_mapLayer_basic, {
-  df_filt_basic <- eventReactive (file_watch_basic_filt(), {
+  df_filt_basic <- eventReactive(file_watch_basic_filt(), {
     # if filters not null then apply to df_import
     # it is possible to select no data
 
@@ -2419,7 +2423,7 @@ shinyServer(function(input, output, session) {
     #
     str_col_2 <- "mapLayer"
     str_SI_value <- eval(parse(text = paste0("input$SI_", str_col_2, "_basic")))
-    if(!is.null(str_SI_value)){
+    if (!is.null(str_SI_value)) {
       df_y <- df_y[df_y[, str_col_2] %in% str_SI_value, ]
     }##IF~mapLayer~END
     
@@ -2470,12 +2474,13 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
-    # DIN and PO4, no long term plots
+    # DIN and PO4, no long term plots (add Surf back for 2022 data)
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        & df_mrl$layer[1] == "Bottom"
                         , FALSE
                         , plots_boo)
     
-    if(isTRUE(plots_boo)) {
+    if (isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station[1], url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
@@ -2495,18 +2500,19 @@ shinyServer(function(input, output, session) {
     leaflet(data = df_mrl) %>%
       # Groups, Base
       #addTiles(group="OSM (default)") %>%  #default tile too cluttered
-      addProviderTiles("CartoDB.Positron", group="Positron") %>%
-      addProviderTiles(providers$Stamen.TonerLite, group="Toner Lite") %>%
+      addProviderTiles("CartoDB.Positron", group = "Positron") %>%
+      addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
       addProviderTiles(providers$OpenStreetMap, group = "Open Street Map") %>%
       # Groups, Overlay
       addPolygons(data = ogr_shp
                   , color = col_Segs 
                   , fill = fill_Segs
                   , group = "CB Outline") %>%
-      addCircles(lng=~longitude
-                 , lat=~latitude
-                 , color=col_Stations
-                 , popup=~paste0("Station: ", station, as.character("<br>")
+      addCircles(lng = ~longitude
+                 , lat = ~latitude
+                 , color = col_Stations
+                 , popup = ~paste0("Station: ", station, as.character("<br>")
+                                 , "Layer:  ", layer, as.character("<br>")
                                  , "Latitude: ", latitude, as.character("<br>")
                                  , "Longitude: ", longitude, as.character("<br>")
                                  , "Segment: ", cbSeg92, as.character("<br>")
@@ -2516,7 +2522,7 @@ shinyServer(function(input, output, session) {
                                  , "Parameter: ", parmName, as.character("<br>")
                                  , "Trend Chart: ", url_click
                  )
-                 , radius=30
+                 , radius = 30
                  , group = "Stations") %>%
       # Legend
       addLegend("bottomleft"
@@ -2542,7 +2548,7 @@ shinyServer(function(input, output, session) {
   })## map_r_leaflet_basic
   
   ### MAP, Basic, Range, Static ----
-  map_range_basic <- eventReactive (file_watch_basic_map_r(), {
+  map_range_basic <- eventReactive(file_watch_basic_map_r(), {
 
     # start with base map
     m_r <- map_base
@@ -2569,7 +2575,7 @@ shinyServer(function(input, output, session) {
                                           , mr_numclass
                                           , mr_cI_type)
     # Redo num classes as "pretty" picks its own number of breaks
-    mr_numclass <- ifelse(mr_cI_type=="pretty"
+    mr_numclass <- ifelse(mr_cI_type == "pretty"
                           , length(mr_cI_val$brks) - 1
                           , mr_numclass)
     #mr_numclass <- ifelse(mr_cI_type=="pretty"
@@ -2578,40 +2584,40 @@ shinyServer(function(input, output, session) {
     # breaks
     mr_brks <- mr_cI_val$brks
     
-    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    mr_pal_col <- RColorBrewer::brewer.pal(n = mr_numclass, name = mr_pal)
     
     # River Names
     boo_riverNames <- "Yes"
     
-    if(boo_riverNames == "Yes"){
+    if (boo_riverNames == "Yes") {
       m_r <- m_r + 
         annotate(geom = "text"
                  , x = as.numeric(lab_Sus[2])
-                 , y=as.numeric(lab_Sus[3])
-                 , label=lab_Sus[1]) +
+                 , y = as.numeric(lab_Sus[3])
+                 , label = lab_Sus[1]) +
         annotate(geom = "text", x = as.numeric(lab_Pat[2])
-                 , y=as.numeric(lab_Pat[3])
-                 , label=lab_Pat[1]) +
+                 , y = as.numeric(lab_Pat[3])
+                 , label = lab_Pat[1]) +
         annotate(geom = "text", x = as.numeric(lab_Cho[2])
-                 , y=as.numeric(lab_Cho[3])
-                 , label=lab_Cho[1], hjust=0) +
+                 , y = as.numeric(lab_Cho[3])
+                 , label = lab_Cho[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Pot[2])
-                 , y=as.numeric(lab_Pot[3])
-                 , label=lab_Pot[1], hjust=0) +
+                 , y = as.numeric(lab_Pot[3])
+                 , label = lab_Pot[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Rap[2])
-                 , y=as.numeric(lab_Rap[3])
-                 , label=lab_Rap[1], hjust=1) +
+                 , y = as.numeric(lab_Rap[3])
+                 , label = lab_Rap[1], hjust = 1) +
         annotate(geom = "text", x = as.numeric(lab_Yor[2])
-                 , y=as.numeric(lab_Yor[3])
-                 , label=lab_Yor[1], hjust=0) +
+                 , y = as.numeric(lab_Yor[3])
+                 , label = lab_Yor[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Jam[2])
-                 , y=as.numeric(lab_Jam[3])
-                 , label=lab_Jam[1], hjust=0)
+                 , y = as.numeric(lab_Jam[3])
+                 , label = lab_Jam[1], hjust = 0)
     }##IF~riverNames~END
     
     # Title
     # mr_title <- input$map_range_title
-    # if(!is.null(mr_title)){
+    # if (!is.null(mr_title)) {
     #   m_r <- m_r +
     #     labs(title=paste(mr_title, collapse="; "))
     #   # labs(title=paste(mr_pal_col, collapse="; "))
@@ -2650,7 +2656,7 @@ shinyServer(function(input, output, session) {
     
     mr_title <- str_title
     
-    if(!is.null(mr_title)){
+    if (!is.null(mr_title)) {
       m_r <- m_r +
         labs(title=paste(mr_title, collapse="; "))
       # labs(title=paste(mr_pal_col, collapse="; "))
@@ -2771,7 +2777,7 @@ shinyServer(function(input, output, session) {
   })##map_range_basic
   
   ### MAP, Basic, Trend ----
-  map_trend_basic <- eventReactive (file_watch_basic_map_t(), {
+  map_trend_basic <- eventReactive(file_watch_basic_map_t(), {
    
     # # validate p-value, poss > sig
     # validate(need(input$map_trend_pval_poss > input$map_trend_pval_sig
@@ -2787,7 +2793,7 @@ shinyServer(function(input, output, session) {
                      , "Red_Blue"
                      , input$SI_pal_trend_basic)
     
-    if(mt_pal == "Orange_Green"){
+    if (mt_pal == "Orange_Green") {
       pal_mt <- pal_change_OrGn
     } else if (mt_pal == "Red_Blue") {
       pal_mt <- pal_change_RdBu
@@ -2810,34 +2816,34 @@ shinyServer(function(input, output, session) {
     
     # River Names
     boo_riverNames_t <- "Yes"
-    if(boo_riverNames_t == "Yes"){
+    if (boo_riverNames_t == "Yes") {
       m_t <- m_t + 
         annotate(geom = "text", x = as.numeric(lab_Sus[2])
-                 , y=as.numeric(lab_Sus[3])
-                 , label=lab_Sus[1]) +
+                 , y = as.numeric(lab_Sus[3])
+                 , label = lab_Sus[1]) +
         annotate(geom = "text", x = as.numeric(lab_Pat[2])
-                 , y=as.numeric(lab_Pat[3])
-                 , label=lab_Pat[1]) +
+                 , y = as.numeric(lab_Pat[3])
+                 , label = lab_Pat[1]) +
         annotate(geom = "text", x = as.numeric(lab_Cho[2])
-                 , y=as.numeric(lab_Cho[3])
-                 , label=lab_Cho[1], hjust=0) +
+                 , y = as.numeric(lab_Cho[3])
+                 , label = lab_Cho[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Pot[2])
-                 , y=as.numeric(lab_Pot[3])
-                 , label=lab_Pot[1], hjust=0) +
+                 , y = as.numeric(lab_Pot[3])
+                 , label = lab_Pot[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Rap[2])
-                 , y=as.numeric(lab_Rap[3])
-                 , label=lab_Rap[1], hjust=1) +
+                 , y = as.numeric(lab_Rap[3])
+                 , label = lab_Rap[1], hjust = 1) +
         annotate(geom = "text", x = as.numeric(lab_Yor[2])
-                 , y=as.numeric(lab_Yor[3])
-                 , label=lab_Yor[1], hjust=0) +
+                 , y = as.numeric(lab_Yor[3])
+                 , label = lab_Yor[1], hjust = 0) +
         annotate(geom = "text", x = as.numeric(lab_Jam[2])
-                 , y=as.numeric(lab_Jam[3])
-                 , label=lab_Jam[1], hjust=0)
+                 , y = as.numeric(lab_Jam[3])
+                 , label = lab_Jam[1], hjust = 0)
     }##IF~riverNames~END
     
     # Title
     # mt_title <- input$map_trend_title
-    # if(!is.null(mt_title)==TRUE){
+    # if (!is.null(mt_title)==TRUE) {
     #   m_t <- m_t + labs(title=paste(mt_title, collapse="; "))
     #   # labs(title=paste(mr_pal_col, collapse="; "))
     # }##IF~riverNames~END
@@ -2868,8 +2874,8 @@ shinyServer(function(input, output, session) {
 
       mt_title <- str_title
     
-      if(!is.null(mt_title)==TRUE){
-        m_t <- m_t + labs(title=paste(mt_title, collapse="; "))
+      if (!is.null(mt_title) == TRUE) {
+        m_t <- m_t + labs(title = paste(mt_title, collapse = "; "))
         # labs(title=paste(mr_pal_col, collapse="; "))
       }##IF~riverNames~END
     
@@ -2882,7 +2888,7 @@ shinyServer(function(input, output, session) {
     chg_pval_poss <- 0.25 #input$map_trend_pval_poss # 0.25
     chg_pval_sig <- 0.05 #input$map_trend_pval_sig # 0.05
     #
-    #if (boo_upisgood == TRUE){
+    #if (boo_upisgood == TRUE) {
     df_mt[df_mt[, "gamDiff.chg.pval"] > chg_pval_poss, "ChangeClass"] <- "NS"
     df_mt[df_mt[, "gamDiff.chg.pval"] < chg_pval_poss & 
             df_mt[, "gamDiff.pct.chg"] > 0, "ChangeClass"] <- "posIncr"
@@ -2953,7 +2959,7 @@ shinyServer(function(input, output, session) {
                       , "posIncr" = 3
                       , "NS" = 2)
     
-    if(boo_upisgood == FALSE){
+    if (boo_upisgood == FALSE) {
       # Direction Arrows the same
       # Just the colors change
       trend_leg_color   <- c(pal_mt[2] # "green"
@@ -2995,7 +3001,7 @@ shinyServer(function(input, output, session) {
                             # , shape = as.numeric(fort_df_mt$ChangeClass_shape)
                             # , size = as.numeric(fort_df_mt$ChangeClass_size)
                             # , fill = fort_df_mt$ChangeClass_color
-                            #, na.rm=TRUE
+                            #, na.rm = TRUE
     ) +
       # scale_color_manual(name = "Type of change", labels = trend_leg_label
       #                    , values = manval_color, drop = FALSE ) +
@@ -3111,7 +3117,7 @@ shinyServer(function(input, output, session) {
                                           , mr_numclass
                                           , mr_cI_type)
     # Redo num classes as "pretty" picks its own number of breaks
-    mr_numclass <- ifelse(mr_cI_type=="pretty"
+    mr_numclass <- ifelse(mr_cI_type == "pretty"
                           , length(mr_cI_val$brks) - 1
                           , mr_numclass)
     #mr_numclass <- ifelse(mr_cI_type=="pretty"
@@ -3120,7 +3126,7 @@ shinyServer(function(input, output, session) {
     # breaks
     mr_brks <- mr_cI_val$brks
     
-    mr_pal_col <- RColorBrewer::brewer.pal(n=mr_numclass, name=mr_pal)
+    mr_pal_col <- RColorBrewer::brewer.pal(n = mr_numclass, name = mr_pal)
     
     ## Break, Color
     df_mr$map_brk_col <- cut(df_mr[, mr_var]
@@ -3170,12 +3176,13 @@ shinyServer(function(input, output, session) {
                                       , "dir_plot"], "/")
     plots_boo <- df_pick_files[df_pick_files[, "radio"] == inFile_radio
                                , "show_plots"]
-    # DIN and PO4, no long term plots
+    # DIN and PO4, no long term plots, add Surf back for 2022 data
     plots_boo <- ifelse(df_mrl$mL_parmName[1] %in% c("DIN", "PO4")
+                        & df_mrl$layer[1] == "Bottom"
                         , FALSE
                         , plots_boo)
  
-    if(isTRUE(plots_boo)) {
+    if (isTRUE(plots_boo)) {
       df_mrl$url <- paste0(url_A, plots_dir, df_mrl$station, url_B)
       df_mrl$url_click <- paste0('<a href="'
                                  , df_mrl[, "url"]
@@ -3194,7 +3201,7 @@ shinyServer(function(input, output, session) {
     mr_pal_col_leg <- mr_pal_col
     
     df_mrl$map_val <- df_mrl[, mr_var]
-    
+  
     # New map
     leafletProxy("map_r_leaflet_basic", data = df_mrl) %>%
       # Remove stations
@@ -3202,14 +3209,15 @@ shinyServer(function(input, output, session) {
       # Remove Legend
       clearControls() %>%
       # Circles, NEW
-      addCircleMarkers(lng=~longitude
-                       , lat=~latitude
-                       , color=~map_brk_col
-                       , fill=~map_brk_col
+      addCircleMarkers(lng = ~longitude
+                       , lat = ~latitude
+                       , color = ~map_brk_col
+                       , fill = ~map_brk_col
                        , group = "Stations"
                        , stroke = TRUE
                        , fillOpacity = 0.75
-                       , popup=~paste0("Station: ", station, as.character("<br>")
+                       , popup = ~paste0("Station: ", station, as.character("<br>")
+                                       , "Layer:  ", layer, as.character("<br>")
                                        , "Latitude: ", latitude, as.character("<br>")
                                        , "Longitude: ", longitude, as.character("<br>")
                                        , "Segment: ", cbSeg92, as.character("<br>")
@@ -3218,7 +3226,7 @@ shinyServer(function(input, output, session) {
                                        , "GAM: ", gamName, as.character("<br>")
                                        , "Parameter: ", parmName, as.character("<br>")
                                        , "Variable: ", mr_var_name, as.character("<br>")
-                                       , "Value: ", map_val, as.character("<br>")
+                                       #, "Value: ", map_val, as.character("<br>")
                                        , "Trend Chart: ", url_click)
       ) %>%
       addLegend("bottomleft"
@@ -3244,8 +3252,8 @@ shinyServer(function(input, output, session) {
   output$map_r_render_basic <- renderPlot({
     #output$map_r_render <- renderPlotly({
     # default map to show
-    # if(input$but_map_basic == 0){
-    #   #if(input$but_filt_apply == 0){
+    # if (input$but_map_basic == 0) {
+    #   #if (input$but_filt_apply == 0) {
     #   m_r_2 <- map_base
     #   # } else {
     #   #   m_r_2 <- map_range_filt_default # different map
@@ -3262,7 +3270,7 @@ shinyServer(function(input, output, session) {
   output$map_t_render_basic <- renderPlot({
     #output$map_t_render <- renderPlotly({
     # default map to show
-    # if(input$but_map_basic == 0){
+    # if (input$but_map_basic == 0) {
     #   m_t_2 <- map_base
     # } else {
     #   m_t_2 <- map_trend_basic()  
@@ -3289,12 +3297,12 @@ shinyServer(function(input, output, session) {
   #   #
   #   # Remove saved map PNG
   #   fn_png <- list.files("map", "\\.png$")
-  #   if(length(fn_png) >0 ) {
+  #   if (length(fn_png) >0 ) {
   #     file.remove(paste0("map/", fn_png))
   #   }##IF ~ length(fn_png)
   #   # Remove zip file
   #   fn_zip <- "map/baytrendsmap.zip"
-  #   if(file.exists(fn_zip)) {
+  #   if (file.exists(fn_zip)) {
   #     file.remove(fn_zip)
   #   }## IF ~ fn_zip
   # })## observerEvent ~ but_map_basic
@@ -3308,7 +3316,7 @@ shinyServer(function(input, output, session) {
   #     # Remove old files
   #     # Remove zip file
   #     fn_zip <- "map/baytrendsmap.zip"
-  #     if(file.exists(fn_zip)) {
+  #     if (file.exists(fn_zip)) {
   #       file.remove(fn_zip)
   #     }## IF ~ fn_zip
   #     
@@ -3320,7 +3328,7 @@ shinyServer(function(input, output, session) {
   #  #    
   #  #    
   #  #    
-  #  #    if(file.exists(fn_out)==TRUE) {
+  #  #    if (file.exists(fn_out)==TRUE) {
   #       mr_ext <- "zip" #input$SI_ext
   #       date_time <- format(Sys.time(), "%Y%m%d_%H%M%S")
   #       paste0("baytrendsmap_", date_time, ".", mr_ext)
@@ -3340,7 +3348,7 @@ shinyServer(function(input, output, session) {
   #  #    #print(map_range())
   #  #    # ggplot2::ggsave(file, plot = ggplot2::last_plot(), device = ext, height = 9, width = 9/1.5, units = "in" )
   #  #    # #file.copy("map_range.pdf", fn, overwrite=TRUE)
-  #     if(file.exists(fn_out) == TRUE){
+  #     if (file.exists(fn_out) == TRUE) {
   #       file.copy(fn_out, fn, overwrite = TRUE)
   #     } else {
   #       fn_out_error <- file.path("map", "Error.zip")
@@ -3364,7 +3372,7 @@ shinyServer(function(input, output, session) {
                             , pattern = "^map_range\\.png$"
                             , full.names = TRUE)
       fn_out <- file.path("map", paste0("map_range", map_ext))
-      if(is.null(fn_maps) == FALSE){
+      if (is.null(fn_maps) == FALSE) {
         file.copy(fn_maps, fn, overwrite = TRUE)
       } else {
         fn_out_error <- file.path("www", "Error_SomethingWrong.png")
@@ -3385,7 +3393,7 @@ shinyServer(function(input, output, session) {
                             , pattern = "^map_change\\.png$"
                             , full.names = TRUE)
       fn_out <- paste0("map/baytrendsmap.", map_ext)
-      if(is.null(fn_maps) == FALSE){
+      if (is.null(fn_maps) == FALSE) {
         file.copy(fn_maps, fn, overwrite = TRUE)
       } else {
         fn_out_error <- file.path("www", "Error_SomethingWrong.png")

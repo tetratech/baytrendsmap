@@ -20,6 +20,16 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.2.5.9005
+===========
+Released - 2023-10-12
+
+* refactor: Modify leaflet map (basic and advanced) pop up text
+    + Add layer
+    + Add DIN and PO4 plots back to the links for surface plots
+    + Update text on no plot graph
+* style: Formatting style in server.R
+
 baytrendsmap 1.2.5.9004
 ===========
 Released - 2023-10-06

@@ -4,7 +4,17 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-06 14:53:22.868474
+    #> Last Update: 2023-10-12 10:36:54.250889
+
+# baytrendsmap 1.2.5.9005
+
+Released - 2023-10-12
+
+- refactor: Modify leaflet map (basic and advanced) pop up text
+  - Add layer
+  - Add DIN and PO4 plots back to the links for surface plots
+  - Update text on no plot graph
+- style: Formatting style in server.R
 
 # baytrendsmap 1.2.5.9004
 

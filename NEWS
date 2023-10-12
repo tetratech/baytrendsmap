@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-12 10:36:54.250889
+    #> Last Update: 2023-10-12 14:59:01.875062
+
+# baytrendsmap 1.2.6
+
+Released - 2023-10-12
+
+- refactor: Bump version number prior to deployment to CBP servers
 
 # baytrendsmap 1.2.5.9005
 

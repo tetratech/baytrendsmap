@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-12 14:59:01.875062
+    #> Last Update: 2023-10-13 08:33:59.987846
+
+# baytrendsmap 1.2.6.9001
+
+Released - 2023-10-13
+
+- fix: Update Dockerfile, line 21
 
 # baytrendsmap 1.2.6
 

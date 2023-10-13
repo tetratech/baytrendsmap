@@ -4,13 +4,19 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-13 08:33:59.987846
+    #> Last Update: 2023-10-13 08:58:39.03596
+
+# baytrendsmap 1.2.6.9002
+
+Released - 2023-10-13
+
+- fix: Update base URL for plots to CBP location
 
 # baytrendsmap 1.2.6.9001
 
 Released - 2023-10-13
 
-- fix: Update Dockerfile, line 21
+- fix: Update buildspec.yml, line 21
 
 # baytrendsmap 1.2.6
 

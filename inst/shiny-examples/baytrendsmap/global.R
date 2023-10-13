@@ -40,7 +40,7 @@ col_width_manual <- "200px"
 # Data, Repository----
 url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/data/current/"
 url_remote_base_cbp <- "https://dx3ga8blp094q.cloudfront.net/"
-url_remote_base <- url_remote_base_github
+url_remote_base <- url_remote_base_cbp
 
 # Pick Lists----
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))

@@ -4,7 +4,15 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2023-10-13 08:58:39.03596
+    #> Last Update: 2024-02-07 13:36:06.037206
+
+# baytrendsmap 1.2.6.9003
+
+Released - 2024-02-07
+
+- refactor: Update GitHub Actions to v2;
+  usethis::use_github_actions(“foo”)
+- docs: Update Readme badge for CRAN check
 
 # baytrendsmap 1.2.6.9002
 

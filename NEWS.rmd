@@ -20,6 +20,14 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+
+baytrendsmap 1.2.6.9003
+===========
+Released - 2024-02-07
+
+* refactor: Update GitHub Actions to v2; usethis::use_github_actions("foo")
+* docs: Update Readme badge for CRAN check
+
 baytrendsmap 1.2.6.9002
 ===========
 Released - 2023-10-13

@@ -4,7 +4,23 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2024-02-07 13:36:06.037206
+    #> Last Update: 2026-10-20 14:41:17.224423
+
+# baytrendsmap 1.3.0.9001
+
+Released - 2026-10-20
+
+- docs: Update version number for fixes
+- fix: Remove deprecated package ggsn, Issue \#79
+  - DESCRIPTION
+  - global.R
+    - north arrow
+    - scale bar
+- fix: Replace Positron with Esri.WorldGrayCanvas as base layer on maps,
+  Issue \#81\
+- fix: Fix ggmap, replace deprecated `aes_string` with `aes`, Issue \#
+  80
+- fix: Update Shiny Help html RMD from html to html_fragment, Issue \#82
 
 # baytrendsmap 1.2.6.9003
 

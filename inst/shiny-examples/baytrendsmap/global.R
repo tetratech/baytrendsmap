@@ -1,5 +1,11 @@
 # Shiny Global File
 
+# Package Version ----
+#pkgver <- utils::packageVersion("baytrendsmap") # does not work on Shinyapps.io
+#pkgver <- installed.packages()["baytrendsmap", "Version"]
+# believe ShinyApps.io blocks some system level commands
+pkgver <- "1.3.0.9001"
+
 # Packages ----
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(baytrends, quietly = TRUE, warn.conflicts = FALSE))
@@ -8,7 +14,7 @@ suppressMessages(library(DT, quietly = TRUE, warn.conflicts = FALSE))
 suppressMessages(library(ggplot2, quietly = TRUE, warn.conflicts = FALSE))
 #suppressMessages(library(rgdal, quietly = TRUE, warn.conflicts = FALSE))
 library(sf) # replace rgdal
-suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
+# suppressMessages(library(ggsn, quietly = TRUE, warn.conflicts = FALSE))
 library(classInt)
 suppressMessages(library(dplyr, quietly = TRUE, warn.conflicts = FALSE))
 library(RColorBrewer)
@@ -22,12 +28,6 @@ library(shinyalert) # popup modal at start up
 # library(stringr)
 library(cowplot)
 
-# Package Version ----
-#pkgver <- utils::packageVersion("baytrendsmap") # does not work on Shinyapps.io
-#pkgver <- installed.packages()["baytrendsmap", "Version"]
-# believe ShinyApps.io blocks some system level commands
-pkgver <- "1.2.6"
-
 # File Size ----
 # By default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 10MB.
@@ -40,7 +40,7 @@ col_width_manual <- "200px"
 # Data, Repository----
 url_remote_base_github <- "https://raw.githubusercontent.com/tetratech/baytrends_files/main/data/current/"
 url_remote_base_cbp <- "https://dx3ga8blp094q.cloudfront.net/"
-url_remote_base <- url_remote_base_cbp
+url_remote_base <- url_remote_base_github
 
 # Pick Lists----
 pick_gamDiff <- paste0("gamDiff.", c("bl.mn.obs", "cr.mn.obs", "abs.chg.obs", "pct.chg", "chg.pval"))
@@ -165,15 +165,28 @@ map_coord_ratio <- 1.3
 #   theme_void() + # no grid or box for lat-long
 #   #theme(legend.position = "none") + # remove legend
 #   coord_fixed(map_coord_ratio) +
-#   scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
+#   scalebar(fort_shp, dist = 25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
 #   north(fort_shp, symbol = 3) 
 
 map_base <- ggplot() +
   geom_sf(data = ogr_shp, color = "grey59", fill = "lightskyblue") + 
-  theme_void() + # no grid or box for lat-long
+  theme_void() #+ # no grid or box for lat-long
   #coord_fixed(map_coord_ratio) +
-  scalebar(fort_shp, dist=25, dist_unit = "km", transform=TRUE, model = "WGS84") + 
-  north(fort_shp, symbol = 3) 
+  # OLD ggsn
+  # scalebar(fort_shp, 
+  #          dist = 25,
+  #          dist_unit = "km",
+  #          transform=TRUE,
+  #          model = "WGS84") +
+  # north(fort_shp, symbol = 3) 
+  # NEW
+  # not working (needs to be piped)
+  # leaflet::addScaleBar(map_base,
+  #                      position = "bottomright",
+  #                      options = scaleBarOptions(
+  #                        metric = TRUE,
+  #                        imperial = FALSE))
+ 
 
 ## Map, Inset (DC) ----
 map_inset <- map_base + 
@@ -320,15 +333,15 @@ fort_df_mrd$map_brk_num <- cut(fort_df_mrd[, mrd_var]
 )
 
 # Points, Add
-m_r_d <- m_r_d + geom_point(data=fort_df_mrd
-                        , aes_string(x =" longitude"
-                                     , y = "latitude"
-                                     #  , fill = "map_brk_num")
-                                     , fill = "map_brk_col")
-                        , size = 4
-                        , pch = 21
-                        , color = "black"
-                        , na.rm = TRUE)
+m_r_d <- m_r_d + geom_point(data = fort_df_mrd,
+                        aes(x = longitude,
+                            y = latitude,
+                            #  , fill = "map_brk_num")
+                            fill = map_brk_col),
+                        size = 4,
+                        pch = 21,
+                        color = "black",
+                        na.rm = TRUE)
 
 
 

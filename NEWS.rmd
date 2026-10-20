@@ -20,6 +20,20 @@ knitr::opts_chunk$set(
 cat(paste0("Last Update: ",Sys.time()))
 ```
 
+baytrendsmap 1.3.0.9001
+===========
+Released - 2026-10-20
+
+* docs: Update version number for fixes
+* fix: Remove deprecated package ggsn, Issue #79
+    + DESCRIPTION
+    + global.R
+        - north arrow
+        - scale bar
+* fix: Replace Positron with Esri.WorldGrayCanvas as base layer on maps, Issue #81    
+* fix: Fix ggmap, replace deprecated `aes_string` with `aes`, Issue # 80
+* fix: Update Shiny Help html RMD from html to html_fragment, Issue #82
+
 
 baytrendsmap 1.2.6.9003
 ===========

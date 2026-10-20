@@ -1031,11 +1031,11 @@ shinyServer(function(input, output, session) {
                                   )
 
     # Points, Add
-    m_r <- m_r + geom_point(data=fort_df_mr
-                                    , aes_string(x =" longitude"
-                                                 , y = "latitude"
-                                               #  , fill = "map_brk_num")
-                                                , fill = "map_brk_col")
+    m_r <- m_r + geom_point(data = fort_df_mr
+                                    , aes(x = longitude
+                                          , y = latitude
+                                          #  , fill = "map_brk_num")
+                                          , fill = map_brk_col)
                                     , size = 4
                                     , pch = 21
                                     , color = "black"
@@ -1281,11 +1281,11 @@ shinyServer(function(input, output, session) {
     )
     
     # Points, Add
-    m_r <- m_r + geom_point(data=fort_df_mr
-                            , aes_string(x =" longitude"
-                                         , y = "latitude"
-                                         #  , fill = "map_brk_num")
-                                         , fill = "map_brk_col")
+    m_r <- m_r + geom_point(data = fort_df_mr
+                            , aes(x = longitude
+                                  , y = latitude
+                                  #  , fill = "map_brk_num")
+                                  , fill = map_brk_col)
                             , size = 4
                             , pch = 21
                             , color = "black"
@@ -1611,15 +1611,15 @@ shinyServer(function(input, output, session) {
     fort_df_mt$ChangeClass_size  <- trend_leg_size[match(fort_df_mt$ChangeClass
                                                          , trend_ChangeClass)]
     
-    m_t <- m_t + geom_point(data=fort_df_mt
-                                   , aes_string(x = "longitude"
-                                                , y = "latitude"
-                                                #, group ="ChangeClass"
-                                                #, color="ChangeClass"
-                                                , shape = "ChangeClass"
-                                                , size = "ChangeClass"
-                                                , fill = "ChangeClass"
-                                                )
+    m_t <- m_t + geom_point(data = fort_df_mt
+                                   , aes(x = longitude
+                                         , y = latitude
+                                         #, group ="ChangeClass"
+                                         #, color="ChangeClass"
+                                         , shape = ChangeClass
+                                         , size = ChangeClass
+                                         , fill = ChangeClass
+                                         )
                                      , color = "black"
                                    # , color = fort_df_mt$ChangeClass_color 
                                    # , shape = as.numeric(fort_df_mt$ChangeClass_shape)
@@ -2030,8 +2030,9 @@ shinyServer(function(input, output, session) {
     leaflet(data = df_mrl) %>%
       # Groups, Base
       #addTiles(group="OSM (default)") %>%  #default tile too cluttered
-      addProviderTiles("CartoDB.Positron", group="Positron") %>%
-      addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
+      # addProviderTiles("CartoDB.Positron", group="Positron") %>%
+      addProviderTiles(providers$Esri.WorldGrayCanvas, group="ESRI Gray") %>%
+      # addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
       addProviderTiles(providers$OpenStreetMap, group = "Open Street Map") %>%
       # Groups, Overlay
       addPolygons(data = ogr_shp
@@ -2060,11 +2061,7 @@ shinyServer(function(input, output, session) {
                 , labels = c("Stations", "CB Outline")
                 , values = NA) %>%
       # Layers
-      # addLayersControl(baseGroups = c("OSM (default)"
-      #                                 , "Positron"
-      #                                 , "Toner Lite")
-      addLayersControl(baseGroups = c("Positron"
-                                      , "Toner Lite"
+      addLayersControl(baseGroups = c("ESRI Gray"
                                       , "Open Street Map")
                        , overlayGroups = c("Stations"
                                            , "CB Outline")) %>%
@@ -2500,8 +2497,9 @@ shinyServer(function(input, output, session) {
     leaflet(data = df_mrl) %>%
       # Groups, Base
       #addTiles(group="OSM (default)") %>%  #default tile too cluttered
-      addProviderTiles("CartoDB.Positron", group = "Positron") %>%
-      addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
+      # addProviderTiles("CartoDB.Positron", group = "Positron") %>%
+      addProviderTiles(providers$Esri.WorldGrayCanvas, group = "ESRI Gray") %>%
+      # addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
       addProviderTiles(providers$OpenStreetMap, group = "Open Street Map") %>%
       # Groups, Overlay
       addPolygons(data = ogr_shp
@@ -2531,11 +2529,7 @@ shinyServer(function(input, output, session) {
                 , values = NA
                 , title = "Stations") %>%
       # Layers
-      # addLayersControl(baseGroups = c("OSM (default)"
-      #                                 , "Positron"
-      #                                 , "Toner Lite")
-      addLayersControl(baseGroups = c("Positron"
-                                      , "Toner Lite"
+      addLayersControl(baseGroups = c("ESRI Gray"
                                       , "Open Street Map")
                        , overlayGroups = c("Stations"
                                            , "CB Outline")) %>%
@@ -2685,11 +2679,11 @@ shinyServer(function(input, output, session) {
     )
     
     # Points, Add
-    m_r <- m_r + geom_point(data=fort_df_mr
-                            , aes_string(x =" longitude"
-                                         , y = "latitude"
-                                         #  , fill = "map_brk_num")
-                                         , fill = "map_brk_col")
+    m_r <- m_r + geom_point(data = fort_df_mr
+                            , aes(x = longitude
+                                  , y = latitude
+                                  #  , fill = "map_brk_num")
+                                  , fill = map_brk_col)
                             , size = 4
                             , pch = 21
                             , color = "black"
@@ -2987,15 +2981,15 @@ shinyServer(function(input, output, session) {
     fort_df_mt$ChangeClass_size  <- trend_leg_size[match(fort_df_mt$ChangeClass
                                                          , trend_ChangeClass)]
     
-    m_t <- m_t + geom_point(data=fort_df_mt
-                            , aes_string(x = "longitude"
-                                         , y = "latitude"
-                                         #, group ="ChangeClass"
-                                         #, color="ChangeClass"
-                                         , shape = "ChangeClass"
-                                         , size = "ChangeClass"
-                                         , fill = "ChangeClass"
-                            )
+    m_t <- m_t + geom_point(data = fort_df_mt
+                            , aes(x = longitude
+                                  , y = latitude
+                                  #, group ="ChangeClass"
+                                  #, color="ChangeClass"
+                                  , shape = ChangeClass
+                                  , size = ChangeClass
+                                  , fill = ChangeClass
+                                  )
                             , color = "black"
                             # , color = fort_df_mt$ChangeClass_color 
                             # , shape = as.numeric(fort_df_mt$ChangeClass_shape)
@@ -3009,14 +3003,14 @@ shinyServer(function(input, output, session) {
                          , labels = trend_leg_label
                          , values = manval_shape
                          , drop = FALSE ) + 
-      scale_fill_manual( name = "Type of change"
-                         , labels = trend_leg_label
-                         , values = manval_color
-                         , drop = FALSE ) + 
-      scale_size_manual( name = "Type of change"
-                         , labels = trend_leg_label
-                         , values = manval_size
-                         ,  drop = FALSE ) +
+      scale_fill_manual(name = "Type of change"
+                        , labels = trend_leg_label
+                        , values = manval_color
+                        , drop = FALSE ) + 
+      scale_size_manual(name = "Type of change"
+                        , labels = trend_leg_label
+                        , values = manval_size
+                        ,  drop = FALSE ) +
       theme(legend.position = c(1, 0.12)
             , legend.justification = c(1, 0)
             , legend.title = element_text(face = "bold"))

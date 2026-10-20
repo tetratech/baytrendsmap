@@ -3,9 +3,10 @@ title: "Navigating the baytrendsmap Shiny App"
 #subtitle: "help"
 #author: "`r Sys.getenv('USERNAME')`"
 date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
-output:
-  html_document:
-    toc: no
+output: html_fragment
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}

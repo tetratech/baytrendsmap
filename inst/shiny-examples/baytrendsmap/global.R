@@ -4,7 +4,7 @@
 #pkgver <- utils::packageVersion("baytrendsmap") # does not work on Shinyapps.io
 #pkgver <- installed.packages()["baytrendsmap", "Version"]
 # believe ShinyApps.io blocks some system level commands
-pkgver <- "1.3.0.9001"
+pkgver <- "1.3.0.9002"
 
 # Packages ----
 suppressMessages(library(shiny, quietly = TRUE, warn.conflicts = FALSE))

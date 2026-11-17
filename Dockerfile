@@ -16,7 +16,6 @@ RUN install2.r --error \
     DT \
     ggplot2 \
     sf \
-    ggsn \
     grid \
     classInt \
     dplyr \

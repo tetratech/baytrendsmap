@@ -4,7 +4,13 @@ NEWS
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-    #> Last Update: 2026-10-20 14:41:17.224423
+    #> Last Update: 2026-11-17 08:02:14.697273
+
+# baytrendsmap 1.3.0.9002
+
+Released - 2026-10-20
+
+- refactor: Update Dockerfile, remove ggsn
 
 # baytrendsmap 1.3.0.9001
 
